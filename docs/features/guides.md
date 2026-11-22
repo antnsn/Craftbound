@@ -7,7 +7,7 @@ description: Where the routes come from, how counts are worked out, and real rea
 
 # Guides
 
-Craftbound ships five routes:
+Craftbound ships eight routes:
 
 | Guide | Average crafts | Notes |
 | --- | --- | --- |
@@ -16,6 +16,9 @@ Craftbound ships five routes:
 | **Blacksmithing: Easiest** | 231 | Starts at **125**. Buy a Blacksmith Hammer first. Grinding stones are made along the way. The last three recipes need Cenarion Circle (Friendly, Honored) and Argent Dawn (Honored) reputation. |
 | **Engineering: Easiest** | 361 | Two tools to make: Arclight Spanner and Gyromatic Micro-Adjustor. Gold Power Cores are made along the way. |
 | **Leatherworking: Easiest** | 329 | Two limited-stock vendor recipes (Werg Thickblade, Jase Farlane). The last three need Cenarion Circle and Timbermaw Hold (Revered) reputation. |
+| **Tailoring: Tried & Tested** | 363 | Bolts are made along the way. From 260 it uses Forever's own patterns: Runecloth Cuffs (Pexmit, Mount Hyjal) and the Venomspew set (Mishta, Cenarion Circle Friendly and Honored, at a Loom). |
+| **Cooking: Tried & Tested** | 346 | Six fish recipes, all from vendors. Mightfish Steak needs an Iron Oven. Expert comes from the Expert Cookbook, Artisan from the Clamlette Surprise quest. |
+| **First Aid: Tried & Tested** | 389 | Bandages. Expert comes from the book Expert First Aid - Under Wraps, Artisan from the Triage quest. The trainers for 240-300 are as in Classic, not yet confirmed on Forever. |
 
 Each route except Blacksmithing goes from 1 to 300.
 
@@ -23,7 +26,7 @@ Pick one with `/craft guide`, or by opening that profession's window.
 
 ## Where the numbers come from
 
-The routes come from the Wowhead "Easiest" planner for WoW: Forever. Blizzard has never published skill-up chances, so the craft counts are simulated from the community's skill-up model. Craftbound shops for the **safe** count, which is enough for most players, and scales it as you go: halfway through a step, it only asks for the other half.
+The routes come from Wowhead's planner for WoW: Forever: the "Easiest" routes, and for Tailoring, Cooking and First Aid Wowhead's "Tried & Tested in Forever" routes with the recipe data from its Forever catalog (`tools/import_wowhead.py`). Blizzard has never published skill-up chances, so the craft counts are simulated from the community's skill-up model. Craftbound shops for the **safe** count, which is enough for most players, and scales it as you go: halfway through a step, it only asks for the other half.
 
 {: .warning }
 Forever lowered the skill level of many old recipes, and neither guide has been playtested in Forever yet. Follow your real skill: Craftbound does, and a step ends when your skill reaches its end, however many crafts that took.

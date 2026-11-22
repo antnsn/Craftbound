@@ -137,8 +137,39 @@ function ns.SelectRecipe(name)
 end
 
 -- Where to learn a step's recipe, from the guide's source.
+-- The vendors of a recipe that serve this character: own faction and neutral, at most two.
+-- Returns their names and whether those shown sell it in limited stock.
+local function vendorsFor(src)
+	local side = UnitFactionGroup and UnitFactionGroup("player")
+	local t, more, limited = {}, false, false
+	for _, v in ipairs(src.vendors) do
+		if not v.side or not side or v.side == side then
+			if #t == 2 then more = true break end
+			t[#t + 1] = v.npc .. (v.location and (" (" .. v.location .. ")") or "")
+			limited = limited or v.limited or false
+		end
+	end
+	if #t == 0 then return nil end
+	return table.concat(t, " or ") .. (more and ", and other vendors" or ""), limited
+end
+
 function ns.LearnHint(s)
 	local src = s.source or {}
+	if src.kind == "known" then
+		return ("%s is a starting recipe: learn it from your trainer."):format(s.recipe)
+	elseif src.kind == "quest" then
+		return ("%s is a quest reward."):format(s.recipe)
+	elseif src.kind == "drop" then
+		return ("The %s recipe drops from mobs; buy it at the auction house."):format(s.recipe)
+	end
+	if src.kind == "vendor" and src.vendors then
+		local who, limited = vendorsFor(src)
+		local rep = src.rep and (" Needs " .. src.rep .. ".") or ""
+		if not who then
+			return ("The %s recipe is only sold to the other faction; buy it at the auction house."):format(s.recipe) .. rep
+		end
+		return ("Buy the %s recipe from %s%s."):format(s.recipe, who, limited and ", limited stock" or "") .. rep
+	end
 	if src.kind == "vendor" and src.npc then
 		return ("Buy the %s recipe from %s%s%s."):format(s.recipe, src.npc,
 			src.location and (" (" .. src.location .. ")") or "",
@@ -253,7 +284,7 @@ function Craftbound_CraftNext() ns.CraftNext() end
 local panel
 
 local function stepLabel(s)
-	if s.kind == "train" then return "Train " .. s.rank end
+	if s.kind == "train" then return (s.how and "Learn " or "Train ") .. s.rank end
 	if s.kind == "disenchant" then return ("%d-%d Disenchant"):format(s.from, s.to) end
 	if s.kind == "tool" then return "Tool: " .. s.recipe end
 	return ("%d-%d %s"):format(s.from, s.to, s.recipe:gsub("^Enchant ", ""))
@@ -430,7 +461,11 @@ local function render()
 	f.bar.text:SetText(("%d / %d   ·   ~%d crafts to go"):format(ctx.skill, guide.to, st.total))
 
 	if st.train and st.step ~= st.train then
-		f.train:SetText(("Train %s soon (you can now; needed before %d)."):format(st.train.rank, st.train.before))
+		if st.train.how then
+			f.train:SetText(("%s You can now; needed before %d."):format(st.train.how, st.train.before))
+		else
+			f.train:SetText(("Train %s soon (you can now; needed before %d)."):format(st.train.rank, st.train.before))
+		end
 	else
 		f.train:SetText("")
 	end

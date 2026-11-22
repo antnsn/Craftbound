@@ -234,6 +234,7 @@ end
 function P.Describe(s, left)
 	if not s then return "Route finished." end
 	if s.kind == "train" then
+		if s.how then return ("%s Needed before skill %d."):format(s.how, s.before) end
 		return ("Train %s at a trainer (needed before skill %d)."):format(s.rank, s.before)
 	elseif s.kind == "disenchant" then
 		return ("Disenchant green or better items up to skill %d."):format(s.to)

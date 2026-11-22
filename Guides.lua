@@ -432,4 +432,262 @@ ns.Guides = {
 			}, source = { kind = "vendor", cost = 37894, npc = "Meilosh", location = "Felwood", rep = "Revered with Timbermaw Hold" }, alts = { "Heavy Scorpid Helm", "Supple Scorpid Vest" }, note = "Needs Revered with Timbermaw Hold to learn this recipe." },
 		},
 	},
+	{ key = "Tailoring:Tried & Tested", profession = "Tailoring", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 363, p90Crafts = 434, playtested = true,
+		parts = {
+			["Bolt of Linen Cloth"] = { recipe = "Bolt of Linen Cloth", id = 2996, makes = 1, mats = {
+	{ name = "Linen Cloth", id = 2589, qty = 2 },
+} },
+			["Bolt of Woolen Cloth"] = { recipe = "Bolt of Woolen Cloth", id = 2997, makes = 1, mats = {
+	{ name = "Wool Cloth", id = 2592, qty = 3 },
+} },
+			["Bolt of Silk Cloth"] = { recipe = "Bolt of Silk Cloth", id = 4305, makes = 1, mats = {
+	{ name = "Silk Cloth", id = 4306, qty = 4 },
+} },
+			["Bolt of Mageweave"] = { recipe = "Bolt of Mageweave", id = 4339, makes = 1, mats = {
+	{ name = "Mageweave Cloth", id = 4338, qty = 5 },
+} },
+			["Bolt of Runecloth"] = { recipe = "Bolt of Runecloth", id = 14048, makes = 1, mats = {
+	{ name = "Runecloth", id = 14047, qty = 5 },
+} },
+		},
+		steps = {
+			{ kind = "craft", from = 1, to = 43, recipe = "Bolt of Linen Cloth", colors = { 1, 25, 37, 50 }, expected = 54, safe = 61, mats = {
+				{ name = "Linen Cloth", id = 2589, qty = 2 },
+			}, source = { kind = "known" } },
+			{ kind = "craft", from = 43, to = 45, recipe = "Brown Linen Vest", colors = { 10, 45, 57, 70 }, expected = 2, safe = 2, mats = {
+				{ name = "Bolt of Linen Cloth", id = 2996, qty = 1 },
+				{ name = "Coarse Thread", id = 2320, qty = 1 },
+			}, source = { kind = "trainer", cost = 50 } },
+			{ kind = "train", rank = "Journeyman", reqSkill = 50, reqLevel = 10, before = 75, cap = 150 },
+			{ kind = "craft", from = 45, to = 70, recipe = "Linen Belt", colors = { 15, 50, 67, 85 }, expected = 33, safe = 39, mats = {
+				{ name = "Bolt of Linen Cloth", id = 2996, qty = 1 },
+				{ name = "Coarse Thread", id = 2320, qty = 1 },
+			}, source = { kind = "trainer", cost = 50 } },
+			{ kind = "craft", from = 70, to = 75, recipe = "Reinforced Linen Cape", colors = { 35, 60, 77, 95 }, expected = 7, safe = 10, mats = {
+				{ name = "Bolt of Linen Cloth", id = 2996, qty = 2 },
+				{ name = "Coarse Thread", id = 2320, qty = 3 },
+			}, source = { kind = "trainer", cost = 200 } },
+			{ kind = "craft", from = 75, to = 81, recipe = "Bolt of Woolen Cloth", colors = { 55, 70, 77, 85 }, expected = 12, safe = 18, mats = {
+				{ name = "Wool Cloth", id = 2592, qty = 3 },
+			}, source = { kind = "trainer", cost = 100 } },
+			{ kind = "craft", from = 81, to = 100, recipe = "Woolen Cape", colors = { 55, 80, 97, 115 }, expected = 27, safe = 33, mats = {
+				{ name = "Bolt of Woolen Cloth", id = 2997, qty = 1 },
+				{ name = "Fine Thread", id = 2321, qty = 1 },
+			}, source = { kind = "trainer", cost = 250 } },
+			{ kind = "craft", from = 100, to = 110, recipe = "Bolt of Silk Cloth", colors = { 100, 110, 115, 120 }, expected = 10, safe = 10, mats = {
+				{ name = "Silk Cloth", id = 4306, qty = 4 },
+			}, source = { kind = "trainer", cost = 500 } },
+			{ kind = "craft", from = 110, to = 125, recipe = "Double-stitched Woolen Shoulders", colors = { 85, 110, 127, 145 }, expected = 19, safe = 22, mats = {
+				{ name = "Bolt of Woolen Cloth", id = 2997, qty = 3 },
+				{ name = "Fine Thread", id = 2321, qty = 2 },
+			}, source = { kind = "trainer", cost = 500 } },
+			{ kind = "train", rank = "Expert", reqSkill = 125, reqLevel = 20, before = 150, cap = 225 },
+			{ kind = "craft", from = 125, to = 132, recipe = "Azure Silk Hood", colors = { 120, 130, 135, 140 }, expected = 7, safe = 8, mats = {
+				{ name = "Bolt of Silk Cloth", id = 4305, qty = 2 },
+				{ name = "Blue Dye", id = 6260, qty = 2 },
+				{ name = "Fine Thread", id = 2321, qty = 1 },
+			}, source = { kind = "trainer", cost = 600 } },
+			{ kind = "craft", from = 132, to = 139, recipe = "Lesser Wizard's Robe", colors = { 110, 130, 145, 160 }, expected = 8, safe = 10, mats = {
+				{ name = "Bolt of Silk Cloth", id = 4305, qty = 2 },
+				{ name = "Fine Thread", id = 2321, qty = 2 },
+				{ name = "Spider's Silk", id = 3182, qty = 2 },
+			}, source = { kind = "trainer", cost = 1000 } },
+			{ kind = "craft", from = 139, to = 140, recipe = "Formal White Shirt", colors = { 135, 145, 150, 155 }, expected = 1, safe = 1, mats = {
+				{ name = "Bolt of Silk Cloth", id = 4305, qty = 3 },
+				{ name = "Bleach", id = 2324, qty = 2 },
+				{ name = "Fine Thread", id = 2321, qty = 1 },
+			}, source = { kind = "trainer", cost = 500 } },
+			{ kind = "craft", from = 140, to = 149, recipe = "Bolt of Mageweave", colors = { 140, 145, 147, 150 }, expected = 11, safe = 14, mats = {
+				{ name = "Mageweave Cloth", id = 4338, qty = 5 },
+			}, source = { kind = "trainer", cost = 1000 } },
+			{ kind = "craft", from = 149, to = 160, recipe = "Earthen Vest", colors = { 135, 155, 170, 185 }, expected = 11, safe = 12, mats = {
+				{ name = "Bolt of Silk Cloth", id = 4305, qty = 3 },
+				{ name = "Elemental Earth", id = 7067, qty = 1 },
+				{ name = "Fine Thread", id = 2321, qty = 2 },
+			}, source = { kind = "trainer", cost = 900 } },
+			{ kind = "craft", from = 160, to = 170, recipe = "Robe of Power", colors = { 155, 175, 190, 205 }, expected = 10, safe = 10, station = "Spinning Wheel", mats = {
+				{ name = "Bolt of Mageweave", id = 4339, qty = 2 },
+				{ name = "Elemental Earth", id = 7067, qty = 2 },
+				{ name = "Elemental Water", id = 7070, qty = 2 },
+				{ name = "Elemental Fire", id = 7068, qty = 2 },
+				{ name = "Elemental Air", id = 7069, qty = 2 },
+				{ name = "Silken Thread", id = 4291, qty = 2 },
+			}, source = { kind = "trainer", cost = 1000 } },
+			{ kind = "craft", from = 170, to = 180, recipe = "Black Mageweave Vest", colors = { 170, 185, 200, 215 }, expected = 10, safe = 10, mats = {
+				{ name = "Bolt of Mageweave", id = 4339, qty = 2 },
+				{ name = "Silken Thread", id = 4291, qty = 3 },
+			}, source = { kind = "trainer", cost = 4000 } },
+			{ kind = "craft", from = 180, to = 190, recipe = "Orange Mageweave Shirt", colors = { 180, 185, 190, 195 }, expected = 11, safe = 13, mats = {
+				{ name = "Bolt of Mageweave", id = 4339, qty = 1 },
+				{ name = "Orange Dye", id = 6261, qty = 1 },
+				{ name = "Heavy Silken Thread", id = 8343, qty = 1 },
+			}, source = { kind = "trainer", cost = 2500 } },
+			{ kind = "train", rank = "Artisan", reqSkill = 200, reqLevel = 35, before = 225, cap = 300 },
+			{ kind = "craft", from = 190, to = 205, recipe = "Black Mageweave Gloves", colors = { 180, 195, 210, 225 }, expected = 16, safe = 19, mats = {
+				{ name = "Bolt of Mageweave", id = 4339, qty = 2 },
+				{ name = "Heavy Silken Thread", id = 8343, qty = 2 },
+			}, source = { kind = "trainer", cost = 5000 } },
+			{ kind = "craft", from = 205, to = 214, recipe = "Bolt of Runecloth", colors = { 205, 210, 212, 215 }, expected = 11, safe = 14, mats = {
+				{ name = "Runecloth", id = 14047, qty = 5 },
+			}, source = { kind = "trainer", cost = 10000 } },
+			{ kind = "craft", from = 214, to = 234, recipe = "Runecloth Belt", colors = { 210, 225, 240, 255 }, expected = 21, safe = 23, mats = {
+				{ name = "Bolt of Runecloth", id = 14048, qty = 3 },
+				{ name = "Rune Thread", id = 14341, qty = 1 },
+			}, source = { kind = "trainer", cost = 10000 } },
+			{ kind = "craft", from = 234, to = 250, recipe = "Runecloth Cloak", colors = { 220, 240, 255, 270 }, expected = 17, safe = 20, mats = {
+				{ name = "Bolt of Runecloth", id = 14048, qty = 4 },
+				{ name = "Ironweb Spider Silk", id = 14227, qty = 1 },
+				{ name = "Rune Thread", id = 14341, qty = 1 },
+			}, source = { kind = "vendor", cost = 12000, npc = "Darnall", location = "Moonglade", limited = true }, note = "The recipe is sold by Darnall (Moonglade) in limited stock; it restocks." },
+			{ kind = "craft", from = 250, to = 260, recipe = "Runecloth Boots", colors = { 235, 250, 265, 280 }, expected = 11, safe = 14, mats = {
+				{ name = "Bolt of Runecloth", id = 14048, qty = 4 },
+				{ name = "Ironweb Spider Silk", id = 14227, qty = 2 },
+				{ name = "Rugged Leather", id = 8170, qty = 4 },
+				{ name = "Rune Thread", id = 14341, qty = 1 },
+			}, source = { kind = "vendor", cost = 20000, npc = "Darnall", location = "Moonglade", limited = true }, note = "The recipe is sold by Darnall (Moonglade) in limited stock; it restocks." },
+			{ kind = "craft", from = 260, to = 280, recipe = "Runecloth Cuffs", colors = { 250, 265, 280, 295 }, expected = 25, safe = 29, mats = {
+				{ name = "Bolt of Runecloth", id = 14048, qty = 5 },
+				{ name = "Ironweb Spider Silk", id = 14227, qty = 1 },
+				{ name = "Rune Thread", id = 14341, qty = 1 },
+			}, source = { kind = "vendor", cost = 90000, npc = "Pexmit", location = "Mount Hyjal" } },
+			{ kind = "craft", from = 280, to = 285, recipe = "Wisdom of the Timbermaw", colors = { 255, 270, 285, 300 }, expected = 8, safe = 11, station = "Spinning Wheel", mats = {
+				{ name = "Bolt of Runecloth", id = 14048, qty = 8 },
+				{ name = "Essence of Earth", id = 7076, qty = 3 },
+				{ name = "Living Essence", id = 12803, qty = 3 },
+				{ name = "Ironweb Spider Silk", id = 14227, qty = 2 },
+			}, source = { kind = "vendor", cost = 20842, npc = "Meilosh", location = "Felwood", rep = "Honored with Timbermaw Hold" }, note = "Needs Honored with Timbermaw Hold to learn this recipe." },
+			{ kind = "craft", from = 285, to = 292, recipe = "Venomspew Gloves", colors = { 285, 290, 292, 295 }, expected = 7, safe = 8, station = "Loom", mats = {
+				{ name = "Bolt of Runecloth", id = 14048, qty = 4 },
+				{ name = "Small Brilliant Shard", id = 14343, qty = 1 },
+				{ name = "Essence of Air", id = 7082, qty = 3 },
+				{ name = "Rune Thread", id = 14341, qty = 6 },
+			}, source = { kind = "vendor", cost = 67500, npc = "Mishta", location = "Silithus", rep = "Friendly with Cenarion Circle" }, note = "Needs Friendly with Cenarion Circle to learn this recipe." },
+			{ kind = "craft", from = 292, to = 299, recipe = "Venomspew Cord", colors = { 290, 295, 297, 300 }, expected = 9, safe = 12, station = "Loom", mats = {
+				{ name = "Bolt of Runecloth", id = 14048, qty = 6 },
+				{ name = "Small Brilliant Shard", id = 14343, qty = 1 },
+				{ name = "Essence of Air", id = 7082, qty = 3 },
+				{ name = "Rune Thread", id = 14341, qty = 6 },
+			}, source = { kind = "vendor", cost = 67500, npc = "Mishta", location = "Silithus", rep = "Honored with Cenarion Circle" }, note = "Needs Honored with Cenarion Circle to learn this recipe." },
+			{ kind = "craft", from = 299, to = 300, recipe = "Venomspew Footpads", colors = { 295, 295, 297, 300 }, expected = 5, safe = 11, station = "Loom", mats = {
+				{ name = "Bolt of Runecloth", id = 14048, qty = 5 },
+				{ name = "Small Brilliant Shard", id = 14343, qty = 1 },
+				{ name = "Essence of Air", id = 7082, qty = 3 },
+				{ name = "Rune Thread", id = 14341, qty = 6 },
+			}, source = { kind = "vendor", cost = 67500, npc = "Mishta", location = "Silithus", rep = "Honored with Cenarion Circle" }, note = "Needs Honored with Cenarion Circle to learn this recipe." },
+		},
+	},
+	{ key = "Cooking:Tried & Tested", profession = "Cooking", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 346, p90Crafts = 371, playtested = true,
+		steps = {
+			{ kind = "craft", from = 1, to = 50, recipe = "Brilliant Smallfish", colors = { 1, 45, 65, 85 }, expected = 49, safe = 50, station = "Cooking Fire", mats = {
+				{ name = "Raw Brilliant Smallfish", id = 6291, qty = 1 },
+			}, source = { kind = "vendor", cost = 38, npc = "Tharynn Bouden", location = "Elwynn Forest", vendors = {
+				{ npc = "Tharynn Bouden", location = "Elwynn Forest", side = "Alliance", cost = 38 },
+				{ npc = "Khara Deepwater", location = "Loch Modan", side = "Alliance", cost = 40 },
+				{ npc = "Sewa Mistrunner", location = "Thunder Bluff", side = "Horde", cost = 37 },
+				{ npc = "Martine Tramblay", location = "Tirisfal Glades", side = "Horde", cost = 38 },
+				{ npc = "Nyoma", location = "Teldrassil", side = "Alliance", cost = 42 },
+				{ npc = "Lizbeth Cromwell", location = "Undercity", side = "Horde", cost = 40 },
+				{ npc = "Catherine Leland", location = "Stormwind City", side = "Alliance", cost = 42 },
+				{ npc = "Harn Longcast", location = "Mulgore", side = "Horde", cost = 40 },
+				{ npc = "Gretta Ganter", location = "Dun Morogh", side = "Alliance", cost = 42 },
+			} } },
+			{ kind = "train", rank = "Journeyman", reqSkill = 50, reqLevel = 10, before = 75, cap = 150 },
+			{ kind = "craft", from = 50, to = 100, recipe = "Longjaw Mud Snapper", colors = { 50, 90, 110, 130 }, expected = 51, safe = 53, station = "Cooking Fire", mats = {
+				{ name = "Raw Longjaw Mud Snapper", id = 6289, qty = 1 },
+			}, source = { kind = "vendor", cost = 380, npc = "Tharynn Bouden", location = "Elwynn Forest", vendors = {
+				{ npc = "Tharynn Bouden", location = "Elwynn Forest", side = "Alliance", cost = 380 },
+				{ npc = "Khara Deepwater", location = "Loch Modan", side = "Alliance", cost = 423 },
+				{ npc = "Naal Mistrunner", location = "Thunder Bluff", side = "Horde", cost = 423 },
+				{ npc = "Nyoma", location = "Teldrassil", side = "Alliance", cost = 421 },
+				{ npc = "Lizbeth Cromwell", location = "Undercity", side = "Horde", cost = 423 },
+				{ npc = "Tansy Puddlefizz", location = "Ironforge", side = "Alliance", cost = 380 },
+				{ npc = "Killian Sanatha", location = "Silverpine Forest", side = "Horde", cost = 400 },
+				{ npc = "Harn Longcast", location = "Mulgore", side = "Horde", cost = 400 },
+			} } },
+			{ kind = "train", rank = "Expert", reqSkill = 125, reqLevel = 20, before = 150, cap = 225, how = "Buy and read the Expert Cookbook to learn Expert." },
+			{ kind = "craft", from = 100, to = 175, recipe = "Bristle Whisker Catfish", colors = { 100, 140, 160, 180 }, expected = 119, safe = 137, station = "Cooking Fire", mats = {
+				{ name = "Raw Bristle Whisker Catfish", id = 6308, qty = 1 },
+			}, source = { kind = "vendor", cost = 1080, npc = "Lindea Rabonne", location = "Hillsbrad Foothills", vendors = {
+				{ npc = "Lindea Rabonne", location = "Hillsbrad Foothills", side = "Alliance", cost = 1080 },
+				{ npc = "Derak Nightfall", location = "Hillsbrad Foothills", side = "Horde", cost = 1270 },
+				{ npc = "Naal Mistrunner", location = "Thunder Bluff", side = "Horde", cost = 1270 },
+				{ npc = "Sewa Mistrunner", location = "Thunder Bluff", side = "Horde", cost = 1263 },
+				{ npc = "Kilxx", location = "The Barrens", cost = 1136 },
+				{ npc = "Ronald Burch", location = "Undercity", side = "Horde", cost = 1143 },
+				{ npc = "Catherine Leland", location = "Stormwind City", side = "Alliance", cost = 1263 },
+				{ npc = "Gritta Chumwater", location = "Riverglades", cost = 1136 },
+			} } },
+			{ kind = "train", rank = "Artisan", reqSkill = 225, reqLevel = 35, before = 225, cap = 300, how = "Artisan Cooking is a quest: Clamlette Surprise (Dirge Quikcleave in Tanaris)." },
+			{ kind = "craft", from = 175, to = 225, recipe = "Mithril Headed Trout", colors = { 175, 215, 235, 255 }, expected = 51, safe = 53, station = "Cooking Fire", mats = {
+				{ name = "Raw Mithril Head Trout", id = 8365, qty = 1 },
+			}, source = { kind = "vendor", cost = 1980, npc = "Lindea Rabonne", location = "Hillsbrad Foothills", vendors = {
+				{ npc = "Lindea Rabonne", location = "Hillsbrad Foothills", side = "Alliance", cost = 1980 },
+				{ npc = "Kelsey Yance", location = "Stranglethorn Vale", cost = 2084 },
+				{ npc = "Stuart Fleming", location = "Wetlands", side = "Alliance", cost = 2200 },
+				{ npc = "Shankys", location = "Orgrimmar", side = "Horde", cost = 2315 },
+				{ npc = "Heldan Galesong", location = "Darkshore", side = "Alliance", cost = 2200 },
+				{ npc = "Lizbeth Cromwell", location = "Undercity", side = "Horde", cost = 2329 },
+				{ npc = "Tansy Puddlefizz", location = "Ironforge", side = "Alliance", cost = 2090 },
+				{ npc = "Wulan", location = "Desolace", side = "Horde", cost = 1980 },
+				{ npc = "Wik'Tar", location = "Ashenvale", side = "Horde", cost = 2200 },
+			} } },
+			{ kind = "craft", from = 225, to = 275, recipe = "Spotted Yellowtail", colors = { 225, 265, 285, 305 }, expected = 51, safe = 53, station = "Cooking Fire", mats = {
+				{ name = "Raw Spotted Yellowtail", id = 4603, qty = 1 },
+			}, source = { kind = "vendor", cost = 15157, npc = "Gikkix", location = "Tanaris" } },
+			{ kind = "craft", from = 275, to = 300, recipe = "Mightfish Steak", colors = { 275, 315, 335, 355 }, expected = 25, safe = 25, station = "Iron Oven", mats = {
+				{ name = "Large Raw Mightfish", id = 13893, qty = 1 },
+				{ name = "Hot Spices", id = 2692, qty = 1 },
+				{ name = "Soothing Spices", id = 3713, qty = 1 },
+			}, source = { kind = "vendor", cost = 20117, npc = "Vivianna", location = "Feralas", vendors = {
+				{ npc = "Vivianna", location = "Feralas", side = "Alliance", cost = 20117 },
+				{ npc = "Sheendra Tallgrass", location = "Feralas", side = "Horde", cost = 19000 },
+			} } },
+		},
+	},
+	{ key = "First Aid:Tried & Tested", profession = "First Aid", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 389, p90Crafts = 436, playtested = true,
+		steps = {
+			{ kind = "craft", from = 1, to = 40, recipe = "Linen Bandage", colors = { 1, 30, 45, 60 }, expected = 40, safe = 43, mats = {
+				{ name = "Linen Cloth", id = 2589, qty = 1 },
+			}, source = { kind = "known" } },
+			{ kind = "train", rank = "Journeyman", reqSkill = 50, reqLevel = 10, before = 75, cap = 150 },
+			{ kind = "craft", from = 40, to = 80, recipe = "Heavy Linen Bandage", colors = { 40, 50, 75, 100 }, expected = 55, safe = 62, mats = {
+				{ name = "Linen Cloth", id = 2589, qty = 2 },
+			}, source = { kind = "trainer", cost = 105 } },
+			{ kind = "craft", from = 80, to = 115, recipe = "Wool Bandage", colors = { 80, 80, 115, 150 }, expected = 48, safe = 54, mats = {
+				{ name = "Wool Cloth", id = 2592, qty = 1 },
+			}, source = { kind = "trainer", cost = 250 } },
+			{ kind = "train", rank = "Expert", reqSkill = 125, reqLevel = 20, before = 150, cap = 225, how = "Buy and read Expert First Aid - Under Wraps (Deneb Walker in Arathi Highlands or Balai Lok'Wein in Dustwallow Marsh) to learn Expert." },
+			{ kind = "craft", from = 115, to = 150, recipe = "Heavy Wool Bandage", colors = { 115, 115, 150, 185 }, expected = 48, safe = 54, mats = {
+				{ name = "Wool Cloth", id = 2592, qty = 2 },
+			}, source = { kind = "trainer", cost = 1000 } },
+			{ kind = "craft", from = 150, to = 180, recipe = "Silk Bandage", colors = { 150, 150, 180, 210 }, expected = 41, safe = 46, mats = {
+				{ name = "Silk Cloth", id = 4306, qty = 1 },
+			}, source = { kind = "trainer", cost = 5000 } },
+			{ kind = "train", rank = "Artisan", reqSkill = 225, reqLevel = 35, before = 225, cap = 300, how = "Artisan First Aid is the Triage quest (Doctor Gustaf VanHowzen in Theramore or Doctor Gregory Victor in Hammerfall)." },
+			{ kind = "craft", from = 180, to = 210, recipe = "Heavy Silk Bandage", colors = { 180, 180, 210, 240 }, expected = 41, safe = 46, mats = {
+				{ name = "Silk Cloth", id = 4306, qty = 2 },
+			}, source = { kind = "vendor", cost = 2444, npc = "Deneb Walker", location = "Arathi Highlands", vendors = {
+				{ npc = "Deneb Walker", location = "Arathi Highlands", side = "Alliance", cost = 2444 },
+				{ npc = "Balai Lok'Wein", location = "Dustwallow Marsh", side = "Horde", cost = 2329 },
+			} } },
+			{ kind = "craft", from = 210, to = 240, recipe = "Mageweave Bandage", colors = { 210, 210, 240, 270 }, expected = 41, safe = 46, mats = {
+				{ name = "Mageweave Cloth", id = 4338, qty = 1 },
+			}, source = { kind = "vendor", cost = 5555, npc = "Deneb Walker", location = "Arathi Highlands", vendors = {
+				{ npc = "Deneb Walker", location = "Arathi Highlands", side = "Alliance", cost = 5555 },
+				{ npc = "Balai Lok'Wein", location = "Dustwallow Marsh", side = "Horde", cost = 5294 },
+			} } },
+			{ kind = "craft", from = 240, to = 260, recipe = "Heavy Mageweave Bandage", colors = { 240, 240, 270, 300 }, expected = 24, safe = 27, mats = {
+				{ name = "Mageweave Cloth", id = 4338, qty = 2 },
+			}, source = { kind = "trainer" }, note = "Trained by Doctor Gustaf VanHowzen in Theramore (Alliance) or Doctor Gregory Victor in Hammerfall (Horde), as in Classic; unconfirmed until checked on a live realm." },
+			{ kind = "craft", from = 260, to = 290, recipe = "Runecloth Bandage", colors = { 260, 260, 290, 320 }, expected = 41, safe = 46, mats = {
+				{ name = "Runecloth", id = 14047, qty = 1 },
+			}, source = { kind = "trainer" }, note = "Trained by Doctor Gustaf VanHowzen in Theramore (Alliance) or Doctor Gregory Victor in Hammerfall (Horde), as in Classic; unconfirmed until checked on a live realm." },
+			{ kind = "craft", from = 290, to = 300, recipe = "Heavy Runecloth Bandage", colors = { 290, 290, 320, 350 }, expected = 10, safe = 12, mats = {
+				{ name = "Runecloth", id = 14047, qty = 2 },
+			}, source = { kind = "trainer" }, note = "Trained by Doctor Gustaf VanHowzen in Theramore (Alliance) or Doctor Gregory Victor in Hammerfall (Horde), as in Classic; unconfirmed until checked on a live realm." },
+		},
+	},
 }
+
+-- Reagents sold by vendors, from the imported catalogs: never bought at the auction house.
+ns.GuideVendorItems = { [2320] = true, [2321] = true, [2324] = true, [2692] = true, [3713] = true, [4291] = true, [6260] = true, [6261] = true, [8343] = true, [14341] = true }

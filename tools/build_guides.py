@@ -86,20 +86,28 @@ def lua(v, ind=""):
     raise TypeError(type(v))
 
 
+IDS = dict(ITEM_IDS)  # plus each guide's own "item_ids" (imported guides carry them)
+
+
 def mats(m):
     out = []
     for name, qty in (m or {}).items():
-        out.append({"name": name, "id": ITEM_IDS.get(name), "qty": qty})
+        out.append({"name": name, "id": IDS.get(name), "qty": qty})
     return out
 
 
 def source(s):
     if not s:
         return None
+    vendors = None
+    if s.get("vendors"):
+        vendors = [{"npc": v["npc"], "location": v.get("location"), "side": v.get("side"),
+                    "cost": v.get("cost_raw"), "limited": bool(v.get("limited_stock")) or None}
+                   for v in s["vendors"]]
     return {
         "kind": s.get("type"), "cost": s.get("cost_raw"), "npc": s.get("npc"),
         "location": s.get("location"), "limited": bool(s.get("limited_stock")) or None,
-        "rep": s.get("requires_reputation"),
+        "rep": s.get("requires_reputation"), "vendors": vendors,
     }
 
 
@@ -117,14 +125,14 @@ def tools(s):
 def step(prof, s):
     t = s["type"]
     if t == "buy_tool":
-        return {"kind": "tool", "buy": True, "recipe": s["item"], "item": ITEM_IDS.get(s["item"]),
+        return {"kind": "tool", "buy": True, "recipe": s["item"], "item": IDS.get(s["item"]),
                 "safe": 1, "expected": 1,
-                "mats": [{"name": s["item"], "id": ITEM_IDS.get(s["item"]), "qty": 1}],
+                "mats": [{"name": s["item"], "id": IDS.get(s["item"]), "qty": 1}],
                 "source": source(s.get("source")), "note": s.get("instructions")}
     if t == "train_rank":
         return {"kind": "train", "rank": s["rank"], "reqSkill": s["requires_skill"],
                 "reqLevel": s.get("requires_character_level"), "before": s["train_before_skill"],
-                "cap": RANK_CAP.get(s["rank"])}
+                "cap": RANK_CAP.get(s["rank"]), "how": s.get("instructions")}
     if t == "disenchant":
         return {"kind": "disenchant", "from": s["skill_from"], "to": s["skill_to"],
                 "note": s.get("instructions")}
@@ -141,7 +149,7 @@ def step(prof, s):
         "alts": s.get("alternatives") or None,
     }
     if t == "craft_tool":
-        out["item"] = ITEM_IDS.get(s["recipe"])
+        out["item"] = IDS.get(s["recipe"])
         out["note"] = "Make one and keep it in your bags."
     src = s.get("source") or {}
     if src.get("limited_stock"):
@@ -150,6 +158,8 @@ def step(prof, s):
     if src.get("requires_reputation"):
         rep = "Needs %s to learn this recipe." % src["requires_reputation"]
         out["note"] = (out["note"] + " " + rep) if out.get("note") else rep
+    if s.get("instructions") and t == "craft":
+        out["note"] = (out["note"] + " " + s["instructions"]) if out.get("note") else s["instructions"]
     if s.get("low_odds"):
         out["note"] = (out["note"] + " " + s["low_odds"]) if out.get("note") else s["low_odds"]
     extra = EXTRA_NOTES.get((prof, s.get("recipe")))
@@ -168,7 +178,12 @@ def main():
         "",
         "ns.Guides = {",
     ]
+    vendor_items = set()
     for g in data["guides"]:
+        IDS.clear()
+        IDS.update(ITEM_IDS)
+        IDS.update(g.get("item_ids") or {})
+        vendor_items.update(g.get("vendor_items") or [])
         key = g["profession"] + ":" + g["guide"]
         est = g.get("source_estimate") or {}
         guide = {
@@ -183,7 +198,7 @@ def main():
         if g.get("parts"):
             lines.append("\t\tparts = {")
             for name, p in g["parts"].items():
-                part = {"recipe": p["recipe"], "id": ITEM_IDS.get(name), "makes": p.get("makes", 1),
+                part = {"recipe": p["recipe"], "id": IDS.get(name), "makes": p.get("makes", 1),
                         "mats": mats(p["materials_per_craft"])}
                 lines.append("\t\t\t[" + lua(name) + "] = " + lua(part) + ",")
             lines.append("\t\t},")
@@ -193,12 +208,16 @@ def main():
         lines.append("\t\t},")
         lines.append("\t},")
     lines.append("}")
+    lines.append("")
+    lines.append("-- Reagents sold by vendors, from the imported catalogs: never bought at the auction house.")
+    lines.append("ns.GuideVendorItems = { " + ", ".join("[%d] = true" % i for i in sorted(vendor_items)) + " }")
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines) + "\n")
+    known = lambda g, m: m in ITEM_IDS or m in (g.get("item_ids") or {})
     missing = sorted({m for g in data["guides"] for s in g["steps"]
-                      for m in (s.get("materials_per_craft") or {}) if m not in ITEM_IDS}
+                      for m in (s.get("materials_per_craft") or {}) if not known(g, m)}
                      | {m for g in data["guides"] for p in (g.get("parts") or {}).values()
-                        for m in p["materials_per_craft"] if m not in ITEM_IDS})
+                        for m in p["materials_per_craft"] if not known(g, m)})
     print("wrote", os.path.normpath(OUT))
     if missing:
         print("no item ID (found by name in the auction house):", ", ".join(missing))

@@ -63,7 +63,9 @@ local function render()
 		local _, missing = P.Shopping(guide, ctx)
 		local bits = {}
 		if st.train and st.step ~= st.train then
-			bits[#bits + 1] = UI.Color({ 1, 0.5, 0.3 }, "Train " .. st.train.rank .. " before " .. st.train.before)
+			bits[#bits + 1] = UI.Color({ 1, 0.5, 0.3 }, st.train.how
+				and (st.train.how .. " Before " .. st.train.before .. ".")
+				or ("Train " .. st.train.rank .. " before " .. st.train.before))
 		end
 		bits[#bits + 1] = missing > 0 and ("%d reagents still to get"):format(missing) or UI.Color("green", "All reagents in hand")
 		tracker.extra:SetText(table.concat(bits, "\n"))

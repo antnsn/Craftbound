@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Three more guides from Wowhead's Forever data: Tailoring, Cooking and First Aid (1-300). They
+  keep Forever's own recipes (Runecloth Cuffs, the Venomspew set), stations (Loom, Spinning
+  Wheel, Iron Oven) and reputation. Bolts are made along the way.
+- Recipe hints name the vendors of your own faction, and say when a recipe is known from the
+  start, a quest reward or a drop. Cooking and First Aid say how to learn Expert (a book) and
+  Artisan (a quest).
+- Vendor reagents from the imported data (spices, bleach, dyes, threads) are bought at
+  merchants, never searched at the auction house.
 - Marius' painted icon: in the addon list, on a new minimap button (left-click: tracker,
   right-click: pick a guide, drag to move; collected by minimap addons through LibDBIcon when
   one is loaded), beside the panel titles and as the docs logo.
