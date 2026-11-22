@@ -22,6 +22,8 @@ When you open a profession with a guide, Craftbound docks a panel to the right o
 
 When the button is greyed out, its tooltip says why: the recipe isn't learned, you are missing reagents, or the step isn't a craft. If you are missing reagents, the panel lists the guide's **alternatives** in their skill-up colour, so you can craft one of those instead.
 
+Reagents in your bank or mailbox count as owned, so Craftbound never asks you to buy them. When the bags are short and the rest is in the bank, the reagent says **N in bank**, the tracker says **Fetch: ...**, and **Craft** tells you to fetch them first. The bank is counted once you have opened it.
+
 ## The route
 
 Every step of the guide, in order:

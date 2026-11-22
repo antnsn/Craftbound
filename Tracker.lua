@@ -69,6 +69,11 @@ local function render()
 				or ("Train " .. st.train.rank .. " before " .. st.train.before))
 		end
 		bits[#bits + 1] = missing > 0 and ("%d reagents still to get"):format(missing) or UI.Color("green", "All reagents in hand")
+		local s = st.step
+		if s and (s.kind == "craft" or s.kind == "tool") then
+			local away = ns.ElsewhereFor(ns.LiveMats(s.recipe) or s.mats, st.left)
+			if #away > 0 then bits[#bits + 1] = UI.Color(UI.GOLD, "Fetch: " .. ns.ElsewhereText(away)) end
+		end
 		tracker.extra:SetText(table.concat(bits, "\n"))
 	end
 	tracker:SetHeight(48 + tracker.step:GetStringHeight() + tracker.extra:GetStringHeight())
