@@ -53,6 +53,12 @@ When you can train the next rank (Journeyman, Expert, Artisan), a red line says 
 
 At the cap (75/75, 150/150, 225/225) crafting gives no skill-up, so the **Craft** button and its key stop and say to train. Blizzard's own **Create** and **Create All** buttons ask first: the first click says you are at the cap, and **Craft anyway** lets your clicks through until your skill or the cap changes. At 300 nothing asks: you craft for the items then. `/craft toggle cap` turns the question off.
 
+## At the trainer
+
+At a profession trainer a Craftbound panel sits beside the trainer window. It lists what your route needs from this trainer, up to your stop: the next rank, the recipes of the steps still ahead, and the recipes of parts those steps need (grinding stones, blasting powder). Each line says **train now**, **at** the skill it needs, or **not taught here** (a vendor or a special trainer has it).
+
+**Train N** trains only the lines marked *train now*, so you don't pay for every recipe the trainer has. Recipes you know, steps you are already past, tools you have and anything after your stop are left alone. `/craft toggle trainer` hides the panel.
+
 ## Turning it off
 
 `/craft toggle panel` hides the panel, and `/craft toggle select` stops Craftbound selecting the recipe when the window opens.

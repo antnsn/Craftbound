@@ -24,5 +24,6 @@ description: Every Craftbound chat command.
 | `/craft toggle select` | Turns selecting the step's recipe on or off. |
 | `/craft toggle tracker` | Turns the tracker on or off. |
 | `/craft toggle minimap` | Shows or hides the minimap button. |
+| `/craft toggle trainer` | Hides (or shows) the panel beside the profession trainer. |
 | `/craft toggle cap` | Turns off (or on) the question before Blizzard's Create buttons craft at a rank's cap. |
 | `/craft help` | Lists the commands in chat. |
