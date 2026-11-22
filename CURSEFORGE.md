@@ -22,6 +22,7 @@ Craftbound follows a levelling route for you. Beside the profession window it sh
 - **A panel beside it**: the step, its skill-up colour, the reagents you have and need, and the route ahead.
 - **Craft** (button or key binding) crafts the step: as many as you can, never past your rank's cap. Enchants go on the right equipped item.
 - **Says what's missing**: a recipe to learn (and where, from the vendors of your faction), a rank to train, a tool to make.
+- **Stops at the cap**: at 75/75, 150/150 and 225/225 crafting gives no skill-up, so Craft stops, and Blizzard's Create buttons ask before they craft.
 
 ## The auction house and vendors
 - **A shopping list** of what the rest of the route needs, minus what's in your bags, bank and mailbox.
@@ -51,7 +52,7 @@ Craftbound follows a levelling route for you. Beside the profession window it sh
 - `/craft list`: the shopping list in chat
 - `/craft tick`, `/craft untick 3`: tick off a step by hand, or put it back
 - `/craft reset`: forget this character's progress in the active guide
-- `/craft toggle panel|shop|select|tracker|minimap`: turn a part on or off
+- `/craft toggle panel|shop|select|tracker|minimap|cap`: turn a part on or off
 - `/craft help`: list every command
 
 Key bindings (Key Bindings > AddOns > Craftbound): **Craft the next step** and **Auction house: buy next / confirm**.
@@ -65,6 +66,10 @@ Key bindings (Key Bindings > AddOns > Craftbound): **Craft the next step** and *
 ### 0.2.2-alpha (2026-11-22)
 
 - First version on CurseForge.
+- **At a rank's cap** (75/75, 150/150, 225/225) Blizzard's Create and Create All buttons ask
+  before they craft, since crafting gives no skill-up there; "Craft anyway" lets the clicks
+  through until the skill or the cap changes. Craftbound's own Craft button already stopped.
+  `/craft toggle cap` turns the question off.
 
 ### 0.2.1-alpha (2026-11-22)
 
