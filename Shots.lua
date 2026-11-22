@@ -188,6 +188,8 @@ function ns.Shots()
 	local function Next(i)
 		local st = steps[i]
 		if not st or InCombatLockdown() then Finish(not st) return end
+		-- the tracker sits on top only for its own shot
+		if ns.tracker and st.name ~= "tracker" then ns.tracker:SetFrameStrata("LOW") end
 		local ok, err = pcall(st.prepare)
 		if not ok then Finish(false, st.name .. ": " .. tostring(err)) return end
 		C_Timer.After(st.wait or SHOT_WAIT, function()

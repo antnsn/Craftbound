@@ -5,7 +5,8 @@
 - The profession panel's route shows steps after your stop greyed out as "past your stop",
   not ticked off as if they were done.
 - The tracker's title fits on one line again ("Alchemy 75/150"; the logo says Craftbound).
-- Screenshots in the docs, the README and on the CurseForge page (the trainer panel too).
+- Screenshots in the docs, the README and on the CurseForge page (the trainer panel and the
+  auction house too).
 - The profession panel's footer no longer says to go to the auction house when you have every
   reagent.
 
