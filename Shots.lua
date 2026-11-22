@@ -101,8 +101,25 @@ local function Steps()
 		prepare = function()
 			hideAll()
 			if ns.tracker and not ns.tracker:IsShown() and ns.ShowTracker then ns.ShowTracker() end
+			-- above the profession or auction panels it may sit behind (its strata is LOW)
+			if ns.tracker then ns.tracker:SetFrameStrata("DIALOG") end
 		end,
 		rects = function() return { main = Rect(ns.tracker) } end }
+	local trainer = named("CraftboundTrainerPanel")
+	if trainer and trainer:IsShown() then
+		steps[#steps + 1] = { name = "trainer", optional = true, prepare = function() hideAll() end,
+			rects = function()
+				local host = named("ClassTrainerFrame")
+				return { main = Union(host and Rect(host, 0), Rect(trainer)), panel = Rect(trainer) }
+			end }
+	end
+	if ns.auctionPanel and ns.auctionPanel:IsShown() then
+		steps[#steps + 1] = { name = "auction-house", prepare = function() end,
+			rects = function()
+				return { main = Union(Rect(named("AuctionHouseFrame"), 0), Rect(ns.auctionPanel)), shop = Rect(ns.auctionPanel) }
+			end }
+	end
+	-- last: the profession window it may open itself would cover the trainer and auction house
 	-- the profession window: opened for the guide's profession when it isn't open yet
 	local line
 	for id, name in pairs(ns.SKILL_LINES or {}) do
@@ -121,20 +138,6 @@ local function Steps()
 			end,
 			rects = function()
 				return { main = Union(Rect(named("ProfessionsFrame"), 0), Rect(ns.professionPanel)), panel = Rect(ns.professionPanel) }
-			end }
-	end
-	local trainer = named("CraftboundTrainerPanel")
-	if trainer and trainer:IsShown() then
-		steps[#steps + 1] = { name = "trainer", optional = true, prepare = function() hideAll() end,
-			rects = function()
-				local host = named("ClassTrainerFrame")
-				return { main = Union(host and Rect(host, 0), Rect(trainer)), panel = Rect(trainer) }
-			end }
-	end
-	if ns.auctionPanel and ns.auctionPanel:IsShown() then
-		steps[#steps + 1] = { name = "auction-house", prepare = function() end,
-			rects = function()
-				return { main = Union(Rect(named("AuctionHouseFrame"), 0), Rect(ns.auctionPanel)), shop = Rect(ns.auctionPanel) }
 			end }
 	end
 	return steps
@@ -159,6 +162,7 @@ function ns.Shots()
 			if f and f:IsShown() then f:Hide() end
 		end
 		ns.char.trackerHidden = trackerHidden
+		if ns.tracker then ns.tracker:SetFrameStrata("LOW") end
 		if ns.openedForShots then
 			ns.openedForShots = nil
 			if C_TradeSkillUI.CloseTradeSkill then pcall(C_TradeSkillUI.CloseTradeSkill) end
