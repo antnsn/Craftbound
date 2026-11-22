@@ -4912,6 +4912,1008 @@
           "instructions": "Trained by Doctor Gustaf VanHowzen in Theramore (Alliance) or Doctor Gregory Victor in Hammerfall (Horde), as in Classic; unconfirmed until checked on a live realm."
         }
       ]
+    },
+    {
+      "profession": "Blacksmithing",
+      "guide": "Tried & Tested",
+      "skill_from": 1,
+      "skill_to": 300,
+      "source_estimate": {
+        "average_crafts": 403,
+        "p90_crafts": 505,
+        "playtested_in_forever": true,
+        "source": "Wowhead: Tried & Tested in Forever, version 2"
+      },
+      "item_ids": {
+        "Arcanite Bar": 12360,
+        "Azerothium Bar": 249726,
+        "Black Pearl": 7971,
+        "Blacksmith Hammer": 5956,
+        "Bronze Bar": 2841,
+        "Coarse Grinding Stone": 3478,
+        "Coarse Stone": 2836,
+        "Copper Bar": 2840,
+        "Dense Grinding Stone": 12644,
+        "Dense Stone": 12365,
+        "Essence of Air": 7082,
+        "Green Dye": 2605,
+        "Heavy Grinding Stone": 3486,
+        "Heavy Stone": 2838,
+        "Iron Bar": 3575,
+        "Large Opal": 12799,
+        "Mageweave Cloth": 4338,
+        "Medium Leather": 2319,
+        "Mithril Bar": 3860,
+        "Rough Grinding Stone": 3470,
+        "Rough Stone": 2835,
+        "Rugged Leather": 8170,
+        "Shadowgem": 1210,
+        "Silver Bar": 2842,
+        "Solid Grinding Stone": 7966,
+        "Solid Stone": 7912,
+        "Star Ruby": 7910,
+        "Steel Bar": 3859,
+        "Strong Flux": 3466,
+        "Thick Leather": 4304,
+        "Thorium Bar": 12359,
+        "Truesilver Bar": 6037
+      },
+      "vendor_items": [
+        2605,
+        3466
+      ],
+      "parts": {
+        "Rough Grinding Stone": {
+          "recipe": "Rough Grinding Stone",
+          "makes": 1,
+          "materials_per_craft": {
+            "Rough Stone": 2
+          }
+        },
+        "Coarse Grinding Stone": {
+          "recipe": "Coarse Grinding Stone",
+          "makes": 1,
+          "materials_per_craft": {
+            "Coarse Stone": 2
+          }
+        },
+        "Heavy Grinding Stone": {
+          "recipe": "Heavy Grinding Stone",
+          "makes": 1,
+          "materials_per_craft": {
+            "Heavy Stone": 3
+          }
+        },
+        "Solid Grinding Stone": {
+          "recipe": "Solid Grinding Stone",
+          "makes": 1,
+          "materials_per_craft": {
+            "Solid Stone": 4
+          }
+        },
+        "Dense Grinding Stone": {
+          "recipe": "Dense Grinding Stone",
+          "makes": 1,
+          "materials_per_craft": {
+            "Dense Stone": 4
+          }
+        }
+      },
+      "steps": [
+        {
+          "type": "craft",
+          "skill_from": 1,
+          "skill_to": 30,
+          "recipe": "Rough Sharpening Stone",
+          "skill_thresholds": {
+            "orange": 1,
+            "yellow": 15,
+            "green": 35,
+            "gray": 55
+          },
+          "crafts": {
+            "expected": 32,
+            "safe": 35
+          },
+          "materials_per_craft": {
+            "Rough Stone": 1
+          },
+          "source": {
+            "type": "known"
+          },
+          "alternatives": []
+        },
+        {
+          "type": "train_rank",
+          "rank": "Journeyman",
+          "requires_skill": 50,
+          "requires_character_level": 10,
+          "train_before_skill": 75
+        },
+        {
+          "type": "craft",
+          "skill_from": 30,
+          "skill_to": 65,
+          "recipe": "Rough Grinding Stone",
+          "skill_thresholds": {
+            "orange": 25,
+            "yellow": 45,
+            "green": 65,
+            "gray": 85
+          },
+          "crafts": {
+            "expected": 42,
+            "safe": 47
+          },
+          "materials_per_craft": {
+            "Rough Stone": 2
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 100
+          },
+          "alternatives": []
+        },
+        {
+          "type": "buy_tool",
+          "item": "Blacksmith Hammer",
+          "item_ids": [
+            5956,
+            285280,
+            281665,
+            285281
+          ],
+          "source": {
+            "type": "vendor",
+            "npc": "a blacksmithing supplies vendor",
+            "cost_raw": 15
+          },
+          "instructions": "Buy a Blacksmith Hammer and keep it in your bags (a better one, such as Mithril Blacksmith Hammer, Twilight Forgehammer, Arcanite Blacksmith Hammer, works too)."
+        },
+        {
+          "type": "craft",
+          "skill_from": 65,
+          "skill_to": 75,
+          "recipe": "Copper Chain Belt",
+          "skill_thresholds": {
+            "orange": 30,
+            "yellow": 70,
+            "green": 90,
+            "gray": 110
+          },
+          "crafts": {
+            "expected": 10,
+            "safe": 11
+          },
+          "materials_per_craft": {
+            "Copper Bar": 6
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 100
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 75,
+          "skill_to": 80,
+          "recipe": "Silver Skeleton Key",
+          "skill_thresholds": {
+            "orange": 75,
+            "yellow": 75,
+            "green": 85,
+            "gray": 95
+          },
+          "crafts": {
+            "expected": 5,
+            "safe": 7
+          },
+          "materials_per_craft": {
+            "Silver Bar": 1,
+            "Rough Grinding Stone": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 100
+          },
+          "alternatives": [],
+          "output_quantity": 2,
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 80,
+          "skill_to": 90,
+          "recipe": "Rough Bronze Leggings",
+          "skill_thresholds": {
+            "orange": 80,
+            "yellow": 120,
+            "green": 135,
+            "gray": 150
+          },
+          "crafts": {
+            "expected": 10,
+            "safe": 10
+          },
+          "materials_per_craft": {
+            "Bronze Bar": 6
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 300
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 90,
+          "skill_to": 100,
+          "recipe": "Runed Copper Belt",
+          "skill_thresholds": {
+            "orange": 45,
+            "yellow": 85,
+            "green": 105,
+            "gray": 125
+          },
+          "crafts": {
+            "expected": 13,
+            "safe": 16
+          },
+          "materials_per_craft": {
+            "Copper Bar": 10
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 200
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 100,
+          "skill_to": 105,
+          "recipe": "Heavy Sharpening Stone",
+          "skill_thresholds": {
+            "orange": 100,
+            "yellow": 100,
+            "green": 107,
+            "gray": 115
+          },
+          "crafts": {
+            "expected": 5,
+            "safe": 7
+          },
+          "materials_per_craft": {
+            "Heavy Stone": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 1000
+          },
+          "alternatives": []
+        },
+        {
+          "type": "craft",
+          "skill_from": 105,
+          "skill_to": 110,
+          "recipe": "Runed Copper Belt",
+          "skill_thresholds": {
+            "orange": 45,
+            "yellow": 85,
+            "green": 105,
+            "gray": 125
+          },
+          "crafts": {
+            "expected": 11,
+            "safe": 16
+          },
+          "materials_per_craft": {
+            "Copper Bar": 10
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 200
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 110,
+          "skill_to": 125,
+          "recipe": "Rough Bronze Leggings",
+          "skill_thresholds": {
+            "orange": 80,
+            "yellow": 120,
+            "green": 135,
+            "gray": 150
+          },
+          "crafts": {
+            "expected": 15,
+            "safe": 16
+          },
+          "materials_per_craft": {
+            "Bronze Bar": 6
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 300
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "train_rank",
+          "rank": "Expert",
+          "requires_skill": 125,
+          "requires_character_level": 20,
+          "train_before_skill": 150
+        },
+        {
+          "type": "craft",
+          "skill_from": 125,
+          "skill_to": 129,
+          "recipe": "Iron Buckle",
+          "skill_thresholds": {
+            "orange": 125,
+            "yellow": 125,
+            "green": 127,
+            "gray": 130
+          },
+          "crafts": {
+            "expected": 6,
+            "safe": 9
+          },
+          "materials_per_craft": {
+            "Iron Bar": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 250
+          },
+          "alternatives": [],
+          "output_quantity": 2,
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 129,
+          "skill_to": 140,
+          "recipe": "Bronze Warhammer",
+          "skill_thresholds": {
+            "orange": 100,
+            "yellow": 155,
+            "green": 170,
+            "gray": 185
+          },
+          "crafts": {
+            "expected": 11,
+            "safe": 11
+          },
+          "materials_per_craft": {
+            "Bronze Bar": 8,
+            "Strong Flux": 1,
+            "Medium Leather": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 250
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 140,
+          "skill_to": 147,
+          "recipe": "Patterned Bronze Bracers",
+          "skill_thresholds": {
+            "orange": 95,
+            "yellow": 125,
+            "green": 140,
+            "gray": 155
+          },
+          "crafts": {
+            "expected": 18,
+            "safe": 25
+          },
+          "materials_per_craft": {
+            "Bronze Bar": 5,
+            "Coarse Grinding Stone": 2
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 500
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 147,
+          "skill_to": 155,
+          "recipe": "Green Iron Bracers",
+          "skill_thresholds": {
+            "orange": 140,
+            "yellow": 165,
+            "green": 177,
+            "gray": 190
+          },
+          "crafts": {
+            "expected": 8,
+            "safe": 8
+          },
+          "materials_per_craft": {
+            "Iron Bar": 6,
+            "Green Dye": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 1000
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 155,
+          "skill_to": 165,
+          "recipe": "Green Iron Leggings",
+          "skill_thresholds": {
+            "orange": 130,
+            "yellow": 155,
+            "green": 167,
+            "gray": 180
+          },
+          "crafts": {
+            "expected": 12,
+            "safe": 15
+          },
+          "materials_per_craft": {
+            "Iron Bar": 8,
+            "Heavy Grinding Stone": 1,
+            "Green Dye": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 5000
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 165,
+          "skill_to": 183,
+          "recipe": "Green Iron Bracers",
+          "skill_thresholds": {
+            "orange": 140,
+            "yellow": 165,
+            "green": 177,
+            "gray": 190
+          },
+          "crafts": {
+            "expected": 30,
+            "safe": 37
+          },
+          "materials_per_craft": {
+            "Iron Bar": 6,
+            "Green Dye": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 1000
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 183,
+          "skill_to": 190,
+          "recipe": "Heavy Mithril Gauntlet",
+          "skill_thresholds": {
+            "orange": 180,
+            "yellow": 200,
+            "green": 210,
+            "gray": 220
+          },
+          "crafts": {
+            "expected": 7,
+            "safe": 7
+          },
+          "materials_per_craft": {
+            "Mithril Bar": 6,
+            "Mageweave Cloth": 4
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 5000
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 190,
+          "skill_to": 200,
+          "recipe": "Golden Scale Bracers",
+          "skill_thresholds": {
+            "orange": 160,
+            "yellow": 185,
+            "green": 197,
+            "gray": 210
+          },
+          "crafts": {
+            "expected": 16,
+            "safe": 21
+          },
+          "materials_per_craft": {
+            "Steel Bar": 5,
+            "Heavy Grinding Stone": 2
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 1000
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "train_rank",
+          "rank": "Artisan",
+          "requires_skill": 200,
+          "requires_character_level": 35,
+          "train_before_skill": 225
+        },
+        {
+          "type": "craft",
+          "skill_from": 200,
+          "skill_to": 205,
+          "recipe": "Heavy Mithril Gauntlet",
+          "skill_thresholds": {
+            "orange": 180,
+            "yellow": 200,
+            "green": 210,
+            "gray": 220
+          },
+          "crafts": {
+            "expected": 5,
+            "safe": 7
+          },
+          "materials_per_craft": {
+            "Mithril Bar": 6,
+            "Mageweave Cloth": 4
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 5000
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 205,
+          "skill_to": 210,
+          "recipe": "Mithril Plate Pants",
+          "skill_thresholds": {
+            "orange": 185,
+            "yellow": 205,
+            "green": 215,
+            "gray": 225
+          },
+          "crafts": {
+            "expected": 5,
+            "safe": 7
+          },
+          "materials_per_craft": {
+            "Mithril Bar": 12
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 5000
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 210,
+          "skill_to": 215,
+          "recipe": "Heavy Mithril Gauntlet",
+          "skill_thresholds": {
+            "orange": 180,
+            "yellow": 200,
+            "green": 210,
+            "gray": 220
+          },
+          "crafts": {
+            "expected": 12,
+            "safe": 19
+          },
+          "materials_per_craft": {
+            "Mithril Bar": 6,
+            "Mageweave Cloth": 4
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 5000
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 215,
+          "skill_to": 225,
+          "recipe": "Heavy Mithril Breastplate",
+          "skill_thresholds": {
+            "orange": 205,
+            "yellow": 225,
+            "green": 235,
+            "gray": 245
+          },
+          "crafts": {
+            "expected": 10,
+            "safe": 10
+          },
+          "materials_per_craft": {
+            "Mithril Bar": 16
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 15000
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 225,
+          "skill_to": 235,
+          "recipe": "Dense Weightstone",
+          "skill_thresholds": {
+            "orange": 225,
+            "yellow": 230,
+            "green": 232,
+            "gray": 235
+          },
+          "crafts": {
+            "expected": 16,
+            "safe": 23
+          },
+          "materials_per_craft": {
+            "Dense Stone": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 10000
+          },
+          "alternatives": []
+        },
+        {
+          "type": "craft",
+          "skill_from": 235,
+          "skill_to": 240,
+          "recipe": "Mithril Coif",
+          "skill_thresholds": {
+            "orange": 205,
+            "yellow": 225,
+            "green": 235,
+            "gray": 245
+          },
+          "crafts": {
+            "expected": 12,
+            "safe": 19
+          },
+          "materials_per_craft": {
+            "Mithril Bar": 10,
+            "Mageweave Cloth": 6
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 15000
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 240,
+          "skill_to": 246,
+          "recipe": "Heavy Mithril Boots",
+          "skill_thresholds": {
+            "orange": 210,
+            "yellow": 230,
+            "green": 240,
+            "gray": 250
+          },
+          "crafts": {
+            "expected": 16,
+            "safe": 24
+          },
+          "materials_per_craft": {
+            "Mithril Bar": 14,
+            "Thick Leather": 4
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 20000
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 246,
+          "skill_to": 250,
+          "recipe": "Big Black Mace",
+          "skill_thresholds": {
+            "orange": 205,
+            "yellow": 230,
+            "green": 242,
+            "gray": 255
+          },
+          "crafts": {
+            "expected": 13,
+            "safe": 21
+          },
+          "materials_per_craft": {
+            "Mithril Bar": 16,
+            "Black Pearl": 1,
+            "Shadowgem": 4,
+            "Solid Grinding Stone": 1,
+            "Thick Leather": 2
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 15000
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 250,
+          "skill_to": 257,
+          "recipe": "Arcanite Skeleton Key",
+          "skill_thresholds": {
+            "orange": 250,
+            "yellow": 250,
+            "green": 255,
+            "gray": 260
+          },
+          "crafts": {
+            "expected": 10,
+            "safe": 15
+          },
+          "materials_per_craft": {
+            "Arcanite Bar": 1,
+            "Dense Grinding Stone": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 10000
+          },
+          "alternatives": [],
+          "output_quantity": 2,
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 257,
+          "skill_to": 270,
+          "recipe": "Ebon Shiv",
+          "skill_thresholds": {
+            "orange": 255,
+            "yellow": 255,
+            "green": 267,
+            "gray": 280
+          },
+          "crafts": {
+            "expected": 20,
+            "safe": 25
+          },
+          "materials_per_craft": {
+            "Mithril Bar": 12,
+            "Truesilver Bar": 6,
+            "Star Ruby": 2,
+            "Solid Grinding Stone": 1,
+            "Thick Leather": 2
+          },
+          "source": {
+            "type": "vendor",
+            "npc": "Magnus Frostwake",
+            "location": "Western Plaguelands",
+            "cost_raw": 9500,
+            "limited_stock": null,
+            "vendors": null
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 270,
+          "skill_to": 275,
+          "recipe": "Bold Dirk",
+          "skill_thresholds": {
+            "orange": 270,
+            "yellow": 290,
+            "green": 300,
+            "gray": 310
+          },
+          "crafts": {
+            "expected": 5,
+            "safe": 5
+          },
+          "materials_per_craft": {
+            "Thorium Bar": 30,
+            "Essence of Air": 4,
+            "Azerothium Bar": 10,
+            "Rugged Leather": 4
+          },
+          "source": {
+            "type": "vendor",
+            "npc": "Pexmit",
+            "location": "Mount Hyjal",
+            "cost_raw": 90000,
+            "limited_stock": null,
+            "vendors": null
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ],
+          "forever": true
+        },
+        {
+          "type": "craft",
+          "skill_from": 275,
+          "skill_to": 279,
+          "recipe": "Ornate Thorium Handaxe",
+          "skill_thresholds": {
+            "orange": 275,
+            "yellow": 275,
+            "green": 287,
+            "gray": 300
+          },
+          "crafts": {
+            "expected": 4,
+            "safe": 5
+          },
+          "materials_per_craft": {
+            "Thorium Bar": 20,
+            "Large Opal": 2,
+            "Dense Grinding Stone": 2,
+            "Rugged Leather": 4
+          },
+          "source": {
+            "type": "vendor",
+            "npc": "Magnus Frostwake",
+            "location": "Western Plaguelands",
+            "cost_raw": 15200,
+            "limited_stock": null,
+            "vendors": null
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 279,
+          "skill_to": 300,
+          "recipe": "Bold Dirk",
+          "skill_thresholds": {
+            "orange": 270,
+            "yellow": 290,
+            "green": 300,
+            "gray": 310
+          },
+          "crafts": {
+            "expected": 24,
+            "safe": 27
+          },
+          "materials_per_craft": {
+            "Thorium Bar": 30,
+            "Essence of Air": 4,
+            "Azerothium Bar": 10,
+            "Rugged Leather": 4
+          },
+          "source": {
+            "type": "vendor",
+            "npc": "Pexmit",
+            "location": "Mount Hyjal",
+            "cost_raw": 90000,
+            "limited_stock": null,
+            "vendors": null
+          },
+          "alternatives": [],
+          "station": "Anvil",
+          "required_tools": [
+            "Blacksmith Hammer"
+          ],
+          "forever": true
+        }
+      ]
     }
   ],
   "vendor_prices": {
@@ -4932,9 +5934,11 @@
     "2686": 48,
     "2692": 36,
     "2723": 45,
+    "2880": 88,
     "2894": 48,
     "3371": 18,
     "3372": 180,
+    "3466": 1777,
     "3713": 144,
     "4291": 450,
     "4340": 315,
@@ -4943,6 +5947,7 @@
     "4470": 34,
     "4471": 110,
     "4536": 22,
+    "5956": 15,
     "6260": 45,
     "6261": 900,
     "8343": 1800,
@@ -4954,6 +5959,7 @@
     "14341": 4500,
     "17194": 10,
     "17196": 50,
+    "18567": 133333,
     "272941": 180000
   }
 }

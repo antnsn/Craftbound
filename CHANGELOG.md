@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Blacksmithing from 1: Wowhead's Forever route 1-300 joins the 125-300 one. The Blacksmith
+  Hammer is a buy step, and Forever's better hammers count as having one.
 - **The Craftbound window** (`/craft`, minimap left-click): every guide, built-in and your own,
   with its route and your skill. It replaces the guide picker; the tracker is now
   `/craft tracker` and the minimap's right-click.

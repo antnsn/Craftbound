@@ -143,6 +143,9 @@ function P.IsDone(guide, i, ctx)
 		return skill > (s.before or 0)
 	elseif s.kind == "tool" then
 		if ctx.have and ctx.have({ id = s.item, name = s.recipe }) > 0 then return true end
+		for _, id in ipairs(s.items or {}) do -- any of the tool's items (a better hammer)
+			if ctx.have and ctx.have({ id = id }) > 0 then return true end
+		end
 		-- past every step that needs it (sold or replaced)
 		local user = lastUser(guide, i, s.recipe)
 		if not user then return false end

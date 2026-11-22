@@ -13,7 +13,7 @@ character stopped.
 - The panel beside the auction house shows what the rest of the route needs minus your bags and
   bank. **Buy next** scans prices and buys at the server's price after you confirm.
 - Progress is saved per character, with a tracker that says what comes next.
-- Guides: Enchanting, Alchemy, Engineering, Leatherworking, Tailoring, Cooking and First Aid 1-300, Blacksmithing 125-300.
+- Guides: Enchanting, Alchemy, Blacksmithing, Engineering, Leatherworking, Tailoring, Cooking and First Aid 1-300 (and a second Blacksmithing route from 125).
 
 `/craft` opens the Craftbound window: every guide, where to stop (150, 225, 300) and what it costs, and your own guides to make and share. `/craft help` lists the commands.
 

@@ -7,20 +7,21 @@ description: Where the routes come from, how counts are worked out, and real rea
 
 # Guides
 
-Craftbound ships eight routes:
+Craftbound ships nine routes:
 
 | Guide | Average crafts | Notes |
 | --- | --- | --- |
 | **Enchanting: Easiest** | 319 (331 for 9 in 10 players) | Four runed rods to make along the way. Disenchanting takes you from 2 to 20. |
 | **Alchemy: Easiest** | 310 | Two steps use limited-stock vendor recipes (Rage Potion from Hagrus in Orgrimmar, Holy Protection Potion from Hula'mahi in the Barrens). |
-| **Blacksmithing: Easiest** | 231 | Starts at **125**. Buy a Blacksmith Hammer first. Grinding stones are made along the way. The last three recipes need Cenarion Circle (Friendly, Honored) and Argent Dawn (Honored) reputation. |
+| **Blacksmithing: Tried & Tested** | 403 | The full route from 1. Buy a Blacksmith Hammer first (Forever's Mithril, Arcanite or Twilight hammers count too). Grinding stones are made along the way. Ends with Forever's Bold Dirk (Pexmit, Mount Hyjal), which needs Azerothium Bars. |
+| **Blacksmithing: Easiest** | 231 | Starts at **125** (the planner worked it out for a character already at 125). Buy a Blacksmith Hammer first. Grinding stones are made along the way. The last three recipes need Cenarion Circle (Friendly, Honored) and Argent Dawn (Honored) reputation. |
 | **Engineering: Easiest** | 361 | Two tools to make: Arclight Spanner and Gyromatic Micro-Adjustor. Gold Power Cores are made along the way. |
 | **Leatherworking: Easiest** | 329 | Two limited-stock vendor recipes (Werg Thickblade, Jase Farlane). The last three need Cenarion Circle and Timbermaw Hold (Revered) reputation. |
 | **Tailoring: Tried & Tested** | 363 | Bolts are made along the way. From 260 it uses Forever's own patterns: Runecloth Cuffs (Pexmit, Mount Hyjal) and the Venomspew set (Mishta, Cenarion Circle Friendly and Honored, at a Loom). |
 | **Cooking: Tried & Tested** | 346 | Six fish recipes, all from vendors. Mightfish Steak needs an Iron Oven. Expert comes from the Expert Cookbook, Artisan from the Clamlette Surprise quest. |
 | **First Aid: Tried & Tested** | 389 | Bandages. Expert comes from the book Expert First Aid - Under Wraps, Artisan from the Triage quest. The trainers for 240-300 are as in Classic, not yet confirmed on Forever. |
 
-Each route except Blacksmithing goes from 1 to 300.
+Each route goes from 1 to 300, except Blacksmithing: Easiest, which starts at 125.
 
 Pick one in the [Craftbound window](window.md) (`/craft`), or by opening that profession's window. You can also copy a guide, change it, or make and share your own: see the window page.
 

@@ -222,6 +222,11 @@ local function step(v)
 	s.source = source(v.source)
 	s.alts = strList(v.alts, 5)
 	s.item = int(v.item, 1, 9999999)
+	if type(v.items) == "table" then
+		local list = {}
+		for i = 1, math.min(#v.items, 8) do list[#list + 1] = int(v.items[i], 1, 9999999) end
+		s.items = #list > 0 and list or nil
+	end
 	s.buy = v.buy == true or nil
 	return s
 end

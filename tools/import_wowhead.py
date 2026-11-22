@@ -27,7 +27,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
 GUIDES = os.path.join(DATA, "profession-guides.json")
 
-NAMES = {197: "Tailoring", 185: "Cooking", 129: "First Aid"}
+NAMES = {197: "Tailoring", 185: "Cooking", 129: "First Aid", 164: "Blacksmithing"}
 SECONDARY = {185, 129}
 
 # Ranks a trainer teaches (primary professions), and how secondary skills get past 150 and 225.
@@ -98,6 +98,7 @@ def build(name):
     makers = {r["creates"][0]: r for r in cat["recipes"] if r.get("creates")}
 
     ids, vendor_items, parts, steps = {}, [], {}, []
+    bought = set()  # tools already given a buy step
     ranks = list(RANKS)
     total_e = total_s = 0
     for st in route["steps"]:
@@ -114,6 +115,23 @@ def build(name):
             if how:
                 t["instructions"] = how
             steps.append(t)
+        # a tool the profession can't make (the Blacksmith Hammer): buy it before the first step
+        # that needs it; any of the tool's items will do (Forever has better hammers)
+        for t in r.get("tools") or []:
+            tool = cat["tools"].get(str(t)) or {}
+            first = (tool.get("items") or [None])[0]
+            if not first or t in bought or first in makers:
+                continue
+            bought.add(t)
+            info = items.get(str(first)) or {}
+            ids[tool["name"]] = first
+            steps.append({"type": "buy_tool", "item": tool["name"], "item_ids": tool.get("items"),
+                          "source": {"type": "vendor", "npc": "a %s supplies vendor" % prof.lower(),
+                                     "cost_raw": info.get("price")},
+                          "instructions": "Buy a %s and keep it in your bags (a better one, such as %s, works too)."
+                          % (tool["name"], ", ".join(items[str(i)]["name"] for i in tool["items"][1:]
+                                                     if str(i) in items)) if len(tool.get("items") or []) > 1
+                          else "Buy a %s and keep it in your bags." % tool["name"]})
         e, s = crafts(r["colors"], a, b, r.get("skillUps"))
         total_e, total_s = total_e + e, total_s + s
         mats = {}

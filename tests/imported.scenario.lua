@@ -69,3 +69,23 @@ wb.check(not P.IsReady(artisan, ctx(210)), "artisan first aid not ready at 210")
 -- a recipe sold only to the other faction
 local only = { recipe = "Test", source = { kind = "vendor", npc = "X", vendors = { { npc = "X", side = "Horde" } } } }
 wb.check(wb.ns.LearnHint(only):find("other faction", 1, true), "other-faction-only recipe")
+
+-- Blacksmithing 1-300 (Wowhead's Tried & Tested): the hammer is bought, a better one counts,
+-- grinding stones are parts, Forever's Bold Dirk comes from Pexmit
+local bs = P.Find("Blacksmithing:Tried & Tested")
+wb.check(bs and bs.from == 1 and bs.to == 300, "blacksmithing 1-300 loads")
+local hammerStep
+for _, s in ipairs(bs.steps) do if s.kind == "tool" and s.buy then hammerStep = s end end
+wb.check(hammerStep and hammerStep.recipe == "Blacksmith Hammer", "hammer is a buy step")
+local hi
+for i, s in ipairs(bs.steps) do if s == hammerStep then hi = i end end
+owned = {}
+wb.check(not P.IsDone(bs, hi, ctx(60)), "no hammer: buy one")
+owned[285281] = 1 -- Arcanite Blacksmith Hammer
+wb.check(P.IsDone(bs, hi, ctx(60)), "a better hammer will do")
+owned = {}
+wb.check(find(P.Shopping(bs, ctx(140)), "Coarse Grinding Stone") == nil, "grinding stones are parts")
+wb.check(find(P.Shopping(bs, ctx(140)), "Coarse Stone") ~= nil, "shopped as stone")
+local dirk = step(bs, "Bold Dirk")
+wb.expect("bold dirk from Pexmit", dirk.source.npc, "Pexmit")
+wb.check(dirk.mats[3] and dirk.mats[3].name == "Azerothium Bar" and dirk.mats[3].id ~= nil, "Azerothium Bar has an ID now")

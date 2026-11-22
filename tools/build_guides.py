@@ -126,6 +126,7 @@ def step(prof, s):
     t = s["type"]
     if t == "buy_tool":
         return {"kind": "tool", "buy": True, "recipe": s["item"], "item": IDS.get(s["item"]),
+                "items": s.get("item_ids"),
                 "safe": 1, "expected": 1,
                 "mats": [{"name": s["item"], "id": IDS.get(s["item"]), "qty": 1}],
                 "source": source(s.get("source")), "note": s.get("instructions")}
