@@ -17,4 +17,5 @@ ignore:
   - .claude
   - README.md
   - Craftbound.png
+  - CURSEFORGE.md
   - .gitignore

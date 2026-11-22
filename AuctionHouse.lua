@@ -24,6 +24,7 @@ local VENDOR_ITEMS = {
 	[4289] = true, -- Salt
 	[2605] = true, [4340] = true, [2325] = true, -- Green, Gray, Black Dye
 }
+for id in pairs(ns.GuideVendorItems or {}) do VENDOR_ITEMS[id] = true end
 AH.VENDOR_ITEMS = VENDOR_ITEMS
 
 AH.prices = {}   -- [itemID] = { commodity, unit, avail, cost, short, auctions, at }
@@ -117,6 +118,7 @@ local function record(itemID, commodity, rows, avail)
 		commodity = commodity, rows = rows, avail = avail,
 		unit = rows[1] and rows[1].unit, cost = cost, short = math.max(0, missing - got), at = GetTime(),
 	}
+	if rows[1] then ns.Prices.Remember(itemID, rows[1].unit) end
 	ns.Refresh()
 end
 

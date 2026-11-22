@@ -68,6 +68,7 @@ local function readMats(recipeID, guideMats)
 	end
 	return (#mats > 0) and mats or nil, sch
 end
+ns.ReadMats = function(recipeID) return (readMats(recipeID)) end
 
 -- Read the open profession: skill, every recipe by name, and the real reagents of the guide's.
 function ns.ScanOpen()
@@ -89,7 +90,10 @@ function ns.ScanOpen()
 			if not seen[id] then
 				seen[id] = true
 				local r = T.GetRecipeInfo(id)
-				if r and r.name then byName[r.name] = r end
+				if r and r.name then
+					byName[r.name] = r
+					if r.learned then ns.char.known[r.name] = true end
+				end
 			end
 		end
 	end
@@ -137,8 +141,39 @@ function ns.SelectRecipe(name)
 end
 
 -- Where to learn a step's recipe, from the guide's source.
+-- The vendors of a recipe that serve this character: own faction and neutral, at most two.
+-- Returns their names and whether those shown sell it in limited stock.
+local function vendorsFor(src)
+	local side = UnitFactionGroup and UnitFactionGroup("player")
+	local t, more, limited = {}, false, false
+	for _, v in ipairs(src.vendors) do
+		if not v.side or not side or v.side == side then
+			if #t == 2 then more = true break end
+			t[#t + 1] = v.npc .. (v.location and (" (" .. v.location .. ")") or "")
+			limited = limited or v.limited or false
+		end
+	end
+	if #t == 0 then return nil end
+	return table.concat(t, " or ") .. (more and ", and other vendors" or ""), limited
+end
+
 function ns.LearnHint(s)
 	local src = s.source or {}
+	if src.kind == "known" then
+		return ("%s is a starting recipe: learn it from your trainer."):format(s.recipe)
+	elseif src.kind == "quest" then
+		return ("%s is a quest reward."):format(s.recipe)
+	elseif src.kind == "drop" then
+		return ("The %s recipe drops from mobs; buy it at the auction house."):format(s.recipe)
+	end
+	if src.kind == "vendor" and src.vendors then
+		local who, limited = vendorsFor(src)
+		local rep = src.rep and (" Needs " .. src.rep .. ".") or ""
+		if not who then
+			return ("The %s recipe is only sold to the other faction; buy it at the auction house."):format(s.recipe) .. rep
+		end
+		return ("Buy the %s recipe from %s%s."):format(s.recipe, who, limited and ", limited stock" or "") .. rep
+	end
 	if src.kind == "vendor" and src.npc then
 		return ("Buy the %s recipe from %s%s%s."):format(s.recipe, src.npc,
 			src.location and (" (" .. src.location .. ")") or "",
@@ -156,6 +191,54 @@ ns.On("REPLACE_ENCHANT", function() replacePending = GetTime() end)
 local function enchantSlot(recipe)
 	local part = recipe:match("^Enchant (.-) %- ")
 	return part and ENCHANT_SLOTS[part]
+end
+
+-- Does the character have a tool (by name), or one of the items that serve as it (a better hammer)?
+function ns.HasTool(guide, tool, ctx)
+	if ctx.have({ id = ns.KnownIDs[tool], name = tool }) > 0 then return true end
+	for _, s in ipairs(guide and guide.steps or {}) do
+		if s.kind == "tool" and s.recipe == tool then
+			for _, id in ipairs(s.items or {}) do
+				if ctx.have({ id = id }) > 0 then return true end
+			end
+		end
+	end
+	return false
+end
+
+-- How to learn a part's recipe (grinding stones, blasting powder).
+local function partLearnHint(short)
+	local src = short.part.source or {}
+	return ("Learn %s at your trainer%s to make the %s."):format(short.part.recipe,
+		src.cost and (" (" .. ns.Money(src.cost) .. ")") or "", short.name)
+end
+
+-- The part to make first for these reagents, going into a part's own parts when it can't be
+-- made yet (Unstable Trigger needs Solid Blasting Powder). Returns a plan, or nil and why not.
+local function partPlan(guide, mats, room, ctx, depth)
+	local why
+	for _, m in ipairs(mats or {}) do
+		local short = P.PartShort(guide, m, (m.qty or 1) * room, ctx, ns.BagCount)
+		local pr = short and ns.OpenRecipe(short.part.recipe)
+		if short and (not pr or pr.learned == false) then
+			why = why or partLearnHint(short)
+		elseif pr then
+			local pc = C_TradeSkillUI.GetCraftableCount and C_TradeSkillUI.GetCraftableCount(pr.recipeID)
+			if type(pc) == "number" and pc > 0 then
+				local pn = math.min(short.crafts, pc)
+				return { label = ("Make %d %s"):format(pn * (short.part.makes or 1), short.name), enabled = true,
+					part = short.name, run = function()
+						ns.SelectRecipe(short.part.recipe)
+						C_TradeSkillUI.CraftRecipe(pr.recipeID, pn)
+					end }
+			elseif depth < 3 then
+				local plan, sub = partPlan(guide, short.part.mats, short.crafts, ctx, depth + 1)
+				if plan then return plan end
+				why = why or sub
+			end
+		end
+	end
+	return nil, why
 end
 
 -- What one press of Craft does right now: returns a plan { label, enabled, reason, run }.
@@ -191,27 +274,18 @@ function ns.CraftPlan()
 			return { label = "Craft", enabled = false, reason = ("You are at the cap (%d): train the next rank first."):format(ctx.maxSkill) }
 		end
 	end
-	-- parts the step needs (a grinding stone, a power core): make those first
+	-- parts the step needs (a grinding stone, a trigger): make those first
 	local guide = ns.ActiveGuide()
-	for _, m in ipairs(ns.LiveMats(s.recipe) or s.mats or {}) do
-		local short = guide and P.PartShort(guide, m, (m.qty or 1) * room, ctx, ns.BagCount)
-		local pr = short and ns.OpenRecipe(short.part.recipe)
-		if pr and pr.learned ~= false then
-			local pc = C_TradeSkillUI.GetCraftableCount and C_TradeSkillUI.GetCraftableCount(pr.recipeID)
-			if type(pc) == "number" and pc > 0 then
-				local pn = math.min(short.crafts, pc)
-				return { label = ("Make %d %s"):format(pn * (short.part.makes or 1), short.name), enabled = true,
-					part = short.name, run = function()
-						ns.SelectRecipe(short.part.recipe)
-						C_TradeSkillUI.CraftRecipe(pr.recipeID, pn)
-					end }
-			end
-		end
+	local partWhy
+	if guide then
+		local plan
+		plan, partWhy = partPlan(guide, ns.LiveMats(s.recipe) or s.mats, room, ctx, 1)
+		if plan then return plan end
 	end
 	local can = C_TradeSkillUI.GetCraftableCount and C_TradeSkillUI.GetCraftableCount(r.recipeID)
 	if type(can) ~= "number" then can = 0 end
 	if can <= 0 then
-		return { label = "Craft", enabled = false, reason = "Missing reagents: see the list below or /craft list." }
+		return { label = "Craft", enabled = false, reason = partWhy or "Missing reagents: see the list below or /craft list." }
 	end
 	local rec = ns.db.recipes[s.recipe] or {}
 	if rec.enchant then
@@ -253,7 +327,7 @@ function Craftbound_CraftNext() ns.CraftNext() end
 local panel
 
 local function stepLabel(s)
-	if s.kind == "train" then return "Train " .. s.rank end
+	if s.kind == "train" then return (s.how and "Learn " or "Train ") .. s.rank end
 	if s.kind == "disenchant" then return ("%d-%d Disenchant"):format(s.from, s.to) end
 	if s.kind == "tool" then return "Tool: " .. s.recipe end
 	return ("%d-%d %s"):format(s.from, s.to, s.recipe:gsub("^Enchant ", ""))
@@ -427,10 +501,14 @@ local function render()
 	f.craft:Show() f.select:Show() f.tick:Show() f.routeTitle:Show()
 	f.guide:SetText(("%s · %s  (%d-%d)"):format(guide.profession, guide.name, guide.from, guide.to))
 	f.bar:SetValue(st.percent)
-	f.bar.text:SetText(("%d / %d   ·   ~%d crafts to go"):format(ctx.skill, guide.to, st.total))
+	f.bar.text:SetText(("%d / %d   ·   ~%d crafts to go"):format(ctx.skill, st.stop, st.total))
 
 	if st.train and st.step ~= st.train then
-		f.train:SetText(("Train %s soon (you can now; needed before %d)."):format(st.train.rank, st.train.before))
+		if st.train.how then
+			f.train:SetText(("%s You can now; needed before %d."):format(st.train.how, st.train.before))
+		else
+			f.train:SetText(("Train %s soon (you can now; needed before %d)."):format(st.train.rank, st.train.before))
+		end
 	else
 		f.train:SetText("")
 	end
@@ -445,7 +523,7 @@ local function render()
 		f.now:SetText(col and UI.Color(col, text) or text)
 		local bits = {}
 		for _, tool in ipairs(s.tools or {}) do
-			local owned = ctx.have({ id = ns.KnownIDs[tool], name = tool }) > 0
+			local owned = ns.HasTool(guide, tool, ctx)
 			bits[#bits + 1] = (owned and "Tool: " or UI.Color({ 1, 0.4, 0.3 }, "Needs: ")) .. tool
 		end
 		if s.station then bits[#bits + 1] = "Craft at: " .. s.station end
@@ -454,8 +532,13 @@ local function render()
 			if ctx.maxSkill then room = math.max(0, math.min(room, ctx.maxSkill - ctx.skill)) end
 			local short = P.PartShort(guide, m, (m.qty or 1) * room, ctx, ns.BagCount)
 			if short then
-				bits[#bits + 1] = UI.Color(UI.GOLD, ("Make %d %s first (%d crafts): Craft does it."):format(
-					short.short, short.name, short.crafts))
+				local pr = ns.OpenRecipe(short.part.recipe)
+				if ns.open and (not pr or pr.learned == false) then
+					bits[#bits + 1] = UI.Color({ 1, 0.4, 0.3 }, partLearnHint(short))
+				else
+					bits[#bits + 1] = UI.Color(UI.GOLD, ("Make %d %s first (%d crafts): Craft does it."):format(
+						short.short, short.name, short.crafts))
+				end
 			end
 		end
 		if guide.note and ctx.skill < guide.from then bits[#bits + 1] = UI.Color({ 1, 0.4, 0.3 }, guide.note) end
@@ -544,7 +627,7 @@ local function render()
 			local col = colorOf(step, ctx)
 			if col == "red" then col = { 0.6, 0.6, 0.6 } end -- not learnable yet: plain, not alarming
 			row.text:SetText(cur and UI.Color({ 1, 1, 1 }, label) or (col and UI.Color(col, label) or label))
-			local left = P.CraftsLeft(step, ctx.skill)
+			local left = P.CraftsLeft(step, ctx.skill, ctx.target)
 			row.count:SetText(left > 0 and ("x" .. left) or "")
 		end
 		row:ClearAllPoints()

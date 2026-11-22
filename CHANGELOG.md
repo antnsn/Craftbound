@@ -2,6 +2,35 @@
 
 ## Unreleased
 
+- **Every guide is now Wowhead's "Tried & Tested in Forever" route, 1-300**, with the recipe
+  data from its Forever catalog. They replace the "Easiest" routes, which the planner had worked
+  out for one character (Blacksmithing started at 125). A character on an old guide moves to the
+  new one for the same profession at login, keeping its history and stop; ticked steps are
+  cleared because the steps changed.
+- Blacksmithing from 1. The Blacksmith Hammer is a buy step, and Forever's better hammers count.
+- Parts can be made of other parts (Engineering's Unstable Trigger needs Solid Blasting Powder):
+  the shopping list goes down to the raw reagents.
+- **The Craftbound window** (`/craft`, minimap left-click): every guide, built-in and your own,
+  with its route and your skill. It replaces the guide picker; the tracker is now
+  `/craft tracker` and the minimap's right-click.
+- **Stop at 150, 225 or 300**: per character and guide. The route, the shopping list, the
+  progress bar and "finished" all end there (`/craft stop 150` does the same).
+- **What each stop costs** from your skill now: missing reagents at remembered prices plus
+  recipes still to learn. Prices come from your own auction house scans (now remembered between
+  sessions), Auctionator's database when it is installed, and vendor prices. Items without a
+  price and old prices are said, never hidden.
+- **Your own guides**: copy any guide and edit it (name, skill ranges, crafts, order, delete
+  steps), or start a new one with your profession window open and add its recipes.
+- **Share guides as text**: Export gives a `CB1:` string to paste anywhere; Import turns one into
+  a custom guide. Imported text is read as data only and checked field by field.
+- Three more guides from Wowhead's Forever data: Tailoring, Cooking and First Aid (1-300). They
+  keep Forever's own recipes (Runecloth Cuffs, the Venomspew set), stations (Loom, Spinning
+  Wheel, Iron Oven) and reputation. Bolts are made along the way.
+- Recipe hints name the vendors of your own faction, and say when a recipe is known from the
+  start, a quest reward or a drop. Cooking and First Aid say how to learn Expert (a book) and
+  Artisan (a quest).
+- Vendor reagents from the imported data (spices, bleach, dyes, threads) are bought at
+  merchants, never searched at the auction house.
 - Marius' painted icon: in the addon list, on a new minimap button (left-click: tracker,
   right-click: pick a guide, drag to move; collected by minimap addons through LibDBIcon when
   one is loaded), beside the panel titles and as the docs logo.

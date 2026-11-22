@@ -20,22 +20,26 @@ function ns.ItemID(mat)
 	end
 end
 
--- Names the guides give IDs for (materials and tools), built once at load.
-ns.KnownIDs = {}
-for _, g in ipairs(ns.Guides) do
-	for _, s in ipairs(g.steps) do
-		for _, m in ipairs(s.mats or {}) do
-			if m.id then ns.KnownIDs[m.name] = m.id end
-		end
-		if s.kind == "tool" and s.item then ns.KnownIDs[s.recipe] = s.item end
-	end
-	for name, part in pairs(g.parts or {}) do
-		if part.id then ns.KnownIDs[name] = part.id end
-		for _, m in ipairs(part.mats or {}) do
-			if m.id then ns.KnownIDs[m.name] = m.id end
-		end
+-- Names the guides give IDs for (materials and tools), and the set of those IDs.
+ns.KnownIDs, ns.UsedIDs = {}, {}
+local function know(name, id)
+	if name and id then
+		if not ns.KnownIDs[name] then ns.KnownIDs[name] = id end
+		ns.UsedIDs[id] = true
 	end
 end
+
+function ns.RegisterGuideItems(g)
+	for _, s in ipairs(g.steps) do
+		for _, m in ipairs(s.mats or {}) do know(m.name, m.id) end
+		if s.kind == "tool" and s.item then know(s.recipe, s.item) end
+	end
+	for name, part in pairs(g.parts or {}) do
+		know(name, part.id)
+		for _, m in ipairs(part.mats or {}) do know(m.name, m.id) end
+	end
+end
+for _, g in ipairs(ns.Guides) do ns.RegisterGuideItems(g) end
 
 -- Teach an item ID found some other way (auction house browse, recipe reagents).
 function ns.LearnItem(name, id)

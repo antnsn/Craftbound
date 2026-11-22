@@ -39,11 +39,16 @@ Craftbound does that job for you. It knows the route and what is in your bags an
 
 | Guide | Range | About |
 | --- | --- | --- |
-| Enchanting: Easiest | 1-300 | ~319 crafts, 19 different materials |
-| Alchemy: Easiest | 1-300 | ~310 crafts |
-| Blacksmithing: Easiest | 125-300 | ~231 crafts |
-| Engineering: Easiest | 1-300 | ~361 crafts |
-| Leatherworking: Easiest | 1-300 | ~329 crafts |
+| Enchanting | 1-300 | ~297 crafts |
+| Alchemy | 1-300 | ~316 crafts |
+| Blacksmithing | 1-300 | ~403 crafts |
+| Engineering | 1-300 | ~395 crafts |
+| Leatherworking | 1-300 | ~413 crafts |
+| Tailoring | 1-300 | ~363 crafts |
+| Cooking | 1-300 | ~346 crafts |
+| First Aid | 1-300 | ~389 crafts |
+
+All are Wowhead's "Tried & Tested in Forever" routes. Make your own in the [Craftbound window](features/window.html).
 
 [About the guides](features/guides.html)
 

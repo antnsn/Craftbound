@@ -12,8 +12,12 @@ Guides.lua
 Core.lua
 Planner.lua
 Items.lua
+Prices.lua
+Share.lua
+Custom.lua
 UI.lua
 Profession.lua
 AuctionHouse.lua
 Tracker.lua
+Window.lua
 Minimap.lua

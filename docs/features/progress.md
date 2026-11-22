@@ -31,17 +31,17 @@ A small box, on the right of the screen at first:
 - a reminder when you can train the next rank,
 - how many reagents you still need.
 
-Drag it to move it. The **×** hides it, and `/craft` brings it back. `/craft toggle tracker` turns it off for every character.
+Drag it to move it. The **×** hides it, and `/craft tracker` brings it back. `/craft toggle tracker` turns it off for every character.
 
 ## Minimap button
 
-The Craftbound book on the minimap: **left-click** shows or hides the tracker, **right-click** picks a guide, and dragging moves it around the minimap. Its tooltip shows your skill and the next step. Minimap collectors (SexyMap, ElvUI, MinimapButtonBag and others) gather it like any other button. `/craft toggle minimap` hides it.
+The Craftbound book on the minimap: **left-click** opens the [Craftbound window](window.md), **right-click** shows or hides the tracker, and dragging moves it around the minimap. Its tooltip shows your skill and the next step. Minimap collectors (SexyMap, ElvUI, MinimapButtonBag and others) gather it like any other button. `/craft toggle minimap` hides it.
 
 ## At login
 
 The chat says where you left off, for example:
 
-> Craftbound: Enchanting Easiest, skill 142. Next: Craft Enchant Bracer - Lesser Stamina x22 (to skill 164).
+> Craftbound: Enchanting Tried & Tested, skill 142. Next: Craft Enchant Bracer - Lesser Stamina x13 (to skill 155).
 
 ## Starting over
 

@@ -12,3 +12,6 @@ docs/.bundle/
 docs/_site/
 docs/vendor/
 docs/.jekyll-cache/
+
+# Wowhead source data, fetched by hand for tools/import_wowhead.py (not ours to publish)
+tools/data/wh_*.json

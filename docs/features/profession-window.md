@@ -11,7 +11,7 @@ When you open Enchanting or Alchemy, Craftbound docks a panel to the right of th
 
 ```
 Craftbound
-Enchanting · Easiest  (1-300)
+Enchanting · Tried & Tested  (1-300)
 [■■■■■■■■■■□□□□□□□□□□]  142 / 300 · ~171 crafts to go
 Craft Enchant Bracer - Lesser Stamina x22 (to skill 164).
 Tool: Runed Silver Rod
