@@ -7,25 +7,9 @@ description: The panel beside the profession window, and the Craft button.
 
 # Profession window
 
-When you open Enchanting or Alchemy, Craftbound docks a panel to the right of the profession window and makes that profession's guide the active one.
+When you open a profession with a guide, Craftbound docks a panel to the right of the profession window and makes that profession's guide the active one.
 
-```
-Craftbound
-Enchanting · Tried & Tested  (1-300)
-[■■■■■■■■■■□□□□□□□□□□]  142 / 300 · ~171 crafts to go
-Craft Enchant Bracer - Lesser Stamina x22 (to skill 164).
-Tool: Runed Silver Rod
-  Soul Dust                          18 / 22
-[ Enchant (22 left) ] [ Show recipe ] [ Done ]
-Route
- ✓ Tool: Runed Copper Rod
- ✓ 1-2 Dust to Motes
- > 132-164 Bracer - Lesser Stamina          x22
-   Tool: Runed Golden Rod                   x1
-   164-189 Boots - Lesser Agility           x27
-Still to get: 4 reagents. Open the auction house to buy them.
-Recipes ahead: 2g 49s
-```
+![The Craftbound panel beside the Alchemy window]({{ '/screenshots/profession-window.png' | relative_url }})
 
 ## The current step
 

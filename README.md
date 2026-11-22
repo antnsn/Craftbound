@@ -8,6 +8,8 @@ character stopped.
 
 **Docs: https://antnsn.github.io/Craftbound/**
 
+![The Craftbound window](docs/screenshots/window.png)
+
 - The panel beside the profession window shows the current step, the recipe already selected,
   and a **Craft** button that crafts what the step still needs.
 - The panel beside the auction house shows what the rest of the route needs minus your bags and

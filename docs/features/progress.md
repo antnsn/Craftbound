@@ -24,6 +24,8 @@ Most steps don't need saving. Craftbound works out the current step from your sk
 
 ## The tracker
 
+![The tracker]({{ '/screenshots/tracker.png' | relative_url }})
+
 A small box, on the right of the screen at first:
 
 - the profession and your skill, with a progress bar,

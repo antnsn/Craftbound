@@ -10,6 +10,8 @@ description: Every guide in one place, where to stop and what it costs, and your
 `/craft` or a left-click on the minimap button opens it. On the left is every guide: the ones
 Craftbound ships and the ones you made or imported (marked **custom**). Click one to see it.
 
+![The Craftbound window: Alchemy, stopping at 150]({{ '/screenshots/window.png' | relative_url }})
+
 ## Where to stop
 
 Under **Stop at** are the rank caps inside the guide: 150, 225 and 300. Click one and the
@@ -45,7 +47,11 @@ items have no price yet. Scan at the auction house to fill those in.
 
 Your guides are saved for your whole account.
 
+![The guide editor]({{ '/screenshots/window-editor.png' | relative_url }})
+
 ## Sharing
+
+![The export box with a guide as CB1: text]({{ '/screenshots/export.png' | relative_url }})
 
 **Export** shows the guide as text starting with `CB1:`. Press Ctrl+C and paste it anywhere:
 Discord, a forum post, a whisper. To use someone's guide, press **Import** at the top of the

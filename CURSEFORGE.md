@@ -12,6 +12,8 @@ Beside the profession window it shows the next step and crafts it with one butto
 
 **Full guide:** https://antnsn.github.io/Craftbound/
 
+![The Craftbound window](https://antnsn.github.io/Craftbound/screenshots/window.png)
+
 **Alpha:** Craftbound is new and not yet tested much in game. Tell us what doesn't work.
 
 ## Guides
@@ -28,6 +30,8 @@ Beside the profession window it shows the next step and crafts it with one butto
 - **At the trainer**: a panel lists the rank and recipes your route needs from there, up to your stop, and one button trains only those.
 - **Stops at the cap**: at 75/75, 150/150 and 225/225 crafting gives no skill-up, so Craft stops, and Blizzard's Create buttons ask before they craft.
 
+![The panel beside the profession window](https://antnsn.github.io/Craftbound/screenshots/profession-window.png)
+
 ## The auction house and vendors
 - **A shopping list** of what the rest of the route needs, minus what's in your bags, bank and mailbox.
 - **Buy** the most-needed item in two clicks at the server's price, with a warning when the price jumped.
@@ -42,6 +46,8 @@ Beside the profession window it shows the next step and crafts it with one butto
 - **Copy and edit** any guide: name, skill ranges, crafts, order, steps.
 - **New guide**: with your profession window open, click recipes to add them.
 - **Share**: Export gives a text you paste anywhere; Import turns someone's text into one of your guides. It is read as data only, never run.
+
+![Export a guide](https://antnsn.github.io/Craftbound/screenshots/export.png)
 
 ## Also in it
 - **Per character**: progress, skills and history are kept per character; your own guides and remembered prices are shared by the account.

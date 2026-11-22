@@ -8,7 +8,7 @@ permalink: /
 # Craftbound
 {: .fs-9 }
 
-Profession levelling for World of Warcraft: Forever, without the chore.
+The ultimate addon for skilling up professions in World of Warcraft: Forever.
 {: .fs-6 .fw-300 }
 
 [Get started](getting-started.html){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
@@ -17,7 +17,9 @@ Profession levelling for World of Warcraft: Forever, without the chore.
 ---
 
 {: .note }
-Craftbound is an alpha. It hasn't been played in game yet, and the guides' craft counts are estimates. If something doesn't work, say so on [GitHub](https://github.com/antnsn/Craftbound/issues).
+Craftbound is an alpha: it has only had its first runs in game, and the guides' craft counts are estimates. If something doesn't work, say so on [GitHub](https://github.com/antnsn/Craftbound/issues).
+
+![The Craftbound window]({{ '/screenshots/window.png' | relative_url }})
 
 ## Why Craftbound exists
 
