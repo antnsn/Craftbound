@@ -61,7 +61,7 @@ function T.tradeSkill(line, name, skill, max, recipes)
 		CraftRecipe = function(id, n) calls.craft[#calls.craft + 1] = { id = id, n = n } end,
 		CraftEnchant = function(id, n, _, loc) calls.enchant[#calls.enchant + 1] = { id = id, n = n, loc = loc } end,
 		OpenRecipe = function(id) calls.opened[#calls.opened + 1] = id end,
-		set = function(newSkill) skill = newSkill end,
+		set = function(newSkill, newMax) skill, max = newSkill, newMax or max end,
 	}
 	return api
 end
@@ -102,10 +102,11 @@ function T.enchantingRecipes(opts)
 	opts = opts or {}
 	return {
 		{ id = 1001, name = "Runed Copper Rod", mats = { { 6217, 1 }, { 99001, 1 } }, craftable = 1 },
-		{ id = 1002, name = "Dust to Motes", mats = { { 10940, 1 } }, craftable = 5 },
-		{ id = 1003, name = "Enchant Chest - Inferior Stamina", mats = { { 10940, 1 } },
-			craftable = opts.craftable or 40, enchant = true, difficulty = 0 },
-		{ id = 1004, name = "Enchant Chest - Minor Absorption", mats = { { 10938, 1 } }, craftable = 0, learned = false },
+		{ id = 1003, name = "Lesser Magic Wand", mats = { { 4470, 1 }, { 10938, 1 } },
+			craftable = opts.craftable or 40, difficulty = 0 },
+		{ id = 1004, name = "Enchant Chest - Minor Absorption", mats = { { 10938, 1 } }, craftable = 20,
+			enchant = true, difficulty = 0 },
+		{ id = 1005, name = "Enchant Bracer - Minor Stamina", mats = { { 10940, 2 } }, craftable = 0, learned = false },
 	}
 end
 

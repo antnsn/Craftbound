@@ -257,7 +257,7 @@ function Share.Sanitize(g)
 			if str(name) and type(p) == "table" and str(p.recipe) then
 				out.parts = out.parts or {}
 				out.parts[str(name)] = { recipe = str(p.recipe), id = int(p.id, 1, 9999999),
-					makes = int(p.makes, 1, 100) or 1, mats = mats(p.mats) }
+					makes = int(p.makes, 1, 100) or 1, mats = mats(p.mats), source = source(p.source) }
 			end
 		end
 	end

@@ -2,8 +2,14 @@
 
 ## Unreleased
 
-- Blacksmithing from 1: Wowhead's Forever route 1-300 joins the 125-300 one. The Blacksmith
-  Hammer is a buy step, and Forever's better hammers count as having one.
+- **Every guide is now Wowhead's "Tried & Tested in Forever" route, 1-300**, with the recipe
+  data from its Forever catalog. They replace the "Easiest" routes, which the planner had worked
+  out for one character (Blacksmithing started at 125). A character on an old guide moves to the
+  new one for the same profession at login, keeping its history and stop; ticked steps are
+  cleared because the steps changed.
+- Blacksmithing from 1. The Blacksmith Hammer is a buy step, and Forever's better hammers count.
+- Parts can be made of other parts (Engineering's Unstable Trigger needs Solid Blasting Powder):
+  the shopping list goes down to the raw reagents.
 - **The Craftbound window** (`/craft`, minimap left-click): every guide, built-in and your own,
   with its route and your skill. It replaces the guide picker; the tracker is now
   `/craft tracker` and the minimap's right-click.

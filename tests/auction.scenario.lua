@@ -5,6 +5,17 @@ wb.state.player.level = 30
 wb.state.player.money = 10000000
 
 wb.login({ saved = T.professionGlobals({ [T.ALCHEMY] = { name = "Alchemy", rank = 1, max = 75 } }) })
+-- what the Alchemy route needs from 1, from the guide itself
+local guide = wb.ns.Planner.Find("Alchemy:Tried & Tested")
+local function need(name)
+	local n = 0
+	for _, st in ipairs(guide.steps) do
+		for _, m in ipairs(st.mats or {}) do if m.name == name then n = n + st.safe * m.qty end end
+	end
+	return n
+end
+local PB, VIALS = need("Peacebloom"), need("Empty Vial")
+local COST = 30 * 20 + (PB - 30) * 25
 local market = {
 	[2447] = { { 20, 30 }, { 25, 200 } },   -- Peacebloom
 	[765] = { { 40, 100 } },                -- Silverleaf
@@ -33,19 +44,19 @@ for _, id in ipairs(ah.calls.search) do
 end
 local pb = wb.ns.AH.prices[2447]
 wb.check(pb and pb.commodity, "peacebloom priced")
-wb.expect("cost walks the cheapest first", pb.cost, 30 * 20 + (90 - 30) * 25)
+wb.expect("cost walks the cheapest first", pb.cost, COST)
 
 -- buy: the most-missing priced item first
 local plan = wb.ns.AH.Plan()
-wb.check(plan.label:find("Buy 90 Peacebloom"), "buys peacebloom: " .. plan.label)
+wb.check(plan.label:find("Buy " .. PB .. " Peacebloom"), "buys peacebloom: " .. plan.label)
 wb.ns.AH.Press()
-wb.expect("purchase started", ah.calls.start[1] and ah.calls.start[1].qty, 90)
+wb.expect("purchase started", ah.calls.start[1] and ah.calls.start[1].qty, PB)
 wb.expect("nothing confirmed yet", #ah.calls.confirm, 0)
-wb.fire("COMMODITY_PRICE_UPDATED", 23, 2100)
+wb.fire("COMMODITY_PRICE_UPDATED", math.floor(COST / PB), COST)
 plan = wb.ns.AH.Plan()
 wb.check(plan.label:find("Confirm"), "second click confirms: " .. plan.label)
 wb.ns.AH.Press()
-wb.expect("confirmed with the same quantity", ah.calls.confirm[1] and ah.calls.confirm[1].qty, 90)
+wb.expect("confirmed with the same quantity", ah.calls.confirm[1] and ah.calls.confirm[1].qty, PB)
 wb.fire("COMMODITY_PURCHASE_SUCCEEDED")
 wb.advance(1)
 local function missingOf(name)
@@ -56,7 +67,7 @@ wb.check(not wb.ns.AH.Plan().label:find("Peacebloom"), "doesn't offer peacebloom
 
 -- the mailbox: collect it (mail empty, bags full)
 T.inject({ GetInboxNumItems = function() return 0 end, GetInboxItem = function() end })
-wb.state.bags[2447] = 90
+wb.state.bags[2447] = PB
 wb.fire("MAIL_INBOX_UPDATE")
 wb.expect("mail recounted", wb.saved("CraftboundCharDB").mail[2447], nil)
 wb.expect("still covered from bags", missingOf("Peacebloom"), 0)
@@ -98,7 +109,7 @@ end
 wb.check(btn, "merchant button shown")
 btn.__scripts.OnClick(btn)
 for _, b in ipairs(bought) do total = total + b.n end
-wb.expect("all empty vials bought in stacks of 20", total, 139)
+wb.expect("all empty vials bought in stacks of 20", total, VIALS)
 
 -- the total covers every missing item, not only the rows that fit
 wb.fire("AUCTION_HOUSE_SHOW")

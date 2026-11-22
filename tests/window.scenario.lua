@@ -4,7 +4,7 @@ local T = dofile(wb.dir .. "/tests/_helper.lua")
 wb.login({ saved = T.professionGlobals({ [333] = { name = "Enchanting", rank = 132, max = 150 } }) })
 local ns = wb.ns
 local P = ns.Planner
-local ench = P.Find("Enchanting:Easiest")
+local ench = P.Find("Enchanting:Tried & Tested")
 
 -- targets ---------------------------------------------------------------------------------
 local function ctx(skill, target)
@@ -13,9 +13,9 @@ end
 local function idx(recipe)
 	for i, s in ipairs(ench.steps) do if s.recipe == recipe then return i, s end end
 end
-local ci, cross = idx("Enchant Bracer - Lesser Stamina") -- 132-164
-wb.expect("a step crossing the stop is cut", P.CraftsLeft(cross, 132, 150), math.ceil(cross.safe * 18 / 32))
-local gi = idx("Enchant Boots - Lesser Agility") -- 164-189
+local ci, cross = idx("Enchant Bracer - Lesser Stamina") -- 135-155
+wb.expect("a step crossing the stop is cut", P.CraftsLeft(cross, 132, 150), math.ceil(cross.safe * 15 / 20))
+local gi = idx("Enchant Bracer - Lesser Strength") -- 156-185
 wb.check(not P.InScope(ench, gi, 150), "a step past the stop is out")
 wb.check(P.IsDone(ench, gi, ctx(132, 150)), "out-of-scope steps count as done")
 local expert
@@ -33,11 +33,11 @@ wb.check(ci and true, "found the crossing step")
 
 wb.slash("/craft guide enchanting")
 wb.slash("/craft stop 150")
-wb.expect("stop saved per character", ns.char.guides["Enchanting:Easiest"].target, 150)
+wb.expect("stop saved per character", ns.char.guides["Enchanting:Tried & Tested"].target, 150)
 wb.expect("targets offered", table.concat(ns.Targets(ench), ","), "150,225,300")
-wb.expect("blacksmithing offers only its range", table.concat(ns.Targets(P.Find("Blacksmithing:Easiest")), ","), "150,225,300")
+wb.expect("blacksmithing offers its stops", table.concat(ns.Targets(P.Find("Blacksmithing:Tried & Tested")), ","), "150,225,300")
 wb.slash("/craft stop end")
-wb.expect("stop cleared", ns.char.guides["Enchanting:Easiest"].target, nil)
+wb.expect("stop cleared", ns.char.guides["Enchanting:Tried & Tested"].target, nil)
 
 -- prices ----------------------------------------------------------------------------------
 local Pr = ns.Prices
@@ -84,7 +84,7 @@ wb.expect("copy is custom:1", copy.key, "custom:1")
 wb.check(P.Find("custom:1") ~= nil, "copy joins the guides")
 local draft = C.Copy(copy)
 draft.name = "Cheap enchanting"
-table.remove(draft.steps) -- drop the last step (268-300)
+table.remove(draft.steps) -- drop the last step (295-300)
 local saved = C.Save("custom:1", draft)
 wb.expect("renamed", saved.name, "Cheap enchanting")
 wb.check(saved.to < 300, "range follows the steps")
@@ -101,11 +101,11 @@ wb.expect("no longer active", ns.char.active, nil)
 -- the window ------------------------------------------------------------------------------
 wb.slash("/craft")
 wb.check(wb.shown("CraftboundWindow"), "/craft opens the window")
-ns.Window.Show("Enchanting:Easiest")
+ns.Window.Show("Enchanting:Tried & Tested")
 local win = wb.G.CraftboundWindow
 wb.check(win.details:IsShown(), "details shown")
 win.details.targets[1]:Click()
-wb.expect("first target button stops at 150", ns.char.guides["Enchanting:Easiest"].target, 150)
+wb.expect("first target button stops at 150", ns.char.guides["Enchanting:Tried & Tested"].target, 150)
 win.details.export:Click()
 wb.check(wb.shown("CraftboundShare"), "export opens the share box")
 local box = wb.G.CraftboundShare.box
@@ -200,7 +200,7 @@ local _, why = ns.Share.Import("CB1:" .. ns.Share.Encode64("tq"))
 wb.check(why and not why:find("Share.lua", 1, true), "no file names in import errors")
 
 -- /craft stop with a stop the guide doesn't offer
-ns.SetActive("Enchanting:Easiest")
-ns.SetTarget("Enchanting:Easiest", nil)
+ns.SetActive("Enchanting:Tried & Tested")
+ns.SetTarget("Enchanting:Tried & Tested", nil)
 wb.slash("/craft stop 175")
-wb.expect("odd stop refused", ns.char.guides["Enchanting:Easiest"].target, nil)
+wb.expect("odd stop refused", ns.char.guides["Enchanting:Tried & Tested"].target, nil)

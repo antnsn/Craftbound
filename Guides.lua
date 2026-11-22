@@ -3,452 +3,645 @@
 local _, ns = ...
 
 ns.Guides = {
-	{ key = "Enchanting:Easiest", profession = "Enchanting", name = "Easiest", from = 1, to = 300, avgCrafts = 319, p90Crafts = 331, playtested = false,
+	{ key = "Enchanting:Tried & Tested", profession = "Enchanting", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 297, p90Crafts = 313, playtested = true,
 		steps = {
 			{ kind = "tool", recipe = "Runed Copper Rod", colors = { 1, 5, 7, 10 }, expected = 1, safe = 1, mats = {
 				{ name = "Copper Rod", id = 6217, qty = 1 },
-				{ name = "Mote of Magic", qty = 1 },
-			}, source = { kind = "trainer" }, item = 6218, note = "Make one and keep it in your bags." },
-			{ kind = "craft", from = 1, to = 2, recipe = "Dust to Motes", colors = { 1, 10, 12, 15 }, expected = 1, safe = 1, makes = 3, tools = { "Runed Copper Rod" }, mats = {
-				{ name = "Strange Dust", id = 10940, qty = 1 },
-			}, source = { kind = "trainer" }, alts = { "Runed Copper Rod", "Novice's Practice Wand" } },
-			{ kind = "disenchant", from = 2, to = 20, note = "Disenchant green or better items and keep the dust and essences. Each gives a skill point up to 20. The chance then falls and stops at 60." },
+				{ name = "Mote of Magic", id = 247786, qty = 1 },
+			}, source = { kind = "known" }, item = 6218, note = "Unconfirmed until checked on a live realm: how a new enchanter gets the first rod. Keep the Runed Copper Rod: every enchant up to 155 needs it. Mote of Magic is sold by enchanting supply vendors." },
+			{ kind = "disenchant", from = 2, to = 20, note = "Disenchant Uncommon (green) or better items to 20: each one is a skill point. Keep the dust and essences for the next steps. Past 20 the chance drops, and it stops at 60." },
 			{ kind = "train", rank = "Journeyman", reqSkill = 50, reqLevel = 10, before = 75, cap = 150 },
-			{ kind = "craft", from = 20, to = 79, recipe = "Enchant Chest - Inferior Stamina", colors = { 15, 70, 90, 110 }, expected = 60, safe = 62, tools = { "Runed Copper Rod" }, mats = {
-				{ name = "Strange Dust", id = 10940, qty = 1 },
-			}, source = { kind = "trainer", cost = 50 }, alts = { "Enchant Chest - Minor Intellect", "Lesser Magic Wand" } },
-			{ kind = "craft", from = 79, to = 103, recipe = "Enchant Chest - Minor Absorption", colors = { 40, 90, 110, 130 }, expected = 26, safe = 29, tools = { "Runed Copper Rod" }, mats = {
+			{ kind = "craft", from = 20, to = 79, recipe = "Lesser Magic Wand", colors = { 10, 75, 95, 115 }, expected = 59, safe = 60, tools = { "Runed Copper Rod" }, mats = {
+				{ name = "Simple Wood", id = 4470, qty = 1 },
 				{ name = "Lesser Magic Essence", id = 10938, qty = 1 },
-			}, source = { kind = "trainer", cost = 1 }, alts = { "Enchant Chest - Minor Intellect", "Enchant Cloak - Minor Resistance" } },
-			{ kind = "craft", from = 103, to = 132, recipe = "Enchant 2H Weapon - Minor Impact", colors = { 100, 130, 150, 170 }, expected = 29, safe = 29, tools = { "Runed Copper Rod" }, mats = {
-				{ name = "Strange Dust", id = 10940, qty = 1 },
-				{ name = "Small Glimmering Shard", id = 10978, qty = 1 },
-			}, source = { kind = "trainer", cost = 5 }, alts = { "Enchant Chest - Lesser Stamina", "Enchant Cloak - Minor Protection" } },
+			}, source = { kind = "trainer", cost = 50 } },
+			{ kind = "craft", from = 79, to = 90, recipe = "Enchant Chest - Minor Absorption", colors = { 40, 90, 110, 130 }, expected = 11, safe = 11, tools = { "Runed Copper Rod" }, mats = {
+				{ name = "Lesser Magic Essence", id = 10938, qty = 1 },
+			}, source = { kind = "trainer", cost = 100 } },
+			{ kind = "craft", from = 90, to = 100, recipe = "Enchant Bracer - Minor Stamina", colors = { 50, 100, 120, 140 }, expected = 10, safe = 10, tools = { "Runed Copper Rod" }, mats = {
+				{ name = "Strange Dust", id = 10940, qty = 2 },
+			}, source = { kind = "trainer", cost = 250 } },
 			{ kind = "tool", recipe = "Runed Silver Rod", colors = { 100, 130, 150, 170 }, expected = 1, safe = 1, mats = {
 				{ name = "Silver Rod", id = 6338, qty = 1 },
 				{ name = "Strange Dust", id = 10940, qty = 3 },
 				{ name = "Lesser Magic Essence", id = 10938, qty = 4 },
 				{ name = "Shadowgem", id = 1210, qty = 1 },
-			}, source = { kind = "trainer", cost = 10 }, item = 6339, note = "Make one and keep it in your bags." },
+			}, source = { kind = "trainer", cost = 1000 }, item = 6339, note = "Keep the Runed Silver Rod: the enchants from here to 155 need it." },
+			{ kind = "craft", from = 101, to = 110, recipe = "Greater Magic Wand", colors = { 70, 110, 130, 150 }, expected = 9, safe = 9, tools = { "Runed Copper Rod" }, mats = {
+				{ name = "Simple Wood", id = 4470, qty = 1 },
+				{ name = "Lesser Magic Essence", id = 10938, qty = 2 },
+			}, source = { kind = "trainer", cost = 200 } },
 			{ kind = "train", rank = "Expert", reqSkill = 125, reqLevel = 20, before = 150, cap = 225 },
-			{ kind = "craft", from = 132, to = 164, recipe = "Enchant Bracer - Lesser Stamina", colors = { 130, 155, 175, 195 }, expected = 33, safe = 34, tools = { "Runed Silver Rod" }, mats = {
+			{ kind = "craft", from = 110, to = 135, recipe = "Enchant Cloak - Minor Agility", colors = { 110, 135, 155, 175 }, expected = 25, safe = 25, tools = { "Runed Silver Rod" }, mats = {
+				{ name = "Lesser Astral Essence", id = 10998, qty = 1 },
+			}, source = { kind = "vendor", cost = 800, npc = "Dalria", location = "Ashenvale", vendors = {
+				{ npc = "Dalria", location = "Ashenvale", side = "Alliance", cost = 800, limited = true },
+				{ npc = "Kulwia", location = "Stonetalon Mountains", side = "Horde", cost = 842, limited = true },
+			} } },
+			{ kind = "craft", from = 135, to = 155, recipe = "Enchant Bracer - Lesser Stamina", colors = { 130, 155, 175, 195 }, expected = 20, safe = 20, tools = { "Runed Silver Rod" }, mats = {
 				{ name = "Soul Dust", id = 11083, qty = 1 },
-			}, source = { kind = "trainer", cost = 15 }, alts = { "Enchant Cloak - Minor Agility", "Enchant Cloak - Lesser Fire Resistance" } },
+			}, source = { kind = "trainer", cost = 1500 } },
 			{ kind = "tool", recipe = "Runed Golden Rod", colors = { 150, 175, 195, 215 }, expected = 1, safe = 1, mats = {
 				{ name = "Golden Rod", id = 11128, qty = 1 },
 				{ name = "Iridescent Pearl", id = 5500, qty = 1 },
 				{ name = "Greater Astral Essence", id = 11082, qty = 1 },
 				{ name = "Soul Dust", id = 11083, qty = 1 },
-			}, source = { kind = "trainer", cost = 25 }, item = 11130, note = "Make one and keep it in your bags." },
-			{ kind = "craft", from = 164, to = 189, recipe = "Enchant Boots - Lesser Agility", colors = { 160, 180, 200, 220 }, expected = 26, safe = 27, tools = { "Runed Golden Rod" }, mats = {
+			}, source = { kind = "trainer", cost = 2500 }, item = 11130, note = "Keep the Runed Golden Rod: the enchants from here to 200 need it." },
+			{ kind = "craft", from = 156, to = 185, recipe = "Enchant Bracer - Lesser Strength", colors = { 140, 165, 185, 205 }, expected = 36, safe = 41, tools = { "Runed Silver Rod" }, mats = {
 				{ name = "Soul Dust", id = 11083, qty = 1 },
-			}, source = { kind = "trainer", cost = 28 }, alts = { "Enchant Bracer - Lesser Strength", "Enchant Chest - Intellect" } },
-			{ kind = "craft", from = 189, to = 214, recipe = "Enchant Chest - Greater Intellect", colors = { 185, 205, 225, 245 }, expected = 26, safe = 28, tools = { "Runed Golden Rod" }, mats = {
-				{ name = "Lesser Mystic Essence", id = 11134, qty = 1 },
-			}, source = { kind = "trainer", cost = 38 }, alts = { "Enchant Bracer - Strength", "Enchant Bracer - Spirit" } },
+			}, source = { kind = "vendor", cost = 2500, npc = "Dalria", location = "Ashenvale", vendors = {
+				{ npc = "Dalria", location = "Ashenvale", side = "Alliance", cost = 2500, limited = true },
+				{ npc = "Kulwia", location = "Stonetalon Mountains", side = "Horde", cost = 2631, limited = true },
+			} } },
+			{ kind = "craft", from = 185, to = 200, recipe = "Enchant Bracer - Strength", colors = { 180, 200, 220, 240 }, expected = 15, safe = 15, tools = { "Runed Golden Rod" }, mats = {
+				{ name = "Vision Dust", id = 11137, qty = 1 },
+			}, source = { kind = "trainer", cost = 3600 } },
+			{ kind = "train", rank = "Artisan", reqSkill = 200, reqLevel = 35, before = 225, cap = 300 },
 			{ kind = "tool", recipe = "Runed Truesilver Rod", colors = { 200, 220, 240, 260 }, expected = 1, safe = 1, mats = {
 				{ name = "Truesilver Rod", id = 11144, qty = 1 },
 				{ name = "Black Pearl", id = 7971, qty = 1 },
 				{ name = "Greater Mystic Essence", id = 11135, qty = 1 },
 				{ name = "Vision Dust", id = 11137, qty = 1 },
-			}, source = { kind = "trainer", cost = 40 }, item = 11145, note = "Make one and keep it in your bags." },
-			{ kind = "train", rank = "Artisan", reqSkill = 200, reqLevel = 35, before = 225, cap = 300 },
-			{ kind = "craft", from = 214, to = 239, recipe = "Enchant Gloves - Agility", colors = { 210, 230, 250, 270 }, expected = 26, safe = 27, tools = { "Runed Truesilver Rod" }, mats = {
+			}, source = { kind = "trainer", cost = 4000 }, item = 11145, note = "Keep the Runed Truesilver Rod: the enchants from here to 290 need it." },
+			{ kind = "craft", from = 201, to = 220, recipe = "Enchant Bracer - Strength", colors = { 180, 200, 220, 240 }, expected = 26, safe = 31, tools = { "Runed Golden Rod" }, mats = {
 				{ name = "Vision Dust", id = 11137, qty = 1 },
-			}, source = { kind = "trainer", cost = 44 }, alts = { "Enchant Cloak - Greater Defense", "Enchant Cloak - Resistance" } },
-			{ kind = "craft", from = 239, to = 268, recipe = "Enchant Boots - Agility", colors = { 235, 255, 275, 295 }, expected = 31, safe = 34, tools = { "Runed Truesilver Rod" }, mats = {
-				{ name = "Greater Nether Essence", id = 11175, qty = 1 },
-			}, source = { kind = "trainer", cost = 58 }, alts = { "Enchant Chest - Superior Intellect", "Enchant Gloves - Agility" } },
-			{ kind = "craft", from = 268, to = 300, recipe = "Enchant Gloves - Minor Haste", colors = { 250, 270, 290, 310 }, expected = 56, safe = 67, tools = { "Runed Truesilver Rod" }, mats = {
-				{ name = "Large Radiant Shard", id = 11178, qty = 1 },
-				{ name = "Wildvine", id = 8153, qty = 1 },
-			}, source = { kind = "trainer", cost = 65 }, alts = { "Enchant Weapon - Greater Striking", "Enchant Boots - Agility" } },
+			}, source = { kind = "trainer", cost = 3600 } },
+			{ kind = "craft", from = 220, to = 225, recipe = "Enchant Cloak - Greater Defense", colors = { 205, 225, 245, 265 }, expected = 5, safe = 5, tools = { "Runed Truesilver Rod" }, mats = {
+				{ name = "Vision Dust", id = 11137, qty = 1 },
+			}, source = { kind = "trainer", cost = 4200 } },
+			{ kind = "craft", from = 225, to = 230, recipe = "Enchant Gloves - Agility", colors = { 210, 230, 250, 270 }, expected = 5, safe = 5, tools = { "Runed Truesilver Rod" }, mats = {
+				{ name = "Vision Dust", id = 11137, qty = 1 },
+			}, source = { kind = "trainer", cost = 4400 } },
+			{ kind = "craft", from = 230, to = 235, recipe = "Enchant Boots - Stamina", colors = { 215, 235, 255, 275 }, expected = 5, safe = 5, tools = { "Runed Truesilver Rod" }, mats = {
+				{ name = "Vision Dust", id = 11137, qty = 2 },
+			}, source = { kind = "trainer", cost = 4600 } },
+			{ kind = "craft", from = 235, to = 250, recipe = "Enchant Chest - Superior Stamina", colors = { 220, 240, 260, 280 }, expected = 16, safe = 18, tools = { "Runed Truesilver Rod" }, mats = {
+				{ name = "Vision Dust", id = 11137, qty = 3 },
+			}, source = { kind = "trainer", cost = 4800 } },
+			{ kind = "craft", from = 250, to = 265, recipe = "Lesser Mana Oil", colors = { 250, 260, 270, 280 }, expected = 15, safe = 17, tools = { "Runed Truesilver Rod" }, mats = {
+				{ name = "Dream Dust", id = 11176, qty = 1 },
+				{ name = "Purple Lotus", id = 8831, qty = 1 },
+				{ name = "Crystal Vial", id = 8925, qty = 1 },
+			}, source = { kind = "vendor", cost = 11250, npc = "Lokhtos Darkbargainer", location = "Blackrock Depths", vendors = {
+				{ npc = "Lokhtos Darkbargainer", location = "Blackrock Depths", cost = 11250 },
+				{ npc = "Kania", location = "Silithus", cost = 9000 },
+			} } },
+			{ kind = "craft", from = 265, to = 294, recipe = "Enchant Shield - Greater Stamina", colors = { 265, 285, 305, 325 }, expected = 30, safe = 31, tools = { "Runed Truesilver Rod" }, mats = {
+				{ name = "Dream Dust", id = 11176, qty = 6 },
+			}, source = { kind = "vendor", cost = 12631, npc = "Mythrin'dir", location = "Darnassus", vendors = {
+				{ npc = "Mythrin'dir", location = "Darnassus", side = "Alliance", cost = 12631, limited = true },
+				{ npc = "Daniel Bartlett", location = "Undercity", side = "Horde", cost = 11435 },
+			} } },
+			{ kind = "craft", from = 294, to = 295, recipe = "Runed Arcanite Rod", colors = { 290, 310, 330, 350 }, expected = 1, safe = 1, mats = {
+				{ name = "Arcanite Rod", id = 16206, qty = 1 },
+				{ name = "Golden Pearl", id = 13926, qty = 1 },
+				{ name = "Illusion Dust", id = 16204, qty = 10 },
+				{ name = "Greater Eternal Essence", id = 16203, qty = 4 },
+				{ name = "Small Brilliant Shard", id = 14343, qty = 4 },
+				{ name = "Large Brilliant Shard", id = 14344, qty = 2 },
+			}, source = { kind = "vendor", cost = 22000, npc = "Lorelae Wintersong", location = "Moonglade", limited = true }, note = "The recipe is sold by Lorelae Wintersong (Moonglade) in limited stock; it restocks. Keep the Runed Arcanite Rod: the last enchants need it." },
+			{ kind = "craft", from = 295, to = 300, recipe = "Enchant Cloak - Superior Defense", colors = { 285, 305, 325, 345 }, expected = 5, safe = 5, tools = { "Runed Truesilver Rod" }, mats = {
+				{ name = "Illusion Dust", id = 16204, qty = 8 },
+			}, source = { kind = "vendor", cost = 20000, npc = "Lorelae Wintersong", location = "Moonglade", limited = true }, note = "The recipe is sold by Lorelae Wintersong (Moonglade) in limited stock; it restocks." },
 		},
 	},
-	{ key = "Alchemy:Easiest", profession = "Alchemy", name = "Easiest", from = 1, to = 300, avgCrafts = 310,
+	{ key = "Alchemy:Tried & Tested", profession = "Alchemy", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 316, p90Crafts = 336, playtested = true,
 		steps = {
-			{ kind = "craft", from = 1, to = 12, recipe = "Minor Arcane Elixir", colors = { 1, 10, 12, 15 }, expected = 11, safe = 11, mats = {
-				{ name = "Peacebloom", id = 2447, qty = 1 },
+			{ kind = "craft", from = 1, to = 12, recipe = "Elixir of Minor Force", colors = { 1, 10, 12, 15 }, expected = 11, safe = 12, mats = {
+				{ name = "Silverleaf", id = 765, qty = 1 },
 				{ name = "Empty Vial", id = 3371, qty = 1 },
-			}, source = { kind = "trainer" }, alts = { "Elixir of Minor Force", "Elixir of Minor Defense" } },
-			{ kind = "craft", from = 12, to = 62, recipe = "Elixir of Minor Defense", colors = { 1, 55, 75, 95 }, expected = 50, safe = 50, mats = {
+			}, source = { kind = "known" } },
+			{ kind = "train", rank = "Journeyman", reqSkill = 50, reqLevel = 10, before = 75, cap = 150 },
+			{ kind = "craft", from = 12, to = 55, recipe = "Elixir of Minor Defense", colors = { 1, 55, 75, 95 }, expected = 43, safe = 43, mats = {
 				{ name = "Silverleaf", id = 765, qty = 1 },
 				{ name = "Peacebloom", id = 2447, qty = 1 },
 				{ name = "Empty Vial", id = 3371, qty = 1 },
-			}, source = { kind = "trainer" }, alts = { "Minor Arcane Elixir", "Elixir of Minor Force" } },
-			{ kind = "train", rank = "Journeyman", reqSkill = 50, reqLevel = 10, before = 75, cap = 150 },
-			{ kind = "craft", from = 62, to = 76, recipe = "Minor Mana Potion", colors = { 25, 65, 85, 105 }, expected = 15, safe = 15, mats = {
+			}, source = { kind = "known" } },
+			{ kind = "craft", from = 55, to = 65, recipe = "Minor Mana Potion", colors = { 25, 65, 85, 105 }, expected = 10, safe = 10, mats = {
 				{ name = "Mageroyal", id = 785, qty = 1 },
 				{ name = "Peacebloom", id = 2447, qty = 1 },
 				{ name = "Empty Vial", id = 3371, qty = 1 },
-			}, source = { kind = "trainer", cost = 1 }, alts = { "Rage Potion", "Minor Rejuvenation Potion" } },
-			{ kind = "craft", from = 76, to = 89, recipe = "Elixir of Minor Fortitude", colors = { 50, 80, 100, 120 }, expected = 14, safe = 14, mats = {
+			}, source = { kind = "trainer", cost = 100 } },
+			{ kind = "craft", from = 65, to = 90, recipe = "Elixir of Minor Fortitude", colors = { 50, 80, 100, 120 }, expected = 26, safe = 28, mats = {
 				{ name = "Earthroot", id = 2449, qty = 2 },
 				{ name = "Peacebloom", id = 2447, qty = 1 },
 				{ name = "Empty Vial", id = 3371, qty = 1 },
-			}, source = { kind = "trainer", cost = 250 }, alts = { "Rage Potion", "Minor Rejuvenation Potion" } },
-			{ kind = "craft", from = 89, to = 100, recipe = "Rage Potion", colors = { 60, 90, 110, 130 }, expected = 12, safe = 12, mats = {
-				{ name = "Sharp Claw", id = 5635, qty = 1 },
-				{ name = "Briarthorn", id = 2450, qty = 1 },
+			}, source = { kind = "trainer", cost = 250 } },
+			{ kind = "craft", from = 90, to = 120, recipe = "Elixir of Wisdom", colors = { 90, 120, 140, 160 }, expected = 30, safe = 30, mats = {
+				{ name = "Mageroyal", id = 785, qty = 1 },
+				{ name = "Briarthorn", id = 2450, qty = 2 },
 				{ name = "Empty Vial", id = 3371, qty = 1 },
-			}, source = { kind = "vendor", cost = 95, npc = "Hagrus", location = "Orgrimmar", limited = true }, alts = { "Elixir of Minor Fortitude", "Blackmouth Oil" }, note = "The recipe is sold by Hagrus (Orgrimmar) in limited stock; it restocks." },
-			{ kind = "craft", from = 100, to = 137, recipe = "Holy Protection Potion", colors = { 100, 130, 150, 170 }, expected = 37, safe = 37, mats = {
-				{ name = "Bruiseweed", id = 2453, qty = 1 },
-				{ name = "Swiftthistle", id = 2452, qty = 1 },
-				{ name = "Empty Vial", id = 3371, qty = 1 },
-			}, source = { kind = "vendor", cost = 842, npc = "Hula'mahi", location = "The Barrens", limited = true }, alts = { "Elixir of Wisdom", "Rage Potion" }, note = "The recipe is sold by Hula'mahi (The Barrens) in limited stock; it restocks." },
+			}, source = { kind = "trainer", cost = 500 } },
 			{ kind = "train", rank = "Expert", reqSkill = 125, reqLevel = 20, before = 150, cap = 225 },
-			{ kind = "craft", from = 137, to = 162, recipe = "Elixir of Lesser Defense", colors = { 130, 155, 175, 195 }, expected = 25, safe = 25, mats = {
-				{ name = "Wild Steelbloom", id = 3355, qty = 1 },
+			{ kind = "craft", from = 120, to = 160, recipe = "Lesser Mana Potion", colors = { 120, 145, 165, 185 }, expected = 43, safe = 46, mats = {
+				{ name = "Mageroyal", id = 785, qty = 1 },
 				{ name = "Stranglekelp", id = 3820, qty = 1 },
-				{ name = "Leaded Vial", id = 3372, qty = 1 },
-			}, source = { kind = "trainer", cost = 20 }, alts = { "Lesser Mana Potion", "Fire Oil" } },
-			{ kind = "craft", from = 162, to = 187, recipe = "Mana Potion", colors = { 160, 180, 200, 220 }, expected = 25, safe = 25, mats = {
+				{ name = "Empty Vial", id = 3371, qty = 1 },
+			}, source = { kind = "trainer", cost = 1500 } },
+			{ kind = "craft", from = 160, to = 195, recipe = "Mana Potion", colors = { 160, 180, 200, 220 }, expected = 38, safe = 41, mats = {
 				{ name = "Stranglekelp", id = 3820, qty = 1 },
 				{ name = "Kingsblood", id = 3356, qty = 1 },
 				{ name = "Leaded Vial", id = 3372, qty = 1 },
-			}, source = { kind = "trainer", cost = 50 }, alts = { "Shadow Protection Potion", "Elixir of Lesser Defense" } },
-			{ kind = "craft", from = 187, to = 212, recipe = "Elixir of Agility", colors = { 185, 205, 225, 245 }, expected = 25, safe = 25, mats = {
+			}, source = { kind = "trainer", cost = 5000 } },
+			{ kind = "train", rank = "Artisan", reqSkill = 200, reqLevel = 35, before = 225, cap = 300 },
+			{ kind = "craft", from = 195, to = 205, recipe = "Elixir of Agility", colors = { 185, 205, 225, 245 }, expected = 10, safe = 10, mats = {
 				{ name = "Stranglekelp", id = 3820, qty = 1 },
 				{ name = "Goldthorn", id = 3821, qty = 1 },
 				{ name = "Leaded Vial", id = 3372, qty = 1 },
-			}, source = { kind = "trainer", cost = 65 }, alts = { "Elixir of Lesser Fortitude", "Great Rage Potion" } },
-			{ kind = "train", rank = "Artisan", reqSkill = 200, reqLevel = 35, before = 225, cap = 300 },
-			{ kind = "craft", from = 212, to = 227, recipe = "Catseye Draught", colors = { 200, 220, 240, 260 }, expected = 15, safe = 15, mats = {
+			}, source = { kind = "trainer", cost = 6500 } },
+			{ kind = "craft", from = 205, to = 225, recipe = "Greater Mana Potion", colors = { 205, 220, 240, 260 }, expected = 20, safe = 21, mats = {
+				{ name = "Khadgar's Whisker", id = 3358, qty = 1 },
 				{ name = "Goldthorn", id = 3821, qty = 1 },
-				{ name = "Fadeleaf", id = 3818, qty = 1 },
 				{ name = "Leaded Vial", id = 3372, qty = 1 },
-			}, source = { kind = "trainer", cost = 80 }, alts = { "Elixir of Defense", "Greater Mana Potion" } },
-			{ kind = "craft", from = 227, to = 232, recipe = "Viridian Dye", colors = { 215, 230, 250, 270 }, expected = 5, safe = 5, tools = { "Fermenter" }, mats = {
-				{ name = "Stranglevine", qty = 2 },
-				{ name = "Crystal Vial", id = 8925, qty = 1 },
-			}, source = { kind = "trainer", cost = 1 }, alts = { "Draught of Greater Water Breathing", "Catseye Draught" } },
-			{ kind = "craft", from = 232, to = 257, recipe = "Draught of Detect Undead", colors = { 230, 245, 265, 285 }, expected = 27, safe = 27, mats = {
+			}, source = { kind = "trainer", cost = 9000 } },
+			{ kind = "craft", from = 225, to = 226, recipe = "Philosopher's Stone", colors = { 225, 240, 260, 280 }, expected = 1, safe = 1, mats = {
+				{ name = "Iron Bar", id = 3575, qty = 4 },
+				{ name = "Black Vitriol", id = 9262, qty = 1 },
+				{ name = "Purple Lotus", id = 8831, qty = 4 },
+				{ name = "Firebloom", id = 4625, qty = 4 },
+			}, source = { kind = "vendor", cost = 7200, npc = "Alchemist Pestlezugg", location = "Tanaris" }, note = "Keep the Philosopher's Stone: transmutes need it." },
+			{ kind = "craft", from = 226, to = 240, recipe = "Greater Mana Potion", colors = { 205, 220, 240, 260 }, expected = 20, safe = 25, mats = {
+				{ name = "Khadgar's Whisker", id = 3358, qty = 1 },
+				{ name = "Goldthorn", id = 3821, qty = 1 },
+				{ name = "Leaded Vial", id = 3372, qty = 1 },
+			}, source = { kind = "trainer", cost = 9000 } },
+			{ kind = "craft", from = 240, to = 260, recipe = "Draught of Detect Undead", colors = { 230, 245, 265, 285 }, expected = 23, safe = 26, mats = {
 				{ name = "Arthas' Tears", id = 8836, qty = 1 },
 				{ name = "Crystal Vial", id = 8925, qty = 1 },
-			}, source = { kind = "trainer", cost = 50 }, alts = { "Viridian Dye", "Dreamless Sleep Potion" } },
-			{ kind = "craft", from = 257, to = 300, recipe = "Major Discolored Healing Potion", colors = { 250, 290, 310, 330 }, expected = 44, safe = 44, mats = {
+			}, source = { kind = "trainer", cost = 5000 } },
+			{ kind = "craft", from = 260, to = 270, recipe = "Superior Mana Potion", colors = { 260, 275, 295, 315 }, expected = 10, safe = 10, mats = {
+				{ name = "Sungrass", id = 8838, qty = 2 },
+				{ name = "Blindweed", id = 8839, qty = 2 },
+				{ name = "Crystal Vial", id = 8925, qty = 1 },
+			}, source = { kind = "vendor", cost = 11294, npc = "Ulthir", location = "Darnassus", vendors = {
+				{ npc = "Ulthir", location = "Darnassus", side = "Alliance", cost = 11294, limited = true },
+				{ npc = "Algernon", location = "Undercity", side = "Horde", cost = 12631, limited = true },
+			} } },
+			{ kind = "craft", from = 270, to = 300, recipe = "Major Discolored Healing Potion", colors = { 250, 290, 310, 330 }, expected = 31, safe = 33, mats = {
 				{ name = "Crystal Vial", id = 8925, qty = 1 },
 				{ name = "Plaguebloom", id = 13466, qty = 1 },
 				{ name = "Murloc Eye", id = 730, qty = 1 },
-			}, source = { kind = "trainer", cost = 1 }, alts = { "Potion of Demon Slaying", "Draught of Detect Demon" }, note = "The source's shopping list has Ghost Mushroom and Gromsblood here instead. Open the recipe once: Craftbound then uses its real reagents.", check = true },
+			}, source = { kind = "trainer", cost = 10000 }, note = "The source's shopping list has Ghost Mushroom and Gromsblood here instead. Open the recipe once: Craftbound then uses its real reagents.", check = true },
 		},
 	},
-	{ key = "Blacksmithing:Easiest", profession = "Blacksmithing", name = "Easiest", from = 125, to = 300, avgCrafts = 231, p90Crafts = 231, playtested = false, note = "This route starts at 125: level Blacksmithing to 125 first.",
+	{ key = "Blacksmithing:Tried & Tested", profession = "Blacksmithing", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 403, p90Crafts = 505, playtested = true,
 		parts = {
+			["Rough Grinding Stone"] = { recipe = "Rough Grinding Stone", id = 3470, makes = 1, mats = {
+	{ name = "Rough Stone", id = 2835, qty = 2 },
+}, source = { kind = "trainer", cost = 100 } },
+			["Coarse Grinding Stone"] = { recipe = "Coarse Grinding Stone", id = 3478, makes = 1, mats = {
+	{ name = "Coarse Stone", id = 2836, qty = 2 },
+}, source = { kind = "trainer", cost = 250 } },
+			["Heavy Grinding Stone"] = { recipe = "Heavy Grinding Stone", id = 3486, makes = 1, mats = {
+	{ name = "Heavy Stone", id = 2838, qty = 3 },
+}, source = { kind = "trainer", cost = 1000 } },
 			["Solid Grinding Stone"] = { recipe = "Solid Grinding Stone", id = 7966, makes = 1, mats = {
 	{ name = "Solid Stone", id = 7912, qty = 4 },
-} },
+}, source = { kind = "trainer", cost = 2500 } },
 			["Dense Grinding Stone"] = { recipe = "Dense Grinding Stone", id = 12644, makes = 1, mats = {
 	{ name = "Dense Stone", id = 12365, qty = 4 },
-} },
+}, source = { kind = "trainer", cost = 10000 } },
 		},
 		steps = {
-			{ kind = "tool", buy = true, recipe = "Blacksmith Hammer", item = 5956, safe = 1, expected = 1, mats = {
+			{ kind = "craft", from = 1, to = 30, recipe = "Rough Sharpening Stone", colors = { 1, 15, 35, 55 }, expected = 32, safe = 35, mats = {
+				{ name = "Rough Stone", id = 2835, qty = 1 },
+			}, source = { kind = "known" } },
+			{ kind = "train", rank = "Journeyman", reqSkill = 50, reqLevel = 10, before = 75, cap = 150 },
+			{ kind = "craft", from = 30, to = 65, recipe = "Rough Grinding Stone", colors = { 25, 45, 65, 85 }, expected = 42, safe = 47, mats = {
+				{ name = "Rough Stone", id = 2835, qty = 2 },
+			}, source = { kind = "trainer", cost = 100 } },
+			{ kind = "tool", buy = true, recipe = "Blacksmith Hammer", item = 5956, items = { 5956, 285280, 281665, 285281 }, safe = 1, expected = 1, mats = {
 				{ name = "Blacksmith Hammer", id = 5956, qty = 1 },
-			}, source = { kind = "vendor", cost = 15, npc = "any trade supplies vendor" }, note = "Buy a Blacksmith Hammer from a trade supplies vendor and keep it in your bags." },
-			{ kind = "craft", from = 125, to = 129, recipe = "Iron Buckle", colors = { 125, 125, 127, 130 }, expected = 6, safe = 6, makes = 2, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+			}, source = { kind = "vendor", cost = 15, npc = "a blacksmithing supplies vendor" }, note = "Buy a Blacksmith Hammer and keep it in your bags (a better one, such as Mithril Blacksmith Hammer, Twilight Forgehammer, Arcanite Blacksmith Hammer, works too)." },
+			{ kind = "craft", from = 65, to = 75, recipe = "Copper Chain Belt", colors = { 30, 70, 90, 110 }, expected = 10, safe = 11, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Copper Bar", id = 2840, qty = 6 },
+			}, source = { kind = "trainer", cost = 100 } },
+			{ kind = "craft", from = 75, to = 80, recipe = "Silver Skeleton Key", colors = { 75, 75, 85, 95 }, expected = 5, safe = 7, makes = 2, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Silver Bar", id = 2842, qty = 1 },
+				{ name = "Rough Grinding Stone", id = 3470, qty = 1 },
+			}, source = { kind = "trainer", cost = 100 } },
+			{ kind = "craft", from = 80, to = 90, recipe = "Rough Bronze Leggings", colors = { 80, 120, 135, 150 }, expected = 10, safe = 10, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Bronze Bar", id = 2841, qty = 6 },
+			}, source = { kind = "trainer", cost = 300 } },
+			{ kind = "craft", from = 90, to = 100, recipe = "Runed Copper Belt", colors = { 45, 85, 105, 125 }, expected = 13, safe = 16, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Copper Bar", id = 2840, qty = 10 },
+			}, source = { kind = "trainer", cost = 200 } },
+			{ kind = "craft", from = 100, to = 105, recipe = "Heavy Sharpening Stone", colors = { 100, 100, 107, 115 }, expected = 5, safe = 7, mats = {
+				{ name = "Heavy Stone", id = 2838, qty = 1 },
+			}, source = { kind = "trainer", cost = 1000 } },
+			{ kind = "craft", from = 105, to = 110, recipe = "Runed Copper Belt", colors = { 45, 85, 105, 125 }, expected = 11, safe = 16, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Copper Bar", id = 2840, qty = 10 },
+			}, source = { kind = "trainer", cost = 200 } },
+			{ kind = "craft", from = 110, to = 125, recipe = "Rough Bronze Leggings", colors = { 80, 120, 135, 150 }, expected = 15, safe = 16, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Bronze Bar", id = 2841, qty = 6 },
+			}, source = { kind = "trainer", cost = 300 } },
+			{ kind = "train", rank = "Expert", reqSkill = 125, reqLevel = 20, before = 150, cap = 225 },
+			{ kind = "craft", from = 125, to = 129, recipe = "Iron Buckle", colors = { 125, 125, 127, 130 }, expected = 6, safe = 9, makes = 2, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Iron Bar", id = 3575, qty = 1 },
-			}, source = { kind = "trainer", cost = 250 }, alts = { "Rough Bronze Leggings", "Golden Skeleton Key" } },
+			}, source = { kind = "trainer", cost = 250 } },
 			{ kind = "craft", from = 129, to = 140, recipe = "Bronze Warhammer", colors = { 100, 155, 170, 185 }, expected = 11, safe = 11, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Bronze Bar", id = 2841, qty = 8 },
 				{ name = "Strong Flux", id = 3466, qty = 1 },
 				{ name = "Medium Leather", id = 2319, qty = 1 },
-			}, source = { kind = "trainer", cost = 250 }, alts = { "Rough Bronze Leggings", "Golden Skeleton Key" } },
-			{ kind = "train", rank = "Expert", reqSkill = 125, reqLevel = 20, before = 150, cap = 225 },
-			{ kind = "craft", from = 140, to = 175, recipe = "Green Iron Bracers", colors = { 140, 165, 177, 190 }, expected = 37, safe = 37, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+			}, source = { kind = "trainer", cost = 250 } },
+			{ kind = "craft", from = 140, to = 147, recipe = "Patterned Bronze Bracers", colors = { 95, 125, 140, 155 }, expected = 18, safe = 25, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Bronze Bar", id = 2841, qty = 5 },
+				{ name = "Coarse Grinding Stone", id = 3478, qty = 2 },
+			}, source = { kind = "trainer", cost = 500 } },
+			{ kind = "craft", from = 147, to = 155, recipe = "Green Iron Bracers", colors = { 140, 165, 177, 190 }, expected = 8, safe = 8, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Iron Bar", id = 3575, qty = 6 },
 				{ name = "Green Dye", id = 2605, qty = 1 },
-			}, source = { kind = "trainer", cost = 10 }, alts = { "Bronze Warhammer", "Green Iron Leggings" } },
-			{ kind = "craft", from = 175, to = 182, recipe = "Solid Sharpening Stone", colors = { 175, 175, 180, 185 }, expected = 10, safe = 10, mats = {
-				{ name = "Solid Stone", id = 7912, qty = 1 },
-			}, source = { kind = "trainer", cost = 25 }, alts = { "Solid Weightstone", "Solid Grinding Stone" } },
-			{ kind = "craft", from = 182, to = 205, recipe = "Heavy Mithril Gauntlet", colors = { 180, 200, 210, 220 }, expected = 23, safe = 23, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+			}, source = { kind = "trainer", cost = 1000 } },
+			{ kind = "craft", from = 155, to = 165, recipe = "Green Iron Leggings", colors = { 130, 155, 167, 180 }, expected = 12, safe = 15, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Iron Bar", id = 3575, qty = 8 },
+				{ name = "Heavy Grinding Stone", id = 3486, qty = 1 },
+				{ name = "Green Dye", id = 2605, qty = 1 },
+			}, source = { kind = "trainer", cost = 5000 } },
+			{ kind = "craft", from = 165, to = 183, recipe = "Green Iron Bracers", colors = { 140, 165, 177, 190 }, expected = 30, safe = 37, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Iron Bar", id = 3575, qty = 6 },
+				{ name = "Green Dye", id = 2605, qty = 1 },
+			}, source = { kind = "trainer", cost = 1000 } },
+			{ kind = "craft", from = 183, to = 190, recipe = "Heavy Mithril Gauntlet", colors = { 180, 200, 210, 220 }, expected = 7, safe = 7, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Mithril Bar", id = 3860, qty = 6 },
 				{ name = "Mageweave Cloth", id = 4338, qty = 4 },
-			}, source = { kind = "trainer", cost = 50 }, alts = { "Heavy Mithril Shoulder", "Truesilver Rod" } },
-			{ kind = "craft", from = 205, to = 211, recipe = "Mithril Plate Pants", colors = { 185, 205, 215, 225 }, expected = 7, safe = 7, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Mithril Bar", id = 3860, qty = 12 },
-			}, source = { kind = "trainer", cost = 50 }, alts = { "Heavy Mithril Gauntlet", "Heavy Mithril Breastplate" } },
-			{ kind = "craft", from = 211, to = 225, recipe = "Heavy Mithril Breastplate", colors = { 205, 225, 235, 245 }, expected = 14, safe = 14, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Mithril Bar", id = 3860, qty = 16 },
-			}, source = { kind = "trainer", cost = 150 }, alts = { "Mithril Coif", "Heavy Mithril Boots" } },
+			}, source = { kind = "trainer", cost = 5000 } },
+			{ kind = "craft", from = 190, to = 200, recipe = "Golden Scale Bracers", colors = { 160, 185, 197, 210 }, expected = 16, safe = 21, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Steel Bar", id = 3859, qty = 5 },
+				{ name = "Heavy Grinding Stone", id = 3486, qty = 2 },
+			}, source = { kind = "trainer", cost = 1000 } },
 			{ kind = "train", rank = "Artisan", reqSkill = 200, reqLevel = 35, before = 225, cap = 300 },
-			{ kind = "craft", from = 225, to = 235, recipe = "Dense Weightstone", colors = { 225, 230, 232, 235 }, expected = 15, safe = 15, mats = {
+			{ kind = "craft", from = 200, to = 205, recipe = "Heavy Mithril Gauntlet", colors = { 180, 200, 210, 220 }, expected = 5, safe = 7, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Mithril Bar", id = 3860, qty = 6 },
+				{ name = "Mageweave Cloth", id = 4338, qty = 4 },
+			}, source = { kind = "trainer", cost = 5000 } },
+			{ kind = "craft", from = 205, to = 210, recipe = "Mithril Plate Pants", colors = { 185, 205, 215, 225 }, expected = 5, safe = 7, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Mithril Bar", id = 3860, qty = 12 },
+			}, source = { kind = "trainer", cost = 5000 } },
+			{ kind = "craft", from = 210, to = 215, recipe = "Heavy Mithril Gauntlet", colors = { 180, 200, 210, 220 }, expected = 12, safe = 19, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Mithril Bar", id = 3860, qty = 6 },
+				{ name = "Mageweave Cloth", id = 4338, qty = 4 },
+			}, source = { kind = "trainer", cost = 5000 } },
+			{ kind = "craft", from = 215, to = 225, recipe = "Heavy Mithril Breastplate", colors = { 205, 225, 235, 245 }, expected = 10, safe = 10, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Mithril Bar", id = 3860, qty = 16 },
+			}, source = { kind = "trainer", cost = 15000 } },
+			{ kind = "craft", from = 225, to = 235, recipe = "Dense Weightstone", colors = { 225, 230, 232, 235 }, expected = 16, safe = 23, mats = {
 				{ name = "Dense Stone", id = 12365, qty = 1 },
-			}, source = { kind = "trainer", cost = 1 }, alts = { "Dense Sharpening Stone", "Dense Grinding Stone" } },
-			{ kind = "craft", from = 235, to = 246, recipe = "Heavy Mithril Boots", colors = { 210, 230, 240, 250 }, expected = 24, safe = 24, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+			}, source = { kind = "trainer", cost = 10000 } },
+			{ kind = "craft", from = 235, to = 240, recipe = "Mithril Coif", colors = { 205, 225, 235, 245 }, expected = 12, safe = 19, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Mithril Bar", id = 3860, qty = 10 },
+				{ name = "Mageweave Cloth", id = 4338, qty = 6 },
+			}, source = { kind = "trainer", cost = 15000 } },
+			{ kind = "craft", from = 240, to = 246, recipe = "Heavy Mithril Boots", colors = { 210, 230, 240, 250 }, expected = 16, safe = 24, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Mithril Bar", id = 3860, qty = 14 },
 				{ name = "Thick Leather", id = 4304, qty = 4 },
-			}, source = { kind = "trainer", cost = 2 }, alts = { "Orcish War Leggings", "Heavy Mithril Breastplate" } },
-			{ kind = "craft", from = 246, to = 250, recipe = "Big Black Mace", colors = { 205, 230, 242, 255 }, expected = 13, safe = 13, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+			}, source = { kind = "trainer", cost = 20000 } },
+			{ kind = "craft", from = 246, to = 250, recipe = "Big Black Mace", colors = { 205, 230, 242, 255 }, expected = 13, safe = 21, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Mithril Bar", id = 3860, qty = 16 },
 				{ name = "Black Pearl", id = 7971, qty = 1 },
 				{ name = "Shadowgem", id = 1210, qty = 4 },
 				{ name = "Solid Grinding Stone", id = 7966, qty = 1 },
 				{ name = "Thick Leather", id = 4304, qty = 2 },
-			}, source = { kind = "trainer", cost = 150 }, note = "Low odds: about 3.4 crafts per point." },
-			{ kind = "craft", from = 250, to = 257, recipe = "Arcanite Skeleton Key", colors = { 250, 250, 255, 260 }, expected = 10, safe = 10, makes = 2, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+			}, source = { kind = "trainer", cost = 15000 } },
+			{ kind = "craft", from = 250, to = 257, recipe = "Arcanite Skeleton Key", colors = { 250, 250, 255, 260 }, expected = 10, safe = 15, makes = 2, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Arcanite Bar", id = 12360, qty = 1 },
 				{ name = "Dense Grinding Stone", id = 12644, qty = 1 },
-			}, source = { kind = "trainer", cost = 1 }, alts = { "Arcanite Rod" } },
-			{ kind = "craft", from = 257, to = 270, recipe = "Ebon Shiv", colors = { 255, 255, 267, 280 }, expected = 20, safe = 20, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+			}, source = { kind = "trainer", cost = 10000 } },
+			{ kind = "craft", from = 257, to = 270, recipe = "Ebon Shiv", colors = { 255, 255, 267, 280 }, expected = 20, safe = 25, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Mithril Bar", id = 3860, qty = 12 },
 				{ name = "Truesilver Bar", id = 6037, qty = 6 },
 				{ name = "Star Ruby", id = 7910, qty = 2 },
 				{ name = "Solid Grinding Stone", id = 7966, qty = 1 },
 				{ name = "Thick Leather", id = 4304, qty = 2 },
-			}, source = { kind = "vendor", cost = 95, npc = "Magnus Frostwake", location = "Western Plaguelands" } },
+			}, source = { kind = "vendor", cost = 9500, npc = "Magnus Frostwake", location = "Western Plaguelands" } },
 			{ kind = "craft", from = 270, to = 275, recipe = "Bold Dirk", colors = { 270, 290, 300, 310 }, expected = 5, safe = 5, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Thorium Bar", id = 12359, qty = 30 },
 				{ name = "Essence of Air", id = 7082, qty = 4 },
-				{ name = "Azerothium Bar", qty = 10 },
+				{ name = "Azerothium Bar", id = 249726, qty = 10 },
 				{ name = "Rugged Leather", id = 8170, qty = 4 },
-			}, source = { kind = "vendor", cost = 9, npc = "Pexmit", location = "Mount Hyjal" } },
-			{ kind = "craft", from = 275, to = 279, recipe = "Ornate Thorium Handaxe", colors = { 275, 275, 287, 300 }, expected = 4, safe = 4, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+			}, source = { kind = "vendor", cost = 90000, npc = "Pexmit", location = "Mount Hyjal" } },
+			{ kind = "craft", from = 275, to = 279, recipe = "Ornate Thorium Handaxe", colors = { 275, 275, 287, 300 }, expected = 4, safe = 5, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Thorium Bar", id = 12359, qty = 20 },
 				{ name = "Large Opal", id = 12799, qty = 2 },
 				{ name = "Dense Grinding Stone", id = 12644, qty = 2 },
 				{ name = "Rugged Leather", id = 8170, qty = 4 },
-			}, source = { kind = "vendor", cost = 152, npc = "Magnus Frostwake", location = "Western Plaguelands" }, alts = { "Bold Dirk" } },
-			{ kind = "craft", from = 279, to = 285, recipe = "Bold Dirk", colors = { 270, 290, 300, 310 }, expected = 6, safe = 6, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+			}, source = { kind = "vendor", cost = 15200, npc = "Magnus Frostwake", location = "Western Plaguelands" } },
+			{ kind = "craft", from = 279, to = 300, recipe = "Bold Dirk", colors = { 270, 290, 300, 310 }, expected = 24, safe = 27, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Thorium Bar", id = 12359, qty = 30 },
 				{ name = "Essence of Air", id = 7082, qty = 4 },
-				{ name = "Azerothium Bar", qty = 10 },
+				{ name = "Azerothium Bar", id = 249726, qty = 10 },
 				{ name = "Rugged Leather", id = 8170, qty = 4 },
-			}, source = { kind = "vendor", cost = 9, npc = "Pexmit", location = "Mount Hyjal" }, alts = { "Ornate Thorium Handaxe" } },
-			{ kind = "craft", from = 285, to = 292, recipe = "Goregasher Grips", colors = { 285, 290, 292, 295 }, expected = 7, safe = 7, tools = { "Blacksmith Hammer" }, station = "Master Forge", mats = {
-				{ name = "Thorium Bar", id = 12359, qty = 7 },
-				{ name = "Enchanted Thorium Bar", id = 12655, qty = 5 },
-				{ name = "Essence of Fire", id = 7078, qty = 3 },
-				{ name = "Elemental Flux", id = 18567, qty = 1 },
-			}, source = { kind = "vendor", cost = 675, npc = "Vargus", location = "Silithus", rep = "Friendly with Cenarion Circle" }, alts = { "Clutchlord's Grips", "Bold Dirk" }, note = "Needs Friendly with Cenarion Circle to learn this recipe." },
-			{ kind = "craft", from = 292, to = 299, recipe = "Goregasher Support", colors = { 290, 295, 297, 300 }, expected = 9, safe = 9, tools = { "Blacksmith Hammer" }, station = "Master Forge", mats = {
-				{ name = "Thorium Bar", id = 12359, qty = 11 },
-				{ name = "Enchanted Thorium Bar", id = 12655, qty = 5 },
-				{ name = "Essence of Fire", id = 7078, qty = 3 },
-				{ name = "Elemental Flux", id = 18567, qty = 1 },
-			}, source = { kind = "vendor", cost = 675, npc = "Vargus", location = "Silithus", rep = "Honored with Cenarion Circle" }, alts = { "Girdle of the Dawn", "Clutchlord's Support" }, note = "Needs Honored with Cenarion Circle to learn this recipe." },
-			{ kind = "craft", from = 299, to = 300, recipe = "Girdle of the Dawn", colors = { 290, 290, 295, 305 }, expected = 2, safe = 2, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Thorium Bar", id = 12359, qty = 8 },
-				{ name = "Truesilver Bar", id = 6037, qty = 6 },
-				{ name = "Righteous Orb", id = 12811, qty = 1 },
-			}, source = { kind = "vendor", cost = 2964, npc = "Argent Quartermaster Hasana", location = "Tirisfal Glades", rep = "Honored with Argent Dawn" }, alts = { "Bold Dirk" }, note = "Needs Honored with Argent Dawn to learn this recipe." },
+			}, source = { kind = "vendor", cost = 90000, npc = "Pexmit", location = "Mount Hyjal" } },
 		},
 	},
-	{ key = "Engineering:Easiest", profession = "Engineering", name = "Easiest", from = 1, to = 300, avgCrafts = 361, p90Crafts = 361, playtested = false,
+	{ key = "Engineering:Tried & Tested", profession = "Engineering", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 395, p90Crafts = 476, playtested = true,
 		parts = {
-			["Gold Power Core"] = { recipe = "Gold Power Core", id = 10558, makes = 3, mats = {
-	{ name = "Gold Bar", id = 3577, qty = 1 },
-} },
+			["Handful of Copper Bolts"] = { recipe = "Handful of Copper Bolts", id = 4359, makes = 1, mats = {
+	{ name = "Copper Bar", id = 2840, qty = 1 },
+}, source = { kind = "trainer", cost = 115 } },
+			["Rough Blasting Powder"] = { recipe = "Rough Blasting Powder", id = 4357, makes = 1, mats = {
+	{ name = "Rough Stone", id = 2835, qty = 1 },
+}, source = { kind = "known" } },
+			["Coarse Blasting Powder"] = { recipe = "Coarse Blasting Powder", id = 4364, makes = 1, mats = {
+	{ name = "Coarse Stone", id = 2836, qty = 1 },
+}, source = { kind = "trainer", cost = 250 } },
+			["Bronze Tube"] = { recipe = "Bronze Tube", id = 4371, makes = 1, mats = {
+	{ name = "Bronze Bar", id = 2841, qty = 2 },
+	{ name = "Weak Flux", id = 2880, qty = 1 },
+}, source = { kind = "trainer", cost = 450 } },
+			["Bronze Framework"] = { recipe = "Bronze Framework", id = 4382, makes = 1, mats = {
+	{ name = "Bronze Bar", id = 2841, qty = 2 },
+	{ name = "Medium Leather", id = 2319, qty = 1 },
+	{ name = "Wool Cloth", id = 2592, qty = 1 },
+}, source = { kind = "trainer", cost = 600 } },
+			["Whirring Bronze Gizmo"] = { recipe = "Whirring Bronze Gizmo", id = 4375, makes = 1, mats = {
+	{ name = "Bronze Bar", id = 2841, qty = 2 },
+	{ name = "Wool Cloth", id = 2592, qty = 1 },
+}, source = { kind = "trainer", cost = 500 } },
+			["Heavy Blasting Powder"] = { recipe = "Heavy Blasting Powder", id = 4377, makes = 1, mats = {
+	{ name = "Heavy Stone", id = 2838, qty = 1 },
+}, source = { kind = "trainer", cost = 500 } },
+			["Solid Blasting Powder"] = { recipe = "Solid Blasting Powder", id = 10505, makes = 1, mats = {
+	{ name = "Solid Stone", id = 7912, qty = 2 },
+}, source = { kind = "trainer", cost = 1000 } },
+			["Mithril Casing"] = { recipe = "Mithril Casing", id = 10561, makes = 1, mats = {
+	{ name = "Mithril Bar", id = 3860, qty = 3 },
+}, source = { kind = "trainer", cost = 1800 } },
+			["Unstable Trigger"] = { recipe = "Unstable Trigger", id = 10560, makes = 1, mats = {
+	{ name = "Mithril Bar", id = 3860, qty = 1 },
+	{ name = "Mageweave Cloth", id = 4338, qty = 1 },
+	{ name = "Solid Blasting Powder", id = 10505, qty = 1 },
+}, source = { kind = "trainer", cost = 1500 } },
 		},
 		steps = {
-			{ kind = "craft", from = 1, to = 30, recipe = "Rough Blasting Powder", colors = { 1, 20, 30, 40 }, expected = 32, safe = 32, mats = {
+			{ kind = "craft", from = 1, to = 30, recipe = "Rough Blasting Powder", colors = { 1, 20, 30, 40 }, expected = 32, safe = 35, mats = {
 				{ name = "Rough Stone", id = 2835, qty = 1 },
-			}, source = { kind = "trainer" }, alts = { "Rough Dynamite" } },
-			{ kind = "tool", buy = true, recipe = "Blacksmith Hammer", item = 5956, safe = 1, expected = 1, mats = {
+			}, source = { kind = "known" }, note = "Craft 60 and Save" },
+			{ kind = "tool", buy = true, recipe = "Blacksmith Hammer", item = 5956, items = { 5956, 285280, 281665, 285281 }, safe = 1, expected = 1, mats = {
 				{ name = "Blacksmith Hammer", id = 5956, qty = 1 },
-			}, source = { kind = "vendor", cost = 15, npc = "any trade supplies vendor" }, note = "Buy a Blacksmith Hammer from a trade supplies vendor and keep it in your bags." },
-			{ kind = "craft", from = 30, to = 51, recipe = "Handful of Copper Bolts", colors = { 30, 45, 52, 60 }, expected = 22, safe = 22, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+			}, source = { kind = "vendor", cost = 15, npc = "an engineering supplies vendor" }, note = "Buy a Blacksmith Hammer and keep it in your bags (a better one, such as Mithril Blacksmith Hammer, Twilight Forgehammer, Arcanite Blacksmith Hammer, works too)." },
+			{ kind = "craft", from = 30, to = 50, recipe = "Handful of Copper Bolts", colors = { 30, 45, 52, 60 }, expected = 20, safe = 22, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Copper Bar", id = 2840, qty = 1 },
-			}, source = { kind = "trainer", cost = 115 }, alts = { "Rough Blasting Powder", "Rough Dynamite" } },
-			{ kind = "craft", from = 51, to = 75, recipe = "Copper Tube", colors = { 50, 80, 95, 110 }, expected = 24, safe = 24, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Copper Bar", id = 2840, qty = 2 },
-				{ name = "Weak Flux", id = 2880, qty = 1 },
-			}, source = { kind = "trainer", cost = 150 }, alts = { "Handful of Copper Bolts", "Arclight Spanner" } },
+			}, source = { kind = "trainer", cost = 115 }, note = "Craft 30 and Save" },
 			{ kind = "train", rank = "Journeyman", reqSkill = 50, reqLevel = 10, before = 75, cap = 150 },
-			{ kind = "craft", from = 75, to = 90, recipe = "Coarse Blasting Powder", colors = { 75, 85, 90, 95 }, expected = 16, safe = 16, mats = {
-				{ name = "Coarse Stone", id = 2836, qty = 1 },
-			}, source = { kind = "trainer", cost = 250 }, alts = { "Copper Tube", "Crafted Heavy Shot" } },
-			{ kind = "craft", from = 90, to = 123, recipe = "Silver Contact", colors = { 90, 110, 125, 140 }, expected = 36, safe = 36, makes = 5, mats = {
-				{ name = "Silver Bar", id = 2842, qty = 1 },
-			}, source = { kind = "trainer", cost = 3 }, alts = { "Coarse Blasting Powder", "Copper Tube" } },
-			{ kind = "craft", from = 123, to = 125, recipe = "Sandpaper", colors = { 120, 130, 142, 155 }, expected = 2, safe = 2, mats = {
-				{ name = "Bauxite", qty = 2 },
-				{ name = "Bolt of Linen Cloth", id = 2996, qty = 1 },
-			}, source = { kind = "trainer", cost = 5 }, alts = { "Silver Contact", "Bronze Tube" } },
-			{ kind = "craft", from = 125, to = 135, recipe = "Heavy Blasting Powder", colors = { 125, 125, 135, 145 }, expected = 13, safe = 13, mats = {
-				{ name = "Heavy Stone", id = 2838, qty = 1 },
-			}, source = { kind = "trainer", cost = 5 }, alts = { "Sandpaper", "Whirring Bronze Gizmo" } },
-			{ kind = "craft", from = 135, to = 140, recipe = "Sandpaper", colors = { 120, 130, 142, 155 }, expected = 7, safe = 7, mats = {
-				{ name = "Bauxite", qty = 2 },
-				{ name = "Bolt of Linen Cloth", id = 2996, qty = 1 },
-			}, source = { kind = "trainer", cost = 5 }, alts = { "Whirring Bronze Gizmo", "Heavy Blasting Powder" } },
 			{ kind = "tool", recipe = "Arclight Spanner", colors = { 50, 70, 80, 90 }, expected = 1, safe = 1, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Copper Bar", id = 2840, qty = 6 },
-			}, source = { kind = "trainer", cost = 150 }, item = 6219, note = "Make one and keep it in your bags." },
-			{ kind = "craft", from = 140, to = 145, recipe = "Whirring Bronze Gizmo", colors = { 125, 125, 150, 175 }, expected = 7, safe = 7, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
+			}, source = { kind = "trainer", cost = 150 }, item = 6219, items = { 6219, 282550 }, note = "Keep the Arclight Spanner: most later recipes need it as a tool." },
+			{ kind = "craft", from = 51, to = 75, recipe = "Rough Copper Bomb", colors = { 30, 60, 75, 90 }, expected = 29, safe = 33, makes = 2, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Copper Bar", id = 2840, qty = 1 },
+				{ name = "Handful of Copper Bolts", id = 4359, qty = 1 },
+				{ name = "Rough Blasting Powder", id = 4357, qty = 2 },
+				{ name = "Linen Cloth", id = 2589, qty = 1 },
+			}, source = { kind = "trainer", cost = 130 } },
+			{ kind = "craft", from = 75, to = 90, recipe = "Coarse Blasting Powder", colors = { 75, 85, 90, 95 }, expected = 16, safe = 18, mats = {
+				{ name = "Coarse Stone", id = 2836, qty = 1 },
+			}, source = { kind = "trainer", cost = 250 } },
+			{ kind = "craft", from = 90, to = 100, recipe = "Coarse Dynamite", colors = { 75, 90, 97, 105 }, expected = 15, safe = 20, makes = 2, mats = {
+				{ name = "Coarse Blasting Powder", id = 4364, qty = 3 },
+				{ name = "Linen Cloth", id = 2589, qty = 1 },
+			}, source = { kind = "trainer", cost = 250 } },
+			{ kind = "craft", from = 100, to = 105, recipe = "Silver Contact", colors = { 90, 110, 125, 140 }, expected = 5, safe = 5, makes = 5, mats = {
+				{ name = "Silver Bar", id = 2842, qty = 1 },
+			}, source = { kind = "trainer", cost = 300 } },
+			{ kind = "craft", from = 105, to = 125, recipe = "Bronze Tube", colors = { 105, 105, 130, 155 }, expected = 25, safe = 29, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Bronze Bar", id = 2841, qty = 2 },
+				{ name = "Weak Flux", id = 2880, qty = 1 },
+			}, source = { kind = "trainer", cost = 450 } },
+			{ kind = "train", rank = "Expert", reqSkill = 125, reqLevel = 20, before = 150, cap = 225 },
+			{ kind = "craft", from = 125, to = 135, recipe = "Standard Scope", colors = { 110, 135, 147, 160 }, expected = 10, safe = 10, tools = { "Arclight Spanner" }, mats = {
+				{ name = "Bronze Tube", id = 4371, qty = 1 },
+				{ name = "Moss Agate", id = 1206, qty = 1 },
+			}, source = { kind = "trainer", cost = 475 } },
+			{ kind = "craft", from = 135, to = 150, recipe = "Whirring Bronze Gizmo", colors = { 125, 125, 150, 175 }, expected = 23, safe = 28, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
 				{ name = "Bronze Bar", id = 2841, qty = 2 },
 				{ name = "Wool Cloth", id = 2592, qty = 1 },
-			}, source = { kind = "trainer", cost = 5 }, alts = { "Sandpaper", "Standard Scope" } },
-			{ kind = "craft", from = 145, to = 150, recipe = "Bronze Framework", colors = { 145, 145, 170, 195 }, expected = 5, safe = 5, mats = {
+			}, source = { kind = "trainer", cost = 500 } },
+			{ kind = "craft", from = 150, to = 160, recipe = "Bronze Framework", colors = { 145, 145, 170, 195 }, expected = 12, safe = 15, mats = {
 				{ name = "Bronze Bar", id = 2841, qty = 2 },
 				{ name = "Medium Leather", id = 2319, qty = 1 },
 				{ name = "Wool Cloth", id = 2592, qty = 1 },
-			}, source = { kind = "trainer", cost = 6 }, alts = { "Whirring Bronze Gizmo", "Standard Scope" } },
-			{ kind = "train", rank = "Expert", reqSkill = 125, reqLevel = 20, before = 150, cap = 225 },
-			{ kind = "craft", from = 150, to = 170, recipe = "Gold Power Core", colors = { 150, 150, 170, 190 }, expected = 27, safe = 27, makes = 3, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
-				{ name = "Gold Bar", id = 3577, qty = 1 },
-			}, source = { kind = "trainer", cost = 10 }, alts = { "Bronze Framework", "Red Firework" } },
-			{ kind = "craft", from = 170, to = 175, recipe = "Gyrochronatom", colors = { 170, 170, 190, 210 }, expected = 5, safe = 5, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
-				{ name = "Iron Bar", id = 3575, qty = 1 },
-				{ name = "Gold Power Core", id = 10558, qty = 1 },
-			}, source = { kind = "trainer", cost = 9 }, alts = { "Gold Power Core", "Ice Deflector" } },
-			{ kind = "craft", from = 175, to = 185, recipe = "Solid Blasting Powder", colors = { 175, 175, 185, 195 }, expected = 13, safe = 13, mats = {
+			}, source = { kind = "trainer", cost = 600 } },
+			{ kind = "craft", from = 160, to = 175, recipe = "Explosive Sheep", colors = { 150, 175, 187, 200 }, expected = 15, safe = 15, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
+				{ name = "Bronze Framework", id = 4382, qty = 1 },
+				{ name = "Whirring Bronze Gizmo", id = 4375, qty = 1 },
+				{ name = "Heavy Blasting Powder", id = 4377, qty = 2 },
+				{ name = "Wool Cloth", id = 2592, qty = 2 },
+			}, source = { kind = "trainer", cost = 750 } },
+			{ kind = "craft", from = 175, to = 194, recipe = "Solid Blasting Powder", colors = { 175, 175, 185, 195 }, expected = 51, safe = 69, mats = {
 				{ name = "Solid Stone", id = 7912, qty = 2 },
-			}, source = { kind = "trainer", cost = 10 }, alts = { "Gyrochronatom", "Gyromatic Micro-Adjustor" } },
-			{ kind = "craft", from = 185, to = 195, recipe = "Gyrochronatom", colors = { 170, 170, 190, 210 }, expected = 19, safe = 19, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
-				{ name = "Iron Bar", id = 3575, qty = 1 },
-				{ name = "Gold Power Core", id = 10558, qty = 1 },
-			}, source = { kind = "trainer", cost = 9 }, alts = { "Gyromatic Micro-Adjustor", "Solid Blasting Powder" } },
-			{ kind = "craft", from = 195, to = 215, recipe = "Mithril Tube", colors = { 195, 195, 215, 235 }, expected = 27, safe = 27, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Mithril Bar", id = 3860, qty = 3 },
-			}, source = { kind = "trainer", cost = 13 }, alts = { "Accurate Scope", "Gyromatic Micro-Adjustor" } },
-			{ kind = "train", rank = "Artisan", reqSkill = 200, reqLevel = 35, before = 225, cap = 300 },
-			{ kind = "craft", from = 215, to = 235, recipe = "Mithril Casing", colors = { 215, 215, 235, 255 }, expected = 27, safe = 27, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
-				{ name = "Mithril Bar", id = 3860, qty = 3 },
-			}, source = { kind = "trainer", cost = 18 }, alts = { "Hi-Impact Mithril Slugs", "Mithril Tube" } },
-			{ kind = "tool", recipe = "Gyromatic Micro-Adjustor", colors = { 175, 175, 195, 215 }, expected = 1, safe = 1, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+			}, source = { kind = "trainer", cost = 1000 } },
+			{ kind = "craft", from = 194, to = 195, recipe = "Gyromatic Micro-Adjustor", colors = { 175, 175, 195, 215 }, expected = 1, safe = 4, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Steel Bar", id = 3859, qty = 4 },
-			}, source = { kind = "trainer", cost = 10 }, item = 10498, note = "Make one and keep it in your bags." },
-			{ kind = "craft", from = 235, to = 250, recipe = "Rose Colored Goggles", colors = { 230, 250, 260, 270 }, expected = 15, safe = 15, tools = { "Arclight Spanner", "Gyromatic Micro-Adjustor" }, mats = {
-				{ name = "Thick Leather", id = 4304, qty = 6 },
-				{ name = "Star Ruby", id = 7910, qty = 2 },
-			}, source = { kind = "trainer", cost = 22 }, alts = { "Mithril Casing", "Deadly Scope" } },
-			{ kind = "craft", from = 250, to = 257, recipe = "Dense Blasting Powder", colors = { 250, 250, 255, 260 }, expected = 10, safe = 10, mats = {
+			}, source = { kind = "trainer", cost = 1000 }, note = "Keep the Gyromatic Micro-Adjustor: goggles and scopes need it as a tool." },
+			{ kind = "craft", from = 195, to = 200, recipe = "Mithril Tube", colors = { 195, 195, 215, 235 }, expected = 5, safe = 6, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
+				{ name = "Mithril Bar", id = 3860, qty = 3 },
+			}, source = { kind = "trainer", cost = 1300 } },
+			{ kind = "train", rank = "Artisan", reqSkill = 200, reqLevel = 35, before = 225, cap = 300 },
+			{ kind = "craft", from = 200, to = 215, recipe = "Unstable Trigger", colors = { 200, 200, 220, 240 }, expected = 18, safe = 21, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
+				{ name = "Mithril Bar", id = 3860, qty = 1 },
+				{ name = "Mageweave Cloth", id = 4338, qty = 1 },
+				{ name = "Solid Blasting Powder", id = 10505, qty = 1 },
+			}, source = { kind = "trainer", cost = 1500 } },
+			{ kind = "craft", from = 215, to = 238, recipe = "Mithril Casing", colors = { 215, 215, 235, 255 }, expected = 33, safe = 39, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
+				{ name = "Mithril Bar", id = 3860, qty = 3 },
+			}, source = { kind = "trainer", cost = 1800 } },
+			{ kind = "craft", from = 238, to = 250, recipe = "Hi-Explosive Bomb", colors = { 235, 235, 255, 275 }, expected = 15, safe = 18, makes = 4, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
+				{ name = "Mithril Casing", id = 10561, qty = 2 },
+				{ name = "Unstable Trigger", id = 10560, qty = 1 },
+				{ name = "Solid Blasting Powder", id = 10505, qty = 2 },
+			}, source = { kind = "trainer", cost = 2400 } },
+			{ kind = "craft", from = 250, to = 260, recipe = "Dense Blasting Powder", colors = { 250, 250, 255, 260 }, expected = 29, safe = 44, mats = {
 				{ name = "Dense Stone", id = 12365, qty = 2 },
-			}, source = { kind = "trainer", cost = 40 }, alts = { "Rose Colored Goggles", "Dense Dynamite" } },
-			{ kind = "craft", from = 257, to = 260, recipe = "Rose Colored Goggles", colors = { 230, 250, 260, 270 }, expected = 5, safe = 5, tools = { "Arclight Spanner", "Gyromatic Micro-Adjustor" }, mats = {
-				{ name = "Thick Leather", id = 4304, qty = 6 },
-				{ name = "Star Ruby", id = 7910, qty = 2 },
-			}, source = { kind = "trainer", cost = 22 }, alts = { "Green Lens", "Mithril Gyro-Shot" } },
-			{ kind = "craft", from = 260, to = 285, recipe = "Thorium Widget", colors = { 260, 280, 290, 300 }, expected = 25, safe = 25, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
+			}, source = { kind = "trainer", cost = 4000 } },
+			{ kind = "craft", from = 260, to = 285, recipe = "Thorium Widget", colors = { 260, 280, 290, 300 }, expected = 25, safe = 27, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
 				{ name = "Thorium Bar", id = 12359, qty = 3 },
 				{ name = "Runecloth", id = 14047, qty = 1 },
-			}, source = { kind = "vendor", cost = 18, npc = "Gearcutter Cogspinner", location = "Ironforge" }, alts = { "Truesilver Transformer", "Green Lens" } },
-			{ kind = "craft", from = 285, to = 300, recipe = "Delicate Arcanite Converter", colors = { 285, 305, 315, 325 }, expected = 15, safe = 15, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
-				{ name = "Arcanite Bar", id = 12360, qty = 1 },
-				{ name = "Ironweb Spider Silk", id = 14227, qty = 1 },
-			}, source = { kind = "vendor", cost = 180, npc = "Xizzer Fizzbolt", location = "Winterspring" }, alts = { "Thorium Tube", "Thorium Widget" } },
+			}, source = { kind = "vendor", cost = 12705, npc = "Sovik", location = "Orgrimmar", vendors = {
+				{ npc = "Sovik", location = "Orgrimmar", side = "Horde", cost = 12705 },
+				{ npc = "Gearcutter Cogspinner", location = "Ironforge", side = "Alliance", cost = 10800 },
+			} } },
+			{ kind = "craft", from = 285, to = 300, recipe = "Thorium Tube", colors = { 275, 295, 305, 315 }, expected = 15, safe = 17, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
+				{ name = "Thorium Bar", id = 12359, qty = 6 },
+			}, source = { kind = "vendor", cost = 14400, npc = "Xizzer Fizzbolt", location = "Winterspring", vendors = {
+				{ npc = "Xizzer Fizzbolt", location = "Winterspring", cost = 14400 },
+				{ npc = "Kor'gar", location = "Riverglades", cost = 16842 },
+			} } },
 		},
 	},
-	{ key = "Leatherworking:Easiest", profession = "Leatherworking", name = "Easiest", from = 1, to = 300, avgCrafts = 329, p90Crafts = 329, playtested = false,
+	{ key = "Leatherworking:Tried & Tested", profession = "Leatherworking", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 413, p90Crafts = 510, playtested = true,
 		parts = {
+			["Fine Leather Belt"] = { recipe = "Fine Leather Belt", id = 4246, makes = 1, mats = {
+	{ name = "Light Leather", id = 2318, qty = 6 },
+	{ name = "Coarse Thread", id = 2320, qty = 2 },
+}, source = { kind = "trainer", cost = 300 } },
+			["Cured Medium Hide"] = { recipe = "Cured Medium Hide", id = 4233, makes = 1, mats = {
+	{ name = "Medium Hide", id = 4232, qty = 1 },
+	{ name = "Salt", id = 4289, qty = 1 },
+}, source = { kind = "trainer", cost = 200 } },
+			["Cured Heavy Hide"] = { recipe = "Cured Heavy Hide", id = 4236, makes = 1, mats = {
+	{ name = "Heavy Hide", id = 4235, qty = 1 },
+	{ name = "Salt", id = 4289, qty = 3 },
+}, source = { kind = "trainer", cost = 500 } },
 			["Cured Rugged Hide"] = { recipe = "Cured Rugged Hide", id = 15407, makes = 2, mats = {
 	{ name = "Rugged Hide", id = 8171, qty = 1 },
 	{ name = "Refined Deeprock Salt", id = 15409, qty = 1 },
-} },
+}, source = { kind = "trainer", cost = 5000 } },
 		},
 		steps = {
-			{ kind = "craft", from = 1, to = 40, recipe = "Light Armor Kit", colors = { 1, 30, 45, 60 }, expected = 41, safe = 41, mats = {
+			{ kind = "craft", from = 1, to = 30, recipe = "Light Leather", colors = { 1, 20, 30, 40 }, expected = 32, safe = 35, mats = {
+				{ name = "Ruined Leather Scraps", id = 2934, qty = 3 },
+			}, source = { kind = "known" } },
+			{ kind = "craft", from = 30, to = 45, recipe = "Light Armor Kit", colors = { 1, 30, 45, 60 }, expected = 20, safe = 24, mats = {
 				{ name = "Light Leather", id = 2318, qty = 1 },
-			}, source = { kind = "trainer" }, alts = { "Handstitched Leather Boots", "Light Leather" } },
-			{ kind = "craft", from = 40, to = 59, recipe = "Cured Light Hide", colors = { 30, 50, 60, 70 }, expected = 21, safe = 21, mats = {
+			}, source = { kind = "known" } },
+			{ kind = "train", rank = "Journeyman", reqSkill = 50, reqLevel = 10, before = 75, cap = 150 },
+			{ kind = "craft", from = 45, to = 55, recipe = "Cured Light Hide", colors = { 30, 50, 60, 70 }, expected = 10, safe = 12, mats = {
 				{ name = "Light Hide", id = 783, qty = 1 },
 				{ name = "Salt", id = 4289, qty = 1 },
-			}, source = { kind = "trainer", cost = 50 }, alts = { "Handstitched Leather Boots", "Handstitched Leather Cloak" } },
-			{ kind = "craft", from = 59, to = 75, recipe = "Embossed Leather Gloves", colors = { 40, 70, 85, 100 }, expected = 16, safe = 16, mats = {
+			}, source = { kind = "trainer", cost = 50 } },
+			{ kind = "craft", from = 55, to = 85, recipe = "Embossed Leather Gloves", colors = { 40, 70, 85, 100 }, expected = 35, safe = 39, mats = {
 				{ name = "Light Leather", id = 2318, qty = 3 },
 				{ name = "Coarse Thread", id = 2320, qty = 2 },
-			}, source = { kind = "trainer", cost = 150 }, alts = { "Cured Light Hide", "Embossed Leather Cloak" } },
-			{ kind = "train", rank = "Journeyman", reqSkill = 50, reqLevel = 10, before = 75, cap = 150 },
-			{ kind = "craft", from = 75, to = 98, recipe = "Cured Medium Hide", colors = { 75, 90, 97, 105 }, expected = 26, safe = 26, mats = {
-				{ name = "Medium Hide", id = 4232, qty = 1 },
-				{ name = "Salt", id = 4289, qty = 1 },
-			}, source = { kind = "trainer", cost = 2 }, alts = { "Medium Leather", "Medium Armor Kit" } },
-			{ kind = "craft", from = 98, to = 105, recipe = "Gray Leather Boots", colors = { 75, 100, 112, 125 }, expected = 7, safe = 7, mats = {
+			}, source = { kind = "trainer", cost = 150 } },
+			{ kind = "craft", from = 85, to = 100, recipe = "Fine Leather Belt", colors = { 55, 85, 100, 115 }, expected = 20, safe = 24, mats = {
+				{ name = "Light Leather", id = 2318, qty = 6 },
+				{ name = "Coarse Thread", id = 2320, qty = 2 },
+			}, source = { kind = "trainer", cost = 300 } },
+			{ kind = "craft", from = 100, to = 115, recipe = "Dark Leather Pants", colors = { 90, 115, 127, 140 }, expected = 15, safe = 15, mats = {
+				{ name = "Medium Leather", id = 2319, qty = 12 },
+				{ name = "Gray Dye", id = 4340, qty = 1 },
+				{ name = "Fine Thread", id = 2321, qty = 1 },
+			}, source = { kind = "trainer", cost = 400 } },
+			{ kind = "craft", from = 115, to = 118, recipe = "Gray Leather Boots", colors = { 75, 100, 112, 125 }, expected = 8, safe = 13, mats = {
 				{ name = "Medium Leather", id = 2319, qty = 4 },
 				{ name = "Fine Thread", id = 2321, qty = 2 },
 				{ name = "Gray Dye", id = 4340, qty = 1 },
-			}, source = { kind = "trainer", cost = 350 }, alts = { "Nimble Leather Gloves", "Deviate Scale Gloves" } },
-			{ kind = "craft", from = 105, to = 125, recipe = "Nimble Leather Gloves", colors = { 95, 120, 132, 145 }, expected = 20, safe = 20, mats = {
-				{ name = "Elixir of Minor Agility", id = 2457, qty = 1 },
-				{ name = "Medium Leather", id = 2319, qty = 6 },
-				{ name = "Fine Thread", id = 2321, qty = 1 },
-			}, source = { kind = "trainer", cost = 5 }, alts = { "Gray Leather Boots", "Deviate Scale Gloves" } },
-			{ kind = "craft", from = 125, to = 139, recipe = "Cured Heavy Hide", colors = { 125, 135, 140, 145 }, expected = 14, safe = 14, mats = {
+			}, source = { kind = "trainer", cost = 350 } },
+			{ kind = "craft", from = 118, to = 125, recipe = "Dark Leather Belt", colors = { 100, 125, 137, 150 }, expected = 7, safe = 7, mats = {
+				{ name = "Fine Leather Belt", id = 4246, qty = 1 },
+				{ name = "Cured Medium Hide", id = 4233, qty = 1 },
+				{ name = "Fine Thread", id = 2321, qty = 2 },
+				{ name = "Gray Dye", id = 4340, qty = 1 },
+			}, source = { kind = "trainer", cost = 400 } },
+			{ kind = "train", rank = "Expert", reqSkill = 125, reqLevel = 20, before = 150, cap = 225 },
+			{ kind = "craft", from = 125, to = 135, recipe = "Cured Heavy Hide", colors = { 125, 135, 140, 145 }, expected = 10, safe = 10, mats = {
 				{ name = "Heavy Hide", id = 4235, qty = 1 },
 				{ name = "Salt", id = 4289, qty = 3 },
-			}, source = { kind = "trainer", cost = 5 }, alts = { "Heavy Leather", "Heavy Armor Kit" } },
-			{ kind = "train", rank = "Expert", reqSkill = 125, reqLevel = 20, before = 150, cap = 225 },
-			{ kind = "craft", from = 139, to = 155, recipe = "Heavy Armor Kit", colors = { 125, 145, 155, 165 }, expected = 19, safe = 19, mats = {
-				{ name = "Heavy Leather", id = 4234, qty = 5 },
-				{ name = "Fine Thread", id = 2321, qty = 1 },
-			}, source = { kind = "trainer", cost = 750 }, alts = { "Hillman's Cloak", "Cured Heavy Hide" } },
-			{ kind = "craft", from = 155, to = 175, recipe = "Frost Leather Cloak", colors = { 155, 175, 185, 195 }, expected = 20, safe = 20, mats = {
-				{ name = "Heavy Leather", id = 4234, qty = 6 },
-				{ name = "Elemental Earth", id = 7067, qty = 2 },
-				{ name = "Elemental Water", id = 7070, qty = 2 },
+			}, source = { kind = "trainer", cost = 500 } },
+			{ kind = "craft", from = 135, to = 143, recipe = "Dark Leather Belt", colors = { 100, 125, 137, 150 }, expected = 18, safe = 25, mats = {
+				{ name = "Fine Leather Belt", id = 4246, qty = 1 },
+				{ name = "Cured Medium Hide", id = 4233, qty = 1 },
 				{ name = "Fine Thread", id = 2321, qty = 2 },
-			}, source = { kind = "trainer", cost = 20 }, alts = { "Raptor Hide Harness", "Barbaric Leggings" } },
-			{ kind = "craft", from = 175, to = 200, recipe = "Thick Armor Kit", colors = { 175, 195, 205, 215 }, expected = 25, safe = 25, mats = {
+				{ name = "Gray Dye", id = 4340, qty = 1 },
+			}, source = { kind = "trainer", cost = 400 } },
+			{ kind = "craft", from = 143, to = 145, recipe = "Cured Heavy Hide", colors = { 125, 135, 140, 145 }, expected = 15, safe = 28, mats = {
+				{ name = "Heavy Hide", id = 4235, qty = 1 },
+				{ name = "Salt", id = 4289, qty = 3 },
+			}, source = { kind = "trainer", cost = 500 } },
+			{ kind = "craft", from = 145, to = 155, recipe = "Toughened Leather Gloves", colors = { 110, 135, 147, 160 }, expected = 25, safe = 35, mats = {
+				{ name = "Medium Leather", id = 2319, qty = 4 },
+				{ name = "Cured Medium Hide", id = 4233, qty = 2 },
+				{ name = "Elixir of Lesser Defense", id = 3389, qty = 2 },
+				{ name = "Spider's Silk", id = 3182, qty = 2 },
+				{ name = "Fine Thread", id = 2321, qty = 2 },
+			}, source = { kind = "trainer", cost = 500 } },
+			{ kind = "craft", from = 155, to = 160, recipe = "Barbaric Shoulders", colors = { 150, 170, 180, 190 }, expected = 5, safe = 5, mats = {
+				{ name = "Heavy Leather", id = 4234, qty = 8 },
+				{ name = "Cured Heavy Hide", id = 4236, qty = 1 },
+				{ name = "Fine Thread", id = 2321, qty = 2 },
+			}, source = { kind = "trainer", cost = 1200 } },
+			{ kind = "craft", from = 160, to = 180, recipe = "Gem-studded Leather Belt", colors = { 160, 180, 190, 200 }, expected = 20, safe = 20, station = "Tanning Rack", mats = {
+				{ name = "Cured Heavy Hide", id = 4236, qty = 4 },
+				{ name = "Iridescent Pearl", id = 5500, qty = 2 },
+				{ name = "Jade", id = 1529, qty = 2 },
+				{ name = "Citrine", id = 3864, qty = 1 },
+				{ name = "Fine Thread", id = 2321, qty = 1 },
+			}, source = { kind = "vendor", cost = 3000, npc = "Rikqiz", location = "Stranglethorn Vale", vendors = {
+				{ npc = "Rikqiz", location = "Stranglethorn Vale", cost = 3000, limited = true },
+				{ npc = "Vendor-Tron 1000", location = "Desolace", cost = 3000, limited = true },
+			} } },
+			{ kind = "craft", from = 180, to = 185, recipe = "Barbaric Shoulders", colors = { 150, 170, 180, 190 }, expected = 12, safe = 19, mats = {
+				{ name = "Heavy Leather", id = 4234, qty = 8 },
+				{ name = "Cured Heavy Hide", id = 4236, qty = 1 },
+				{ name = "Fine Thread", id = 2321, qty = 2 },
+			}, source = { kind = "trainer", cost = 1200 } },
+			{ kind = "craft", from = 185, to = 190, recipe = "Gem-studded Leather Belt", colors = { 160, 180, 190, 200 }, expected = 7, safe = 10, station = "Tanning Rack", mats = {
+				{ name = "Cured Heavy Hide", id = 4236, qty = 4 },
+				{ name = "Iridescent Pearl", id = 5500, qty = 2 },
+				{ name = "Jade", id = 1529, qty = 2 },
+				{ name = "Citrine", id = 3864, qty = 1 },
+				{ name = "Fine Thread", id = 2321, qty = 1 },
+			}, source = { kind = "vendor", cost = 3000, npc = "Rikqiz", location = "Stranglethorn Vale", vendors = {
+				{ npc = "Rikqiz", location = "Stranglethorn Vale", cost = 3000, limited = true },
+				{ npc = "Vendor-Tron 1000", location = "Desolace", cost = 3000, limited = true },
+			} } },
+			{ kind = "craft", from = 190, to = 200, recipe = "Guardian Gloves", colors = { 165, 185, 195, 205 }, expected = 20, safe = 27, mats = {
+				{ name = "Heavy Leather", id = 4234, qty = 4 },
+				{ name = "Cured Heavy Hide", id = 4236, qty = 1 },
+				{ name = "Silken Thread", id = 4291, qty = 1 },
+			}, source = { kind = "trainer", cost = 2400 } },
+			{ kind = "train", rank = "Artisan", reqSkill = 200, reqLevel = 35, before = 225, cap = 300 },
+			{ kind = "craft", from = 200, to = 210, recipe = "Thick Armor Kit", colors = { 175, 195, 205, 215 }, expected = 20, safe = 27, mats = {
 				{ name = "Thick Leather", id = 4304, qty = 5 },
 				{ name = "Silken Thread", id = 4291, qty = 1 },
-			}, source = { kind = "trainer", cost = 20 }, alts = { "Thick Leather", "Frost Leather Cloak" } },
-			{ kind = "craft", from = 200, to = 211, recipe = "Nightscape Headband", colors = { 180, 200, 210, 220 }, expected = 15, safe = 15, mats = {
-				{ name = "Thick Leather", id = 4304, qty = 5 },
-				{ name = "Silken Thread", id = 4291, qty = 2 },
-			}, source = { kind = "trainer", cost = 30 }, alts = { "Nightscape Tunic", "Thick Armor Kit" } },
-			{ kind = "craft", from = 211, to = 225, recipe = "Nightscape Boots", colors = { 210, 230, 240, 250 }, expected = 14, safe = 14, mats = {
-				{ name = "Thick Leather", id = 4304, qty = 16 },
-				{ name = "Heavy Silken Thread", id = 8343, qty = 2 },
-			}, source = { kind = "trainer", cost = 45 }, alts = { "Nightscape Pants", "Quickdraw Quiver" } },
-			{ kind = "train", rank = "Artisan", reqSkill = 200, reqLevel = 35, before = 225, cap = 300 },
-			{ kind = "craft", from = 225, to = 232, recipe = "Cured Rugged Hide", colors = { 225, 225, 230, 235 }, expected = 11, safe = 11, makes = 2, station = "Tanning Rack", mats = {
+			}, source = { kind = "trainer", cost = 2000 } },
+			{ kind = "craft", from = 210, to = 225, recipe = "Nightscape Pants", colors = { 205, 225, 235, 245 }, expected = 15, safe = 15, mats = {
+				{ name = "Thick Leather", id = 4304, qty = 14 },
+				{ name = "Silken Thread", id = 4291, qty = 4 },
+			}, source = { kind = "trainer", cost = 4000 } },
+			{ kind = "craft", from = 225, to = 230, recipe = "Cured Rugged Hide", colors = { 225, 225, 230, 235 }, expected = 6, safe = 8, makes = 2, station = "Tanning Rack", mats = {
 				{ name = "Rugged Hide", id = 8171, qty = 1 },
 				{ name = "Refined Deeprock Salt", id = 15409, qty = 1 },
-			}, source = { kind = "trainer", cost = 50 }, alts = { "Rugged Armor Kit", "Nightscape Pants" } },
-			{ kind = "craft", from = 232, to = 235, recipe = "Rugged Armor Kit", colors = { 225, 225, 235, 245 }, expected = 5, safe = 5, mats = {
-				{ name = "Rugged Leather", id = 8170, qty = 5 },
-			}, source = { kind = "trainer", cost = 50 }, alts = { "Nightscape Boots", "Nightscape Pants" } },
-			{ kind = "craft", from = 235, to = 267, recipe = "Wicked Leather Gauntlets", colors = { 235, 255, 265, 275 }, expected = 37, safe = 37, mats = {
+			}, source = { kind = "trainer", cost = 5000 } },
+			{ kind = "craft", from = 230, to = 240, recipe = "Nightscape Pants", colors = { 205, 225, 235, 245 }, expected = 20, safe = 27, mats = {
+				{ name = "Thick Leather", id = 4304, qty = 14 },
+				{ name = "Silken Thread", id = 4291, qty = 4 },
+			}, source = { kind = "trainer", cost = 4000 } },
+			{ kind = "craft", from = 240, to = 255, recipe = "Wicked Leather Gauntlets", colors = { 235, 255, 265, 275 }, expected = 15, safe = 15, mats = {
 				{ name = "Rugged Leather", id = 8170, qty = 8 },
 				{ name = "Black Dye", id = 2325, qty = 1 },
 				{ name = "Rune Thread", id = 14341, qty = 1 },
-			}, source = { kind = "vendor", cost = 120, npc = "Werg Thickblade", location = "Tirisfal Glades", limited = true }, alts = { "Rugged Armor Kit", "Forceful Rugged Armor Kit" }, note = "The recipe is sold by Werg Thickblade (Tirisfal Glades) in limited stock; it restocks." },
-			{ kind = "craft", from = 267, to = 285, recipe = "Runic Leather Headband", colors = { 265, 285, 295, 305 }, expected = 18, safe = 18, mats = {
-				{ name = "Rugged Leather", id = 8170, qty = 14 },
-				{ name = "Runecloth", id = 14047, qty = 10 },
+			}, source = { kind = "vendor", cost = 13500, npc = "Leonard Porter", location = "Western Plaguelands", vendors = {
+				{ npc = "Leonard Porter", location = "Western Plaguelands", side = "Alliance", cost = 13500, limited = true },
+				{ npc = "Werg Thickblade", location = "Tirisfal Glades", side = "Horde", cost = 12000, limited = true },
+			} } },
+			{ kind = "craft", from = 255, to = 260, recipe = "Heavy Scorpid Bracers", colors = { 255, 255, 260, 270 }, expected = 5, safe = 7, mats = {
+				{ name = "Rugged Leather", id = 8170, qty = 4 },
+				{ name = "Heavy Scorpid Scale", id = 15408, qty = 4 },
 				{ name = "Rune Thread", id = 14341, qty = 1 },
-			}, source = { kind = "vendor", cost = 220, npc = "Jase Farlane", location = "Eastern Plaguelands", limited = true }, alts = { "Tooled Leather Armor", "Might of the Timbermaw" }, note = "The recipe is sold by Jase Farlane (Eastern Plaguelands) in limited stock; it restocks." },
-			{ kind = "craft", from = 285, to = 292, recipe = "Scalegut Clenchers", colors = { 285, 290, 292, 295 }, expected = 7, safe = 7, station = "Sewing Machine", mats = {
-				{ name = "Heavy Scorpid Scale", id = 15408, qty = 5 },
-				{ name = "Enchanted Leather", id = 12810, qty = 3 },
-				{ name = "Essence of Fire", id = 7078, qty = 3 },
-				{ name = "Rune Thread", id = 14341, qty = 6 },
-			}, source = { kind = "vendor", cost = 750, npc = "Aendel Windspear", location = "Silithus", rep = "Friendly with Cenarion Circle" }, alts = { "Broodwatcher's Clenchers", "Heavy Scorpid Helm" }, note = "Needs Friendly with Cenarion Circle to learn this recipe." },
-			{ kind = "craft", from = 292, to = 298, recipe = "Scalegut Belt", colors = { 290, 295, 297, 300 }, expected = 7, safe = 7, station = "Sewing Machine", mats = {
-				{ name = "Heavy Scorpid Scale", id = 15408, qty = 7 },
-				{ name = "Enchanted Leather", id = 12810, qty = 3 },
-				{ name = "Essence of Fire", id = 7078, qty = 3 },
-				{ name = "Rune Thread", id = 14341, qty = 6 },
-			}, source = { kind = "vendor", cost = 750, npc = "Aendel Windspear", location = "Silithus", rep = "Honored with Cenarion Circle" }, alts = { "Broodwatcher's Belt", "Heavy Timbermaw Belt" }, note = "Needs Honored with Cenarion Circle to learn this recipe." },
-			{ kind = "craft", from = 298, to = 300, recipe = "Timbermaw Brawlers", colors = { 295, 315, 325, 335 }, expected = 2, safe = 2, station = "Sewing Machine", mats = {
-				{ name = "Enchanted Leather", id = 12810, qty = 8 },
-				{ name = "Powerful Mojo", id = 12804, qty = 6 },
-				{ name = "Living Essence", id = 12803, qty = 6 },
-				{ name = "Cured Rugged Hide", id = 15407, qty = 2 },
-				{ name = "Ironweb Spider Silk", id = 14227, qty = 2 },
-			}, source = { kind = "vendor", cost = 37894, npc = "Meilosh", location = "Felwood", rep = "Revered with Timbermaw Hold" }, alts = { "Heavy Scorpid Helm", "Supple Scorpid Vest" }, note = "Needs Revered with Timbermaw Hold to learn this recipe." },
+			}, source = { kind = "vendor", cost = 11400, npc = "Zannok Hidepiercer", location = "Silithus" } },
+			{ kind = "craft", from = 260, to = 270, recipe = "Wicked Leather Gauntlets", colors = { 235, 255, 265, 275 }, expected = 20, safe = 27, mats = {
+				{ name = "Rugged Leather", id = 8170, qty = 8 },
+				{ name = "Black Dye", id = 2325, qty = 1 },
+				{ name = "Rune Thread", id = 14341, qty = 1 },
+			}, source = { kind = "vendor", cost = 13500, npc = "Leonard Porter", location = "Western Plaguelands", vendors = {
+				{ npc = "Leonard Porter", location = "Western Plaguelands", side = "Alliance", cost = 13500, limited = true },
+				{ npc = "Werg Thickblade", location = "Tirisfal Glades", side = "Horde", cost = 12000, limited = true },
+			} } },
+			{ kind = "craft", from = 270, to = 300, recipe = "Heavy Scorpid Helm", colors = { 270, 290, 300, 310 }, expected = 33, safe = 36, mats = {
+				{ name = "Rugged Leather", id = 8170, qty = 8 },
+				{ name = "Heavy Scorpid Scale", id = 15408, qty = 12 },
+				{ name = "Cured Rugged Hide", id = 15407, qty = 1 },
+				{ name = "Rune Thread", id = 14341, qty = 1 },
+			}, source = { kind = "vendor", cost = 23750, npc = "Zannok Hidepiercer", location = "Silithus" } },
 		},
 	},
 	{ key = "Tailoring:Tried & Tested", profession = "Tailoring", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 363, p90Crafts = 434, playtested = true,
 		parts = {
 			["Bolt of Linen Cloth"] = { recipe = "Bolt of Linen Cloth", id = 2996, makes = 1, mats = {
 	{ name = "Linen Cloth", id = 2589, qty = 2 },
-} },
+}, source = { kind = "known" } },
 			["Bolt of Woolen Cloth"] = { recipe = "Bolt of Woolen Cloth", id = 2997, makes = 1, mats = {
 	{ name = "Wool Cloth", id = 2592, qty = 3 },
-} },
+}, source = { kind = "trainer", cost = 100 } },
 			["Bolt of Silk Cloth"] = { recipe = "Bolt of Silk Cloth", id = 4305, makes = 1, mats = {
 	{ name = "Silk Cloth", id = 4306, qty = 4 },
-} },
+}, source = { kind = "trainer", cost = 500 } },
 			["Bolt of Mageweave"] = { recipe = "Bolt of Mageweave", id = 4339, makes = 1, mats = {
 	{ name = "Mageweave Cloth", id = 4338, qty = 5 },
-} },
+}, source = { kind = "trainer", cost = 1000 } },
 			["Bolt of Runecloth"] = { recipe = "Bolt of Runecloth", id = 14048, makes = 1, mats = {
 	{ name = "Runecloth", id = 14047, qty = 5 },
-} },
+}, source = { kind = "trainer", cost = 10000 } },
 		},
 		steps = {
 			{ kind = "craft", from = 1, to = 43, recipe = "Bolt of Linen Cloth", colors = { 1, 25, 37, 50 }, expected = 54, safe = 61, mats = {
@@ -687,159 +880,10 @@ ns.Guides = {
 			}, source = { kind = "trainer" }, note = "Trained by Doctor Gustaf VanHowzen in Theramore (Alliance) or Doctor Gregory Victor in Hammerfall (Horde), as in Classic; unconfirmed until checked on a live realm." },
 		},
 	},
-	{ key = "Blacksmithing:Tried & Tested", profession = "Blacksmithing", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 403, p90Crafts = 505, playtested = true,
-		parts = {
-			["Rough Grinding Stone"] = { recipe = "Rough Grinding Stone", id = 3470, makes = 1, mats = {
-	{ name = "Rough Stone", id = 2835, qty = 2 },
-} },
-			["Coarse Grinding Stone"] = { recipe = "Coarse Grinding Stone", id = 3478, makes = 1, mats = {
-	{ name = "Coarse Stone", id = 2836, qty = 2 },
-} },
-			["Heavy Grinding Stone"] = { recipe = "Heavy Grinding Stone", id = 3486, makes = 1, mats = {
-	{ name = "Heavy Stone", id = 2838, qty = 3 },
-} },
-			["Solid Grinding Stone"] = { recipe = "Solid Grinding Stone", id = 7966, makes = 1, mats = {
-	{ name = "Solid Stone", id = 7912, qty = 4 },
-} },
-			["Dense Grinding Stone"] = { recipe = "Dense Grinding Stone", id = 12644, makes = 1, mats = {
-	{ name = "Dense Stone", id = 12365, qty = 4 },
-} },
-		},
-		steps = {
-			{ kind = "craft", from = 1, to = 30, recipe = "Rough Sharpening Stone", colors = { 1, 15, 35, 55 }, expected = 32, safe = 35, mats = {
-				{ name = "Rough Stone", id = 2835, qty = 1 },
-			}, source = { kind = "known" } },
-			{ kind = "train", rank = "Journeyman", reqSkill = 50, reqLevel = 10, before = 75, cap = 150 },
-			{ kind = "craft", from = 30, to = 65, recipe = "Rough Grinding Stone", colors = { 25, 45, 65, 85 }, expected = 42, safe = 47, mats = {
-				{ name = "Rough Stone", id = 2835, qty = 2 },
-			}, source = { kind = "trainer", cost = 100 } },
-			{ kind = "tool", buy = true, recipe = "Blacksmith Hammer", item = 5956, items = { 5956, 285280, 281665, 285281 }, safe = 1, expected = 1, mats = {
-				{ name = "Blacksmith Hammer", id = 5956, qty = 1 },
-			}, source = { kind = "vendor", cost = 15, npc = "a blacksmithing supplies vendor" }, note = "Buy a Blacksmith Hammer and keep it in your bags (a better one, such as Mithril Blacksmith Hammer, Twilight Forgehammer, Arcanite Blacksmith Hammer, works too)." },
-			{ kind = "craft", from = 65, to = 75, recipe = "Copper Chain Belt", colors = { 30, 70, 90, 110 }, expected = 10, safe = 11, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Copper Bar", id = 2840, qty = 6 },
-			}, source = { kind = "trainer", cost = 100 } },
-			{ kind = "craft", from = 75, to = 80, recipe = "Silver Skeleton Key", colors = { 75, 75, 85, 95 }, expected = 5, safe = 7, makes = 2, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Silver Bar", id = 2842, qty = 1 },
-				{ name = "Rough Grinding Stone", id = 3470, qty = 1 },
-			}, source = { kind = "trainer", cost = 100 } },
-			{ kind = "craft", from = 80, to = 90, recipe = "Rough Bronze Leggings", colors = { 80, 120, 135, 150 }, expected = 10, safe = 10, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Bronze Bar", id = 2841, qty = 6 },
-			}, source = { kind = "trainer", cost = 300 } },
-			{ kind = "craft", from = 90, to = 100, recipe = "Runed Copper Belt", colors = { 45, 85, 105, 125 }, expected = 13, safe = 16, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Copper Bar", id = 2840, qty = 10 },
-			}, source = { kind = "trainer", cost = 200 } },
-			{ kind = "craft", from = 100, to = 105, recipe = "Heavy Sharpening Stone", colors = { 100, 100, 107, 115 }, expected = 5, safe = 7, mats = {
-				{ name = "Heavy Stone", id = 2838, qty = 1 },
-			}, source = { kind = "trainer", cost = 1000 } },
-			{ kind = "craft", from = 105, to = 110, recipe = "Runed Copper Belt", colors = { 45, 85, 105, 125 }, expected = 11, safe = 16, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Copper Bar", id = 2840, qty = 10 },
-			}, source = { kind = "trainer", cost = 200 } },
-			{ kind = "craft", from = 110, to = 125, recipe = "Rough Bronze Leggings", colors = { 80, 120, 135, 150 }, expected = 15, safe = 16, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Bronze Bar", id = 2841, qty = 6 },
-			}, source = { kind = "trainer", cost = 300 } },
-			{ kind = "train", rank = "Expert", reqSkill = 125, reqLevel = 20, before = 150, cap = 225 },
-			{ kind = "craft", from = 125, to = 129, recipe = "Iron Buckle", colors = { 125, 125, 127, 130 }, expected = 6, safe = 9, makes = 2, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Iron Bar", id = 3575, qty = 1 },
-			}, source = { kind = "trainer", cost = 250 } },
-			{ kind = "craft", from = 129, to = 140, recipe = "Bronze Warhammer", colors = { 100, 155, 170, 185 }, expected = 11, safe = 11, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Bronze Bar", id = 2841, qty = 8 },
-				{ name = "Strong Flux", id = 3466, qty = 1 },
-				{ name = "Medium Leather", id = 2319, qty = 1 },
-			}, source = { kind = "trainer", cost = 250 } },
-			{ kind = "craft", from = 140, to = 147, recipe = "Patterned Bronze Bracers", colors = { 95, 125, 140, 155 }, expected = 18, safe = 25, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Bronze Bar", id = 2841, qty = 5 },
-				{ name = "Coarse Grinding Stone", id = 3478, qty = 2 },
-			}, source = { kind = "trainer", cost = 500 } },
-			{ kind = "craft", from = 147, to = 155, recipe = "Green Iron Bracers", colors = { 140, 165, 177, 190 }, expected = 8, safe = 8, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Iron Bar", id = 3575, qty = 6 },
-				{ name = "Green Dye", id = 2605, qty = 1 },
-			}, source = { kind = "trainer", cost = 1000 } },
-			{ kind = "craft", from = 155, to = 165, recipe = "Green Iron Leggings", colors = { 130, 155, 167, 180 }, expected = 12, safe = 15, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Iron Bar", id = 3575, qty = 8 },
-				{ name = "Heavy Grinding Stone", id = 3486, qty = 1 },
-				{ name = "Green Dye", id = 2605, qty = 1 },
-			}, source = { kind = "trainer", cost = 5000 } },
-			{ kind = "craft", from = 165, to = 183, recipe = "Green Iron Bracers", colors = { 140, 165, 177, 190 }, expected = 30, safe = 37, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Iron Bar", id = 3575, qty = 6 },
-				{ name = "Green Dye", id = 2605, qty = 1 },
-			}, source = { kind = "trainer", cost = 1000 } },
-			{ kind = "craft", from = 183, to = 190, recipe = "Heavy Mithril Gauntlet", colors = { 180, 200, 210, 220 }, expected = 7, safe = 7, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Mithril Bar", id = 3860, qty = 6 },
-				{ name = "Mageweave Cloth", id = 4338, qty = 4 },
-			}, source = { kind = "trainer", cost = 5000 } },
-			{ kind = "craft", from = 190, to = 200, recipe = "Golden Scale Bracers", colors = { 160, 185, 197, 210 }, expected = 16, safe = 21, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Steel Bar", id = 3859, qty = 5 },
-				{ name = "Heavy Grinding Stone", id = 3486, qty = 2 },
-			}, source = { kind = "trainer", cost = 1000 } },
-			{ kind = "train", rank = "Artisan", reqSkill = 200, reqLevel = 35, before = 225, cap = 300 },
-			{ kind = "craft", from = 200, to = 205, recipe = "Heavy Mithril Gauntlet", colors = { 180, 200, 210, 220 }, expected = 5, safe = 7, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Mithril Bar", id = 3860, qty = 6 },
-				{ name = "Mageweave Cloth", id = 4338, qty = 4 },
-			}, source = { kind = "trainer", cost = 5000 } },
-			{ kind = "craft", from = 205, to = 210, recipe = "Mithril Plate Pants", colors = { 185, 205, 215, 225 }, expected = 5, safe = 7, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Mithril Bar", id = 3860, qty = 12 },
-			}, source = { kind = "trainer", cost = 5000 } },
-			{ kind = "craft", from = 210, to = 215, recipe = "Heavy Mithril Gauntlet", colors = { 180, 200, 210, 220 }, expected = 12, safe = 19, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Mithril Bar", id = 3860, qty = 6 },
-				{ name = "Mageweave Cloth", id = 4338, qty = 4 },
-			}, source = { kind = "trainer", cost = 5000 } },
-			{ kind = "craft", from = 215, to = 225, recipe = "Heavy Mithril Breastplate", colors = { 205, 225, 235, 245 }, expected = 10, safe = 10, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Mithril Bar", id = 3860, qty = 16 },
-			}, source = { kind = "trainer", cost = 15000 } },
-			{ kind = "craft", from = 225, to = 235, recipe = "Dense Weightstone", colors = { 225, 230, 232, 235 }, expected = 16, safe = 23, mats = {
-				{ name = "Dense Stone", id = 12365, qty = 1 },
-			}, source = { kind = "trainer", cost = 10000 } },
-			{ kind = "craft", from = 235, to = 240, recipe = "Mithril Coif", colors = { 205, 225, 235, 245 }, expected = 12, safe = 19, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Mithril Bar", id = 3860, qty = 10 },
-				{ name = "Mageweave Cloth", id = 4338, qty = 6 },
-			}, source = { kind = "trainer", cost = 15000 } },
-			{ kind = "craft", from = 240, to = 246, recipe = "Heavy Mithril Boots", colors = { 210, 230, 240, 250 }, expected = 16, safe = 24, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Mithril Bar", id = 3860, qty = 14 },
-				{ name = "Thick Leather", id = 4304, qty = 4 },
-			}, source = { kind = "trainer", cost = 20000 } },
-			{ kind = "craft", from = 246, to = 250, recipe = "Big Black Mace", colors = { 205, 230, 242, 255 }, expected = 13, safe = 21, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Mithril Bar", id = 3860, qty = 16 },
-				{ name = "Black Pearl", id = 7971, qty = 1 },
-				{ name = "Shadowgem", id = 1210, qty = 4 },
-				{ name = "Solid Grinding Stone", id = 7966, qty = 1 },
-				{ name = "Thick Leather", id = 4304, qty = 2 },
-			}, source = { kind = "trainer", cost = 15000 } },
-			{ kind = "craft", from = 250, to = 257, recipe = "Arcanite Skeleton Key", colors = { 250, 250, 255, 260 }, expected = 10, safe = 15, makes = 2, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Arcanite Bar", id = 12360, qty = 1 },
-				{ name = "Dense Grinding Stone", id = 12644, qty = 1 },
-			}, source = { kind = "trainer", cost = 10000 } },
-			{ kind = "craft", from = 257, to = 270, recipe = "Ebon Shiv", colors = { 255, 255, 267, 280 }, expected = 20, safe = 25, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Mithril Bar", id = 3860, qty = 12 },
-				{ name = "Truesilver Bar", id = 6037, qty = 6 },
-				{ name = "Star Ruby", id = 7910, qty = 2 },
-				{ name = "Solid Grinding Stone", id = 7966, qty = 1 },
-				{ name = "Thick Leather", id = 4304, qty = 2 },
-			}, source = { kind = "vendor", cost = 9500, npc = "Magnus Frostwake", location = "Western Plaguelands" } },
-			{ kind = "craft", from = 270, to = 275, recipe = "Bold Dirk", colors = { 270, 290, 300, 310 }, expected = 5, safe = 5, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Thorium Bar", id = 12359, qty = 30 },
-				{ name = "Essence of Air", id = 7082, qty = 4 },
-				{ name = "Azerothium Bar", id = 249726, qty = 10 },
-				{ name = "Rugged Leather", id = 8170, qty = 4 },
-			}, source = { kind = "vendor", cost = 90000, npc = "Pexmit", location = "Mount Hyjal" } },
-			{ kind = "craft", from = 275, to = 279, recipe = "Ornate Thorium Handaxe", colors = { 275, 275, 287, 300 }, expected = 4, safe = 5, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Thorium Bar", id = 12359, qty = 20 },
-				{ name = "Large Opal", id = 12799, qty = 2 },
-				{ name = "Dense Grinding Stone", id = 12644, qty = 2 },
-				{ name = "Rugged Leather", id = 8170, qty = 4 },
-			}, source = { kind = "vendor", cost = 15200, npc = "Magnus Frostwake", location = "Western Plaguelands" } },
-			{ kind = "craft", from = 279, to = 300, recipe = "Bold Dirk", colors = { 270, 290, 300, 310 }, expected = 24, safe = 27, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
-				{ name = "Thorium Bar", id = 12359, qty = 30 },
-				{ name = "Essence of Air", id = 7082, qty = 4 },
-				{ name = "Azerothium Bar", id = 249726, qty = 10 },
-				{ name = "Rugged Leather", id = 8170, qty = 4 },
-			}, source = { kind = "vendor", cost = 90000, npc = "Pexmit", location = "Mount Hyjal" } },
-		},
-	},
 }
 
 -- Reagents sold by vendors, from the imported catalogs: never bought at the auction house.
-ns.GuideVendorItems = { [2320] = true, [2321] = true, [2324] = true, [2605] = true, [2692] = true, [3466] = true, [3713] = true, [4291] = true, [6260] = true, [6261] = true, [8343] = true, [14341] = true }
+ns.GuideVendorItems = { [2320] = true, [2321] = true, [2324] = true, [2325] = true, [2605] = true, [2692] = true, [2880] = true, [3371] = true, [3372] = true, [3466] = true, [3713] = true, [4289] = true, [4291] = true, [4340] = true, [4470] = true, [6217] = true, [6260] = true, [6261] = true, [8343] = true, [8925] = true, [14341] = true }
 
 -- Vendor buy prices (copper) from the imported catalogs, for the cost estimates.
-ns.VendorPrices = { [159] = 21, [1179] = 111, [1205] = 405, [1645] = 1800, [1708] = 900, [2320] = 9, [2321] = 90, [2324] = 23, [2325] = 900, [2594] = 1350, [2596] = 108, [2604] = 45, [2605] = 90, [2678] = 9, [2686] = 48, [2692] = 36, [2723] = 45, [2880] = 88, [2894] = 48, [3371] = 18, [3372] = 180, [3466] = 1777, [3713] = 144, [4291] = 450, [4340] = 315, [4341] = 450, [4342] = 2250, [4470] = 34, [4471] = 110, [4536] = 22, [5956] = 15, [6260] = 45, [6261] = 900, [8343] = 1800, [8766] = 3600, [8925] = 2222, [10284] = 180, [10290] = 2250, [11291] = 4050, [14341] = 4500, [17194] = 10, [17196] = 50, [18567] = 133333, [272941] = 180000 }
+ns.VendorPrices = { [159] = 21, [1179] = 111, [1205] = 405, [1645] = 1800, [1708] = 900, [2320] = 9, [2321] = 90, [2324] = 23, [2325] = 900, [2594] = 1350, [2596] = 108, [2604] = 45, [2605] = 90, [2678] = 9, [2686] = 48, [2692] = 36, [2723] = 45, [2880] = 88, [2894] = 48, [3371] = 18, [3372] = 180, [3466] = 1777, [3713] = 144, [4289] = 45, [4291] = 450, [4340] = 315, [4341] = 450, [4342] = 2250, [4399] = 180, [4400] = 1800, [4470] = 34, [4471] = 110, [4536] = 22, [4605] = 111, [5956] = 15, [6217] = 112, [6260] = 45, [6261] = 900, [6530] = 90, [8343] = 1800, [8766] = 3600, [8925] = 2222, [10284] = 180, [10290] = 2250, [10647] = 1800, [10648] = 450, [11291] = 4050, [14341] = 4500, [17034] = 180, [17035] = 360, [17194] = 10, [17196] = 50, [17202] = 10, [18256] = 27000, [18567] = 133333, [272941] = 180000 }

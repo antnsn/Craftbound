@@ -21,16 +21,24 @@ pf:Show()
 wb.fire("TRADE_SKILL_SHOW")
 wb.advance(0.5)
 wb.check(wb.shown("CraftboundProfessionPanel"), "panel docked to the profession window")
-wb.expect("step recipe selected", selected[#selected], "Enchant Chest - Inferior Stamina")
-local rec = wb.saved("CraftboundDB").recipes["Enchant Chest - Inferior Stamina"]
+wb.expect("step recipe selected", selected[#selected], "Lesser Magic Wand")
+local rec = wb.saved("CraftboundDB").recipes["Lesser Magic Wand"]
 wb.expect("recipe id remembered", rec and rec.id, 1003)
-wb.check(rec.enchant, "known as an enchant")
+wb.check(not rec.enchant, "a wand is not an enchant")
 local mote = wb.saved("CraftboundDB").recipes["Runed Copper Rod"].mats[2]
 wb.expect("unknown reagent gets an id", mote.id, 99001)
 
--- craft: an enchant goes on the chest
+-- craft the wand: as many as the window allows and the step needs
 local plan = wb.ns.CraftPlan()
 wb.check(plan.enabled, "craft enabled: " .. tostring(plan.reason))
+wb.ns.CraftNext()
+wb.check(ts.calls.craft[1] and ts.calls.craft[1].id == 1003, "wand crafted")
+
+-- skill 79: Minor Absorption is an enchant, it goes on the chest
+ts.set(79, 150)
+T.inject(T.professionGlobals({ [T.ENCHANTING] = { name = "Enchanting", rank = 79, max = 150 } }))
+wb.fire("TRADE_SKILL_LIST_UPDATE")
+wb.advance(0.2)
 wb.ns.CraftNext()
 wb.expect("one enchant cast", #ts.calls.enchant, 1)
 wb.expect("on the chest slot", loc.slot, 5)
@@ -43,38 +51,38 @@ wb.expect("button offers the replace", wb.ns.CraftPlan().label, "Replace enchant
 wb.ns.CraftNext()
 wb.expect("replace answered", replaced, 1)
 
--- skill moves to 79: next recipe is not learned -> disabled with a reason
-ts.set(79)
-T.inject(T.professionGlobals({ [T.ENCHANTING] = { name = "Enchanting", rank = 79, max = 150 } }))
+-- skill moves to 90: next recipe is not learned -> disabled with a reason
+ts.set(90, 150)
+T.inject(T.professionGlobals({ [T.ENCHANTING] = { name = "Enchanting", rank = 90, max = 150 } }))
 wb.fire("TRADE_SKILL_LIST_UPDATE")
 wb.advance(0.2)
 plan = wb.ns.CraftPlan()
 wb.check(not plan.enabled, "unlearned recipe can't be crafted")
-wb.check(plan.reason and plan.reason:find("Learn Enchant Chest %- Minor Absorption"), "says to learn it: " .. tostring(plan.reason))
+wb.check(plan.reason and plan.reason:find("Learn Enchant Bracer %- Minor Stamina"), "says to learn it: " .. tostring(plan.reason))
 
 -- a non-enchant profession: Alchemy crafts min(left, craftable) in one go
 wb.fire("TRADE_SKILL_CLOSE")
 local alch = T.tradeSkill(T.ALCHEMY, "Alchemy", 1, 75, {
-	{ id = 2001, name = "Minor Arcane Elixir", mats = { { 2447, 1 }, { 3371, 1 } }, craftable = 7 },
+	{ id = 2001, name = "Elixir of Minor Force", mats = { { 765, 1 }, { 3371, 1 } }, craftable = 7 },
 })
 T.inject({ C_TradeSkillUI = alch })
 wb.fire("TRADE_SKILL_SHOW")
 wb.advance(0.5)
-wb.expect("alchemy guide follows the window", wb.saved("CraftboundCharDB").active, "Alchemy:Easiest")
+wb.expect("alchemy guide follows the window", wb.saved("CraftboundCharDB").active, "Alchemy:Tried & Tested")
 wb.ns.CraftNext()
 wb.expect("crafts what it can", alch.calls.craft[1] and alch.calls.craft[1].n, 7)
 
--- a batch never runs past the rank's cap: 62/75 on Minor Mana Potion (15 crafts) -> 13
+-- a batch never runs past the rank's cap: 68/75 on Elixir of Minor Fortitude (65-90) -> 7
 wb.fire("TRADE_SKILL_CLOSE")
-local capped = T.tradeSkill(T.ALCHEMY, "Alchemy", 62, 75, {
-	{ id = 2003, name = "Minor Mana Potion", mats = { { 785, 1 }, { 2447, 1 }, { 3371, 1 } }, craftable = 40 },
+local capped = T.tradeSkill(T.ALCHEMY, "Alchemy", 68, 75, {
+	{ id = 2003, name = "Elixir of Minor Fortitude", mats = { { 2449, 2 }, { 2447, 1 }, { 3371, 1 } }, craftable = 40 },
 })
 T.inject({ C_TradeSkillUI = capped })
-T.inject(T.professionGlobals({ [T.ALCHEMY] = { name = "Alchemy", rank = 62, max = 75 } }))
+T.inject(T.professionGlobals({ [T.ALCHEMY] = { name = "Alchemy", rank = 68, max = 75 } }))
 wb.fire("TRADE_SKILL_SHOW")
 wb.advance(0.5)
 local cp = wb.ns.CraftPlan()
-wb.expect("capped batch", cp.label, "Craft 13")
+wb.expect("capped batch", cp.label, "Craft 7")
 
 -- at the cap: train first
 capped.set(75)
@@ -84,8 +92,13 @@ cp = wb.ns.CraftPlan()
 wb.check(not cp.enabled, "no crafting at the cap")
 
 -- vendor recipes say where to buy them
-local rage = wb.ns.Planner.Find("Alchemy:Easiest").steps[6]
-wb.expect("vendor hint", wb.ns.LearnHint(rage), "Buy the Rage Potion recipe from Hagrus (Orgrimmar), limited stock.")
+local smp
+for _, s in ipairs(wb.ns.Planner.Find("Alchemy:Tried & Tested").steps) do
+	if s.recipe == "Superior Mana Potion" then smp = s end
+end
+wb.state.player.faction = "Horde"
+local hint = wb.ns.LearnHint(smp)
+wb.check(hint:find("Buy the Superior Mana Potion recipe from", 1, true) and hint:find("limited stock", 1, true), "vendor hint: " .. hint)
 
 -- the route list shows a window of steps around the current one
 local panel = wb.frame("CraftboundProfessionPanel")

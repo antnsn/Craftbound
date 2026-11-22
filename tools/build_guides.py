@@ -151,7 +151,8 @@ def step(prof, s):
     }
     if t == "craft_tool":
         out["item"] = IDS.get(s["recipe"])
-        out["note"] = "Make one and keep it in your bags."
+        out["items"] = s.get("item_ids")
+        out["note"] = s.get("instructions") or "Make one and keep it in your bags."
     src = s.get("source") or {}
     if src.get("limited_stock"):
         out["note"] = ("The recipe is sold by %s (%s) in limited stock; it restocks."
@@ -200,7 +201,7 @@ def main():
             lines.append("\t\tparts = {")
             for name, p in g["parts"].items():
                 part = {"recipe": p["recipe"], "id": IDS.get(name), "makes": p.get("makes", 1),
-                        "mats": mats(p["materials_per_craft"])}
+                        "mats": mats(p["materials_per_craft"]), "source": source(p.get("source"))}
                 lines.append("\t\t\t[" + lua(name) + "] = " + lua(part) + ",")
             lines.append("\t\t},")
         lines.append("\t\tsteps = {")

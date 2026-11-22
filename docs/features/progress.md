@@ -41,7 +41,7 @@ The Craftbound book on the minimap: **left-click** opens the [Craftbound window]
 
 The chat says where you left off, for example:
 
-> Craftbound: Enchanting Easiest, skill 142. Next: Craft Enchant Bracer - Lesser Stamina x22 (to skill 164).
+> Craftbound: Enchanting Tried & Tested, skill 142. Next: Craft Enchant Bracer - Lesser Stamina x13 (to skill 155).
 
 ## Starting over
 

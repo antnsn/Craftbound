@@ -27,7 +27,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
 GUIDES = os.path.join(DATA, "profession-guides.json")
 
-NAMES = {197: "Tailoring", 185: "Cooking", 129: "First Aid", 164: "Blacksmithing"}
+NAMES = {197: "Tailoring", 185: "Cooking", 129: "First Aid", 164: "Blacksmithing",
+         333: "Enchanting", 171: "Alchemy", 202: "Engineering", 165: "Leatherworking"}
 SECONDARY = {185, 129}
 
 # Ranks a trainer teaches (primary professions), and how secondary skills get past 150 and 225.
@@ -99,11 +100,31 @@ def build(name):
 
     ids, vendor_items, parts, steps = {}, [], {}, []
     bought = set()  # tools already given a buy step
+    tool_items = {i: t["name"] for t in cat["tools"].values() for i in t.get("items") or []}
+
+    def add_part(item, a):
+        """A reagent the profession makes from other things ("craft" items): shopped as its own
+        reagents, made before the step that needs it. Its reagents may be parts too."""
+        n = item_name(item)
+        info = items.get(str(item), {})
+        # a vendor sells it (Mote of Magic): buy it, don't make it
+        if n in parts or info.get("type") != "craft" or info.get("price"):
+            return n in parts
+        m = makers.get(item)
+        if not m or m["learn"] > a:
+            return False
+        parts[n] = {"recipe": m["name"], "makes": m["creates"][1],
+                    "materials_per_craft": {item_name(i): q for i, q in m["reagents"]},
+                    "source": source(m, cat)}
+        for i, _ in m["reagents"]:
+            ids[item_name(i)] = i
+            add_part(i, a)
+        return True
     ranks = list(RANKS)
     total_e = total_s = 0
     for st in route["steps"]:
-        r = recipes[st["recipe"]]
         a, b = st["from"], st["to"]
+        r = recipes.get(st["recipe"])
         while ranks and b > ranks[0][1]:
             rank, req, lvl, before = ranks.pop(0)
             req = RANK_SKILL.get(skill, {}).get(rank, req)
@@ -115,6 +136,14 @@ def build(name):
             if how:
                 t["instructions"] = how
             steps.append(t)
+        if not r:
+            # a text step: the only kind the routes use is disenchanting (Enchanting 2-20)
+            if "isenchant" in (st.get("note") or ""):
+                steps.append({"type": "disenchant", "skill_from": a, "skill_to": b,
+                              "instructions": st["note"], "excluded_from_craft_estimates": True})
+            else:
+                print("  skipped a text step %d-%d: %s" % (a, b, st.get("note")), file=sys.stderr)
+            continue
         # a tool the profession can't make (the Blacksmith Hammer): buy it before the first step
         # that needs it; any of the tool's items will do (Forever has better hammers)
         for t in r.get("tools") or []:
@@ -126,7 +155,7 @@ def build(name):
             info = items.get(str(first)) or {}
             ids[tool["name"]] = first
             steps.append({"type": "buy_tool", "item": tool["name"], "item_ids": tool.get("items"),
-                          "source": {"type": "vendor", "npc": "a %s supplies vendor" % prof.lower(),
+                          "source": {"type": "vendor", "npc": "a%s %s supplies vendor" % ("n" if prof[0] in "AEIOU" else "", prof.lower()),
                                      "cost_raw": info.get("price")},
                           "instructions": "Buy a %s and keep it in your bags (a better one, such as %s, works too)."
                           % (tool["name"], ", ".join(items[str(i)]["name"] for i in tool["items"][1:]
@@ -143,15 +172,30 @@ def build(name):
             if info.get("type") == "vendor" and item not in vendor_items:
                 vendor_items.append(item)
             # reagents a vendor sells in the catalog: their buy price, for the cost estimates
-            # made by an earlier recipe of this profession from plain reagents: a part
-            m = makers.get(item)
-            if m and m["learn"] <= a and m["id"] != r["id"] and \
-                    all(items[str(i)].get("type") != "craft" for i, _ in m["reagents"]):
-                pm = {item_name(i): q for i, q in m["reagents"]}
-                for i, _ in m["reagents"]:
-                    ids[item_name(i)] = i
-                parts[n] = {"recipe": m["name"], "makes": m["creates"][1], "materials_per_craft": pm}
+            if makers.get(item, {}).get("id") != r["id"]:
+                add_part(item, a)
         made = r["creates"]
+        later_needs = any(made and str(t) in cat["tools"] and made[0] in (cat["tools"][str(t)].get("items") or [])
+                          for x in route["steps"] if x["from"] >= b and recipes.get(x["recipe"])
+                          for t in recipes[x["recipe"]].get("tools") or [])
+        if made and made[0] in tool_items and later_needs:
+            # a tool the profession makes (runed rods, spanner): make one and keep it
+            if b - a > 1:
+                print("  %s %d-%d: a tool step keeps no skill range" % (r["name"], a, b), file=sys.stderr)
+            ids[r["name"]] = made[0]
+            alt = next((t.get("items") for t in cat["tools"].values() if made[0] in (t.get("items") or [])), None)
+            steps.append({k: v for k, v in {
+                "type": "craft_tool", "recipe": r["name"],
+                "skill_thresholds": dict(zip(("orange", "yellow", "green", "gray"), r["colors"])),
+                "crafts": {"expected": 1, "safe": 1}, "materials_per_craft": mats,
+                "item_ids": alt if alt and len(alt) > 1 else None,
+                "source": source(r, cat), "instructions": st.get("note") or None,
+                "station": r.get("focus"),
+                "required_tools": [cat["tools"][str(t)]["name"] for t in r.get("tools") or []
+                                   if str(t) in cat["tools"]] or None,
+            }.items() if v is not None})
+            total_e, total_s = total_e - e + 1, total_s - s + 1
+            continue
         step = {"type": "craft", "skill_from": a, "skill_to": b, "recipe": r["name"],
                 "skill_thresholds": dict(zip(("orange", "yellow", "green", "gray"), r["colors"])),
                 "crafts": {"expected": e, "safe": s}, "materials_per_craft": mats,
@@ -195,8 +239,9 @@ def main(names):
         prices.update(vendor_prices(name))
         g = build(name)
         g = {k: v for k, v in g.items() if v is not None}
+        # Wowhead's tested Forever route replaces the planner's character-specific "Easiest" one
         data["guides"] = [x for x in data["guides"]
-                          if (x["profession"], x["guide"]) != (g["profession"], g["guide"])] + [g]
+                          if x["profession"] != g["profession"] or x["guide"] not in (g["guide"], "Easiest")] + [g]
         print("%s: %d steps, ~%d crafts (safe %d)" % (g["profession"], len(g["steps"]),
               g["source_estimate"]["average_crafts"], g["source_estimate"]["p90_crafts"]))
     data["vendor_prices"] = dict(sorted(prices.items(), key=lambda kv: int(kv[0])))
@@ -207,4 +252,5 @@ def main(names):
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:] or ["tailoring", "cooking", "firstaid"]))
+    sys.exit(main(sys.argv[1:] or ["enchanting", "alchemy", "blacksmithing", "engineering",
+                                   "leatherworking", "tailoring", "cooking", "firstaid"]))

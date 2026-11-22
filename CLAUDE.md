@@ -7,6 +7,8 @@ Design: `docs/superpowers/specs/2026-11-22-craftbound-design.md`.
 ## Build & test
 
 ```bash
+python3 -I tools/import_wowhead.py   # Wowhead route + catalog JSON (tools/data/wh_*.json, fetched
+                                     # by hand, gitignored) -> tools/data/profession-guides.json
 python3 tools/build_guides.py        # after changing tools/data/profession-guides.json or the script
 for f in *.lua; do luac5.1 -p "$f" || echo "syntax error: $f"; done
 ~/.luarocks/bin/luacheck .

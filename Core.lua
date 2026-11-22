@@ -213,8 +213,35 @@ ns.On("ADDON_LOADED", function(name)
 	CraftboundCharDB = fill(CraftboundCharDB or {}, CHAR_DEFAULTS)
 	ns.db, ns.char = CraftboundDB, CraftboundCharDB
 	if ns.Custom then ns.Custom.Load() end
-	-- a guide that no longer exists
-	if ns.char.active and not ns.Planner.Find(ns.char.active) then ns.char.active = nil end
+	-- guides that no longer exist (the old "Easiest" routes): their progress moves to the
+	-- profession's guide now (history and stop; ticks were by step number)
+	local function successor(key)
+		if key:find("^custom:") then return nil end
+		local prof = key:match("^(.-):")
+		return prof and ns.Planner.ForProfession(prof)[1]
+	end
+	local gone = {}
+	for key in pairs(ns.char.guides) do
+		if not ns.Planner.Find(key) then gone[#gone + 1] = key end
+	end
+	for _, key in ipairs(gone) do
+		local now = successor(key)
+		if now then
+			local old = ns.char.guides[key]
+			local cur = ns.char.guides[now.key] or { ticks = {} }
+			if not (cur.history and #cur.history > 0) then cur.history = old.history or {} end
+			cur.target = cur.target or old.target
+			cur.started = cur.started or old.started
+			cur.last = cur.last or old.last
+			ns.char.guides[now.key] = cur
+			ns.char.guides[key] = nil
+		end
+	end
+	local active = ns.char.active
+	if active and not ns.Planner.Find(active) then
+		local now = successor(active)
+		ns.char.active = now and now.key or nil
+	end
 	dispatch("CB_LOADED")
 end)
 
