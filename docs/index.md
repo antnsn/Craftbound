@@ -41,6 +41,9 @@ Craftbound does that job for you. It knows the route and what is in your bags an
 | --- | --- | --- |
 | Enchanting: Easiest | 1-300 | ~319 crafts, 19 different materials |
 | Alchemy: Easiest | 1-300 | ~310 crafts |
+| Blacksmithing: Easiest | 125-300 | ~231 crafts |
+| Engineering: Easiest | 1-300 | ~361 crafts |
+| Leatherworking: Easiest | 1-300 | ~329 crafts |
 
 [About the guides](features/guides.html)
 
