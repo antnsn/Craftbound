@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "Craftbound",
+  "project_id": "3dae73ae-df9e-4279-a742-fb28a7253549"
+}

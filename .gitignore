@@ -1,0 +1,14 @@
+/dist
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
+.claude/
+__pycache__/
+
+# docs site: local Bundler config and build output
+docs/.bundle/
+docs/_site/
+docs/vendor/
+docs/.jekyll-cache/
