@@ -32,7 +32,7 @@ Reagents that come in stacks (herbs, dust, essences) are bought as commodities: 
 
 ## Merchants
 
-When a merchant sells something the route needs, a **Buy route reagents (cost)** button appears below its window, on the right (the Merchant and Buyback tabs are on the left). One click buys everything still missing, in full stacks. Items in limited stock are bought as far as the merchant's stock goes. Come back later for the rest.
+When a merchant sells something the route needs, a **Buy route reagents (cost)** button appears just above its window, on the right. One click buys everything still missing, in full stacks. Items in limited stock are bought as far as the merchant's stock goes. Come back later for the rest.
 
 ## Turning it off
 

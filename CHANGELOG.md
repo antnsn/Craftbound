@@ -7,6 +7,8 @@
 - The tracker's title fits on one line again ("Alchemy 75/150"; the logo says Craftbound).
 - Screenshots in the docs, the README and on the CurseForge page (the trainer panel and the
   auction house too).
+- The merchant's **Buy route reagents** button sits just above the vendor window, on the right:
+  below it, the tab row covered it.
 - The profession panel's footer no longer says to go to the auction house when you have every
   reagent.
 
