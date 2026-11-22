@@ -3,7 +3,7 @@
 -- CraftboundDB.shots (the same shape as LibBound's Shots.lua), so after a /reload
 --   python3 LibBound/tools/crop_shots.py Craftbound
 -- cuts the frames out into docs/screenshots/. The active guide's profession window is opened for
--- its shot (and closed again); the auction house panel is shot when the auction house is open. Nothing is saved or bought:
+-- its shot (and closed again); the auction house and trainer panels are shot when those are open. Nothing is saved or bought:
 -- the editor shows an unsaved draft and is cancelled afterwards.
 local _, ns = ...
 
@@ -121,6 +121,14 @@ local function Steps()
 			end,
 			rects = function()
 				return { main = Union(Rect(named("ProfessionsFrame"), 0), Rect(ns.professionPanel)), panel = Rect(ns.professionPanel) }
+			end }
+	end
+	local trainer = named("CraftboundTrainerPanel")
+	if trainer and trainer:IsShown() then
+		steps[#steps + 1] = { name = "trainer", optional = true, prepare = function() hideAll() end,
+			rects = function()
+				local host = named("ClassTrainerFrame")
+				return { main = Union(host and Rect(host, 0), Rect(trainer)), panel = Rect(trainer) }
 			end }
 	end
 	if ns.auctionPanel and ns.auctionPanel:IsShown() then
