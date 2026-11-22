@@ -2,6 +2,12 @@
 # A tag publishes: "v0.2.0" = release, "v0.2.0-beta.1" = beta, "v0.2.0-alpha.1" = alpha.
 package-as: Craftbound
 
+# Related projects on CurseForge: Craftbound works without them; with them it does more
+# (Auctionator: prices for the cost per stop; TomTom: an arrow for /craft way)
+optional-dependencies:
+  - auctionator
+  - tomtom
+
 manual-changelog:
   filename: CHANGELOG.md
   markup-type: markdown
