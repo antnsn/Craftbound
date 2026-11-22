@@ -644,8 +644,9 @@ local function render()
 
 	local _, missing = P.Shopping(guide, ctx)
 	local cost = P.RecipeCost(guide, ctx)
-	f.footer:SetText(("Still to get: %d reagents%s. Open the auction house to buy them.\nRecipes ahead: %s"):format(
-		missing, missing == 0 and " (you have everything)" or "", ns.Money(cost)))
+	local have = missing == 0 and "You have every reagent for the route to your stop."
+		or ("Still to get: %d reagents. Open the auction house to buy them."):format(missing)
+	f.footer:SetText(have .. (cost > 0 and ("\nRecipes ahead: " .. ns.Money(cost)) or ""))
 end
 
 ns.On("CB_REFRESH", render)

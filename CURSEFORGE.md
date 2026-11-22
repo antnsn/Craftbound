@@ -47,6 +47,8 @@ Beside the profession window it shows the next step and crafts it with one butto
 - **New guide**: with your profession window open, click recipes to add them.
 - **Share**: Export gives a text you paste anywhere; Import turns someone's text into one of your guides. It is read as data only, never run.
 
+![At the trainer: only what the route needs](https://antnsn.github.io/Craftbound/screenshots/trainer.png)
+
 ![Export a guide](https://antnsn.github.io/Craftbound/screenshots/export.png)
 
 ## Also in it
