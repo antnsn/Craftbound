@@ -72,6 +72,9 @@ Beside the profession window it shows the next step and crafts it with one butto
 
 Key bindings (Key Bindings > AddOns > Craftbound): **Craft the next step** and **Auction house: buy next / confirm**.
 
+## Works with
+Nothing else is needed. **Auctionator** (optional) fills in prices for what each stop costs; **TomTom** (optional) adds an arrow to `/craft way`. Minimap addons (SexyMap, ElvUI and others) collect the minimap button.
+
 ## Credits
 Where trainers and vendors stand comes from QuestieDB, part of [Questie](https://github.com/Questie/Questie), used under the GPLv3. Routes and recipe data: Wowhead's WoW: Forever profession guides. Craftbound is GPL-3.0-or-later.
 

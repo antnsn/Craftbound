@@ -9,6 +9,7 @@
 ## SavedVariablesPerCharacter: CraftboundCharDB
 ## IconTexture: Interface\AddOns\Craftbound\Media\Icon64
 ## X-Category: Professions
+## OptionalDeps: Auctionator, TomTom
 
 Guides.lua
 NpcData.lua
