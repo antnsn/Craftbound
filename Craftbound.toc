@@ -3,6 +3,7 @@
 ## Notes: Profession levelling for WoW: Forever. The next step in your profession window, one-click shopping in the auction house, and it remembers where you stopped. /craft
 ## Author: Rheolux
 ## Version: @project-version@
+## X-Curse-Project-ID: 1824701
 ## SavedVariables: CraftboundDB
 ## SavedVariablesPerCharacter: CraftboundCharDB
 ## IconTexture: Interface\AddOns\Craftbound\Media\Icon64
