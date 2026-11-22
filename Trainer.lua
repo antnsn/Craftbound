@@ -51,8 +51,12 @@ end
 local function matches(e, name, sub, line)
 	if e.kind == "rank" then
 		if name == e.name and sub == e.rank then return true end
-		-- "Journeyman Enchanting": only for a service of this profession's own skill line
-		return line == e.name and name ~= nil and name:find(e.rank, 1, true) ~= nil
+		if not name or name:find(e.rank, 1, true) == nil then return false end
+		-- "Journeyman Enchanting" on this profession's skill line, or, when the client doesn't say
+		-- the line, a name that starts with the rank and names the profession ("Journeyman
+		-- Alchemist" on Forever)
+		if line then return line == e.name end
+		return name:find("^" .. e.rank .. " ") ~= nil and name:find(e.name:sub(1, 4), 1, true) ~= nil
 	end
 	return name == e.name
 end
@@ -63,15 +67,43 @@ local function skillLine(i)
 	return ok and type(line) == "string" and line or nil
 end
 
--- The trainer's services: { index, name, sub, type, cost }
+-- A service's requirements: skill level (and whether it's met, as the client says), player level.
+local function requirements(i)
+	local skill, met, level
+	if GetTrainerServiceSkillReq then
+		local ok, _, lvl, has = pcall(GetTrainerServiceSkillReq, i)
+		if ok then skill, met = tonumber(lvl), has end
+	end
+	if GetTrainerServiceLevelReq then
+		local ok, lvl = pcall(GetTrainerServiceLevelReq, i)
+		if ok then level = tonumber(lvl) end
+	end
+	return skill, met, level
+end
+
+-- Can the character train this service now? The client's type says so for "available", but
+-- Forever's trainer window doesn't always mark it: then the requirements decide (skill and level
+-- met, not known yet).
+local function trainable(s, ctx)
+	if s.type == "available" then return true end
+	if s.type == "used" or s.type == "header" then return false end
+	if s.skill == nil and s.met == nil and s.level == nil then return false end -- nothing to go on
+	local skillOk = s.met == true or s.met == 1 or (s.skill ~= nil and (ctx.skill or 0) >= s.skill)
+	local levelOk = not s.level or (UnitLevel("player") or 0) >= s.level
+	return skillOk and levelOk and not ns.char.known[s.name]
+end
+ns.TrainerTrainable = trainable
+
+-- The trainer's services: { index, name, sub, type, cost, skill, met, level }
 local function services()
 	local list = {}
 	for i = 1, (GetNumTrainerServices and GetNumTrainerServices() or 0) do
 		local name, sub, kind = GetTrainerServiceInfo(i)
 		if name and kind ~= "header" then
 			local cost = GetTrainerServiceCost and GetTrainerServiceCost(i) or 0
+			local skill, met, level = requirements(i)
 			list[#list + 1] = { index = i, name = name, sub = sub, type = kind, line = skillLine(i),
-				cost = type(cost) == "number" and cost or 0 }
+				cost = type(cost) == "number" and cost or 0, skill = skill, met = met, level = level }
 		end
 	end
 	return list
@@ -103,7 +135,7 @@ function ns.TrainerPlan()
 			local row = { entry = e, service = found }
 			if found then
 				hits = hits + 1
-				row.state = found.type == "available" and "train" or found.type == "used" and "known" or "later"
+				row.state = trainable(found, ctx) and "train" or found.type == "used" and "known" or "later"
 				if row.state == "train" then
 					now[#now + 1] = row
 					cost = cost + found.cost
@@ -155,7 +187,7 @@ function ns.TrainRoute()
 		local row = want[i]
 		if row then
 			local name, sub, kind = GetTrainerServiceInfo(i)
-			if kind == "available" and matches(row.entry, name, sub) then
+			if kind ~= "used" and matches(row.entry, name, sub, skillLine(i)) then
 				BuyTrainerService(i)
 				names[#names + 1] = row.entry.rank and (row.entry.rank .. " " .. row.entry.name) or row.entry.name
 			end
@@ -166,6 +198,18 @@ function ns.TrainRoute()
 		waiting = true
 		if panel then panel.train:SetEnabled(false) end
 		C_Timer.After(2, function() waiting = nil if panel and panel:IsShown() then ns.Fire("TRAINER_UPDATE") end end)
+	end
+end
+
+-- /craft trainerinfo: what the client says about each service (for reports from the game)
+function ns.TrainerInfo()
+	local n = GetNumTrainerServices and GetNumTrainerServices() or 0
+	ns.Print(("trainer: %d services, profession trainer: %s"):format(n, tostring(IsTradeskillTrainer and IsTradeskillTrainer())))
+	for i = 1, n do
+		local name, sub, kind = GetTrainerServiceInfo(i)
+		local skill, met, level = requirements(i)
+		print(("  %d. %s | %s | %s | skill %s (%s) | level %s | %s"):format(i, tostring(name), tostring(sub),
+			tostring(kind), tostring(skill), tostring(met), tostring(level), tostring(skillLine(i))))
 	end
 end
 
@@ -243,7 +287,7 @@ local function render()
 				local name = e.rank and (e.rank .. " " .. e.name) or e.name
 				local state = LABEL[row.state]
 				if row.state == "later" then
-					state = state:format(e.from or 0) .. (e.level and (UnitLevel("player") or 0) < e.level and (", level " .. e.level) or "")
+					state = state:format((row.service and row.service.skill) or e.from or 0) .. (e.level and (UnitLevel("player") or 0) < e.level and (", level " .. e.level) or "")
 				end
 				local cost = row.state == "train" and row.service.cost > 0 and ("  " .. ns.Money(row.service.cost)) or ""
 				t:SetText(UI.Color(STATE[row.state], name .. "  ·  " .. state) .. cost)

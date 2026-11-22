@@ -326,6 +326,8 @@ local function slash(msg)
 		ns.SetTarget(guide.key, t)
 		local st = ns.Status(guide)
 		ns.Print(("%s %s: stopping at %d."):format(guide.profession, guide.name, st.stop))
+	elseif cmd == "trainerinfo" then
+		ns.TrainerInfo() -- what the trainer's list says, for bug reports; not in the help
 	elseif cmd == "way" then
 		ns.Waypoint(rest ~= "" and rest:lower() or nil)
 	elseif cmd == "shots" then

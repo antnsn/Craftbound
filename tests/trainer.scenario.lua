@@ -95,3 +95,41 @@ local states = {}
 for _, r in ipairs(plan.rows) do states[r.state] = true end
 wb.check(not states.elsewhere, "nothing called not taught here behind a filter")
 local _ = P2
+
+-- Forever's trainer window: a recipe the character can learn, not marked "available" by the
+-- client, is trained when its skill and level requirements are met
+trainer = {
+	{ "Enchant Bracer - Lesser Stamina", nil, "unavailable", 1500, 130, 1 },
+	{ "Runed Golden Rod", nil, "unavailable", 2500, 150, 1 },
+}
+T.inject({
+	GetTrainerServiceTypeFilter = function() return true end,
+	GetTrainerServiceSkillReq = function(i) return "Enchanting", trainer[i][5], nil end,
+	GetTrainerServiceLevelReq = function(i) return trainer[i][6] end,
+	GetTrainerServiceSkillLine = function() return "Enchanting" end,
+})
+T.inject(T.professionGlobals({ [T.ENCHANTING] = { name = "Enchanting", rank = 135, max = 150 } }))
+wb.fire("SKILL_LINES_CHANGED")
+wb.state.player.money = 1000000
+wb.fire("TRAINER_UPDATE")
+plan = wb.ns.TrainerPlan()
+local st = {}
+for _, r in ipairs(plan.rows) do st[r.entry.name] = r.state end
+wb.expect("skill 130 met at 135: train now", st["Enchant Bracer - Lesser Stamina"], "train")
+wb.expect("skill 150 not met: later", st["Runed Golden Rod"], "later")
+bought = {}
+wb.ns.TrainRoute()
+wb.expect("bought the one it can learn", table.concat(bought, ","), "Enchant Bracer - Lesser Stamina")
+wb.slash("/craft trainerinfo")
+wb.check(wb.printed("Lesser Stamina | nil | unavailable | skill 130"), "trainerinfo prints the raw answers")
+
+-- Forever names ranks after the trainer ("Journeyman Alchemist"), without a skill line
+T.inject({ GetTrainerServiceSkillLine = function() return nil end })
+local wants = { kind = "rank", name = "Enchanting", rank = "Expert" }
+trainer = { { "Expert Enchanter", nil, "unavailable", 5000, 125, 20 }, { "Expert Tailor", nil, "available", 5000, 125, 20 } }
+wb.fire("TRAINER_UPDATE")
+plan = wb.ns.TrainerPlan()
+local ex
+for _, r in ipairs(plan.rows) do if r.entry.rank == "Expert" then ex = r end end
+wb.expect("Expert Enchanter is the rank", ex and ex.service and ex.service.name, "Expert Enchanter")
+local _ = wants
