@@ -21,6 +21,14 @@ Forever: `GetTradeSkillInfo`, `GetItemInfo`, `GetItemCount`...). Purchases and c
 come from a click or a key binding: never from an event handler. Run `/codex:review` before
 every commit.
 
+## CurseForge
+
+`CURSEFORGE.md` is the project page (pasted by hand) and `Craftbound.png` its picture (made by
+`tools/make_media.py`). Before a release: write the version in `CHANGELOG.md`, run
+`python3 tools/sync_curseforge.py` (it copies the changelog to the bottom of the page). The comment
+at the top of `CURSEFORGE.md` is the text for CurseForge's "Summary" field (at most 256
+characters; the tool checks it, `--summary` prints it).
+
 ## Git flow
 
 Protected `main`: `git switch -c <topic>`, commit (with `.beads/issues.jsonl`), push,
