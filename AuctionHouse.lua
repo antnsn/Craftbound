@@ -591,7 +591,9 @@ ns.On("MERCHANT_SHOW", function()
 			buyFromMerchant()
 			self:Hide()
 		end)
-		merchantBtn:SetPoint("TOPLEFT", MerchantFrame, "BOTTOMLEFT", 4, -2)
+		-- below the window on the right: the Merchant and Buyback tabs sit below it on the left,
+		-- and a second window (character, spellbook) opens to its right
+		merchantBtn:SetPoint("TOPRIGHT", MerchantFrame, "BOTTOMRIGHT", -4, -2)
 		UI.Tooltip(merchantBtn, function(tip)
 			tip:AddLine("Craftbound")
 			for _, b in ipairs((merchantPlan())) do tip:AddLine(("%s x%d"):format(b.name, b.qty), 1, 1, 1) end

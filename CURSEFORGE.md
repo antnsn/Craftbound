@@ -1,12 +1,14 @@
 <!-- summary (CurseForge "Summary" field, at most 256 characters):
-Profession levelling for WoW: Forever: tested routes for eight professions, the next step and a Craft button beside the profession window, an auction house shopping list, where to stop and what it costs, and your own guides to share.
+The ultimate addon for skilling up professions in WoW: Forever: tested routes 1-300 for eight professions, one-click crafting, auction house and vendor shopping, the trainer's recipes, where to stop and what it costs.
 -->
 
 # Craftbound
 
-**Profession levelling for World of Warcraft: Forever, as close to automatic as the game allows.**
+**The ultimate addon for skilling up professions in World of Warcraft: Forever.**
 
-Craftbound follows a levelling route for you. Beside the profession window it shows the next step and crafts it with one button or key. At the auction house it shops for the rest of the route, and at vendors it buys what vendors sell. It remembers per character where you stopped, so you pick up right there.
+Levelling a profession is the most tedious job in the game. Craftbound does it with you, as close to automatic as the game allows, from the first craft to 300: it follows a tested route, crafts the next step, shops for what's missing, trains only the recipes you need, and stops where you want to stop.
+
+Beside the profession window it shows the next step and crafts it with one button or key. At the auction house it shops for the rest of the route, and at vendors it buys what vendors sell. It remembers per character where you stopped, so you pick up right there.
 
 **Full guide:** https://antnsn.github.io/Craftbound/
 
@@ -22,6 +24,7 @@ Craftbound follows a levelling route for you. Beside the profession window it sh
 - **A panel beside it**: the step, its skill-up colour, the reagents you have and need, and the route ahead.
 - **Craft** (button or key binding) crafts the step: as many as you can, never past your rank's cap. Enchants go on the right equipped item.
 - **Says what's missing**: a recipe to learn (and where, from the vendors of your faction), a rank to train, a tool to make.
+- **At the trainer**: a panel lists the rank and recipes your route needs from there, up to your stop, and one button trains only those.
 - **Stops at the cap**: at 75/75, 150/150 and 225/225 crafting gives no skill-up, so Craft stops, and Blizzard's Create buttons ask before they craft.
 
 ## The auction house and vendors
@@ -52,7 +55,7 @@ Craftbound follows a levelling route for you. Beside the profession window it sh
 - `/craft list`: the shopping list in chat
 - `/craft tick`, `/craft untick 3`: tick off a step by hand, or put it back
 - `/craft reset`: forget this character's progress in the active guide
-- `/craft toggle panel|shop|select|tracker|minimap|cap`: turn a part on or off
+- `/craft toggle panel|shop|select|tracker|minimap|cap|trainer`: turn a part on or off
 - `/craft help`: list every command
 
 Key bindings (Key Bindings > AddOns > Craftbound): **Craft the next step** and **Auction house: buy next / confirm**.
@@ -66,6 +69,11 @@ Key bindings (Key Bindings > AddOns > Craftbound): **Craft the next step** and *
 ### 0.2.2-alpha (2026-11-22)
 
 - First version on CurseForge.
+- **At the trainer**: a panel beside the profession trainer lists what the route needs from it,
+  up to your stop (the next rank, the recipes of the steps ahead, the recipes of their parts), and
+  **Train N** trains only those, not everything the trainer has.
+- The vendor's "Buy route reagents" button sits below the vendor window on the right, no longer
+  over the Merchant and Buyback tabs.
 - **At a rank's cap** (75/75, 150/150, 225/225) Blizzard's Create and Create All buttons ask
   before they craft, since crafting gives no skill-up there; "Craft anyway" lets the clicks
   through until the skill or the cap changes. Craftbound's own Craft button already stopped.

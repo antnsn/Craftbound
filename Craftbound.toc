@@ -20,6 +20,7 @@ UI.lua
 Profession.lua
 CapGuard.lua
 AuctionHouse.lua
+Trainer.lua
 Tracker.lua
 Window.lua
 Minimap.lua

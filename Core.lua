@@ -20,6 +20,7 @@ local DEFAULTS = {
 		buffer = 0,          -- extra percent on top of the guide's safe counts when shopping
 		minimap = true,      -- the minimap button
 		capGuard = true,     -- ask before Blizzard's Create buttons craft at a rank's cap (CapGuard.lua)
+		trainerPanel = true, -- the route's recipes beside the profession trainer (Trainer.lua)
 	},
 	minimapIcon = nil,       -- LibDBIcon's position table { minimapPos, hide }
 	items = {},              -- [name] = itemID, learned at runtime
@@ -283,7 +284,7 @@ local HELP = {
 	"/craft list  the shopping list in chat",
 	"/craft tick  tick off the current step by hand (/craft untick N to undo step N)",
 	"/craft reset  forget this character's progress in the active guide",
-	"/craft toggle panel|shop|select|tracker|minimap|cap  turn a part on or off",
+	"/craft toggle panel|shop|select|tracker|minimap|cap|trainer  turn a part on or off",
 }
 
 local TOGGLES = {
@@ -293,6 +294,7 @@ local TOGGLES = {
 	tracker = { "tracker", "the tracker" },
 	minimap = { "minimap", "the minimap button" },
 	cap = { "capGuard", "asking before Blizzard's Create buttons craft at a rank's cap" },
+	trainer = { "trainerPanel", "the route's recipes beside the profession trainer" },
 }
 
 local function findGuide(word)
@@ -358,7 +360,7 @@ local function slash(msg)
 		end
 	elseif cmd == "toggle" then
 		local t = TOGGLES[rest:lower()]
-		if not t then return ns.Print("/craft toggle panel, shop, select, tracker, minimap or cap.") end
+		if not t then return ns.Print("/craft toggle panel, shop, select, tracker, minimap, cap or trainer.") end
 		local set = ns.db.settings
 		set[t[1]] = not set[t[1]]
 		ns.Print(("%s: %s."):format(t[2], set[t[1]] and "on" or "off"))

@@ -3,6 +3,11 @@
 ## 0.2.2-alpha (2026-11-22)
 
 - First version on CurseForge.
+- **At the trainer**: a panel beside the profession trainer lists what the route needs from it,
+  up to your stop (the next rank, the recipes of the steps ahead, the recipes of their parts), and
+  **Train N** trains only those, not everything the trainer has.
+- The vendor's "Buy route reagents" button sits below the vendor window on the right, no longer
+  over the Merchant and Buyback tabs.
 - **At a rank's cap** (75/75, 150/150, 225/225) Blizzard's Create and Create All buttons ask
   before they craft, since crafting gives no skill-up there; "Craft anyway" lets the clicks
   through until the skill or the cap changes. Craftbound's own Craft button already stopped.
