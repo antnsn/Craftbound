@@ -29,6 +29,12 @@ for _, g in ipairs(ns.Guides) do
 		end
 		if s.kind == "tool" and s.item then ns.KnownIDs[s.recipe] = s.item end
 	end
+	for name, part in pairs(g.parts or {}) do
+		if part.id then ns.KnownIDs[name] = part.id end
+		for _, m in ipairs(part.mats or {}) do
+			if m.id then ns.KnownIDs[m.name] = m.id end
+		end
+	end
 end
 
 -- Teach an item ID found some other way (auction house browse, recipe reagents).

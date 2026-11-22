@@ -1,5 +1,22 @@
 # Changelog
 
+## Unreleased
+
+- Marius' painted icon: in the addon list, on a new minimap button (left-click: tracker,
+  right-click: pick a guide, drag to move; collected by minimap addons through LibDBIcon when
+  one is loaded), beside the panel titles and as the docs logo.
+- Three new guides: Blacksmithing (125-300), Engineering and Leatherworking (1-300).
+- Steps can need several tools (hammer, spanner, micro-adjustor) and a station (anvil,
+  forge, tanning rack, sewing machine). A bought tool (the Blacksmith Hammer) is its own step,
+  shopped for and bought at the merchant.
+- Parts made along the way (grinding stones, power cores, cured hides): the shopping list buys
+  their reagents, and **Craft** makes the parts before the step that needs them.
+- Recipe notes name the reputation they need.
+- The guide picker is wider, so long lines (Blacksmithing 125-300, active) fit; button labels are
+  cut off inside the button instead of spilling past it.
+- Fixes from the first in-game look: the panel docks beside the profession window's side tabs
+  instead of over them, and route steps you can't learn yet are grey instead of orange.
+
 ## 0.1.0-alpha (2026-11-22)
 
 First version, not yet tested in game.

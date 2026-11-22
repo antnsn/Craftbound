@@ -4,6 +4,8 @@ url: https://antnsn.github.io
 baseurl: /Craftbound
 
 theme: just-the-docs
+logo: "/assets/logo.png"
+favicon_ico: "/assets/favicon.png"
 color_scheme: craftbound
 
 search_enabled: true

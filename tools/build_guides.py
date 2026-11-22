@@ -3,7 +3,7 @@
 
     python3 tools/build_guides.py            # from the Craftbound folder
 
-The JSON is the planner export the two v1 guides come from. Item IDs are not in it: ITEM_IDS
+The JSON is the planner export the guides come from. Item IDs are not in it: ITEM_IDS
 below maps material and tool names to item IDs (Classic IDs, which Forever kept). A name without
 an ID is still shopped for: the addon finds it by name in the auction house and remembers the ID.
 """
@@ -35,6 +35,26 @@ ITEM_IDS = {
     "Arthas' Tears": 8836, "Plaguebloom": 13466, "Ghost Mushroom": 8845, "Gromsblood": 8846,
     "Empty Vial": 3371, "Leaded Vial": 3372, "Crystal Vial": 8925,
     "Sharp Claw": 5635, "Murloc Eye": 730,
+    # Tools, stations' reagents and trade goods (Blacksmithing, Engineering, Leatherworking)
+    "Blacksmith Hammer": 5956, "Arclight Spanner": 6219, "Gyromatic Micro-Adjustor": 10498,
+    "Copper Bar": 2840, "Bronze Bar": 2841, "Silver Bar": 2842, "Iron Bar": 3575,
+    "Gold Bar": 3577, "Steel Bar": 3859, "Mithril Bar": 3860, "Truesilver Bar": 6037,
+    "Thorium Bar": 12359, "Arcanite Bar": 12360, "Enchanted Thorium Bar": 12655,
+    "Rough Stone": 2835, "Coarse Stone": 2836, "Heavy Stone": 2838, "Solid Stone": 7912,
+    "Dense Stone": 12365, "Solid Grinding Stone": 7966, "Dense Grinding Stone": 12644,
+    "Weak Flux": 2880, "Strong Flux": 3466, "Elemental Flux": 18567,
+    "Gold Power Core": 10558, "Bolt of Linen Cloth": 2996, "Wool Cloth": 2592,
+    "Mageweave Cloth": 4338, "Runecloth": 14047, "Ironweb Spider Silk": 14227,
+    "Star Ruby": 7910, "Large Opal": 12799, "Righteous Orb": 12811,
+    "Essence of Air": 7082, "Essence of Fire": 7078, "Elemental Earth": 7067,
+    "Elemental Water": 7070, "Living Essence": 12803, "Powerful Mojo": 12804,
+    "Light Leather": 2318, "Medium Leather": 2319, "Heavy Leather": 4234, "Thick Leather": 4304,
+    "Rugged Leather": 8170, "Enchanted Leather": 12810, "Light Hide": 783, "Medium Hide": 4232,
+    "Heavy Hide": 4235, "Rugged Hide": 8171, "Cured Rugged Hide": 15407,
+    "Heavy Scorpid Scale": 15408, "Refined Deeprock Salt": 15409, "Salt": 4289,
+    "Coarse Thread": 2320, "Fine Thread": 2321, "Silken Thread": 4291,
+    "Heavy Silken Thread": 8343, "Rune Thread": 14341,
+    "Green Dye": 2605, "Gray Dye": 4340, "Black Dye": 2325, "Elixir of Minor Agility": 2457,
 }
 
 # Notes from the source guide that the JSON keeps elsewhere (or not at all).
@@ -79,6 +99,7 @@ def source(s):
     return {
         "kind": s.get("type"), "cost": s.get("cost_raw"), "npc": s.get("npc"),
         "location": s.get("location"), "limited": bool(s.get("limited_stock")) or None,
+        "rep": s.get("requires_reputation"),
     }
 
 
@@ -88,8 +109,18 @@ def colors(t):
     return [t["orange"], t["yellow"], t["green"], t["gray"]]
 
 
+def tools(s):
+    t = s.get("required_tools") or ([s["required_tool"]] if s.get("required_tool") else [])
+    return t or None
+
+
 def step(prof, s):
     t = s["type"]
+    if t == "buy_tool":
+        return {"kind": "tool", "buy": True, "recipe": s["item"], "item": ITEM_IDS.get(s["item"]),
+                "safe": 1, "expected": 1,
+                "mats": [{"name": s["item"], "id": ITEM_IDS.get(s["item"]), "qty": 1}],
+                "source": source(s.get("source")), "note": s.get("instructions")}
     if t == "train_rank":
         return {"kind": "train", "rank": s["rank"], "reqSkill": s["requires_skill"],
                 "reqLevel": s.get("requires_character_level"), "before": s["train_before_skill"],
@@ -104,7 +135,7 @@ def step(prof, s):
         "recipe": s["recipe"], "colors": colors(s.get("skill_thresholds")),
         "expected": crafts.get("expected"), "safe": crafts.get("safe"),
         "makes": s.get("output_quantity"),
-        "tool": s.get("required_tool"),
+        "tools": tools(s), "station": s.get("station"),
         "mats": mats(s.get("materials_per_craft")),
         "source": source(s.get("source")),
         "alts": s.get("alternatives") or None,
@@ -116,6 +147,11 @@ def step(prof, s):
     if src.get("limited_stock"):
         out["note"] = ("The recipe is sold by %s (%s) in limited stock; it restocks."
                        % (src.get("npc"), src.get("location")))
+    if src.get("requires_reputation"):
+        rep = "Needs %s to learn this recipe." % src["requires_reputation"]
+        out["note"] = (out["note"] + " " + rep) if out.get("note") else rep
+    if s.get("low_odds"):
+        out["note"] = (out["note"] + " " + s["low_odds"]) if out.get("note") else s["low_odds"]
     extra = EXTRA_NOTES.get((prof, s.get("recipe")))
     if extra:
         out["note"] = extra
@@ -140,9 +176,17 @@ def main():
             "from": g["skill_from"], "to": g["skill_to"],
             "avgCrafts": est.get("average_crafts"), "p90Crafts": est.get("p90_crafts"),
             "playtested": est.get("playtested_in_forever"),
+            "note": g.get("starts_note"),
         }
         head = ", ".join(k + " = " + lua(v) for k, v in guide.items() if v is not None)
         lines.append("\t{ " + head + ",")
+        if g.get("parts"):
+            lines.append("\t\tparts = {")
+            for name, p in g["parts"].items():
+                part = {"recipe": p["recipe"], "id": ITEM_IDS.get(name), "makes": p.get("makes", 1),
+                        "mats": mats(p["materials_per_craft"])}
+                lines.append("\t\t\t[" + lua(name) + "] = " + lua(part) + ",")
+            lines.append("\t\t},")
         lines.append("\t\tsteps = {")
         for s in g["steps"]:
             lines.append("\t\t\t" + lua(step(g["profession"], s), "\t\t\t") + ",")
@@ -152,7 +196,9 @@ def main():
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines) + "\n")
     missing = sorted({m for g in data["guides"] for s in g["steps"]
-                      for m in (s.get("materials_per_craft") or {}) if m not in ITEM_IDS})
+                      for m in (s.get("materials_per_craft") or {}) if m not in ITEM_IDS}
+                     | {m for g in data["guides"] for p in (g.get("parts") or {}).values()
+                        for m in p["materials_per_craft"] if m not in ITEM_IDS})
     print("wrote", os.path.normpath(OUT))
     if missing:
         print("no item ID (found by name in the auction house):", ", ".join(missing))

@@ -1,5 +1,5 @@
 -- AuctionHouse: shops the rest of the route in Blizzard's auction house (C_AuctionHouse), and
--- buys vendor reagents (vials, rods) at merchants.
+-- buys vendor reagents (vials, rods, flux, thread, dye, the hammer) at merchants.
 --
 -- Nothing is bought without a click that shows what and for how much:
 --   commodities  Buy → StartCommoditiesPurchase → the server's price → Confirm (second click)
@@ -18,6 +18,11 @@ local VENDOR_ITEMS = {
 	[3372] = true, -- Leaded Vial
 	[8925] = true, -- Crystal Vial
 	[6217] = true, -- Copper Rod
+	[5956] = true, -- Blacksmith Hammer
+	[2880] = true, [3466] = true, -- Weak Flux, Strong Flux
+	[2320] = true, [2321] = true, [4291] = true, [8343] = true, [14341] = true, -- threads
+	[4289] = true, -- Salt
+	[2605] = true, [4340] = true, [2325] = true, -- Green, Gray, Black Dye
 }
 AH.VENDOR_ITEMS = VENDOR_ITEMS
 
@@ -405,6 +410,7 @@ local function build()
 	f.title = UI.Text(f, "big", UI.GOLD)
 	f.title:SetPoint("TOPLEFT", 10, -8)
 	f.title:SetText("Craftbound shopping")
+	f.logo = UI.TitleLogo(f, f.title, 22)
 	f.guide = UI.Text(f, "small", { 0.8, 0.8, 0.8 })
 	f.guide:SetPoint("TOPLEFT", 10, -28)
 	f.guide:SetWidth(280)

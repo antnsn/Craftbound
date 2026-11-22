@@ -142,7 +142,7 @@ function ns.LearnHint(s)
 	if src.kind == "vendor" and src.npc then
 		return ("Buy the %s recipe from %s%s%s."):format(s.recipe, src.npc,
 			src.location and (" (" .. src.location .. ")") or "",
-			src.limited and ", limited stock" or "")
+			src.limited and ", limited stock" or "") .. (src.rep and (" Needs " .. src.rep .. ".") or "")
 	end
 	return ("Learn %s at your trainer%s."):format(s.recipe, src.cost and (" (" .. ns.Money(src.cost) .. ")") or "")
 end
@@ -170,7 +170,7 @@ function ns.CraftPlan()
 	local st, ctx = ns.Status()
 	if not st then return { label = "Craft", enabled = false, reason = "No guide picked (/craft guide)." } end
 	local s = st.step
-	if not s or (s.kind ~= "craft" and s.kind ~= "tool") then
+	if not s or (s.kind ~= "craft" and s.kind ~= "tool") or s.buy then
 		return { label = "Craft", enabled = false, reason = P.Describe(s, st.left) }
 	end
 	if not ns.open then
@@ -189,6 +189,23 @@ function ns.CraftPlan()
 		room = math.min(room, ctx.maxSkill - ctx.skill)
 		if room <= 0 then
 			return { label = "Craft", enabled = false, reason = ("You are at the cap (%d): train the next rank first."):format(ctx.maxSkill) }
+		end
+	end
+	-- parts the step needs (a grinding stone, a power core): make those first
+	local guide = ns.ActiveGuide()
+	for _, m in ipairs(ns.LiveMats(s.recipe) or s.mats or {}) do
+		local short = guide and P.PartShort(guide, m, (m.qty or 1) * room, ctx, ns.BagCount)
+		local pr = short and ns.OpenRecipe(short.part.recipe)
+		if pr and pr.learned ~= false then
+			local pc = C_TradeSkillUI.GetCraftableCount and C_TradeSkillUI.GetCraftableCount(pr.recipeID)
+			if type(pc) == "number" and pc > 0 then
+				local pn = math.min(short.crafts, pc)
+				return { label = ("Make %d %s"):format(pn * (short.part.makes or 1), short.name), enabled = true,
+					part = short.name, run = function()
+						ns.SelectRecipe(short.part.recipe)
+						C_TradeSkillUI.CraftRecipe(pr.recipeID, pn)
+					end }
+			end
 		end
 	end
 	local can = C_TradeSkillUI.GetCraftableCount and C_TradeSkillUI.GetCraftableCount(r.recipeID)
@@ -291,14 +308,38 @@ local function makeMatRow(parent)
 	return r
 end
 
+-- How far the window's own side tabs (other professions) stick out on the right, so the panel
+-- docks beside them instead of under them.
+local function tabsWidth(self)
+	local right = ProfessionsFrame:GetRight()
+	if type(right) ~= "number" then return 0 end
+	local out = 0
+	for _, child in ipairs({ ProfessionsFrame:GetChildren() }) do
+		if child ~= self and child:IsShown() then
+			local l, r = child:GetLeft(), child:GetRight()
+			local w = type(l) == "number" and type(r) == "number" and r - l or 999
+			-- a tab: narrow, starts inside or at the edge, sticks out past it
+			if w < 64 and r > right and l < right + 8 then out = math.max(out, r - right) end
+		end
+	end
+	return math.min(out, 64)
+end
+
+local function dock(f)
+	local x = 2 + tabsWidth(f)
+	f:ClearAllPoints()
+	f:SetPoint("TOPLEFT", ProfessionsFrame, "TOPRIGHT", x, 0)
+	f:SetPoint("BOTTOMLEFT", ProfessionsFrame, "BOTTOMRIGHT", x, 0)
+end
+
 local function build()
 	local f = UI.Panel("CraftboundProfessionPanel", ProfessionsFrame, 300, 400)
-	f:SetPoint("TOPLEFT", ProfessionsFrame, "TOPRIGHT", 2, 0)
-	f:SetPoint("BOTTOMLEFT", ProfessionsFrame, "BOTTOMRIGHT", 2, 0)
+	dock(f)
 
 	f.title = UI.Text(f, "big", UI.GOLD)
 	f.title:SetPoint("TOPLEFT", 10, -8)
 	f.title:SetText("Craftbound")
+	f.logo = UI.TitleLogo(f, f.title, 22)
 	f.guide = UI.Text(f, "small", { 0.8, 0.8, 0.8 })
 	f.guide:SetPoint("TOPLEFT", 10, -28)
 
@@ -403,10 +444,21 @@ local function render()
 		local text = P.Describe(s, st.left)
 		f.now:SetText(col and UI.Color(col, text) or text)
 		local bits = {}
-		if s.tool then
-			local owned = ctx.have({ name = s.tool }) > 0
-			bits[#bits + 1] = (owned and "Tool: " or UI.Color({ 1, 0.4, 0.3 }, "Needs: ")) .. s.tool
+		for _, tool in ipairs(s.tools or {}) do
+			local owned = ctx.have({ id = ns.KnownIDs[tool], name = tool }) > 0
+			bits[#bits + 1] = (owned and "Tool: " or UI.Color({ 1, 0.4, 0.3 }, "Needs: ")) .. tool
 		end
+		if s.station then bits[#bits + 1] = "Craft at: " .. s.station end
+		for _, m in ipairs((s.recipe and ns.LiveMats(s.recipe)) or s.mats or {}) do
+			local room = st.left
+			if ctx.maxSkill then room = math.max(0, math.min(room, ctx.maxSkill - ctx.skill)) end
+			local short = P.PartShort(guide, m, (m.qty or 1) * room, ctx, ns.BagCount)
+			if short then
+				bits[#bits + 1] = UI.Color(UI.GOLD, ("Make %d %s first (%d crafts): Craft does it."):format(
+					short.short, short.name, short.crafts))
+			end
+		end
+		if guide.note and ctx.skill < guide.from then bits[#bits + 1] = UI.Color({ 1, 0.4, 0.3 }, guide.note) end
 		if s.note then bits[#bits + 1] = s.note end
 		local live = s.recipe and ns.OpenRecipe(s.recipe)
 		if live and live.learned == false then
@@ -490,6 +542,7 @@ local function render()
 			row.count:SetText("")
 		else
 			local col = colorOf(step, ctx)
+			if col == "red" then col = { 0.6, 0.6, 0.6 } end -- not learnable yet: plain, not alarming
 			row.text:SetText(cur and UI.Color({ 1, 1, 1 }, label) or (col and UI.Color(col, label) or label))
 			local left = P.CraftsLeft(step, ctx.skill)
 			row.count:SetText(left > 0 and ("x" .. left) or "")
@@ -515,6 +568,8 @@ local function onShow()
 		ns.professionPanel = panel
 	end
 	ns.ScanOpen()
+	dock(panel)
+	C_Timer.After(0, function() if panel then dock(panel) end end) -- tabs may be laid out a frame later
 	panel:SetShown(ns.db.settings.profPanel)
 	if ns.db.settings.autoSelect then
 		local st = ns.Status()

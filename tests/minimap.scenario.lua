@@ -1,0 +1,16 @@
+-- The minimap button: shown at login, left-click toggles the tracker, right-click the picker,
+-- the setting hides it.
+wb.login({ saved = { CraftboundCharDB = { active = "Enchanting:Easiest" } } })
+wb.check(wb.G.CraftboundMinimapButton ~= nil, "minimap button made (no LibDBIcon loaded)")
+wb.check(wb.shown("CraftboundMinimapButton"), "button shown")
+wb.check(wb.shown("CraftboundTracker"), "tracker shown")
+wb.ns.MinimapClick(nil, "LeftButton")
+wb.check(not wb.shown("CraftboundTracker"), "left-click hides the tracker")
+wb.ns.MinimapClick(nil, "LeftButton")
+wb.check(wb.shown("CraftboundTracker"), "left-click shows it again")
+wb.ns.MinimapClick(nil, "RightButton")
+wb.check(wb.shown("CraftboundGuidePicker"), "right-click opens the guide picker")
+wb.slash("/craft toggle minimap")
+wb.check(not wb.shown("CraftboundMinimapButton"), "toggle hides the button")
+wb.reload()
+wb.check(not wb.shown("CraftboundMinimapButton"), "hidden after reload")

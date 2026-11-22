@@ -21,4 +21,5 @@ description: Every Craftbound chat command.
 | `/craft toggle shop` | Turns the auction house panel on or off. |
 | `/craft toggle select` | Turns selecting the step's recipe on or off. |
 | `/craft toggle tracker` | Turns the tracker on or off. |
+| `/craft toggle minimap` | Shows or hides the minimap button. |
 | `/craft help` | Lists the commands in chat. |

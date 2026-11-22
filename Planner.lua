@@ -41,24 +41,39 @@ function P.CraftsLeft(step, skill)
 end
 
 -- The skill-up colour of a recipe at a skill, from the guide's thresholds:
--- "orange", "yellow", "green", "gray" (nil without thresholds).
+-- "red" (not learnable yet), "orange", "yellow", "green", "gray" (nil without thresholds).
 function P.Color(step, skill)
 	local c = step.colors
 	if not c then return nil end
+	if skill < c[1] then return "red" end
 	if skill >= c[4] then return "gray" end
 	if skill >= c[3] then return "green" end
 	if skill >= c[2] then return "yellow" end
 	return "orange"
 end
 
--- The last later craft step that needs this tool.
+-- Does a step need this tool in its bags?
+function P.NeedsTool(s, tool)
+	for _, t in ipairs(s.tools or {}) do
+		if t == tool then return true end
+	end
+	return false
+end
+
+-- The last later step that needs this tool (crafts and tools made with it).
 local function lastUser(guide, i, tool)
 	local last
 	for j = i + 1, #guide.steps do
 		local s = guide.steps[j]
-		if s.kind == "craft" and s.tool == tool then last = s end
+		if (s.kind == "craft" or s.kind == "tool") and P.NeedsTool(s, tool) then last = s end
 	end
 	return last
+end
+
+local function indexOf(guide, step)
+	for j, s in ipairs(guide.steps) do
+		if s == step then return j end
+	end
 end
 
 function P.IsDone(guide, i, ctx)
@@ -74,7 +89,9 @@ function P.IsDone(guide, i, ctx)
 		if ctx.have and ctx.have({ id = s.item, name = s.recipe }) > 0 then return true end
 		-- past every step that needs it (sold or replaced)
 		local user = lastUser(guide, i, s.recipe)
-		return user ~= nil and skill >= (user.to or 0)
+		if not user then return false end
+		if user.kind == "tool" then return P.IsDone(guide, indexOf(guide, user), ctx) end
+		return skill >= (user.to or 0)
 	end
 	return false
 end
@@ -124,35 +141,74 @@ end
 
 local function matKey(m) return m.id or m.name end
 
+-- A part the route makes along the way (a grinding stone, a power core), by reagent name.
+function P.Part(guide, name)
+	return guide.parts and name and guide.parts[name]
+end
+
+-- How many more of a part to make, and in how many crafts: { part, short, crafts } or nil.
+-- have: optional count function (the bags only, when crafting); default ctx.have.
+function P.PartShort(guide, mat, need, ctx, have)
+	local part = P.Part(guide, mat.name)
+	if not part then return nil end
+	have = have or ctx.have
+	have = have and have({ id = part.id or mat.id, name = mat.name }) or 0
+	local short = need - have
+	if short <= 0 then return nil end
+	return { part = part, name = mat.name, short = short, crafts = ceil(short / (part.makes or 1)) }
+end
+
 -- What the rest of the route still needs, minus what the character owns.
+-- Parts the route makes itself are replaced by their own reagents (minus the parts in bags).
 -- Returns a list of { id, name, need, have, missing } sorted with the most missing first,
 -- then the total of what is missing (pieces).
 function P.Shopping(guide, ctx)
 	local skill = ctx.skill or 0
 	local need, order = {}, {}
+	local function add(m, qty)
+		local k = matKey(m)
+		local e = need[k]
+		if not e then
+			e = { id = m.id, name = m.name, need = 0 }
+			need[k] = e
+			order[#order + 1] = e
+		end
+		e.id = e.id or m.id
+		e.need = e.need + qty
+	end
 	for i, s in ipairs(guide.steps) do
 		if (s.kind == "craft" or s.kind == "tool") and not P.IsDone(guide, i, ctx) then
 			local n = P.CraftsLeft(s, skill)
 			local mats = (ctx.liveMats and ctx.liveMats(s.recipe)) or s.mats or {}
-			for _, m in ipairs(mats) do
-				local k = matKey(m)
-				local e = need[k]
-				if not e then
-					e = { id = m.id, name = m.name, need = 0 }
-					need[k] = e
-					order[#order + 1] = e
-				end
-				e.id = e.id or m.id
-				e.need = e.need + (m.qty or 1) * n
+			for _, m in ipairs(mats) do add(m, (m.qty or 1) * n) end
+		end
+	end
+	-- expand parts into their reagents (parts are not made of other parts)
+	local parts = {}
+	for _, e in ipairs(order) do
+		if P.Part(guide, e.name) then parts[#parts + 1] = e end
+	end
+	for _, e in ipairs(parts) do
+		-- a part the route also crafts as a step of its own (Gold Power Core) comes from there
+		local made = 0
+		for i, s in ipairs(guide.steps) do
+			if s.kind == "craft" and s.recipe == e.name and not P.IsDone(guide, i, ctx) then
+				made = made + P.CraftsLeft(s, skill) * (s.makes or 1)
 			end
+		end
+		local short = P.PartShort(guide, e, e.need - made, ctx)
+		if short then
+			for _, m in ipairs(short.part.mats or {}) do add(m, (m.qty or 1) * short.crafts) end
 		end
 	end
 	local list, missingTotal = {}, 0
 	for _, e in ipairs(order) do
-		e.have = ctx.have and ctx.have(e) or 0
-		e.missing = max(0, e.need - e.have)
-		missingTotal = missingTotal + e.missing
-		list[#list + 1] = e
+		if not P.Part(guide, e.name) then
+			e.have = ctx.have and ctx.have(e) or 0
+			e.missing = max(0, e.need - e.have)
+			missingTotal = missingTotal + e.missing
+			list[#list + 1] = e
+		end
 	end
 	table.sort(list, function(a, b)
 		if (a.missing > 0) ~= (b.missing > 0) then return a.missing > 0 end
@@ -181,6 +237,9 @@ function P.Describe(s, left)
 		return ("Train %s at a trainer (needed before skill %d)."):format(s.rank, s.before)
 	elseif s.kind == "disenchant" then
 		return ("Disenchant green or better items up to skill %d."):format(s.to)
+	elseif s.kind == "tool" and s.buy then
+		return ("Buy a %s from %s and keep it in your bags."):format(s.recipe,
+			(s.source and s.source.npc) or "a vendor")
 	elseif s.kind == "tool" then
 		return ("Make a %s and keep it in your bags."):format(s.recipe)
 	end

@@ -45,8 +45,26 @@ function UI.Button(parent, label, w, h, onClick)
 	local b = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
 	b:SetSize(w or 100, h or 22)
 	b:SetText(label)
+	local fs = b:GetFontString()
+	if fs then -- long labels are cut off inside the button, never drawn past its edges
+		fs:SetWidth((w or 100) - 12)
+		fs:SetWordWrap(false)
+	end
 	if onClick then b:SetScript("OnClick", onClick) end
 	return b
+end
+
+-- The Craftbound logo left of a title font string (moves the title right to make room).
+function UI.TitleLogo(f, title, size)
+	size = size or 20
+	local logo = f:CreateTexture(nil, "ARTWORK")
+	logo:SetTexture(ns.MEDIA .. "Logo64")
+	logo:SetSize(size, size)
+	local point, rel, relPoint, x, y = title:GetPoint(1)
+	logo:SetPoint(point or "TOPLEFT", rel or f, relPoint or "TOPLEFT", (x or 0) - 1, (y or 0) + 2)
+	title:ClearAllPoints()
+	title:SetPoint("LEFT", logo, "RIGHT", 3, 0)
+	return logo
 end
 
 -- Small square button with an icon texture.

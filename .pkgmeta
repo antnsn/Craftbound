@@ -16,4 +16,5 @@ ignore:
   - .beads
   - .claude
   - README.md
+  - Craftbound.png
   - .gitignore
