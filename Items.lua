@@ -60,6 +60,43 @@ function ns.BagCount(mat)
 	return type(n) == "number" and n or 0
 end
 
+-- How many are in the bank (the client's cached bank, once it has been opened).
+function ns.BankCount(mat)
+	local id = ns.ItemID(mat)
+	if not id then return 0 end
+	local all, bags = C_Item.GetItemCount(id, true), C_Item.GetItemCount(id)
+	if type(all) ~= "number" or type(bags) ~= "number" then return 0 end
+	return math.max(0, all - bags)
+end
+
+-- Reagents of a step that the bags are short of but the bank (or the mailbox) holds:
+-- { { name, bank, mail } } for crafts (count) of the step.
+function ns.ElsewhereFor(mats, crafts)
+	local out = {}
+	for _, m in ipairs(mats or {}) do
+		local need = (m.qty or 1) * math.max(1, crafts or 1)
+		local bags = ns.BagCount(m)
+		if bags < need then
+			local id = ns.ItemID(m)
+			local bank, mail = ns.BankCount(m), id and ns.char.mail[id] or 0
+			if bank > 0 or mail > 0 then out[#out + 1] = { name = m.name, bank = bank, mail = mail } end
+		end
+	end
+	return out
+end
+
+-- "Peacebloom (5 in the bank), Mageroyal (2 in the mailbox)"
+function ns.ElsewhereText(list)
+	local t = {}
+	for _, e in ipairs(list) do
+		local where = {}
+		if e.bank > 0 then where[#where + 1] = e.bank .. " in the bank" end
+		if e.mail > 0 then where[#where + 1] = e.mail .. " in the mailbox" end
+		t[#t + 1] = ("%s (%s)"):format(e.name, table.concat(where, ", "))
+	end
+	return table.concat(t, ", ")
+end
+
 function ns.ItemIcon(mat)
 	local id = ns.ItemID(mat)
 	if id and C_Item.GetItemIconByID then return C_Item.GetItemIconByID(id) end

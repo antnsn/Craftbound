@@ -285,6 +285,10 @@ function ns.CraftPlan()
 	local can = C_TradeSkillUI.GetCraftableCount and C_TradeSkillUI.GetCraftableCount(r.recipeID)
 	if type(can) ~= "number" then can = 0 end
 	if can <= 0 then
+		local away = ns.ElsewhereFor(ns.LiveMats(s.recipe) or s.mats, 1)
+		if #away > 0 then
+			return { label = "Craft", enabled = false, reason = "Fetch them first: " .. ns.ElsewhereText(away) .. "." }
+		end
 		return { label = "Craft", enabled = false, reason = partWhy or "Missing reagents: see the list below or /craft list." }
 	end
 	local rec = ns.db.recipes[s.recipe] or {}
@@ -562,7 +566,12 @@ local function render()
 			local need = (m.qty or 1) * st.left
 			local have = ctx.have(m)
 			row.icon:SetTexture(ns.ItemIcon(m))
-			row.text:SetText(m.name)
+			-- counted, but not in the bags: say where they are
+			local bags = ns.BagCount(m)
+			local away = bags < need and have > bags and (have - bags) or 0
+			local bank = away > 0 and math.min(away, ns.BankCount(m)) or 0
+			local where = bank > 0 and ("  %d in bank"):format(bank) or (away > 0 and ("  %d in mail"):format(away) or "")
+			row.text:SetText(m.name .. (where ~= "" and UI.Color(UI.GOLD, where) or ""))
 			row.count:SetText(UI.Color(have >= need and "green" or { 1, 0.4, 0.3 }, ("%d / %d"):format(have, need)))
 			row:ClearAllPoints()
 			row:SetPoint("TOPLEFT", anchor, "BOTTOMLEFT", anchor == f.sub and -4 or 0, y)
