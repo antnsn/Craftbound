@@ -619,10 +619,14 @@ local function render()
 		local step = guide.steps[i]
 		local row = f.route:Get()
 		row.index, row.step = i, step
-		local done, cur = st.done[i], i == st.current
+		local out, cur = st.out[i], i == st.current
+		local done = st.done[i] and not out
 		row.mark:SetText(done and "|TInterface\\RaidFrame\\ReadyCheck-Ready:12|t" or cur and UI.Color(UI.GOLD, ">") or "")
 		local label = stepLabel(step)
-		if done then
+		if out then -- after the stop: not done, just not on this route
+			row.text:SetText(UI.Color({ 0.4, 0.4, 0.4 }, label .. "  (past your stop)"))
+			row.count:SetText("")
+		elseif done then
 			row.text:SetText(UI.Color("gray", label))
 			row.count:SetText("")
 		else

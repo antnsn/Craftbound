@@ -54,7 +54,7 @@ local function render()
 	tracker:SetShown(want and true or false)
 	if not want then return end
 	local st, ctx = ns.Status(guide)
-	tracker.title:SetText(("Craftbound · %s %d/%d"):format(guide.profession, ctx.skill, st.stop))
+	tracker.title:SetText(("%s %d/%d"):format(guide.profession, ctx.skill, st.stop)) -- the logo says Craftbound
 	tracker.bar:SetValue(st.percent)
 	if st.finished then
 		tracker.step:SetText(UI.Color("green", "Route finished!"))
