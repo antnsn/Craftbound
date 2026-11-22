@@ -29,11 +29,20 @@ every commit.
 at the top of `CURSEFORGE.md` is the text for CurseForge's "Summary" field (at most 256
 characters; the tool checks it, `--summary` prints it).
 
+## Screenshots
+
+In game: `/craft shots` (not in the help) shows each frame and takes a screenshot; it opens the
+active guide's profession window itself, the auction house must be open for its panel. Then
+`/reload` and `python3 LibBound/tools/crop_shots.py Craftbound` (from `Interface/AddOns`) cuts
+them out into `docs/screenshots/`.
+
 ## Git flow
 
 Protected `main`: `git switch -c <topic>`, commit (with `.beads/issues.jsonl`), push,
-`gh pr create --fill`, `gh pr merge --squash --delete-branch`. Releases: tag on main,
-`wowbench pack . --set-version X`, `gh release create vX dist/Craftbound-X.zip`.
+`gh pr create --fill`, `gh pr merge --squash --delete-branch`. Releases: a `## X` section in
+`CHANGELOG.md` and `python3 tools/sync_curseforge.py` (through a PR), then tag `vX` on main and
+push the tag: `.github/workflows/release.yml` packs it (`tools/package.py`) and publishes the
+GitHub release. CurseForge will take tags through its webhook once the project exists.
 
 ## Issues
 

@@ -427,6 +427,26 @@ local function badStep()
 	end
 end
 
+-- The editor on an unsaved copy of a guide (for /craft shots): nothing is stored.
+function W.Preview(guide)
+	W.Show()
+	draft = ns.Custom.Copy(guide)
+	draft.key, draft.custom, draft.id = nil, nil, nil
+	draftKey, mode = nil, "edit"
+	win.editor.offset = 0
+	refill = true
+	message("")
+	W.Render()
+end
+
+-- Leave the editor without saving.
+function W.CancelEdit()
+	if mode ~= "edit" then return end
+	mode, draft, draftKey = "details", nil, nil
+	message("")
+	W.Render()
+end
+
 local function save()
 	draft.name = win.editor.nameBox:GetText()
 	if #draft.steps == 0 then return message("Add at least one step first.", true) end
