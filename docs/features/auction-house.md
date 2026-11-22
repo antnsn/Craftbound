@@ -7,6 +7,8 @@ description: The shopping list, price scans, Buy and Confirm, and merchants.
 
 # Auction house
 
+![The shopping panel beside the auction house]({{ '/screenshots/auction-house.png' | relative_url }})
+
 Open the auction house and the **Craftbound shopping** panel docks to its right. It lists every reagent the rest of the route still needs, minus what is in your bags and bank, with the most-missing first.
 
 ## Buying

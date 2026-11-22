@@ -37,6 +37,8 @@ Beside the profession window it shows the next step and crafts it with one butto
 - **Buy** the most-needed item in two clicks at the server's price, with a warning when the price jumped.
 - **Vendor goods never at the auction house**: vials, thread, dye, flux and spices are bought at a merchant with one click.
 
+![Shopping at the auction house](https://antnsn.github.io/Craftbound/screenshots/auction-house.png)
+
 ## The Craftbound window
 - **Every guide** in one place (`/craft` or the minimap button), with its route and your skill.
 - **Stop at 150, 225 or 300**: the route, the shopping list and the progress bar end there.
