@@ -6,6 +6,7 @@ local addonName, ns = ...
 
 ns.name = addonName
 ns.title = "|cffe0a040Craft|r|cfff0e0c0bound|r"
+ns.MEDIA = "Interface\\AddOns\\Craftbound\\Media\\"
 
 local DEFAULTS = {
 	settings = {
@@ -14,7 +15,9 @@ local DEFAULTS = {
 		ahPanel = true,      -- dock the panel to the auction house
 		autoSelect = true,   -- select the step's recipe when the profession window opens
 		buffer = 0,          -- extra percent on top of the guide's safe counts when shopping
+		minimap = true,      -- the minimap button
 	},
+	minimapIcon = nil,       -- LibDBIcon's position table { minimapPos, hide }
 	items = {},              -- [name] = itemID, learned at runtime
 	recipes = {},            -- [recipe name] = { id = recipeID, mats = { {id,name,qty} }, colors = {...} }
 }
@@ -215,7 +218,7 @@ local HELP = {
 	"/craft list  the shopping list in chat",
 	"/craft tick  tick off the current step by hand (/craft untick N to undo step N)",
 	"/craft reset  forget this character's progress in the active guide",
-	"/craft toggle panel|shop|select|tracker  turn a part on or off",
+	"/craft toggle panel|shop|select|tracker|minimap  turn a part on or off",
 }
 
 local TOGGLES = {
@@ -223,6 +226,7 @@ local TOGGLES = {
 	shop = { "ahPanel", "the shopping panel beside the auction house" },
 	select = { "autoSelect", "selecting the step's recipe when the window opens" },
 	tracker = { "tracker", "the tracker" },
+	minimap = { "minimap", "the minimap button" },
 }
 
 local function findGuide(word)
@@ -269,12 +273,13 @@ local function slash(msg)
 		end
 	elseif cmd == "toggle" then
 		local t = TOGGLES[rest:lower()]
-		if not t then return ns.Print("/craft toggle panel, shop, select or tracker.") end
+		if not t then return ns.Print("/craft toggle panel, shop, select, tracker or minimap.") end
 		local set = ns.db.settings
 		set[t[1]] = not set[t[1]]
 		ns.Print(("%s: %s."):format(t[2], set[t[1]] and "on" or "off"))
 		if ns.professionPanel then ns.professionPanel:SetShown(set.profPanel and ns.open ~= nil) end
 		ns.AH.UpdatePanel()
+		if ns.UpdateMinimap then ns.UpdateMinimap() end
 		ns.Refresh()
 	elseif cmd == "reset" then
 		local guide = ns.ActiveGuide()

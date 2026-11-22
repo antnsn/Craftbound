@@ -1,5 +1,7 @@
 # Craftbound
 
+<img src="Craftbound.png" alt="Craftbound" width="128" align="right">
+
 Profession levelling for **WoW: Forever**. Craftbound puts the next step in your profession
 window, buys what the route still needs in the auction house, and remembers where every
 character stopped.

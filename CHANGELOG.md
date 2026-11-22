@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Marius' painted icon: in the addon list, on a new minimap button (left-click: tracker,
+  right-click: pick a guide, drag to move; collected by minimap addons through LibDBIcon when
+  one is loaded), beside the panel titles and as the docs logo.
 - Three new guides: Blacksmithing (125-300), Engineering and Leatherworking (1-300).
 - Steps can need several tools (hammer, spanner, micro-adjustor) and a station (anvil,
   forge, tanning rack, sewing machine). A bought tool (the Blacksmith Hammer) is its own step,

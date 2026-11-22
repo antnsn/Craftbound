@@ -10,7 +10,7 @@ globals = {
 	"Craftbound_CraftNext", "Craftbound_BuyNext",
 }
 read_globals = {
-	"ATTACHMENTS_MAX_RECEIVE", "AuctionHouseFrame", "BuyMerchantItem", "GetInboxItem", "GetInboxNumItems", "C_AuctionHouse", "C_Item", "C_MerchantFrame", "C_Timer",
+	"ATTACHMENTS_MAX_RECEIVE", "AddonCompartmentFrame", "GetCursorPosition", "Minimap", "AuctionHouseFrame", "BuyMerchantItem", "GetInboxItem", "GetInboxNumItems", "C_AuctionHouse", "C_Item", "C_MerchantFrame", "C_Timer",
 	"C_TradeSkillUI", "CreateFrame", "Enum", "GameTooltip", "GetMerchantItemID", "GetMerchantItemMaxStack",
 	"GetMerchantNumItems", "GetMoney", "GetProfessionInfo", "GetProfessions", "GetTime", "InCombatLockdown",
 	"IsShiftKeyDown", "ItemLocation", "MerchantFrame", "ProfessionsFrame", "StaticPopup_Hide", "UIParent",

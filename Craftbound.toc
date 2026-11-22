@@ -5,7 +5,7 @@
 ## Version: @project-version@
 ## SavedVariables: CraftboundDB
 ## SavedVariablesPerCharacter: CraftboundCharDB
-## IconTexture: Interface\Icons\Trade_Engraving
+## IconTexture: Interface\AddOns\Craftbound\Media\Icon64
 ## X-Category: Professions
 
 Guides.lua
@@ -16,3 +16,4 @@ UI.lua
 Profession.lua
 AuctionHouse.lua
 Tracker.lua
+Minimap.lua
