@@ -43,6 +43,8 @@ The map button on the panel (and on the tracker), or `/craft way`, sets a waypoi
 
 ## At the trainer
 
+![The trainer panel beside Doctor Marsh, Expert Alchemist]({{ '/screenshots/trainer.png' | relative_url }})
+
 At a profession trainer a Craftbound panel sits beside the trainer window. It lists what your route needs from this trainer, up to your stop: the next rank, the recipes of the steps still ahead, and the recipes of parts those steps need (grinding stones, blasting powder). Each line says **train now**, **at** the skill it needs, or **not taught here** (a vendor or a special trainer has it).
 
 **Train N** trains only the lines marked *train now*, so you don't pay for every recipe the trainer has. Recipes you know, steps you are already past, tools you have and anything after your stop are left alone. `/craft toggle trainer` hides the panel.
