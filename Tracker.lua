@@ -96,7 +96,7 @@ local picker
 
 function ns.ShowGuidePicker()
 	if not picker then
-		picker = UI.Panel("CraftboundGuidePicker", UIParent, 300, 60 + 46 * #ns.Guides)
+		picker = UI.Panel("CraftboundGuidePicker", UIParent, 400, 44 + 46 * #ns.Guides)
 		picker:SetPoint("CENTER")
 		picker:SetFrameStrata("DIALOG")
 		UI.Movable(picker, function() return {} end, "x")
@@ -108,7 +108,7 @@ function ns.ShowGuidePicker()
 		close:SetPoint("TOPRIGHT", -2, -2)
 		picker.buttons = {}
 		for i, g in ipairs(ns.Guides) do
-			local b = UI.Button(picker, "", 276, 40, function()
+			local b = UI.Button(picker, "", 376, 40, function()
 				ns.SetActive(g.key)
 				picker:Hide()
 				ns.ShowTracker()
@@ -123,8 +123,8 @@ function ns.ShowGuidePicker()
 		local g = b.guide
 		local s = ns.char.skills[g.profession]
 		local tag = s and ("skill %d"):format(s.rank) or "not learned"
-		local active = ns.char.active == g.key and " (active)" or ""
-		b:SetText(("%s · %s  %d-%d   [%s]%s"):format(g.profession, g.name, g.from, g.to, tag, active))
+		local active = ns.char.active == g.key and "  |cff40ff40(active)|r" or ""
+		b:SetText(("%s · %s  %d-%d  [%s]%s"):format(g.profession, g.name, g.from, g.to, tag, active))
 	end
 	picker:Show()
 end

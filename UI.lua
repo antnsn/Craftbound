@@ -45,6 +45,11 @@ function UI.Button(parent, label, w, h, onClick)
 	local b = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
 	b:SetSize(w or 100, h or 22)
 	b:SetText(label)
+	local fs = b:GetFontString()
+	if fs then -- long labels are cut off inside the button, never drawn past its edges
+		fs:SetWidth((w or 100) - 12)
+		fs:SetWordWrap(false)
+	end
 	if onClick then b:SetScript("OnClick", onClick) end
 	return b
 end
