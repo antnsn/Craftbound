@@ -24,6 +24,7 @@ Beside the profession window it shows the next step and crafts it with one butto
 - **A panel beside it**: the step, its skill-up colour, the reagents you have and need, and the route ahead.
 - **Craft** (button or key binding) crafts the step: as many as you can, never past your rank's cap. Enchants go on the right equipped item.
 - **Says what's missing**: a recipe to learn (and where, from the vendors of your faction), a rank to train, a tool to make.
+- **Waypoints** to the nearest trainer for your next rank or recipe, the recipe's vendor, or a vendor for missing reagents (`/craft way` or the map button; TomTom too). The places come from Questie's database.
 - **At the trainer**: a panel lists the rank and recipes your route needs from there, up to your stop, and one button trains only those.
 - **Stops at the cap**: at 75/75, 150/150 and 225/225 crafting gives no skill-up, so Craft stops, and Blizzard's Create buttons ask before they craft.
 
@@ -52,6 +53,7 @@ Beside the profession window it shows the next step and crafts it with one butto
 - `/craft tracker`: show or hide the tracker
 - `/craft guide enchanting`: follow a profession's guide
 - `/craft stop 150`: stop at 150 (or 225, 300; `end` for the guide's end)
+- `/craft way`: a waypoint to what the route needs next (`way trainer`, `way recipe`, `way vendor`)
 - `/craft list`: the shopping list in chat
 - `/craft tick`, `/craft untick 3`: tick off a step by hand, or put it back
 - `/craft reset`: forget this character's progress in the active guide
@@ -59,6 +61,9 @@ Beside the profession window it shows the next step and crafts it with one butto
 - `/craft help`: list every command
 
 Key bindings (Key Bindings > AddOns > Craftbound): **Craft the next step** and **Auction house: buy next / confirm**.
+
+## Credits
+Where trainers and vendors stand comes from QuestieDB, part of [Questie](https://github.com/Questie/Questie), used under the GPLv3. Routes and recipe data: Wowhead's WoW: Forever profession guides. Craftbound is GPL-3.0-or-later.
 
 ## Ideas and contributions
 - **Missing something?** New features are added on request: leave a comment here.
@@ -69,6 +74,10 @@ Key bindings (Key Bindings > AddOns > Craftbound): **Craft the next step** and *
 ### 0.2.2-alpha (2026-11-22)
 
 - First version on CurseForge.
+- **Waypoints** (`/craft way`, or the map button on the profession panel and the tracker): to the
+  nearest trainer for your next rank or recipe, the recipe's vendor, or a vendor selling a
+  reagent you're missing, on your side and continent. Map waypoint plus TomTom. Trainer and
+  vendor places come from QuestieDB (Questie, GPLv3); Craftbound is now GPL-3.0-or-later.
 - **At the trainer**: a panel beside the profession trainer lists what the route needs from it,
   up to your stop (the next rank, the recipes of the steps ahead, the recipes of their parts), and
   **Train N** trains only those, not everything the trainer has.

@@ -276,12 +276,14 @@
           "source": {
             "type": "vendor",
             "npc": "Dalria",
+            "npc_id": 3954,
             "location": "Ashenvale",
             "cost_raw": 800,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Dalria",
+                "id": 3954,
                 "location": "Ashenvale",
                 "side": "Alliance",
                 "cost_raw": 800,
@@ -289,6 +291,7 @@
               },
               {
                 "npc": "Kulwia",
+                "id": 12043,
                 "location": "Stonetalon Mountains",
                 "side": "Horde",
                 "cost_raw": 842,
@@ -374,12 +377,14 @@
           "source": {
             "type": "vendor",
             "npc": "Dalria",
+            "npc_id": 3954,
             "location": "Ashenvale",
             "cost_raw": 2500,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Dalria",
+                "id": 3954,
                 "location": "Ashenvale",
                 "side": "Alliance",
                 "cost_raw": 2500,
@@ -387,6 +392,7 @@
               },
               {
                 "npc": "Kulwia",
+                "id": 12043,
                 "location": "Stonetalon Mountains",
                 "side": "Horde",
                 "cost_raw": 2631,
@@ -616,12 +622,14 @@
           "source": {
             "type": "vendor",
             "npc": "Lokhtos Darkbargainer",
+            "npc_id": 12944,
             "location": "Blackrock Depths",
             "cost_raw": 11250,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Lokhtos Darkbargainer",
+                "id": 12944,
                 "location": "Blackrock Depths",
                 "side": null,
                 "cost_raw": 11250,
@@ -629,6 +637,7 @@
               },
               {
                 "npc": "Kania",
+                "id": 15419,
                 "location": "Silithus",
                 "side": null,
                 "cost_raw": 9000,
@@ -662,12 +671,14 @@
           "source": {
             "type": "vendor",
             "npc": "Mythrin'dir",
+            "npc_id": 4229,
             "location": "Darnassus",
             "cost_raw": 12631,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Mythrin'dir",
+                "id": 4229,
                 "location": "Darnassus",
                 "side": "Alliance",
                 "cost_raw": 12631,
@@ -675,6 +686,7 @@
               },
               {
                 "npc": "Daniel Bartlett",
+                "id": 4561,
                 "location": "Undercity",
                 "side": "Horde",
                 "cost_raw": 11435,
@@ -713,6 +725,7 @@
           "source": {
             "type": "vendor",
             "npc": "Lorelae Wintersong",
+            "npc_id": 12022,
             "location": "Moonglade",
             "cost_raw": 22000,
             "limited_stock": true,
@@ -742,6 +755,7 @@
           "source": {
             "type": "vendor",
             "npc": "Lorelae Wintersong",
+            "npc_id": 12022,
             "location": "Moonglade",
             "cost_raw": 20000,
             "limited_stock": true,
@@ -1071,6 +1085,7 @@
           "source": {
             "type": "vendor",
             "npc": "Alchemist Pestlezugg",
+            "npc_id": 5594,
             "location": "Tanaris",
             "cost_raw": 7200,
             "limited_stock": null,
@@ -1153,12 +1168,14 @@
           "source": {
             "type": "vendor",
             "npc": "Ulthir",
+            "npc_id": 4226,
             "location": "Darnassus",
             "cost_raw": 11294,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Ulthir",
+                "id": 4226,
                 "location": "Darnassus",
                 "side": "Alliance",
                 "cost_raw": 11294,
@@ -1166,6 +1183,7 @@
               },
               {
                 "npc": "Algernon",
+                "id": 4610,
                 "location": "Undercity",
                 "side": "Horde",
                 "cost_raw": 12631,
@@ -2106,6 +2124,7 @@
           "source": {
             "type": "vendor",
             "npc": "Magnus Frostwake",
+            "npc_id": 11278,
             "location": "Western Plaguelands",
             "cost_raw": 9500,
             "limited_stock": null,
@@ -2141,6 +2160,7 @@
           "source": {
             "type": "vendor",
             "npc": "Pexmit",
+            "npc_id": 266901,
             "location": "Mount Hyjal",
             "cost_raw": 90000,
             "limited_stock": null,
@@ -2177,6 +2197,7 @@
           "source": {
             "type": "vendor",
             "npc": "Magnus Frostwake",
+            "npc_id": 11278,
             "location": "Western Plaguelands",
             "cost_raw": 15200,
             "limited_stock": null,
@@ -2212,6 +2233,7 @@
           "source": {
             "type": "vendor",
             "npc": "Pexmit",
+            "npc_id": 266901,
             "location": "Mount Hyjal",
             "cost_raw": 90000,
             "limited_stock": null,
@@ -2981,12 +3003,14 @@
           "source": {
             "type": "vendor",
             "npc": "Sovik",
+            "npc_id": 3413,
             "location": "Orgrimmar",
             "cost_raw": 12705,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Sovik",
+                "id": 3413,
                 "location": "Orgrimmar",
                 "side": "Horde",
                 "cost_raw": 12705,
@@ -2994,6 +3018,7 @@
               },
               {
                 "npc": "Gearcutter Cogspinner",
+                "id": 5175,
                 "location": "Ironforge",
                 "side": "Alliance",
                 "cost_raw": 10800,
@@ -3029,12 +3054,14 @@
           "source": {
             "type": "vendor",
             "npc": "Xizzer Fizzbolt",
+            "npc_id": 11185,
             "location": "Winterspring",
             "cost_raw": 14400,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Xizzer Fizzbolt",
+                "id": 11185,
                 "location": "Winterspring",
                 "side": null,
                 "cost_raw": 14400,
@@ -3042,6 +3069,7 @@
               },
               {
                 "npc": "Kor'gar",
+                "id": 260565,
                 "location": "Riverglades",
                 "side": null,
                 "cost_raw": 16842,
@@ -3529,12 +3557,14 @@
           "source": {
             "type": "vendor",
             "npc": "Rikqiz",
+            "npc_id": 2699,
             "location": "Stranglethorn Vale",
             "cost_raw": 3000,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Rikqiz",
+                "id": 2699,
                 "location": "Stranglethorn Vale",
                 "side": null,
                 "cost_raw": 3000,
@@ -3542,6 +3572,7 @@
               },
               {
                 "npc": "Vendor-Tron 1000",
+                "id": 12245,
                 "location": "Desolace",
                 "side": null,
                 "cost_raw": 3000,
@@ -3603,12 +3634,14 @@
           "source": {
             "type": "vendor",
             "npc": "Rikqiz",
+            "npc_id": 2699,
             "location": "Stranglethorn Vale",
             "cost_raw": 3000,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Rikqiz",
+                "id": 2699,
                 "location": "Stranglethorn Vale",
                 "side": null,
                 "cost_raw": 3000,
@@ -3616,6 +3649,7 @@
               },
               {
                 "npc": "Vendor-Tron 1000",
+                "id": 12245,
                 "location": "Desolace",
                 "side": null,
                 "cost_raw": 3000,
@@ -3784,12 +3818,14 @@
           "source": {
             "type": "vendor",
             "npc": "Leonard Porter",
+            "npc_id": 12942,
             "location": "Western Plaguelands",
             "cost_raw": 13500,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Leonard Porter",
+                "id": 12942,
                 "location": "Western Plaguelands",
                 "side": "Alliance",
                 "cost_raw": 13500,
@@ -3797,6 +3833,7 @@
               },
               {
                 "npc": "Werg Thickblade",
+                "id": 12943,
                 "location": "Tirisfal Glades",
                 "side": "Horde",
                 "cost_raw": 12000,
@@ -3829,6 +3866,7 @@
           "source": {
             "type": "vendor",
             "npc": "Zannok Hidepiercer",
+            "npc_id": 12956,
             "location": "Silithus",
             "cost_raw": 11400,
             "limited_stock": null,
@@ -3859,12 +3897,14 @@
           "source": {
             "type": "vendor",
             "npc": "Leonard Porter",
+            "npc_id": 12942,
             "location": "Western Plaguelands",
             "cost_raw": 13500,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Leonard Porter",
+                "id": 12942,
                 "location": "Western Plaguelands",
                 "side": "Alliance",
                 "cost_raw": 13500,
@@ -3872,6 +3912,7 @@
               },
               {
                 "npc": "Werg Thickblade",
+                "id": 12943,
                 "location": "Tirisfal Glades",
                 "side": "Horde",
                 "cost_raw": 12000,
@@ -3905,6 +3946,7 @@
           "source": {
             "type": "vendor",
             "npc": "Zannok Hidepiercer",
+            "npc_id": 12956,
             "location": "Silithus",
             "cost_raw": 23750,
             "limited_stock": null,
@@ -4546,6 +4588,7 @@
           "source": {
             "type": "vendor",
             "npc": "Darnall",
+            "npc_id": 7940,
             "location": "Moonglade",
             "cost_raw": 12000,
             "limited_stock": true,
@@ -4577,6 +4620,7 @@
           "source": {
             "type": "vendor",
             "npc": "Darnall",
+            "npc_id": 7940,
             "location": "Moonglade",
             "cost_raw": 20000,
             "limited_stock": true,
@@ -4607,6 +4651,7 @@
           "source": {
             "type": "vendor",
             "npc": "Pexmit",
+            "npc_id": 266901,
             "location": "Mount Hyjal",
             "cost_raw": 90000,
             "limited_stock": null,
@@ -4639,6 +4684,7 @@
           "source": {
             "type": "vendor",
             "npc": "Meilosh",
+            "npc_id": 11557,
             "location": "Felwood",
             "cost_raw": 20842,
             "limited_stock": null,
@@ -4672,6 +4718,7 @@
           "source": {
             "type": "vendor",
             "npc": "Mishta",
+            "npc_id": 15179,
             "location": "Silithus",
             "cost_raw": 67500,
             "limited_stock": null,
@@ -4706,6 +4753,7 @@
           "source": {
             "type": "vendor",
             "npc": "Mishta",
+            "npc_id": 15179,
             "location": "Silithus",
             "cost_raw": 67500,
             "limited_stock": null,
@@ -4740,6 +4788,7 @@
           "source": {
             "type": "vendor",
             "npc": "Mishta",
+            "npc_id": 15179,
             "location": "Silithus",
             "cost_raw": 67500,
             "limited_stock": null,
@@ -4799,12 +4848,14 @@
           "source": {
             "type": "vendor",
             "npc": "Tharynn Bouden",
+            "npc_id": 66,
             "location": "Elwynn Forest",
             "cost_raw": 38,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Tharynn Bouden",
+                "id": 66,
                 "location": "Elwynn Forest",
                 "side": "Alliance",
                 "cost_raw": 38,
@@ -4812,6 +4863,7 @@
               },
               {
                 "npc": "Khara Deepwater",
+                "id": 1684,
                 "location": "Loch Modan",
                 "side": "Alliance",
                 "cost_raw": 40,
@@ -4819,6 +4871,7 @@
               },
               {
                 "npc": "Sewa Mistrunner",
+                "id": 3029,
                 "location": "Thunder Bluff",
                 "side": "Horde",
                 "cost_raw": 37,
@@ -4826,6 +4879,7 @@
               },
               {
                 "npc": "Martine Tramblay",
+                "id": 3550,
                 "location": "Tirisfal Glades",
                 "side": "Horde",
                 "cost_raw": 38,
@@ -4833,6 +4887,7 @@
               },
               {
                 "npc": "Nyoma",
+                "id": 4265,
                 "location": "Teldrassil",
                 "side": "Alliance",
                 "cost_raw": 42,
@@ -4840,6 +4895,7 @@
               },
               {
                 "npc": "Lizbeth Cromwell",
+                "id": 4574,
                 "location": "Undercity",
                 "side": "Horde",
                 "cost_raw": 40,
@@ -4847,6 +4903,7 @@
               },
               {
                 "npc": "Catherine Leland",
+                "id": 5494,
                 "location": "Stormwind City",
                 "side": "Alliance",
                 "cost_raw": 42,
@@ -4854,6 +4911,7 @@
               },
               {
                 "npc": "Harn Longcast",
+                "id": 5940,
                 "location": "Mulgore",
                 "side": "Horde",
                 "cost_raw": 40,
@@ -4861,6 +4919,7 @@
               },
               {
                 "npc": "Gretta Ganter",
+                "id": 8508,
                 "location": "Dun Morogh",
                 "side": "Alliance",
                 "cost_raw": 42,
@@ -4899,12 +4958,14 @@
           "source": {
             "type": "vendor",
             "npc": "Tharynn Bouden",
+            "npc_id": 66,
             "location": "Elwynn Forest",
             "cost_raw": 380,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Tharynn Bouden",
+                "id": 66,
                 "location": "Elwynn Forest",
                 "side": "Alliance",
                 "cost_raw": 380,
@@ -4912,6 +4973,7 @@
               },
               {
                 "npc": "Khara Deepwater",
+                "id": 1684,
                 "location": "Loch Modan",
                 "side": "Alliance",
                 "cost_raw": 423,
@@ -4919,6 +4981,7 @@
               },
               {
                 "npc": "Naal Mistrunner",
+                "id": 3027,
                 "location": "Thunder Bluff",
                 "side": "Horde",
                 "cost_raw": 423,
@@ -4926,6 +4989,7 @@
               },
               {
                 "npc": "Nyoma",
+                "id": 4265,
                 "location": "Teldrassil",
                 "side": "Alliance",
                 "cost_raw": 421,
@@ -4933,6 +4997,7 @@
               },
               {
                 "npc": "Lizbeth Cromwell",
+                "id": 4574,
                 "location": "Undercity",
                 "side": "Horde",
                 "cost_raw": 423,
@@ -4940,6 +5005,7 @@
               },
               {
                 "npc": "Tansy Puddlefizz",
+                "id": 5162,
                 "location": "Ironforge",
                 "side": "Alliance",
                 "cost_raw": 380,
@@ -4947,6 +5013,7 @@
               },
               {
                 "npc": "Killian Sanatha",
+                "id": 5748,
                 "location": "Silverpine Forest",
                 "side": "Horde",
                 "cost_raw": 400,
@@ -4954,6 +5021,7 @@
               },
               {
                 "npc": "Harn Longcast",
+                "id": 5940,
                 "location": "Mulgore",
                 "side": "Horde",
                 "cost_raw": 400,
@@ -4993,12 +5061,14 @@
           "source": {
             "type": "vendor",
             "npc": "Lindea Rabonne",
+            "npc_id": 2383,
             "location": "Hillsbrad Foothills",
             "cost_raw": 1080,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Lindea Rabonne",
+                "id": 2383,
                 "location": "Hillsbrad Foothills",
                 "side": "Alliance",
                 "cost_raw": 1080,
@@ -5006,6 +5076,7 @@
               },
               {
                 "npc": "Derak Nightfall",
+                "id": 2397,
                 "location": "Hillsbrad Foothills",
                 "side": "Horde",
                 "cost_raw": 1270,
@@ -5013,6 +5084,7 @@
               },
               {
                 "npc": "Naal Mistrunner",
+                "id": 3027,
                 "location": "Thunder Bluff",
                 "side": "Horde",
                 "cost_raw": 1270,
@@ -5020,6 +5092,7 @@
               },
               {
                 "npc": "Sewa Mistrunner",
+                "id": 3029,
                 "location": "Thunder Bluff",
                 "side": "Horde",
                 "cost_raw": 1263,
@@ -5027,6 +5100,7 @@
               },
               {
                 "npc": "Kilxx",
+                "id": 3497,
                 "location": "The Barrens",
                 "side": null,
                 "cost_raw": 1136,
@@ -5034,6 +5108,7 @@
               },
               {
                 "npc": "Ronald Burch",
+                "id": 4553,
                 "location": "Undercity",
                 "side": "Horde",
                 "cost_raw": 1143,
@@ -5041,6 +5116,7 @@
               },
               {
                 "npc": "Catherine Leland",
+                "id": 5494,
                 "location": "Stormwind City",
                 "side": "Alliance",
                 "cost_raw": 1263,
@@ -5048,6 +5124,7 @@
               },
               {
                 "npc": "Gritta Chumwater",
+                "id": 260487,
                 "location": "Riverglades",
                 "side": null,
                 "cost_raw": 1136,
@@ -5087,12 +5164,14 @@
           "source": {
             "type": "vendor",
             "npc": "Lindea Rabonne",
+            "npc_id": 2383,
             "location": "Hillsbrad Foothills",
             "cost_raw": 1980,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Lindea Rabonne",
+                "id": 2383,
                 "location": "Hillsbrad Foothills",
                 "side": "Alliance",
                 "cost_raw": 1980,
@@ -5100,6 +5179,7 @@
               },
               {
                 "npc": "Kelsey Yance",
+                "id": 2664,
                 "location": "Stranglethorn Vale",
                 "side": null,
                 "cost_raw": 2084,
@@ -5107,6 +5187,7 @@
               },
               {
                 "npc": "Stuart Fleming",
+                "id": 3178,
                 "location": "Wetlands",
                 "side": "Alliance",
                 "cost_raw": 2200,
@@ -5114,6 +5195,7 @@
               },
               {
                 "npc": "Shankys",
+                "id": 3333,
                 "location": "Orgrimmar",
                 "side": "Horde",
                 "cost_raw": 2315,
@@ -5121,6 +5203,7 @@
               },
               {
                 "npc": "Heldan Galesong",
+                "id": 4307,
                 "location": "Darkshore",
                 "side": "Alliance",
                 "cost_raw": 2200,
@@ -5128,6 +5211,7 @@
               },
               {
                 "npc": "Lizbeth Cromwell",
+                "id": 4574,
                 "location": "Undercity",
                 "side": "Horde",
                 "cost_raw": 2329,
@@ -5135,6 +5219,7 @@
               },
               {
                 "npc": "Tansy Puddlefizz",
+                "id": 5162,
                 "location": "Ironforge",
                 "side": "Alliance",
                 "cost_raw": 2090,
@@ -5142,6 +5227,7 @@
               },
               {
                 "npc": "Wulan",
+                "id": 12033,
                 "location": "Desolace",
                 "side": "Horde",
                 "cost_raw": 1980,
@@ -5149,6 +5235,7 @@
               },
               {
                 "npc": "Wik'Tar",
+                "id": 12962,
                 "location": "Ashenvale",
                 "side": "Horde",
                 "cost_raw": 2200,
@@ -5180,6 +5267,7 @@
           "source": {
             "type": "vendor",
             "npc": "Gikkix",
+            "npc_id": 8137,
             "location": "Tanaris",
             "cost_raw": 15157,
             "limited_stock": null,
@@ -5211,12 +5299,14 @@
           "source": {
             "type": "vendor",
             "npc": "Vivianna",
+            "npc_id": 7947,
             "location": "Feralas",
             "cost_raw": 20117,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Vivianna",
+                "id": 7947,
                 "location": "Feralas",
                 "side": "Alliance",
                 "cost_raw": 20117,
@@ -5224,6 +5314,7 @@
               },
               {
                 "npc": "Sheendra Tallgrass",
+                "id": 8145,
                 "location": "Feralas",
                 "side": "Horde",
                 "cost_raw": 19000,
@@ -5419,12 +5510,14 @@
           "source": {
             "type": "vendor",
             "npc": "Deneb Walker",
+            "npc_id": 2805,
             "location": "Arathi Highlands",
             "cost_raw": 2444,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Deneb Walker",
+                "id": 2805,
                 "location": "Arathi Highlands",
                 "side": "Alliance",
                 "cost_raw": 2444,
@@ -5432,6 +5525,7 @@
               },
               {
                 "npc": "Balai Lok'Wein",
+                "id": 13476,
                 "location": "Dustwallow Marsh",
                 "side": "Horde",
                 "cost_raw": 2329,
@@ -5462,12 +5556,14 @@
           "source": {
             "type": "vendor",
             "npc": "Deneb Walker",
+            "npc_id": 2805,
             "location": "Arathi Highlands",
             "cost_raw": 5555,
             "limited_stock": null,
             "vendors": [
               {
                 "npc": "Deneb Walker",
+                "id": 2805,
                 "location": "Arathi Highlands",
                 "side": "Alliance",
                 "cost_raw": 5555,
@@ -5475,6 +5571,7 @@
               },
               {
                 "npc": "Balai Lok'Wein",
+                "id": 13476,
                 "location": "Dustwallow Marsh",
                 "side": "Horde",
                 "cost_raw": 5294,

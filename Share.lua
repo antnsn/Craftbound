@@ -169,7 +169,7 @@ local SOURCES = { trainer = true, vendor = true, known = true, quest = true, dro
 
 local function source(v)
 	if type(v) ~= "table" or not SOURCES[v.kind] then return nil end
-	local out = { kind = v.kind, cost = int(v.cost, 0, 100000000), npc = str(v.npc),
+	local out = { kind = v.kind, cost = int(v.cost, 0, 100000000), npc = str(v.npc), npcID = int(v.npcID, 1, 9999999),
 		location = str(v.location), limited = v.limited == true or nil, rep = str(v.rep) }
 	if type(v.vendors) == "table" then
 		out.vendors = {}
@@ -177,7 +177,7 @@ local function source(v)
 			local x = v.vendors[i]
 			if type(x) == "table" and str(x.npc) then
 				local side = (x.side == "Alliance" or x.side == "Horde") and x.side or nil
-				out.vendors[#out.vendors + 1] = { npc = str(x.npc), location = str(x.location), side = side,
+				out.vendors[#out.vendors + 1] = { npc = str(x.npc), id = int(x.id, 1, 9999999), location = str(x.location), side = side,
 					cost = int(x.cost, 0, 100000000), limited = x.limited == true or nil }
 			end
 		end

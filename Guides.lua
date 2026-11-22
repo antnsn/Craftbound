@@ -34,9 +34,9 @@ ns.Guides = {
 			{ kind = "train", rank = "Expert", reqSkill = 125, reqLevel = 20, before = 150, cap = 225 },
 			{ kind = "craft", from = 110, to = 135, recipe = "Enchant Cloak - Minor Agility", colors = { 110, 135, 155, 175 }, expected = 25, safe = 25, tools = { "Runed Silver Rod" }, mats = {
 				{ name = "Lesser Astral Essence", id = 10998, qty = 1 },
-			}, source = { kind = "vendor", cost = 800, npc = "Dalria", location = "Ashenvale", vendors = {
-				{ npc = "Dalria", location = "Ashenvale", side = "Alliance", cost = 800, limited = true },
-				{ npc = "Kulwia", location = "Stonetalon Mountains", side = "Horde", cost = 842, limited = true },
+			}, source = { kind = "vendor", cost = 800, npc = "Dalria", npcID = 3954, location = "Ashenvale", vendors = {
+				{ npc = "Dalria", id = 3954, location = "Ashenvale", side = "Alliance", cost = 800, limited = true },
+				{ npc = "Kulwia", id = 12043, location = "Stonetalon Mountains", side = "Horde", cost = 842, limited = true },
 			} } },
 			{ kind = "craft", from = 135, to = 155, recipe = "Enchant Bracer - Lesser Stamina", colors = { 130, 155, 175, 195 }, expected = 20, safe = 20, tools = { "Runed Silver Rod" }, mats = {
 				{ name = "Soul Dust", id = 11083, qty = 1 },
@@ -49,9 +49,9 @@ ns.Guides = {
 			}, source = { kind = "trainer", cost = 2500 }, item = 11130, note = "Keep the Runed Golden Rod: the enchants from here to 200 need it." },
 			{ kind = "craft", from = 156, to = 185, recipe = "Enchant Bracer - Lesser Strength", colors = { 140, 165, 185, 205 }, expected = 36, safe = 41, tools = { "Runed Silver Rod" }, mats = {
 				{ name = "Soul Dust", id = 11083, qty = 1 },
-			}, source = { kind = "vendor", cost = 2500, npc = "Dalria", location = "Ashenvale", vendors = {
-				{ npc = "Dalria", location = "Ashenvale", side = "Alliance", cost = 2500, limited = true },
-				{ npc = "Kulwia", location = "Stonetalon Mountains", side = "Horde", cost = 2631, limited = true },
+			}, source = { kind = "vendor", cost = 2500, npc = "Dalria", npcID = 3954, location = "Ashenvale", vendors = {
+				{ npc = "Dalria", id = 3954, location = "Ashenvale", side = "Alliance", cost = 2500, limited = true },
+				{ npc = "Kulwia", id = 12043, location = "Stonetalon Mountains", side = "Horde", cost = 2631, limited = true },
 			} } },
 			{ kind = "craft", from = 185, to = 200, recipe = "Enchant Bracer - Strength", colors = { 180, 200, 220, 240 }, expected = 15, safe = 15, tools = { "Runed Golden Rod" }, mats = {
 				{ name = "Vision Dust", id = 11137, qty = 1 },
@@ -82,15 +82,15 @@ ns.Guides = {
 				{ name = "Dream Dust", id = 11176, qty = 1 },
 				{ name = "Purple Lotus", id = 8831, qty = 1 },
 				{ name = "Crystal Vial", id = 8925, qty = 1 },
-			}, source = { kind = "vendor", cost = 11250, npc = "Lokhtos Darkbargainer", location = "Blackrock Depths", vendors = {
-				{ npc = "Lokhtos Darkbargainer", location = "Blackrock Depths", cost = 11250 },
-				{ npc = "Kania", location = "Silithus", cost = 9000 },
+			}, source = { kind = "vendor", cost = 11250, npc = "Lokhtos Darkbargainer", npcID = 12944, location = "Blackrock Depths", vendors = {
+				{ npc = "Lokhtos Darkbargainer", id = 12944, location = "Blackrock Depths", cost = 11250 },
+				{ npc = "Kania", id = 15419, location = "Silithus", cost = 9000 },
 			} } },
 			{ kind = "craft", from = 265, to = 294, recipe = "Enchant Shield - Greater Stamina", colors = { 265, 285, 305, 325 }, expected = 30, safe = 31, tools = { "Runed Truesilver Rod" }, mats = {
 				{ name = "Dream Dust", id = 11176, qty = 6 },
-			}, source = { kind = "vendor", cost = 12631, npc = "Mythrin'dir", location = "Darnassus", vendors = {
-				{ npc = "Mythrin'dir", location = "Darnassus", side = "Alliance", cost = 12631, limited = true },
-				{ npc = "Daniel Bartlett", location = "Undercity", side = "Horde", cost = 11435 },
+			}, source = { kind = "vendor", cost = 12631, npc = "Mythrin'dir", npcID = 4229, location = "Darnassus", vendors = {
+				{ npc = "Mythrin'dir", id = 4229, location = "Darnassus", side = "Alliance", cost = 12631, limited = true },
+				{ npc = "Daniel Bartlett", id = 4561, location = "Undercity", side = "Horde", cost = 11435 },
 			} } },
 			{ kind = "craft", from = 294, to = 295, recipe = "Runed Arcanite Rod", colors = { 290, 310, 330, 350 }, expected = 1, safe = 1, mats = {
 				{ name = "Arcanite Rod", id = 16206, qty = 1 },
@@ -99,10 +99,10 @@ ns.Guides = {
 				{ name = "Greater Eternal Essence", id = 16203, qty = 4 },
 				{ name = "Small Brilliant Shard", id = 14343, qty = 4 },
 				{ name = "Large Brilliant Shard", id = 14344, qty = 2 },
-			}, source = { kind = "vendor", cost = 22000, npc = "Lorelae Wintersong", location = "Moonglade", limited = true }, note = "The recipe is sold by Lorelae Wintersong (Moonglade) in limited stock; it restocks. Keep the Runed Arcanite Rod: the last enchants need it." },
+			}, source = { kind = "vendor", cost = 22000, npc = "Lorelae Wintersong", npcID = 12022, location = "Moonglade", limited = true }, note = "The recipe is sold by Lorelae Wintersong (Moonglade) in limited stock; it restocks. Keep the Runed Arcanite Rod: the last enchants need it." },
 			{ kind = "craft", from = 295, to = 300, recipe = "Enchant Cloak - Superior Defense", colors = { 285, 305, 325, 345 }, expected = 5, safe = 5, tools = { "Runed Truesilver Rod" }, mats = {
 				{ name = "Illusion Dust", id = 16204, qty = 8 },
-			}, source = { kind = "vendor", cost = 20000, npc = "Lorelae Wintersong", location = "Moonglade", limited = true }, note = "The recipe is sold by Lorelae Wintersong (Moonglade) in limited stock; it restocks." },
+			}, source = { kind = "vendor", cost = 20000, npc = "Lorelae Wintersong", npcID = 12022, location = "Moonglade", limited = true }, note = "The recipe is sold by Lorelae Wintersong (Moonglade) in limited stock; it restocks." },
 		},
 	},
 	{ key = "Alchemy:Tried & Tested", profession = "Alchemy", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 316, p90Crafts = 336, playtested = true,
@@ -159,7 +159,7 @@ ns.Guides = {
 				{ name = "Black Vitriol", id = 9262, qty = 1 },
 				{ name = "Purple Lotus", id = 8831, qty = 4 },
 				{ name = "Firebloom", id = 4625, qty = 4 },
-			}, source = { kind = "vendor", cost = 7200, npc = "Alchemist Pestlezugg", location = "Tanaris" }, note = "Keep the Philosopher's Stone: transmutes need it." },
+			}, source = { kind = "vendor", cost = 7200, npc = "Alchemist Pestlezugg", npcID = 5594, location = "Tanaris" }, note = "Keep the Philosopher's Stone: transmutes need it." },
 			{ kind = "craft", from = 226, to = 240, recipe = "Greater Mana Potion", colors = { 205, 220, 240, 260 }, expected = 20, safe = 25, mats = {
 				{ name = "Khadgar's Whisker", id = 3358, qty = 1 },
 				{ name = "Goldthorn", id = 3821, qty = 1 },
@@ -173,9 +173,9 @@ ns.Guides = {
 				{ name = "Sungrass", id = 8838, qty = 2 },
 				{ name = "Blindweed", id = 8839, qty = 2 },
 				{ name = "Crystal Vial", id = 8925, qty = 1 },
-			}, source = { kind = "vendor", cost = 11294, npc = "Ulthir", location = "Darnassus", vendors = {
-				{ npc = "Ulthir", location = "Darnassus", side = "Alliance", cost = 11294, limited = true },
-				{ npc = "Algernon", location = "Undercity", side = "Horde", cost = 12631, limited = true },
+			}, source = { kind = "vendor", cost = 11294, npc = "Ulthir", npcID = 4226, location = "Darnassus", vendors = {
+				{ npc = "Ulthir", id = 4226, location = "Darnassus", side = "Alliance", cost = 11294, limited = true },
+				{ npc = "Algernon", id = 4610, location = "Undercity", side = "Horde", cost = 12631, limited = true },
 			} } },
 			{ kind = "craft", from = 270, to = 300, recipe = "Major Discolored Healing Potion", colors = { 250, 290, 310, 330 }, expected = 31, safe = 33, mats = {
 				{ name = "Crystal Vial", id = 8925, qty = 1 },
@@ -312,25 +312,25 @@ ns.Guides = {
 				{ name = "Star Ruby", id = 7910, qty = 2 },
 				{ name = "Solid Grinding Stone", id = 7966, qty = 1 },
 				{ name = "Thick Leather", id = 4304, qty = 2 },
-			}, source = { kind = "vendor", cost = 9500, npc = "Magnus Frostwake", location = "Western Plaguelands" } },
+			}, source = { kind = "vendor", cost = 9500, npc = "Magnus Frostwake", npcID = 11278, location = "Western Plaguelands" } },
 			{ kind = "craft", from = 270, to = 275, recipe = "Bold Dirk", colors = { 270, 290, 300, 310 }, expected = 5, safe = 5, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Thorium Bar", id = 12359, qty = 30 },
 				{ name = "Essence of Air", id = 7082, qty = 4 },
 				{ name = "Azerothium Bar", id = 249726, qty = 10 },
 				{ name = "Rugged Leather", id = 8170, qty = 4 },
-			}, source = { kind = "vendor", cost = 90000, npc = "Pexmit", location = "Mount Hyjal" } },
+			}, source = { kind = "vendor", cost = 90000, npc = "Pexmit", npcID = 266901, location = "Mount Hyjal" } },
 			{ kind = "craft", from = 275, to = 279, recipe = "Ornate Thorium Handaxe", colors = { 275, 275, 287, 300 }, expected = 4, safe = 5, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Thorium Bar", id = 12359, qty = 20 },
 				{ name = "Large Opal", id = 12799, qty = 2 },
 				{ name = "Dense Grinding Stone", id = 12644, qty = 2 },
 				{ name = "Rugged Leather", id = 8170, qty = 4 },
-			}, source = { kind = "vendor", cost = 15200, npc = "Magnus Frostwake", location = "Western Plaguelands" } },
+			}, source = { kind = "vendor", cost = 15200, npc = "Magnus Frostwake", npcID = 11278, location = "Western Plaguelands" } },
 			{ kind = "craft", from = 279, to = 300, recipe = "Bold Dirk", colors = { 270, 290, 300, 310 }, expected = 24, safe = 27, tools = { "Blacksmith Hammer" }, station = "Anvil", mats = {
 				{ name = "Thorium Bar", id = 12359, qty = 30 },
 				{ name = "Essence of Air", id = 7082, qty = 4 },
 				{ name = "Azerothium Bar", id = 249726, qty = 10 },
 				{ name = "Rugged Leather", id = 8170, qty = 4 },
-			}, source = { kind = "vendor", cost = 90000, npc = "Pexmit", location = "Mount Hyjal" } },
+			}, source = { kind = "vendor", cost = 90000, npc = "Pexmit", npcID = 266901, location = "Mount Hyjal" } },
 		},
 	},
 	{ key = "Engineering:Tried & Tested", profession = "Engineering", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 395, p90Crafts = 476, playtested = true,
@@ -455,15 +455,15 @@ ns.Guides = {
 			{ kind = "craft", from = 260, to = 285, recipe = "Thorium Widget", colors = { 260, 280, 290, 300 }, expected = 25, safe = 27, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
 				{ name = "Thorium Bar", id = 12359, qty = 3 },
 				{ name = "Runecloth", id = 14047, qty = 1 },
-			}, source = { kind = "vendor", cost = 12705, npc = "Sovik", location = "Orgrimmar", vendors = {
-				{ npc = "Sovik", location = "Orgrimmar", side = "Horde", cost = 12705 },
-				{ npc = "Gearcutter Cogspinner", location = "Ironforge", side = "Alliance", cost = 10800 },
+			}, source = { kind = "vendor", cost = 12705, npc = "Sovik", npcID = 3413, location = "Orgrimmar", vendors = {
+				{ npc = "Sovik", id = 3413, location = "Orgrimmar", side = "Horde", cost = 12705 },
+				{ npc = "Gearcutter Cogspinner", id = 5175, location = "Ironforge", side = "Alliance", cost = 10800 },
 			} } },
 			{ kind = "craft", from = 285, to = 300, recipe = "Thorium Tube", colors = { 275, 295, 305, 315 }, expected = 15, safe = 17, tools = { "Blacksmith Hammer", "Arclight Spanner" }, station = "Anvil", mats = {
 				{ name = "Thorium Bar", id = 12359, qty = 6 },
-			}, source = { kind = "vendor", cost = 14400, npc = "Xizzer Fizzbolt", location = "Winterspring", vendors = {
-				{ npc = "Xizzer Fizzbolt", location = "Winterspring", cost = 14400 },
-				{ npc = "Kor'gar", location = "Riverglades", cost = 16842 },
+			}, source = { kind = "vendor", cost = 14400, npc = "Xizzer Fizzbolt", npcID = 11185, location = "Winterspring", vendors = {
+				{ npc = "Xizzer Fizzbolt", id = 11185, location = "Winterspring", cost = 14400 },
+				{ npc = "Kor'gar", id = 260565, location = "Riverglades", cost = 16842 },
 			} } },
 		},
 	},
@@ -555,9 +555,9 @@ ns.Guides = {
 				{ name = "Jade", id = 1529, qty = 2 },
 				{ name = "Citrine", id = 3864, qty = 1 },
 				{ name = "Fine Thread", id = 2321, qty = 1 },
-			}, source = { kind = "vendor", cost = 3000, npc = "Rikqiz", location = "Stranglethorn Vale", vendors = {
-				{ npc = "Rikqiz", location = "Stranglethorn Vale", cost = 3000, limited = true },
-				{ npc = "Vendor-Tron 1000", location = "Desolace", cost = 3000, limited = true },
+			}, source = { kind = "vendor", cost = 3000, npc = "Rikqiz", npcID = 2699, location = "Stranglethorn Vale", vendors = {
+				{ npc = "Rikqiz", id = 2699, location = "Stranglethorn Vale", cost = 3000, limited = true },
+				{ npc = "Vendor-Tron 1000", id = 12245, location = "Desolace", cost = 3000, limited = true },
 			} } },
 			{ kind = "craft", from = 180, to = 185, recipe = "Barbaric Shoulders", colors = { 150, 170, 180, 190 }, expected = 12, safe = 19, mats = {
 				{ name = "Heavy Leather", id = 4234, qty = 8 },
@@ -570,9 +570,9 @@ ns.Guides = {
 				{ name = "Jade", id = 1529, qty = 2 },
 				{ name = "Citrine", id = 3864, qty = 1 },
 				{ name = "Fine Thread", id = 2321, qty = 1 },
-			}, source = { kind = "vendor", cost = 3000, npc = "Rikqiz", location = "Stranglethorn Vale", vendors = {
-				{ npc = "Rikqiz", location = "Stranglethorn Vale", cost = 3000, limited = true },
-				{ npc = "Vendor-Tron 1000", location = "Desolace", cost = 3000, limited = true },
+			}, source = { kind = "vendor", cost = 3000, npc = "Rikqiz", npcID = 2699, location = "Stranglethorn Vale", vendors = {
+				{ npc = "Rikqiz", id = 2699, location = "Stranglethorn Vale", cost = 3000, limited = true },
+				{ npc = "Vendor-Tron 1000", id = 12245, location = "Desolace", cost = 3000, limited = true },
 			} } },
 			{ kind = "craft", from = 190, to = 200, recipe = "Guardian Gloves", colors = { 165, 185, 195, 205 }, expected = 20, safe = 27, mats = {
 				{ name = "Heavy Leather", id = 4234, qty = 4 },
@@ -600,29 +600,29 @@ ns.Guides = {
 				{ name = "Rugged Leather", id = 8170, qty = 8 },
 				{ name = "Black Dye", id = 2325, qty = 1 },
 				{ name = "Rune Thread", id = 14341, qty = 1 },
-			}, source = { kind = "vendor", cost = 13500, npc = "Leonard Porter", location = "Western Plaguelands", vendors = {
-				{ npc = "Leonard Porter", location = "Western Plaguelands", side = "Alliance", cost = 13500, limited = true },
-				{ npc = "Werg Thickblade", location = "Tirisfal Glades", side = "Horde", cost = 12000, limited = true },
+			}, source = { kind = "vendor", cost = 13500, npc = "Leonard Porter", npcID = 12942, location = "Western Plaguelands", vendors = {
+				{ npc = "Leonard Porter", id = 12942, location = "Western Plaguelands", side = "Alliance", cost = 13500, limited = true },
+				{ npc = "Werg Thickblade", id = 12943, location = "Tirisfal Glades", side = "Horde", cost = 12000, limited = true },
 			} } },
 			{ kind = "craft", from = 255, to = 260, recipe = "Heavy Scorpid Bracers", colors = { 255, 255, 260, 270 }, expected = 5, safe = 7, mats = {
 				{ name = "Rugged Leather", id = 8170, qty = 4 },
 				{ name = "Heavy Scorpid Scale", id = 15408, qty = 4 },
 				{ name = "Rune Thread", id = 14341, qty = 1 },
-			}, source = { kind = "vendor", cost = 11400, npc = "Zannok Hidepiercer", location = "Silithus" } },
+			}, source = { kind = "vendor", cost = 11400, npc = "Zannok Hidepiercer", npcID = 12956, location = "Silithus" } },
 			{ kind = "craft", from = 260, to = 270, recipe = "Wicked Leather Gauntlets", colors = { 235, 255, 265, 275 }, expected = 20, safe = 27, mats = {
 				{ name = "Rugged Leather", id = 8170, qty = 8 },
 				{ name = "Black Dye", id = 2325, qty = 1 },
 				{ name = "Rune Thread", id = 14341, qty = 1 },
-			}, source = { kind = "vendor", cost = 13500, npc = "Leonard Porter", location = "Western Plaguelands", vendors = {
-				{ npc = "Leonard Porter", location = "Western Plaguelands", side = "Alliance", cost = 13500, limited = true },
-				{ npc = "Werg Thickblade", location = "Tirisfal Glades", side = "Horde", cost = 12000, limited = true },
+			}, source = { kind = "vendor", cost = 13500, npc = "Leonard Porter", npcID = 12942, location = "Western Plaguelands", vendors = {
+				{ npc = "Leonard Porter", id = 12942, location = "Western Plaguelands", side = "Alliance", cost = 13500, limited = true },
+				{ npc = "Werg Thickblade", id = 12943, location = "Tirisfal Glades", side = "Horde", cost = 12000, limited = true },
 			} } },
 			{ kind = "craft", from = 270, to = 300, recipe = "Heavy Scorpid Helm", colors = { 270, 290, 300, 310 }, expected = 33, safe = 36, mats = {
 				{ name = "Rugged Leather", id = 8170, qty = 8 },
 				{ name = "Heavy Scorpid Scale", id = 15408, qty = 12 },
 				{ name = "Cured Rugged Hide", id = 15407, qty = 1 },
 				{ name = "Rune Thread", id = 14341, qty = 1 },
-			}, source = { kind = "vendor", cost = 23750, npc = "Zannok Hidepiercer", location = "Silithus" } },
+			}, source = { kind = "vendor", cost = 23750, npc = "Zannok Hidepiercer", npcID = 12956, location = "Silithus" } },
 		},
 	},
 	{ key = "Tailoring:Tried & Tested", profession = "Tailoring", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 363, p90Crafts = 434, playtested = true,
@@ -731,109 +731,109 @@ ns.Guides = {
 				{ name = "Bolt of Runecloth", id = 14048, qty = 4 },
 				{ name = "Ironweb Spider Silk", id = 14227, qty = 1 },
 				{ name = "Rune Thread", id = 14341, qty = 1 },
-			}, source = { kind = "vendor", cost = 12000, npc = "Darnall", location = "Moonglade", limited = true }, note = "The recipe is sold by Darnall (Moonglade) in limited stock; it restocks." },
+			}, source = { kind = "vendor", cost = 12000, npc = "Darnall", npcID = 7940, location = "Moonglade", limited = true }, note = "The recipe is sold by Darnall (Moonglade) in limited stock; it restocks." },
 			{ kind = "craft", from = 250, to = 260, recipe = "Runecloth Boots", colors = { 235, 250, 265, 280 }, expected = 11, safe = 14, mats = {
 				{ name = "Bolt of Runecloth", id = 14048, qty = 4 },
 				{ name = "Ironweb Spider Silk", id = 14227, qty = 2 },
 				{ name = "Rugged Leather", id = 8170, qty = 4 },
 				{ name = "Rune Thread", id = 14341, qty = 1 },
-			}, source = { kind = "vendor", cost = 20000, npc = "Darnall", location = "Moonglade", limited = true }, note = "The recipe is sold by Darnall (Moonglade) in limited stock; it restocks." },
+			}, source = { kind = "vendor", cost = 20000, npc = "Darnall", npcID = 7940, location = "Moonglade", limited = true }, note = "The recipe is sold by Darnall (Moonglade) in limited stock; it restocks." },
 			{ kind = "craft", from = 260, to = 280, recipe = "Runecloth Cuffs", colors = { 250, 265, 280, 295 }, expected = 25, safe = 29, mats = {
 				{ name = "Bolt of Runecloth", id = 14048, qty = 5 },
 				{ name = "Ironweb Spider Silk", id = 14227, qty = 1 },
 				{ name = "Rune Thread", id = 14341, qty = 1 },
-			}, source = { kind = "vendor", cost = 90000, npc = "Pexmit", location = "Mount Hyjal" } },
+			}, source = { kind = "vendor", cost = 90000, npc = "Pexmit", npcID = 266901, location = "Mount Hyjal" } },
 			{ kind = "craft", from = 280, to = 285, recipe = "Wisdom of the Timbermaw", colors = { 255, 270, 285, 300 }, expected = 8, safe = 11, station = "Spinning Wheel", mats = {
 				{ name = "Bolt of Runecloth", id = 14048, qty = 8 },
 				{ name = "Essence of Earth", id = 7076, qty = 3 },
 				{ name = "Living Essence", id = 12803, qty = 3 },
 				{ name = "Ironweb Spider Silk", id = 14227, qty = 2 },
-			}, source = { kind = "vendor", cost = 20842, npc = "Meilosh", location = "Felwood", rep = "Honored with Timbermaw Hold" }, note = "Needs Honored with Timbermaw Hold to learn this recipe." },
+			}, source = { kind = "vendor", cost = 20842, npc = "Meilosh", npcID = 11557, location = "Felwood", rep = "Honored with Timbermaw Hold" }, note = "Needs Honored with Timbermaw Hold to learn this recipe." },
 			{ kind = "craft", from = 285, to = 292, recipe = "Venomspew Gloves", colors = { 285, 290, 292, 295 }, expected = 7, safe = 8, station = "Loom", mats = {
 				{ name = "Bolt of Runecloth", id = 14048, qty = 4 },
 				{ name = "Small Brilliant Shard", id = 14343, qty = 1 },
 				{ name = "Essence of Air", id = 7082, qty = 3 },
 				{ name = "Rune Thread", id = 14341, qty = 6 },
-			}, source = { kind = "vendor", cost = 67500, npc = "Mishta", location = "Silithus", rep = "Friendly with Cenarion Circle" }, note = "Needs Friendly with Cenarion Circle to learn this recipe." },
+			}, source = { kind = "vendor", cost = 67500, npc = "Mishta", npcID = 15179, location = "Silithus", rep = "Friendly with Cenarion Circle" }, note = "Needs Friendly with Cenarion Circle to learn this recipe." },
 			{ kind = "craft", from = 292, to = 299, recipe = "Venomspew Cord", colors = { 290, 295, 297, 300 }, expected = 9, safe = 12, station = "Loom", mats = {
 				{ name = "Bolt of Runecloth", id = 14048, qty = 6 },
 				{ name = "Small Brilliant Shard", id = 14343, qty = 1 },
 				{ name = "Essence of Air", id = 7082, qty = 3 },
 				{ name = "Rune Thread", id = 14341, qty = 6 },
-			}, source = { kind = "vendor", cost = 67500, npc = "Mishta", location = "Silithus", rep = "Honored with Cenarion Circle" }, note = "Needs Honored with Cenarion Circle to learn this recipe." },
+			}, source = { kind = "vendor", cost = 67500, npc = "Mishta", npcID = 15179, location = "Silithus", rep = "Honored with Cenarion Circle" }, note = "Needs Honored with Cenarion Circle to learn this recipe." },
 			{ kind = "craft", from = 299, to = 300, recipe = "Venomspew Footpads", colors = { 295, 295, 297, 300 }, expected = 5, safe = 11, station = "Loom", mats = {
 				{ name = "Bolt of Runecloth", id = 14048, qty = 5 },
 				{ name = "Small Brilliant Shard", id = 14343, qty = 1 },
 				{ name = "Essence of Air", id = 7082, qty = 3 },
 				{ name = "Rune Thread", id = 14341, qty = 6 },
-			}, source = { kind = "vendor", cost = 67500, npc = "Mishta", location = "Silithus", rep = "Honored with Cenarion Circle" }, note = "Needs Honored with Cenarion Circle to learn this recipe." },
+			}, source = { kind = "vendor", cost = 67500, npc = "Mishta", npcID = 15179, location = "Silithus", rep = "Honored with Cenarion Circle" }, note = "Needs Honored with Cenarion Circle to learn this recipe." },
 		},
 	},
 	{ key = "Cooking:Tried & Tested", profession = "Cooking", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 346, p90Crafts = 371, playtested = true,
 		steps = {
 			{ kind = "craft", from = 1, to = 50, recipe = "Brilliant Smallfish", colors = { 1, 45, 65, 85 }, expected = 49, safe = 50, station = "Cooking Fire", mats = {
 				{ name = "Raw Brilliant Smallfish", id = 6291, qty = 1 },
-			}, source = { kind = "vendor", cost = 38, npc = "Tharynn Bouden", location = "Elwynn Forest", vendors = {
-				{ npc = "Tharynn Bouden", location = "Elwynn Forest", side = "Alliance", cost = 38 },
-				{ npc = "Khara Deepwater", location = "Loch Modan", side = "Alliance", cost = 40 },
-				{ npc = "Sewa Mistrunner", location = "Thunder Bluff", side = "Horde", cost = 37 },
-				{ npc = "Martine Tramblay", location = "Tirisfal Glades", side = "Horde", cost = 38 },
-				{ npc = "Nyoma", location = "Teldrassil", side = "Alliance", cost = 42 },
-				{ npc = "Lizbeth Cromwell", location = "Undercity", side = "Horde", cost = 40 },
-				{ npc = "Catherine Leland", location = "Stormwind City", side = "Alliance", cost = 42 },
-				{ npc = "Harn Longcast", location = "Mulgore", side = "Horde", cost = 40 },
-				{ npc = "Gretta Ganter", location = "Dun Morogh", side = "Alliance", cost = 42 },
+			}, source = { kind = "vendor", cost = 38, npc = "Tharynn Bouden", npcID = 66, location = "Elwynn Forest", vendors = {
+				{ npc = "Tharynn Bouden", id = 66, location = "Elwynn Forest", side = "Alliance", cost = 38 },
+				{ npc = "Khara Deepwater", id = 1684, location = "Loch Modan", side = "Alliance", cost = 40 },
+				{ npc = "Sewa Mistrunner", id = 3029, location = "Thunder Bluff", side = "Horde", cost = 37 },
+				{ npc = "Martine Tramblay", id = 3550, location = "Tirisfal Glades", side = "Horde", cost = 38 },
+				{ npc = "Nyoma", id = 4265, location = "Teldrassil", side = "Alliance", cost = 42 },
+				{ npc = "Lizbeth Cromwell", id = 4574, location = "Undercity", side = "Horde", cost = 40 },
+				{ npc = "Catherine Leland", id = 5494, location = "Stormwind City", side = "Alliance", cost = 42 },
+				{ npc = "Harn Longcast", id = 5940, location = "Mulgore", side = "Horde", cost = 40 },
+				{ npc = "Gretta Ganter", id = 8508, location = "Dun Morogh", side = "Alliance", cost = 42 },
 			} } },
 			{ kind = "train", rank = "Journeyman", reqSkill = 50, reqLevel = 10, before = 75, cap = 150 },
 			{ kind = "craft", from = 50, to = 100, recipe = "Longjaw Mud Snapper", colors = { 50, 90, 110, 130 }, expected = 51, safe = 53, station = "Cooking Fire", mats = {
 				{ name = "Raw Longjaw Mud Snapper", id = 6289, qty = 1 },
-			}, source = { kind = "vendor", cost = 380, npc = "Tharynn Bouden", location = "Elwynn Forest", vendors = {
-				{ npc = "Tharynn Bouden", location = "Elwynn Forest", side = "Alliance", cost = 380 },
-				{ npc = "Khara Deepwater", location = "Loch Modan", side = "Alliance", cost = 423 },
-				{ npc = "Naal Mistrunner", location = "Thunder Bluff", side = "Horde", cost = 423 },
-				{ npc = "Nyoma", location = "Teldrassil", side = "Alliance", cost = 421 },
-				{ npc = "Lizbeth Cromwell", location = "Undercity", side = "Horde", cost = 423 },
-				{ npc = "Tansy Puddlefizz", location = "Ironforge", side = "Alliance", cost = 380 },
-				{ npc = "Killian Sanatha", location = "Silverpine Forest", side = "Horde", cost = 400 },
-				{ npc = "Harn Longcast", location = "Mulgore", side = "Horde", cost = 400 },
+			}, source = { kind = "vendor", cost = 380, npc = "Tharynn Bouden", npcID = 66, location = "Elwynn Forest", vendors = {
+				{ npc = "Tharynn Bouden", id = 66, location = "Elwynn Forest", side = "Alliance", cost = 380 },
+				{ npc = "Khara Deepwater", id = 1684, location = "Loch Modan", side = "Alliance", cost = 423 },
+				{ npc = "Naal Mistrunner", id = 3027, location = "Thunder Bluff", side = "Horde", cost = 423 },
+				{ npc = "Nyoma", id = 4265, location = "Teldrassil", side = "Alliance", cost = 421 },
+				{ npc = "Lizbeth Cromwell", id = 4574, location = "Undercity", side = "Horde", cost = 423 },
+				{ npc = "Tansy Puddlefizz", id = 5162, location = "Ironforge", side = "Alliance", cost = 380 },
+				{ npc = "Killian Sanatha", id = 5748, location = "Silverpine Forest", side = "Horde", cost = 400 },
+				{ npc = "Harn Longcast", id = 5940, location = "Mulgore", side = "Horde", cost = 400 },
 			} } },
 			{ kind = "train", rank = "Expert", reqSkill = 125, reqLevel = 20, before = 150, cap = 225, how = "Buy and read the Expert Cookbook to learn Expert." },
 			{ kind = "craft", from = 100, to = 175, recipe = "Bristle Whisker Catfish", colors = { 100, 140, 160, 180 }, expected = 119, safe = 137, station = "Cooking Fire", mats = {
 				{ name = "Raw Bristle Whisker Catfish", id = 6308, qty = 1 },
-			}, source = { kind = "vendor", cost = 1080, npc = "Lindea Rabonne", location = "Hillsbrad Foothills", vendors = {
-				{ npc = "Lindea Rabonne", location = "Hillsbrad Foothills", side = "Alliance", cost = 1080 },
-				{ npc = "Derak Nightfall", location = "Hillsbrad Foothills", side = "Horde", cost = 1270 },
-				{ npc = "Naal Mistrunner", location = "Thunder Bluff", side = "Horde", cost = 1270 },
-				{ npc = "Sewa Mistrunner", location = "Thunder Bluff", side = "Horde", cost = 1263 },
-				{ npc = "Kilxx", location = "The Barrens", cost = 1136 },
-				{ npc = "Ronald Burch", location = "Undercity", side = "Horde", cost = 1143 },
-				{ npc = "Catherine Leland", location = "Stormwind City", side = "Alliance", cost = 1263 },
-				{ npc = "Gritta Chumwater", location = "Riverglades", cost = 1136 },
+			}, source = { kind = "vendor", cost = 1080, npc = "Lindea Rabonne", npcID = 2383, location = "Hillsbrad Foothills", vendors = {
+				{ npc = "Lindea Rabonne", id = 2383, location = "Hillsbrad Foothills", side = "Alliance", cost = 1080 },
+				{ npc = "Derak Nightfall", id = 2397, location = "Hillsbrad Foothills", side = "Horde", cost = 1270 },
+				{ npc = "Naal Mistrunner", id = 3027, location = "Thunder Bluff", side = "Horde", cost = 1270 },
+				{ npc = "Sewa Mistrunner", id = 3029, location = "Thunder Bluff", side = "Horde", cost = 1263 },
+				{ npc = "Kilxx", id = 3497, location = "The Barrens", cost = 1136 },
+				{ npc = "Ronald Burch", id = 4553, location = "Undercity", side = "Horde", cost = 1143 },
+				{ npc = "Catherine Leland", id = 5494, location = "Stormwind City", side = "Alliance", cost = 1263 },
+				{ npc = "Gritta Chumwater", id = 260487, location = "Riverglades", cost = 1136 },
 			} } },
 			{ kind = "train", rank = "Artisan", reqSkill = 225, reqLevel = 35, before = 225, cap = 300, how = "Artisan Cooking is a quest: Clamlette Surprise (Dirge Quikcleave in Tanaris)." },
 			{ kind = "craft", from = 175, to = 225, recipe = "Mithril Headed Trout", colors = { 175, 215, 235, 255 }, expected = 51, safe = 53, station = "Cooking Fire", mats = {
 				{ name = "Raw Mithril Head Trout", id = 8365, qty = 1 },
-			}, source = { kind = "vendor", cost = 1980, npc = "Lindea Rabonne", location = "Hillsbrad Foothills", vendors = {
-				{ npc = "Lindea Rabonne", location = "Hillsbrad Foothills", side = "Alliance", cost = 1980 },
-				{ npc = "Kelsey Yance", location = "Stranglethorn Vale", cost = 2084 },
-				{ npc = "Stuart Fleming", location = "Wetlands", side = "Alliance", cost = 2200 },
-				{ npc = "Shankys", location = "Orgrimmar", side = "Horde", cost = 2315 },
-				{ npc = "Heldan Galesong", location = "Darkshore", side = "Alliance", cost = 2200 },
-				{ npc = "Lizbeth Cromwell", location = "Undercity", side = "Horde", cost = 2329 },
-				{ npc = "Tansy Puddlefizz", location = "Ironforge", side = "Alliance", cost = 2090 },
-				{ npc = "Wulan", location = "Desolace", side = "Horde", cost = 1980 },
-				{ npc = "Wik'Tar", location = "Ashenvale", side = "Horde", cost = 2200 },
+			}, source = { kind = "vendor", cost = 1980, npc = "Lindea Rabonne", npcID = 2383, location = "Hillsbrad Foothills", vendors = {
+				{ npc = "Lindea Rabonne", id = 2383, location = "Hillsbrad Foothills", side = "Alliance", cost = 1980 },
+				{ npc = "Kelsey Yance", id = 2664, location = "Stranglethorn Vale", cost = 2084 },
+				{ npc = "Stuart Fleming", id = 3178, location = "Wetlands", side = "Alliance", cost = 2200 },
+				{ npc = "Shankys", id = 3333, location = "Orgrimmar", side = "Horde", cost = 2315 },
+				{ npc = "Heldan Galesong", id = 4307, location = "Darkshore", side = "Alliance", cost = 2200 },
+				{ npc = "Lizbeth Cromwell", id = 4574, location = "Undercity", side = "Horde", cost = 2329 },
+				{ npc = "Tansy Puddlefizz", id = 5162, location = "Ironforge", side = "Alliance", cost = 2090 },
+				{ npc = "Wulan", id = 12033, location = "Desolace", side = "Horde", cost = 1980 },
+				{ npc = "Wik'Tar", id = 12962, location = "Ashenvale", side = "Horde", cost = 2200 },
 			} } },
 			{ kind = "craft", from = 225, to = 275, recipe = "Spotted Yellowtail", colors = { 225, 265, 285, 305 }, expected = 51, safe = 53, station = "Cooking Fire", mats = {
 				{ name = "Raw Spotted Yellowtail", id = 4603, qty = 1 },
-			}, source = { kind = "vendor", cost = 15157, npc = "Gikkix", location = "Tanaris" } },
+			}, source = { kind = "vendor", cost = 15157, npc = "Gikkix", npcID = 8137, location = "Tanaris" } },
 			{ kind = "craft", from = 275, to = 300, recipe = "Mightfish Steak", colors = { 275, 315, 335, 355 }, expected = 25, safe = 25, station = "Iron Oven", mats = {
 				{ name = "Large Raw Mightfish", id = 13893, qty = 1 },
 				{ name = "Hot Spices", id = 2692, qty = 1 },
 				{ name = "Soothing Spices", id = 3713, qty = 1 },
-			}, source = { kind = "vendor", cost = 20117, npc = "Vivianna", location = "Feralas", vendors = {
-				{ npc = "Vivianna", location = "Feralas", side = "Alliance", cost = 20117 },
-				{ npc = "Sheendra Tallgrass", location = "Feralas", side = "Horde", cost = 19000 },
+			}, source = { kind = "vendor", cost = 20117, npc = "Vivianna", npcID = 7947, location = "Feralas", vendors = {
+				{ npc = "Vivianna", id = 7947, location = "Feralas", side = "Alliance", cost = 20117 },
+				{ npc = "Sheendra Tallgrass", id = 8145, location = "Feralas", side = "Horde", cost = 19000 },
 			} } },
 		},
 	},
@@ -859,15 +859,15 @@ ns.Guides = {
 			{ kind = "train", rank = "Artisan", reqSkill = 225, reqLevel = 35, before = 225, cap = 300, how = "Artisan First Aid is the Triage quest (Doctor Gustaf VanHowzen in Theramore or Doctor Gregory Victor in Hammerfall)." },
 			{ kind = "craft", from = 180, to = 210, recipe = "Heavy Silk Bandage", colors = { 180, 180, 210, 240 }, expected = 41, safe = 46, mats = {
 				{ name = "Silk Cloth", id = 4306, qty = 2 },
-			}, source = { kind = "vendor", cost = 2444, npc = "Deneb Walker", location = "Arathi Highlands", vendors = {
-				{ npc = "Deneb Walker", location = "Arathi Highlands", side = "Alliance", cost = 2444 },
-				{ npc = "Balai Lok'Wein", location = "Dustwallow Marsh", side = "Horde", cost = 2329 },
+			}, source = { kind = "vendor", cost = 2444, npc = "Deneb Walker", npcID = 2805, location = "Arathi Highlands", vendors = {
+				{ npc = "Deneb Walker", id = 2805, location = "Arathi Highlands", side = "Alliance", cost = 2444 },
+				{ npc = "Balai Lok'Wein", id = 13476, location = "Dustwallow Marsh", side = "Horde", cost = 2329 },
 			} } },
 			{ kind = "craft", from = 210, to = 240, recipe = "Mageweave Bandage", colors = { 210, 210, 240, 270 }, expected = 41, safe = 46, mats = {
 				{ name = "Mageweave Cloth", id = 4338, qty = 1 },
-			}, source = { kind = "vendor", cost = 5555, npc = "Deneb Walker", location = "Arathi Highlands", vendors = {
-				{ npc = "Deneb Walker", location = "Arathi Highlands", side = "Alliance", cost = 5555 },
-				{ npc = "Balai Lok'Wein", location = "Dustwallow Marsh", side = "Horde", cost = 5294 },
+			}, source = { kind = "vendor", cost = 5555, npc = "Deneb Walker", npcID = 2805, location = "Arathi Highlands", vendors = {
+				{ npc = "Deneb Walker", id = 2805, location = "Arathi Highlands", side = "Alliance", cost = 5555 },
+				{ npc = "Balai Lok'Wein", id = 13476, location = "Dustwallow Marsh", side = "Horde", cost = 5294 },
 			} } },
 			{ kind = "craft", from = 240, to = 260, recipe = "Heavy Mageweave Bandage", colors = { 240, 240, 270, 300 }, expected = 24, safe = 27, mats = {
 				{ name = "Mageweave Cloth", id = 4338, qty = 2 },

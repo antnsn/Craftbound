@@ -73,6 +73,18 @@ function UI.Edit(parent, w, numeric, onChange)
 	return e
 end
 
+-- A small map button: a click sets a waypoint to what the route needs next (Waypoint.lua).
+function UI.WayButton(parent)
+	local b = UI.IconButton(parent, 18, "Interface\\Icons\\INV_Misc_Map_01", function() ns.Waypoint() end)
+	UI.Tooltip(b, function(tip)
+		local plan = ns.WayPlan and ns.WayPlan()
+		tip:AddLine("Waypoint")
+		tip:AddLine(plan and ("To " .. plan.label .. ", the nearest on your side.") or "Pick a guide first.", 1, 1, 1, true)
+		tip:AddLine("/craft way trainer, recipe or vendor for one of them.", 0.6, 0.8, 1, true)
+	end)
+	return b
+end
+
 -- The Craftbound logo left of a title font string (moves the title right to make room).
 function UI.TitleLogo(f, title, size)
 	size = size or 20

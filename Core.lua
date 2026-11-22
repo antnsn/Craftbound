@@ -281,6 +281,7 @@ local HELP = {
 	"/craft tracker  show or hide the tracker",
 	"/craft guide  pick a guide (or /craft guide enchanting, /craft guide alchemy)",
 	"/craft stop 150|225|300|end  where to stop in the active guide",
+	"/craft way  a waypoint to what the route needs next (or: way trainer, way recipe, way vendor)",
 	"/craft list  the shopping list in chat",
 	"/craft tick  tick off the current step by hand (/craft untick N to undo step N)",
 	"/craft reset  forget this character's progress in the active guide",
@@ -325,6 +326,8 @@ local function slash(msg)
 		ns.SetTarget(guide.key, t)
 		local st = ns.Status(guide)
 		ns.Print(("%s %s: stopping at %d."):format(guide.profession, guide.name, st.stop))
+	elseif cmd == "way" then
+		ns.Waypoint(rest ~= "" and rest:lower() or nil)
 	elseif cmd == "shots" then
 		ns.Shots() -- screenshots for the docs (Shots.lua); not in the help
 	elseif cmd == "help" then

@@ -53,6 +53,10 @@ When you can train the next rank (Journeyman, Expert, Artisan), a red line says 
 
 At the cap (75/75, 150/150, 225/225) crafting gives no skill-up, so the **Craft** button and its key stop and say to train. Blizzard's own **Create** and **Create All** buttons ask first: the first click says you are at the cap, and **Craft anyway** lets your clicks through until your skill or the cap changes. At 300 nothing asks: you craft for the items then. `/craft toggle cap` turns the question off.
 
+## Waypoints
+
+The map button on the panel (and on the tracker), or `/craft way`, sets a waypoint to the nearest place on your side and continent for what the route needs next: the trainer for your next rank (an Expert or Artisan trainer when that's what you need), the trainer or vendor of the recipe you haven't learned yet, or a vendor that sells a reagent you're missing (vials, thread, dye). It sets the game map's waypoint and a TomTom one when you use TomTom. Where the trainers and vendors stand comes from Questie's database.
+
 ## At the trainer
 
 At a profession trainer a Craftbound panel sits beside the trainer window. It lists what your route needs from this trainer, up to your stop: the next rank, the recipes of the steps still ahead, and the recipes of parts those steps need (grinding stones, blasting powder). Each line says **train now**, **at** the skill it needs, or **not taught here** (a vendor or a special trainer has it).

@@ -15,6 +15,7 @@ description: Every Craftbound chat command.
 | `/craft guide` | Opens the Craftbound window to pick a guide. |
 | `/craft guide enchanting` | Makes the Enchanting guide the active one (`alchemy` likewise). |
 | `/craft stop 150` | Stops the active guide at 150 (or `225`, `300`; `end` for the guide's end). |
+| `/craft way` | Sets a waypoint to what the route needs next: a rank's trainer, the current recipe's trainer or vendor, a vendor for a reagent you're missing. `/craft way trainer`, `way recipe` or `way vendor` for one of them. |
 | `/craft list` | Prints what the rest of the route still needs in chat. |
 | `/craft tick` | Ticks off the current step. `/craft tick 3` ticks off step 3. |
 | `/craft untick 3` | Puts step 3 back on the list. |

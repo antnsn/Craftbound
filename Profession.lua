@@ -414,6 +414,8 @@ local function build()
 	f.title:SetPoint("TOPLEFT", 10, -8)
 	f.title:SetText("Craftbound")
 	f.logo = UI.TitleLogo(f, f.title, 22)
+	f.way = UI.WayButton(f)
+	f.way:SetPoint("TOPRIGHT", -10, -9)
 	f.guide = UI.Text(f, "small", { 0.8, 0.8, 0.8 })
 	f.guide:SetPoint("TOPLEFT", 10, -28)
 

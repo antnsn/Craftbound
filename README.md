@@ -31,3 +31,7 @@ wowbench check . && wowbench test .               # 0 errors, every scenario ok
 
 Scenarios live in `tests/*.scenario.lua`. `tests/_helper.lua` has fake versions of
 `C_TradeSkillUI` and `C_AuctionHouse`, because the wowbench stand-in client doesn't model them.
+
+## License
+
+GPL-3.0-or-later (see `LICENSE`). Trainer and vendor places come from QuestieDB, part of [Questie](https://github.com/Questie/Questie), used under the GPLv3.
