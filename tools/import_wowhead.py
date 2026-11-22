@@ -64,11 +64,11 @@ def source(r, cat):
         vendors = []
         for v in r["vendor"]:
             npc = cat["vendors"].get(str(v["npc"])) or {}
-            vendors.append({"npc": npc.get("name", "NPC %d" % v["npc"]), "location": npc.get("zone"),
+            vendors.append({"npc": npc.get("name", "NPC %d" % v["npc"]), "id": v["npc"], "location": npc.get("zone"),
                             "side": SIDE.get(npc.get("side")), "cost_raw": v.get("price"),
                             "limited_stock": bool(v.get("limited"))})
         first = vendors[0]
-        out = {"type": "vendor", "npc": first["npc"], "location": first["location"],
+        out = {"type": "vendor", "npc": first["npc"], "npc_id": first["id"], "location": first["location"],
                "cost_raw": first["cost_raw"],
                # one vendor: the step note says limited stock; several: the hint picks per faction
                "limited_stock": (first["limited_stock"] or None) if len(vendors) == 1 else None,

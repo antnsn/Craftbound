@@ -101,11 +101,11 @@ def source(s):
         return None
     vendors = None
     if s.get("vendors"):
-        vendors = [{"npc": v["npc"], "location": v.get("location"), "side": v.get("side"),
+        vendors = [{"npc": v["npc"], "id": v.get("id"), "location": v.get("location"), "side": v.get("side"),
                     "cost": v.get("cost_raw"), "limited": bool(v.get("limited_stock")) or None}
                    for v in s["vendors"]]
     return {
-        "kind": s.get("type"), "cost": s.get("cost_raw"), "npc": s.get("npc"),
+        "kind": s.get("type"), "cost": s.get("cost_raw"), "npc": s.get("npc"), "npcID": s.get("npc_id"),
         "location": s.get("location"), "limited": bool(s.get("limited_stock")) or None,
         "rep": s.get("requires_reputation"), "vendors": vendors,
     }

@@ -14,5 +14,5 @@ read_globals = {
 	"C_TradeSkillUI", "CreateFrame", "Enum", "GameTooltip", "GetMerchantItemID", "GetMerchantItemMaxStack",
 	"GetMerchantNumItems", "GetMoney", "GetProfessionInfo", "GetProfessions", "GetTime", "InCombatLockdown",
 	"IsShiftKeyDown", "ItemLocation", "MerchantFrame", "ProfessionsFrame", "StaticPopup_Hide", "UIParent",
-	"UISpecialFrames", "UnitFactionGroup", "UnitLevel", "UnitName", "Screenshot", "StaticPopup_Show", "GetNumTrainerServices", "GetTrainerServiceInfo", "GetTrainerServiceCost", "BuyTrainerService", "IsTradeskillTrainer", "GetTrainerServiceSkillLine", "GetTrainerServiceTypeFilter", "PlaySound", "SOUNDKIT", "date", "geterrorhandler", "time", "tinsert",
+	"UISpecialFrames", "UnitFactionGroup", "UnitLevel", "UnitName", "Screenshot", "StaticPopup_Show", "GetNumTrainerServices", "GetTrainerServiceInfo", "GetTrainerServiceCost", "BuyTrainerService", "IsTradeskillTrainer", "C_Map", "CreateVector2D", "UiMapPoint", "C_SuperTrack", "GetTrainerServiceSkillLine", "GetTrainerServiceTypeFilter", "PlaySound", "SOUNDKIT", "date", "geterrorhandler", "time", "tinsert",
 }

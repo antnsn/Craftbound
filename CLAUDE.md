@@ -29,6 +29,11 @@ every commit.
 at the top of `CURSEFORGE.md` is the text for CurseForge's "Summary" field (at most 256
 characters; the tool checks it, `--summary` prints it).
 
+## NPC data
+
+`NpcData.lua` is generated: `python3 tools/make_npc_data.py` (needs `../QuestieDB`) after the guides
+or QuestieDB change. It is QuestieDB data (GPLv3), which is why Craftbound is GPL-3.0-or-later.
+
 ## Screenshots
 
 In game: `/craft shots` (not in the help) shows each frame and takes a screenshot; it opens the

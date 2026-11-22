@@ -3,6 +3,10 @@
 ## 0.2.2-alpha (2026-11-22)
 
 - First version on CurseForge.
+- **Waypoints** (`/craft way`, or the map button on the profession panel and the tracker): to the
+  nearest trainer for your next rank or recipe, the recipe's vendor, or a vendor selling a
+  reagent you're missing, on your side and continent. Map waypoint plus TomTom. Trainer and
+  vendor places come from QuestieDB (Questie, GPLv3); Craftbound is now GPL-3.0-or-later.
 - **At the trainer**: a panel beside the profession trainer lists what the route needs from it,
   up to your stop (the next rank, the recipes of the steps ahead, the recipes of their parts), and
   **Train N** trains only those, not everything the trainer has.
