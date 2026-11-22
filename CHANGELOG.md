@@ -10,6 +10,9 @@
 - **At the trainer**: a panel beside the profession trainer lists what the route needs from it,
   up to your stop (the next rank, the recipes of the steps ahead, the recipes of their parts), and
   **Train N** trains only those, not everything the trainer has.
+  It reads each recipe's skill and level requirements itself, since Forever's trainer window
+  doesn't always mark what you can learn, and knows Forever's rank names ("Journeyman
+  Alchemist"). `/craft trainerinfo` prints what the trainer's list says, for bug reports.
 - The vendor's "Buy route reagents" button sits below the vendor window on the right, no longer
   over the Merchant and Buyback tabs.
 - **At a rank's cap** (75/75, 150/150, 225/225) Blizzard's Create and Create All buttons ask
