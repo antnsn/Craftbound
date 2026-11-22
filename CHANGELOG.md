@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1-alpha (2026-11-22)
+
+- `/craft shots` takes screenshots of every Craftbound frame for the docs (the window, the
+  editor, the export box, the tracker, and the profession window it opens itself; the auction
+  house panel when the auction house is open).
+- Releases are packed and published by GitHub Actions when a version is tagged.
+
 ## 0.2.0-alpha (2026-11-22)
 
 - **Every guide is now Wowhead's "Tried & Tested in Forever" route, 1-300**, with the recipe

@@ -7,6 +7,9 @@ local addonName, ns = ...
 ns.name = addonName
 ns.title = "|cffe0a040Craft|r|cfff0e0c0bound|r"
 ns.MEDIA = "Interface\\AddOns\\Craftbound\\Media\\"
+-- Craftbound has one look. LibBound's crop_shots.py reads the addon's own skin from this line and
+-- files /craft shots under docs/screenshots.
+ns.skin = "craftbound"
 
 local DEFAULTS = {
 	settings = {
@@ -318,6 +321,8 @@ local function slash(msg)
 		ns.SetTarget(guide.key, t)
 		local st = ns.Status(guide)
 		ns.Print(("%s %s: stopping at %d."):format(guide.profession, guide.name, st.stop))
+	elseif cmd == "shots" then
+		ns.Shots() -- screenshots for the docs (Shots.lua); not in the help
 	elseif cmd == "help" then
 		for _, line in ipairs(HELP) do print(line) end
 	elseif cmd == "guide" or cmd == "guides" then

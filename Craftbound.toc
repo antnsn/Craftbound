@@ -21,3 +21,4 @@ AuctionHouse.lua
 Tracker.lua
 Window.lua
 Minimap.lua
+Shots.lua

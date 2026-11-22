@@ -1,0 +1,34 @@
+# A tag "v<version>" (v0.3.0, v0.3.0-alpha, v0.3.0-beta.1) packs the addon and publishes a GitHub
+# release with that version's CHANGELOG.md section. A version with a "-" is a prerelease.
+# CurseForge picks the tag up through its own webhook once the project exists (like the other
+# Bound addons), not from here.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pack
+        run: python3 tools/package.py "${GITHUB_REF_NAME#v}"
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            echo "Release $GITHUB_REF_NAME exists already: nothing to do."
+            exit 0
+          fi
+          python3 tools/package.py "$version" --notes > notes.md
+          pre=""
+          case "$version" in *-*) pre="--prerelease" ;; esac
+          gh release create "$GITHUB_REF_NAME" "dist/Craftbound-$version.zip" \
+            --title "Craftbound $version" --notes-file notes.md $pre
