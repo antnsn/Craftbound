@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+- **The Craftbound window** (`/craft`, minimap left-click): every guide, built-in and your own,
+  with its route and your skill. It replaces the guide picker; the tracker is now
+  `/craft tracker` and the minimap's right-click.
+- **Stop at 150, 225 or 300**: per character and guide. The route, the shopping list, the
+  progress bar and "finished" all end there (`/craft stop 150` does the same).
+- **What each stop costs** from your skill now: missing reagents at remembered prices plus
+  recipes still to learn. Prices come from your own auction house scans (now remembered between
+  sessions), Auctionator's database when it is installed, and vendor prices. Items without a
+  price and old prices are said, never hidden.
+- **Your own guides**: copy any guide and edit it (name, skill ranges, crafts, order, delete
+  steps), or start a new one with your profession window open and add its recipes.
+- **Share guides as text**: Export gives a `CB1:` string to paste anywhere; Import turns one into
+  a custom guide. Imported text is read as data only and checked field by field.
 - Three more guides from Wowhead's Forever data: Tailoring, Cooking and First Aid (1-300). They
   keep Forever's own recipes (Runecloth Cuffs, the Venomspew set), stations (Loom, Spinning
   Wheel, Iron Oven) and reputation. Bolts are made along the way.

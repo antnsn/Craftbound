@@ -1,7 +1,7 @@
 ---
 title: Guides
 parent: Features
-nav_order: 5
+nav_order: 6
 description: Where the routes come from, how counts are worked out, and real reagents.
 ---
 
@@ -22,7 +22,7 @@ Craftbound ships eight routes:
 
 Each route except Blacksmithing goes from 1 to 300.
 
-Pick one with `/craft guide`, or by opening that profession's window.
+Pick one in the [Craftbound window](window.md) (`/craft`), or by opening that profession's window. You can also copy a guide, change it, or make and share your own: see the window page.
 
 ## Where the numbers come from
 

@@ -20,14 +20,20 @@ local DEFAULTS = {
 	minimapIcon = nil,       -- LibDBIcon's position table { minimapPos, hide }
 	items = {},              -- [name] = itemID, learned at runtime
 	recipes = {},            -- [recipe name] = { id = recipeID, mats = { {id,name,qty} }, colors = {...} }
+	prices = {},             -- [itemID] = { unit = copper, at = time() } from Craftbound's AH scans
+	vendorPrices = {},       -- [itemID] = copper, buy prices seen at merchants
+	custom = {},             -- custom guides (Custom.lua), a list of guide tables
+	customNext = 1,          -- the next custom guide number
 }
 
 local CHAR_DEFAULTS = {
 	active = nil,            -- guide key, e.g. "Enchanting:Easiest"
-	guides = {},             -- [key] = { ticks = {}, history = {}, started, last }
+	guides = {},             -- [key] = { ticks = {}, history = {}, started, last, target }
+	known = {},              -- [recipe name] = true, recipes this character has learned
 	skills = {},             -- [profession] = { rank, max, seen }
 	mail = {},               -- [itemID] = count bought or waiting in the mailbox
 	tracker = nil,           -- { point, x, y }
+	window = nil,            -- { point, x, y } of the Craftbound window
 	trackerHidden = nil,     -- the player closed it
 }
 
@@ -92,6 +98,11 @@ function ns.GuideState(key)
 		g = { ticks = {}, history = {}, started = time() }
 		ns.char.guides[key] = g
 	end
+	-- an edited custom guide: its step numbers changed, so hand ticks no longer fit
+	local guide = ns.Planner.Find(key)
+	if guide and guide.rev ~= g.rev then
+		g.ticks, g.rev = {}, guide.rev
+	end
 	return g
 end
 
@@ -134,7 +145,7 @@ end
 -- The planner context for a guide, from what we know about this character.
 function ns.Context(guide)
 	local s = ns.char.skills[guide.profession] or {}
-	local gs = ns.GuideState(guide.key)
+	local gs = ns.char.guides[guide.key] and ns.GuideState(guide.key) or { ticks = {} }
 	return {
 		skill = s.rank or 0,
 		maxSkill = s.max,
@@ -142,7 +153,27 @@ function ns.Context(guide)
 		ticks = gs.ticks,
 		have = ns.Have,
 		liveMats = ns.LiveMats,
+		target = gs.target,
+		known = function(recipe) return ns.char.known[recipe] or false end,
 	}
+end
+
+-- The skill to stop at in a guide (nil: the guide's end).
+function ns.SetTarget(key, target)
+	local g = ns.Planner.Find(key)
+	if not g then return end
+	ns.GuideState(key).target = (target and target < g.to and target > g.from) and target or nil
+	ns.Refresh()
+end
+
+-- The stop targets a guide offers: the rank caps inside its range, and its end.
+function ns.Targets(guide)
+	local t = {}
+	for _, cap in ipairs({ 150, 225, 300 }) do
+		if cap > guide.from and cap < guide.to then t[#t + 1] = cap end
+	end
+	t[#t + 1] = guide.to
+	return t
 end
 
 function ns.Status(guide)
@@ -181,6 +212,7 @@ ns.On("ADDON_LOADED", function(name)
 	CraftboundDB = fill(CraftboundDB or {}, DEFAULTS)
 	CraftboundCharDB = fill(CraftboundCharDB or {}, CHAR_DEFAULTS)
 	ns.db, ns.char = CraftboundDB, CraftboundCharDB
+	if ns.Custom then ns.Custom.Load() end
 	-- a guide that no longer exists
 	if ns.char.active and not ns.Planner.Find(ns.char.active) then ns.char.active = nil end
 	dispatch("CB_LOADED")
@@ -213,8 +245,10 @@ end)
 -- Slash -----------------------------------------------------------------------------------
 
 local HELP = {
-	"/craft  show or hide the tracker",
+	"/craft  open the Craftbound window (guides, where to stop and what it costs, your own guides)",
+	"/craft tracker  show or hide the tracker",
 	"/craft guide  pick a guide (or /craft guide enchanting, /craft guide alchemy)",
+	"/craft stop 150|225|300|end  where to stop in the active guide",
 	"/craft list  the shopping list in chat",
 	"/craft tick  tick off the current step by hand (/craft untick N to undo step N)",
 	"/craft reset  forget this character's progress in the active guide",
@@ -240,8 +274,25 @@ local function slash(msg)
 	msg = (msg or ""):gsub("^%s+", ""):gsub("%s+$", "")
 	local cmd, rest = msg:match("^(%S*)%s*(.-)$")
 	cmd = cmd:lower()
-	if cmd == "" then
+	if cmd == "" or cmd == "window" then
+		ns.Window.Toggle()
+	elseif cmd == "tracker" then
 		ns.ToggleTracker()
+	elseif cmd == "stop" then
+		local guide = ns.ActiveGuide()
+		if not guide then return ns.Print("Pick a guide first: /craft guide.") end
+		local t = tonumber(rest)
+		local ok = rest:lower() == "end"
+		for _, x in ipairs(ns.Targets(guide)) do if x == t then ok = true end end
+		if not ok then
+			return ns.Print(("Stops for %s %s: %s, or end."):format(guide.profession, guide.name,
+				table.concat(ns.Targets(guide), ", ")))
+		end
+		ns.SetTarget(guide.key, t)
+		local st = ns.Status(guide)
+		ns.Print(("%s %s: stopping at %d."):format(guide.profession, guide.name, st.stop))
+	elseif cmd == "help" then
+		for _, line in ipairs(HELP) do print(line) end
 	elseif cmd == "guide" or cmd == "guides" then
 		if rest ~= "" then
 			local g = findGuide(rest)

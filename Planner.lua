@@ -7,6 +7,9 @@
 --   ctx.have(mat)             how many of a material/tool the character owns (mat = { id, name })
 --   ctx.liveMats(recipe)      optional: the recipe's real reagents seen in the profession
 --                             window, a list of { id, name, qty }, or nil
+--   ctx.target                optional: the skill the player wants to stop at (150, 225...).
+--                             Steps past it are out of scope (counted as done), a step that
+--                             crosses it is cut short. Step indices never change.
 local _, ns = ...
 
 local P = {}
@@ -28,16 +31,24 @@ function P.ForProfession(profession)
 	return list
 end
 
+-- Where the route ends for this character: the guide's end, or the stop target below it.
+function P.End(guide, ctx)
+	local t = ctx and ctx.target
+	return (t and t < guide.to and t > guide.from) and t or guide.to
+end
+
 -- Crafts still needed in a craft step at this skill: the guide's safe count, scaled by the part
--- of the step's range still ahead. Tools: one until owned.
-function P.CraftsLeft(step, skill)
+-- of the step's range still ahead (up to the target, when there is one). Tools: one until owned.
+function P.CraftsLeft(step, skill, target)
 	if step.kind == "tool" then return step.safe or 1 end
 	if step.kind ~= "craft" then return 0 end
 	local safe = step.safe or step.expected or 0
 	local from, to = step.from or 0, step.to or 0
-	if skill >= to then return 0 end
-	if skill <= from or to <= from then return safe end
-	return max(1, ceil(safe * (to - skill) / (to - from)))
+	local stop = (target and target < to) and target or to
+	local ahead = stop - max(skill, from)
+	if ahead <= 0 then return 0 end
+	if to <= from then return safe end
+	return max(1, ceil(safe * ahead / (to - from)))
 end
 
 -- The skill-up colour of a recipe at a skill, from the guide's thresholds:
@@ -76,12 +87,57 @@ local function indexOf(guide, step)
 	end
 end
 
+-- Which steps are part of the route up to a target: { [i] = true/false }, worked out once per
+-- guide and target, last step first (a tool is in scope when a later in-scope step needs it).
+local scopes = setmetatable({}, { __mode = "k" })
+
+function P.Scope(guide, target)
+	local byTarget = scopes[guide]
+	if not byTarget then
+		byTarget = {}
+		scopes[guide] = byTarget
+	end
+	local sc = byTarget[target]
+	if sc then return sc end
+	sc = {}
+	local steps = guide.steps
+	for i = #steps, 1, -1 do
+		local s = steps[i]
+		local inside = true
+		if s.kind == "craft" or s.kind == "disenchant" then
+			inside = (s.from or 0) < target
+		elseif s.kind == "train" then
+			inside = (s.before or 0) < target
+		elseif s.kind == "tool" then
+			local used, needed = false, false
+			for j = i + 1, #steps do
+				local u = steps[j]
+				if (u.kind == "craft" or u.kind == "tool") and P.NeedsTool(u, s.recipe) then
+					used = true
+					if sc[j] then needed = true break end
+				end
+			end
+			inside = needed or (not used and ((s.colors and s.colors[1]) or 0) < target)
+		end
+		sc[i] = inside
+	end
+	byTarget[target] = sc
+	return sc
+end
+
+-- Is step i part of the route up to the target? (Always, without a target.)
+function P.InScope(guide, i, target)
+	if not target or target >= guide.to or target <= guide.from then return true end
+	return P.Scope(guide, target)[i]
+end
+
 function P.IsDone(guide, i, ctx)
 	local s = guide.steps[i]
 	if ctx.ticks and ctx.ticks[i] then return true end
+	if not P.InScope(guide, i, ctx.target) then return true end
 	local skill = ctx.skill or 0
 	if s.kind == "craft" or s.kind == "disenchant" then
-		return skill >= (s.to or 0)
+		return skill >= min(s.to or 0, P.End(guide, ctx))
 	elseif s.kind == "train" then
 		if ctx.maxSkill and s.cap and ctx.maxSkill >= s.cap then return true end
 		return skill > (s.before or 0)
@@ -91,7 +147,7 @@ function P.IsDone(guide, i, ctx)
 		local user = lastUser(guide, i, s.recipe)
 		if not user then return false end
 		if user.kind == "tool" then return P.IsDone(guide, indexOf(guide, user), ctx) end
-		return skill >= (user.to or 0)
+		return skill >= min(user.to or 0, P.End(guide, ctx))
 	end
 	return false
 end
@@ -112,10 +168,11 @@ end
 -- in the route, finished = bool, percent = 0..1 }
 function P.Status(guide, ctx)
 	local skill = ctx.skill or 0
-	local st = { done = {}, total = 0 }
+	local st = { done = {}, out = {}, total = 0, stop = P.End(guide, ctx) }
 	for i, s in ipairs(guide.steps) do
 		local done = P.IsDone(guide, i, ctx)
 		st.done[i] = done
+		st.out[i] = not P.InScope(guide, i, ctx.target) or nil
 		if not done then
 			if s.kind == "train" then
 				if P.IsReady(s, ctx) and not st.train then
@@ -124,7 +181,7 @@ function P.Status(guide, ctx)
 				end
 			else
 				if not st.current and P.IsReady(s, ctx) then st.current, st.step = i, s end
-				st.total = st.total + P.CraftsLeft(s, skill)
+				st.total = st.total + P.CraftsLeft(s, skill, ctx.target)
 			end
 		end
 	end
@@ -132,9 +189,9 @@ function P.Status(guide, ctx)
 	if st.train and (st.trainUrgent or not st.current) then
 		st.current, st.step = st.trainIndex, st.train
 	end
-	st.finished = st.current == nil and skill >= guide.to
-	if st.step then st.left = P.CraftsLeft(st.step, skill) else st.left = 0 end
-	local span = guide.to - guide.from
+	st.finished = st.current == nil and skill >= st.stop
+	if st.step then st.left = P.CraftsLeft(st.step, skill, ctx.target) else st.left = 0 end
+	local span = st.stop - guide.from
 	st.percent = span > 0 and min(1, max(0, (skill - guide.from) / span)) or 1
 	return st
 end
@@ -178,7 +235,7 @@ function P.Shopping(guide, ctx)
 	end
 	for i, s in ipairs(guide.steps) do
 		if (s.kind == "craft" or s.kind == "tool") and not P.IsDone(guide, i, ctx) then
-			local n = P.CraftsLeft(s, skill)
+			local n = P.CraftsLeft(s, skill, ctx.target)
 			local mats = (ctx.liveMats and ctx.liveMats(s.recipe)) or s.mats or {}
 			for _, m in ipairs(mats) do add(m, (m.qty or 1) * n) end
 		end
@@ -193,7 +250,7 @@ function P.Shopping(guide, ctx)
 		local made = 0
 		for i, s in ipairs(guide.steps) do
 			if s.kind == "craft" and s.recipe == e.name and not P.IsDone(guide, i, ctx) then
-				made = made + P.CraftsLeft(s, skill) * (s.makes or 1)
+				made = made + P.CraftsLeft(s, skill, ctx.target) * (s.makes or 1)
 			end
 		end
 		local short = P.PartShort(guide, e, e.need - made, ctx)
@@ -218,13 +275,16 @@ function P.Shopping(guide, ctx)
 	return list, missingTotal
 end
 
--- Trainer/vendor cost still ahead (the guide's raw numbers, copper).
+-- Trainer and vendor recipe cost still ahead (the guide's numbers, copper). A bought tool is on
+-- the shopping list instead. ctx.known(recipe) (optional) skips recipes already learned.
 function P.RecipeCost(guide, ctx)
 	local sum = 0
 	for i, s in ipairs(guide.steps) do
-		if (s.kind == "craft" or s.kind == "tool") and not P.IsDone(guide, i, ctx)
-			and s.source and s.source.cost and s.source.kind == "trainer" then
-			sum = sum + s.source.cost
+		local src = s.source
+		if (s.kind == "craft" or s.kind == "tool") and not s.buy and not P.IsDone(guide, i, ctx)
+			and src and src.cost and (src.kind == "trainer" or src.kind == "vendor")
+			and not (ctx.known and ctx.known(s.recipe)) then
+			sum = sum + src.cost
 		end
 	end
 	return sum

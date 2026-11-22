@@ -211,6 +211,10 @@ def main():
     lines.append("")
     lines.append("-- Reagents sold by vendors, from the imported catalogs: never bought at the auction house.")
     lines.append("ns.GuideVendorItems = { " + ", ".join("[%d] = true" % i for i in sorted(vendor_items)) + " }")
+    lines.append("")
+    lines.append("-- Vendor buy prices (copper) from the imported catalogs, for the cost estimates.")
+    vp = data.get("vendor_prices") or {}
+    lines.append("ns.VendorPrices = { " + ", ".join("[%s] = %d" % (k, v) for k, v in vp.items()) + " }")
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines) + "\n")
     known = lambda g, m: m in ITEM_IDS or m in (g.get("item_ids") or {})

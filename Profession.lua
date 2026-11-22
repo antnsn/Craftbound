@@ -68,6 +68,7 @@ local function readMats(recipeID, guideMats)
 	end
 	return (#mats > 0) and mats or nil, sch
 end
+ns.ReadMats = function(recipeID) return (readMats(recipeID)) end
 
 -- Read the open profession: skill, every recipe by name, and the real reagents of the guide's.
 function ns.ScanOpen()
@@ -89,7 +90,10 @@ function ns.ScanOpen()
 			if not seen[id] then
 				seen[id] = true
 				local r = T.GetRecipeInfo(id)
-				if r and r.name then byName[r.name] = r end
+				if r and r.name then
+					byName[r.name] = r
+					if r.learned then ns.char.known[r.name] = true end
+				end
 			end
 		end
 	end
@@ -458,7 +462,7 @@ local function render()
 	f.craft:Show() f.select:Show() f.tick:Show() f.routeTitle:Show()
 	f.guide:SetText(("%s · %s  (%d-%d)"):format(guide.profession, guide.name, guide.from, guide.to))
 	f.bar:SetValue(st.percent)
-	f.bar.text:SetText(("%d / %d   ·   ~%d crafts to go"):format(ctx.skill, guide.to, st.total))
+	f.bar.text:SetText(("%d / %d   ·   ~%d crafts to go"):format(ctx.skill, st.stop, st.total))
 
 	if st.train and st.step ~= st.train then
 		if st.train.how then
@@ -579,7 +583,7 @@ local function render()
 			local col = colorOf(step, ctx)
 			if col == "red" then col = { 0.6, 0.6, 0.6 } end -- not learnable yet: plain, not alarming
 			row.text:SetText(cur and UI.Color({ 1, 1, 1 }, label) or (col and UI.Color(col, label) or label))
-			local left = P.CraftsLeft(step, ctx.skill)
+			local left = P.CraftsLeft(step, ctx.skill, ctx.target)
 			row.count:SetText(left > 0 and ("x" .. left) or "")
 		end
 		row:ClearAllPoints()

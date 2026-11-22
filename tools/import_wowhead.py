@@ -124,6 +124,7 @@ def build(name):
             info = items[str(item)]
             if info.get("type") == "vendor" and item not in vendor_items:
                 vendor_items.append(item)
+            # reagents a vendor sells in the catalog: their buy price, for the cost estimates
             # made by an earlier recipe of this profession from plain reagents: a part
             m = makers.get(item)
             if m and m["learn"] <= a and m["id"] != r["id"] and \
@@ -163,15 +164,24 @@ def build(name):
     }
 
 
+def vendor_prices(name):
+    cat = json.load(open(os.path.join(DATA, "wh_catalog_%s.json" % name), encoding="utf-8"))["catalog"]
+    return {str(i): v["price"] for i, v in cat["items"].items()
+            if v.get("type") == "vendor" and isinstance(v.get("price"), int) and v["price"] > 0}
+
+
 def main(names):
     data = json.load(open(GUIDES, encoding="utf-8"))
+    prices = data.get("vendor_prices") or {}
     for name in names:
+        prices.update(vendor_prices(name))
         g = build(name)
         g = {k: v for k, v in g.items() if v is not None}
         data["guides"] = [x for x in data["guides"]
                           if (x["profession"], x["guide"]) != (g["profession"], g["guide"])] + [g]
         print("%s: %d steps, ~%d crafts (safe %d)" % (g["profession"], len(g["steps"]),
               g["source_estimate"]["average_crafts"], g["source_estimate"]["p90_crafts"]))
+    data["vendor_prices"] = dict(sorted(prices.items(), key=lambda kv: int(kv[0])))
     with open(GUIDES, "w", encoding="utf-8", newline="\n") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
         f.write("\n")

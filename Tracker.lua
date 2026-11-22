@@ -1,5 +1,4 @@
--- Tracker: a small movable box that says where you left off, anywhere in the world, and the
--- guide picker.
+-- Tracker: a small movable box that says where you left off, anywhere in the world.
 local _, ns = ...
 
 local UI = ns.UI
@@ -53,7 +52,7 @@ local function render()
 	tracker:SetShown(want and true or false)
 	if not want then return end
 	local st, ctx = ns.Status(guide)
-	tracker.title:SetText(("Craftbound · %s %d/%d"):format(guide.profession, ctx.skill, guide.to))
+	tracker.title:SetText(("Craftbound · %s %d/%d"):format(guide.profession, ctx.skill, st.stop))
 	tracker.bar:SetValue(st.percent)
 	if st.finished then
 		tracker.step:SetText(UI.Color("green", "Route finished!"))
@@ -93,41 +92,7 @@ function ns.ToggleTracker()
 	render()
 end
 
--- Guide picker ------------------------------------------------------------------------------
-
-local picker
-
+-- The guide picker is the Craftbound window now.
 function ns.ShowGuidePicker()
-	if not picker then
-		picker = UI.Panel("CraftboundGuidePicker", UIParent, 400, 44 + 46 * #ns.Guides)
-		picker:SetPoint("CENTER")
-		picker:SetFrameStrata("DIALOG")
-		UI.Movable(picker, function() return {} end, "x")
-		tinsert(UISpecialFrames, "CraftboundGuidePicker")
-		local t = UI.Text(picker, "big", UI.GOLD)
-		t:SetPoint("TOPLEFT", 12, -10)
-		t:SetText("Craftbound: pick a guide")
-		local close = CreateFrame("Button", nil, picker, "UIPanelCloseButton")
-		close:SetPoint("TOPRIGHT", -2, -2)
-		picker.buttons = {}
-		for i, g in ipairs(ns.Guides) do
-			local b = UI.Button(picker, "", 376, 40, function()
-				ns.SetActive(g.key)
-				picker:Hide()
-				ns.ShowTracker()
-				ns.Print(("Active guide: %s %s."):format(g.profession, g.name))
-			end)
-			b:SetPoint("TOPLEFT", 12, -36 - (i - 1) * 46)
-			b.guide = g
-			picker.buttons[i] = b
-		end
-	end
-	for _, b in ipairs(picker.buttons) do
-		local g = b.guide
-		local s = ns.char.skills[g.profession]
-		local tag = s and ("skill %d"):format(s.rank) or "not learned"
-		local active = ns.char.active == g.key and "  |cff40ff40(active)|r" or ""
-		b:SetText(("%s · %s  %d-%d  [%s]%s"):format(g.profession, g.name, g.from, g.to, tag, active))
-	end
-	picker:Show()
+	ns.Window.Show()
 end

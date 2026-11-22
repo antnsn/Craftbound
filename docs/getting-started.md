@@ -14,7 +14,7 @@ description: Install Craftbound and level your first profession with it.
 
 ## Your first session
 
-1. **Log in.** If your character has one profession with a guide (Enchanting, Alchemy, Blacksmithing, Engineering, Leatherworking), Craftbound picks that guide by itself. If it has two, type `/craft guide` and choose one.
+1. **Log in.** If your character has one profession with a guide (Enchanting, Alchemy, Blacksmithing, Engineering, Leatherworking, Tailoring, Cooking, First Aid), Craftbound picks that guide by itself. If it has two, type `/craft` and pick one in the window.
 2. **Look at the tracker.** It is a small box on the right of the screen showing your skill, the next step and how many reagents you still need. Drag it wherever you like.
 3. **Go shopping.** Open the auction house. The **Craftbound shopping** panel sits next to it. Click **Scan prices**, then **Buy ...** and **Confirm** for each reagent. At a merchant, click **Buy route reagents** to get vials and rods. See [Auction house](features/auction-house.html).
 4. **Open your profession window.** The Craftbound panel docks to its right, and the step's recipe is already selected. Click **Craft**, or bind a key and press it. See [Profession window](features/profession-window.html).

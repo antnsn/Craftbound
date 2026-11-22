@@ -14,9 +14,9 @@ wb.check(wb.printed("Next: Craft Enchant Chest %- Inferior Stamina"), "login mes
 
 -- tick the disenchant step by hand, hide the tracker
 wb.slash("/craft tick 3")
-wb.slash("/craft")
+wb.slash("/craft tracker")
 wb.advance(0.2)
-wb.check(not wb.shown("CraftboundTracker"), "/craft hides the tracker")
+wb.check(not wb.shown("CraftboundTracker"), "/craft tracker hides the tracker")
 
 wb.reload()
 char = wb.saved("CraftboundCharDB")
@@ -34,9 +34,9 @@ local h = char.guides["Enchanting:Easiest"].history
 wb.expect("history records the skill-up", h[#h].skill, 66)
 
 wb.relog()
-wb.slash("/craft")
+wb.slash("/craft tracker")
 wb.advance(0.2)
-wb.check(wb.shown("CraftboundTracker"), "/craft shows it again after relog")
+wb.check(wb.shown("CraftboundTracker"), "/craft tracker shows it again after relog")
 wb.expect("still 66 after relog", wb.saved("CraftboundCharDB").skills.Enchanting.rank, 66)
 
 -- switch guide by command

@@ -54,6 +54,25 @@ function UI.Button(parent, label, w, h, onClick)
 	return b
 end
 
+-- A one-line text field. onChange(box, text) runs when the player types (not on SetText).
+function UI.Edit(parent, w, numeric, onChange)
+	local e = CreateFrame("EditBox", nil, parent, "InputBoxTemplate")
+	e:SetSize(w, 20)
+	e:SetAutoFocus(false)
+	if numeric then
+		e:SetNumeric(true)
+		e:SetMaxLetters(4)
+	end
+	e:SetScript("OnEscapePressed", function(self) self:ClearFocus() end)
+	e:SetScript("OnEnterPressed", function(self) self:ClearFocus() end)
+	if onChange then
+		e:SetScript("OnTextChanged", function(self, user)
+			if user then onChange(self, self:GetText() or "") end
+		end)
+	end
+	return e
+end
+
 -- The Craftbound logo left of a title font string (moves the title right to make room).
 function UI.TitleLogo(f, title, size)
 	size = size or 20

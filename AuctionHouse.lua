@@ -118,6 +118,7 @@ local function record(itemID, commodity, rows, avail)
 		commodity = commodity, rows = rows, avail = avail,
 		unit = rows[1] and rows[1].unit, cost = cost, short = math.max(0, missing - got), at = GetTime(),
 	}
+	if rows[1] then ns.Prices.Remember(itemID, rows[1].unit) end
 	ns.Refresh()
 end
 

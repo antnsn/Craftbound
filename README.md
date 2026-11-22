@@ -15,7 +15,7 @@ character stopped.
 - Progress is saved per character, with a tracker that says what comes next.
 - Guides: Enchanting, Alchemy, Engineering, Leatherworking, Tailoring, Cooking and First Aid 1-300, Blacksmithing 125-300.
 
-`/craft` shows or hides the tracker. `/craft help` lists the commands.
+`/craft` opens the Craftbound window: every guide, where to stop (150, 225, 300) and what it costs, and your own guides to make and share. `/craft help` lists the commands.
 
 ## Development
 

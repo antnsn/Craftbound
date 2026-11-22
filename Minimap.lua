@@ -1,4 +1,5 @@
--- Minimap button: left-click shows or hides the tracker, right-click picks a guide, drag to move.
+-- Minimap button: left-click opens the Craftbound window, right-click shows or hides the tracker,
+-- drag to move.
 -- Also listed in the addon compartment.
 --
 -- When another addon has loaded LibDataBroker-1.1 and LibDBIcon-1.0 (most minimap collectors do),
@@ -14,9 +15,9 @@ local btn, dbi
 
 local function onClick(_, button)
 	if button == "RightButton" then
-		ns.ShowGuidePicker()
-	else
 		ns.ToggleTracker()
+	else
+		ns.Window.Toggle()
 	end
 end
 ns.MinimapClick = onClick
@@ -26,13 +27,13 @@ local function tooltip(tt)
 	local guide = ns.ActiveGuide()
 	if guide then
 		local st, ctx = ns.Status(guide)
-		tt:AddLine(("%s %d/%d"):format(guide.profession, ctx.skill, guide.to), 1, 0.82, 0)
+		tt:AddLine(("%s %d/%d"):format(guide.profession, ctx.skill, st.stop), 1, 0.82, 0)
 		tt:AddLine(ns.Planner.Describe(st.step, st.left), 1, 1, 1, true)
 	else
 		tt:AddLine("No guide picked yet.", 1, 1, 1)
 	end
-	tt:AddLine("Left-click: show or hide the tracker", 0.6, 0.8, 1)
-	tt:AddLine("Right-click: pick a guide", 0.6, 0.8, 1)
+	tt:AddLine("Left-click: the Craftbound window", 0.6, 0.8, 1)
+	tt:AddLine("Right-click: show or hide the tracker", 0.6, 0.8, 1)
 	tt:AddLine("Drag: move", 0.6, 0.6, 0.6)
 end
 
