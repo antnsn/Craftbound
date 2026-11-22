@@ -14,5 +14,5 @@ read_globals = {
 	"C_TradeSkillUI", "CreateFrame", "Enum", "GameTooltip", "GetMerchantItemID", "GetMerchantItemMaxStack",
 	"GetMerchantNumItems", "GetMoney", "GetProfessionInfo", "GetProfessions", "GetTime", "InCombatLockdown",
 	"IsShiftKeyDown", "ItemLocation", "MerchantFrame", "ProfessionsFrame", "StaticPopup_Hide", "UIParent",
-	"UISpecialFrames", "UnitFactionGroup", "UnitLevel", "UnitName", "Screenshot", "PlaySound", "SOUNDKIT", "date", "geterrorhandler", "time", "tinsert",
+	"UISpecialFrames", "UnitFactionGroup", "UnitLevel", "UnitName", "Screenshot", "StaticPopup_Show", "PlaySound", "SOUNDKIT", "date", "geterrorhandler", "time", "tinsert",
 }

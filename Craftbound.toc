@@ -18,6 +18,7 @@ Share.lua
 Custom.lua
 UI.lua
 Profession.lua
+CapGuard.lua
 AuctionHouse.lua
 Tracker.lua
 Window.lua

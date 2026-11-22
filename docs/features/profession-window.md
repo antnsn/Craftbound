@@ -51,6 +51,8 @@ Every step of the guide, in order:
 
 When you can train the next rank (Journeyman, Expert, Artisan), a red line says so. Five points before your skill hits the cap, training becomes the current step. Craftbound sees that you have trained from your new maximum skill.
 
+At the cap (75/75, 150/150, 225/225) crafting gives no skill-up, so the **Craft** button and its key stop and say to train. Blizzard's own **Create** and **Create All** buttons ask first: the first click says you are at the cap, and **Craft anyway** lets your clicks through until your skill or the cap changes. At 300 nothing asks: you craft for the items then. `/craft toggle cap` turns the question off.
+
 ## Turning it off
 
 `/craft toggle panel` hides the panel, and `/craft toggle select` stops Craftbound selecting the recipe when the window opens.

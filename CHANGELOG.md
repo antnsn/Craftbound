@@ -3,6 +3,10 @@
 ## 0.2.2-alpha (2026-11-22)
 
 - First version on CurseForge.
+- **At a rank's cap** (75/75, 150/150, 225/225) Blizzard's Create and Create All buttons ask
+  before they craft, since crafting gives no skill-up there; "Craft anyway" lets the clicks
+  through until the skill or the cap changes. Craftbound's own Craft button already stopped.
+  `/craft toggle cap` turns the question off.
 
 ## 0.2.1-alpha (2026-11-22)
 
