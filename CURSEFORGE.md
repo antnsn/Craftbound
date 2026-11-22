@@ -62,6 +62,10 @@ Key bindings (Key Bindings > AddOns > Craftbound): **Craft the next step** and *
 
 ## Changelog
 <!-- changelog:start -->
+### 0.2.2-alpha (2026-11-22)
+
+- First version on CurseForge.
+
 ### 0.2.1-alpha (2026-11-22)
 
 - `/craft shots` takes screenshots of every Craftbound frame for the docs (the window, the
