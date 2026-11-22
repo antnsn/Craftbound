@@ -1,0 +1,8 @@
+<Bindings>
+	<Binding name="CRAFTBOUND_CRAFT" header="CRAFTBOUND" category="ADDONS">
+		Craftbound_CraftNext()
+	</Binding>
+	<Binding name="CRAFTBOUND_BUY" category="ADDONS">
+		Craftbound_BuyNext()
+	</Binding>
+</Bindings>

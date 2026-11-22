@@ -1,0 +1,18 @@
+## Interface: 16001
+## Title: |cffe0a040Craft|r|cfff0e0c0bound|r
+## Notes: Profession levelling for WoW: Forever. The next step in your profession window, one-click shopping in the auction house, and it remembers where you stopped. /craft
+## Author: Rheolux
+## Version: @project-version@
+## SavedVariables: CraftboundDB
+## SavedVariablesPerCharacter: CraftboundCharDB
+## IconTexture: Interface\Icons\Trade_Engraving
+## X-Category: Professions
+
+Guides.lua
+Core.lua
+Planner.lua
+Items.lua
+UI.lua
+Profession.lua
+AuctionHouse.lua
+Tracker.lua

@@ -1,0 +1,1054 @@
+{
+  "schema_version": 1,
+  "game": "World of Warcraft Forever",
+  "data_notes": {
+    "craft_counts": "Planner estimates based on a community skill-up model. Follow actual skill until the target is reached.",
+    "shopping": "Route quantities sum materials_per_craft multiplied by each step's safe count, before inventory, disenchanting yields or other acquired materials. Reusable tools are separate.",
+    "cost_raw": "Numeric values copied from source. Currency denominations were not specified.",
+    "rank_steps": "Train once the prerequisites are met and before the skill cap, including during a craft step that crosses the cap."
+  },
+  "guide_browser": {
+    "tabs": [
+      "Steps",
+      "Shopping list",
+      "History"
+    ],
+    "community_search_fields": [
+      "guide",
+      "author",
+      "recipe",
+      "material"
+    ],
+    "community_guides_listed": {
+      "Enchanting": 0,
+      "Alchemy": 0
+    },
+    "publishing": "Sign in, save a guide copy, edit it, and set Who can see it to Everyone."
+  },
+  "guides": [
+    {
+      "profession": "Enchanting",
+      "guide": "Easiest",
+      "skill_from": 1,
+      "skill_to": 300,
+      "source_estimate": {
+        "average_crafts": 319,
+        "p90_crafts": 331,
+        "different_materials": 19,
+        "recipes_tools_vendor_materials_cost_raw": 33071,
+        "biggest_buys_reported": {
+          "Strange Dust": 93,
+          "Soul Dust": 60,
+          "Wildvine": 56
+        },
+        "status": "Experimental",
+        "character_specific": true,
+        "uses_known_recipes": true,
+        "all_recipes_in_forever": true,
+        "playtested_in_forever": false,
+        "uses_market_prices": false
+      },
+      "steps": [
+        {
+          "type": "craft_tool",
+          "keep_in_bags": true,
+          "recipe": "Runed Copper Rod",
+          "skill_thresholds": {
+            "orange": 1,
+            "yellow": 5,
+            "green": 7,
+            "gray": 10
+          },
+          "crafts": {
+            "expected": 1,
+            "safe": 1,
+            "guaranteed": true
+          },
+          "materials_per_craft": {
+            "Copper Rod": 1,
+            "Mote of Magic": 1
+          },
+          "source": {
+            "type": "trainer"
+          },
+          "alternatives": []
+        },
+        {
+          "type": "craft",
+          "skill_from": 1,
+          "skill_to": 2,
+          "recipe": "Dust to Motes",
+          "skill_thresholds": {
+            "orange": 1,
+            "yellow": 10,
+            "green": 12,
+            "gray": 15
+          },
+          "crafts": {
+            "expected": 1,
+            "safe": 1,
+            "guaranteed": true
+          },
+          "materials_per_craft": {
+            "Strange Dust": 1
+          },
+          "source": {
+            "type": "trainer"
+          },
+          "alternatives": [
+            "Runed Copper Rod",
+            "Novice's Practice Wand"
+          ],
+          "required_tool": "Runed Copper Rod",
+          "output_quantity": 3
+        },
+        {
+          "type": "disenchant",
+          "skill_from": 2,
+          "skill_to": 20,
+          "item_quality_minimum": "Uncommon",
+          "instructions": "Disenchant green or better items and keep the dust and essences. Each gives a skill point up to 20. The chance then falls and stops at 60.",
+          "excluded_from_craft_estimates": true
+        },
+        {
+          "type": "train_rank",
+          "rank": "Journeyman",
+          "requires_skill": 50,
+          "requires_character_level": 10,
+          "train_before_skill": 75
+        },
+        {
+          "type": "craft",
+          "skill_from": 20,
+          "skill_to": 79,
+          "recipe": "Enchant Chest - Inferior Stamina",
+          "skill_thresholds": {
+            "orange": 15,
+            "yellow": 70,
+            "green": 90,
+            "gray": 110
+          },
+          "crafts": {
+            "expected": 60,
+            "safe": 62
+          },
+          "materials_per_craft": {
+            "Strange Dust": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 50
+          },
+          "alternatives": [
+            "Enchant Chest - Minor Intellect",
+            "Lesser Magic Wand"
+          ],
+          "required_tool": "Runed Copper Rod"
+        },
+        {
+          "type": "craft",
+          "skill_from": 79,
+          "skill_to": 103,
+          "recipe": "Enchant Chest - Minor Absorption",
+          "skill_thresholds": {
+            "orange": 40,
+            "yellow": 90,
+            "green": 110,
+            "gray": 130
+          },
+          "crafts": {
+            "expected": 26,
+            "safe": 29
+          },
+          "materials_per_craft": {
+            "Lesser Magic Essence": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 1
+          },
+          "alternatives": [
+            "Enchant Chest - Minor Intellect",
+            "Enchant Cloak - Minor Resistance"
+          ],
+          "required_tool": "Runed Copper Rod"
+        },
+        {
+          "type": "craft",
+          "skill_from": 103,
+          "skill_to": 132,
+          "recipe": "Enchant 2H Weapon - Minor Impact",
+          "skill_thresholds": {
+            "orange": 100,
+            "yellow": 130,
+            "green": 150,
+            "gray": 170
+          },
+          "crafts": {
+            "expected": 29,
+            "safe": 29
+          },
+          "materials_per_craft": {
+            "Strange Dust": 1,
+            "Small Glimmering Shard": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 5
+          },
+          "alternatives": [
+            "Enchant Chest - Lesser Stamina",
+            "Enchant Cloak - Minor Protection"
+          ],
+          "required_tool": "Runed Copper Rod"
+        },
+        {
+          "type": "craft_tool",
+          "keep_in_bags": true,
+          "recipe": "Runed Silver Rod",
+          "skill_thresholds": {
+            "orange": 100,
+            "yellow": 130,
+            "green": 150,
+            "gray": 170
+          },
+          "crafts": {
+            "expected": 1,
+            "safe": 1,
+            "guaranteed": true
+          },
+          "materials_per_craft": {
+            "Silver Rod": 1,
+            "Strange Dust": 3,
+            "Lesser Magic Essence": 4,
+            "Shadowgem": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 10
+          },
+          "alternatives": []
+        },
+        {
+          "type": "train_rank",
+          "rank": "Expert",
+          "requires_skill": 125,
+          "requires_character_level": 20,
+          "train_before_skill": 150
+        },
+        {
+          "type": "craft",
+          "skill_from": 132,
+          "skill_to": 164,
+          "recipe": "Enchant Bracer - Lesser Stamina",
+          "skill_thresholds": {
+            "orange": 130,
+            "yellow": 155,
+            "green": 175,
+            "gray": 195
+          },
+          "crafts": {
+            "expected": 33,
+            "safe": 34
+          },
+          "materials_per_craft": {
+            "Soul Dust": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 15
+          },
+          "alternatives": [
+            "Enchant Cloak - Minor Agility",
+            "Enchant Cloak - Lesser Fire Resistance"
+          ],
+          "required_tool": "Runed Silver Rod"
+        },
+        {
+          "type": "craft_tool",
+          "keep_in_bags": true,
+          "recipe": "Runed Golden Rod",
+          "skill_thresholds": {
+            "orange": 150,
+            "yellow": 175,
+            "green": 195,
+            "gray": 215
+          },
+          "crafts": {
+            "expected": 1,
+            "safe": 1,
+            "guaranteed": true
+          },
+          "materials_per_craft": {
+            "Golden Rod": 1,
+            "Iridescent Pearl": 1,
+            "Greater Astral Essence": 1,
+            "Soul Dust": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 25
+          },
+          "alternatives": []
+        },
+        {
+          "type": "craft",
+          "skill_from": 164,
+          "skill_to": 189,
+          "recipe": "Enchant Boots - Lesser Agility",
+          "skill_thresholds": {
+            "orange": 160,
+            "yellow": 180,
+            "green": 200,
+            "gray": 220
+          },
+          "crafts": {
+            "expected": 26,
+            "safe": 27
+          },
+          "materials_per_craft": {
+            "Soul Dust": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 28
+          },
+          "alternatives": [
+            "Enchant Bracer - Lesser Strength",
+            "Enchant Chest - Intellect"
+          ],
+          "required_tool": "Runed Golden Rod"
+        },
+        {
+          "type": "craft",
+          "skill_from": 189,
+          "skill_to": 214,
+          "recipe": "Enchant Chest - Greater Intellect",
+          "skill_thresholds": {
+            "orange": 185,
+            "yellow": 205,
+            "green": 225,
+            "gray": 245
+          },
+          "crafts": {
+            "expected": 26,
+            "safe": 28
+          },
+          "materials_per_craft": {
+            "Lesser Mystic Essence": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 38
+          },
+          "alternatives": [
+            "Enchant Bracer - Strength",
+            "Enchant Bracer - Spirit"
+          ],
+          "required_tool": "Runed Golden Rod"
+        },
+        {
+          "type": "craft_tool",
+          "keep_in_bags": true,
+          "recipe": "Runed Truesilver Rod",
+          "skill_thresholds": {
+            "orange": 200,
+            "yellow": 220,
+            "green": 240,
+            "gray": 260
+          },
+          "crafts": {
+            "expected": 1,
+            "safe": 1,
+            "guaranteed": true
+          },
+          "materials_per_craft": {
+            "Truesilver Rod": 1,
+            "Black Pearl": 1,
+            "Greater Mystic Essence": 1,
+            "Vision Dust": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 40
+          },
+          "alternatives": []
+        },
+        {
+          "type": "train_rank",
+          "rank": "Artisan",
+          "requires_skill": 200,
+          "requires_character_level": 35,
+          "train_before_skill": 225
+        },
+        {
+          "type": "craft",
+          "skill_from": 214,
+          "skill_to": 239,
+          "recipe": "Enchant Gloves - Agility",
+          "skill_thresholds": {
+            "orange": 210,
+            "yellow": 230,
+            "green": 250,
+            "gray": 270
+          },
+          "crafts": {
+            "expected": 26,
+            "safe": 27
+          },
+          "materials_per_craft": {
+            "Vision Dust": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 44
+          },
+          "alternatives": [
+            "Enchant Cloak - Greater Defense",
+            "Enchant Cloak - Resistance"
+          ],
+          "required_tool": "Runed Truesilver Rod"
+        },
+        {
+          "type": "craft",
+          "skill_from": 239,
+          "skill_to": 268,
+          "recipe": "Enchant Boots - Agility",
+          "skill_thresholds": {
+            "orange": 235,
+            "yellow": 255,
+            "green": 275,
+            "gray": 295
+          },
+          "crafts": {
+            "expected": 31,
+            "safe": 34
+          },
+          "materials_per_craft": {
+            "Greater Nether Essence": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 58
+          },
+          "alternatives": [
+            "Enchant Chest - Superior Intellect",
+            "Enchant Gloves - Agility"
+          ],
+          "required_tool": "Runed Truesilver Rod"
+        },
+        {
+          "type": "craft",
+          "skill_from": 268,
+          "skill_to": 300,
+          "recipe": "Enchant Gloves - Minor Haste",
+          "skill_thresholds": {
+            "orange": 250,
+            "yellow": 270,
+            "green": 290,
+            "gray": 310
+          },
+          "crafts": {
+            "expected": 56,
+            "safe": 67
+          },
+          "materials_per_craft": {
+            "Large Radiant Shard": 1,
+            "Wildvine": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 65
+          },
+          "alternatives": [
+            "Enchant Weapon - Greater Striking",
+            "Enchant Boots - Agility"
+          ],
+          "required_tool": "Runed Truesilver Rod"
+        }
+      ],
+      "shopping": {
+        "source_import_name": "Wowhead Enchanting: Easiest",
+        "source_import_quantities": {
+          "Strange Dust": 95,
+          "Wildvine": 67,
+          "Large Radiant Shard": 67,
+          "Soul Dust": 62,
+          "Greater Nether Essence": 34,
+          "Lesser Magic Essence": 33,
+          "Small Glimmering Shard": 29,
+          "Lesser Mystic Essence": 28,
+          "Vision Dust": 28,
+          "Shadowgem": 1,
+          "Iridescent Pearl": 1,
+          "Silver Rod": 1,
+          "Black Pearl": 1,
+          "Greater Astral Essence": 1,
+          "Golden Rod": 1,
+          "Greater Mystic Essence": 1,
+          "Truesilver Rod": 1
+        },
+        "route_quantities_using_safe_counts": {
+          "Copper Rod": 1,
+          "Mote of Magic": 1,
+          "Strange Dust": 95,
+          "Lesser Magic Essence": 33,
+          "Small Glimmering Shard": 29,
+          "Silver Rod": 1,
+          "Shadowgem": 1,
+          "Soul Dust": 62,
+          "Golden Rod": 1,
+          "Iridescent Pearl": 1,
+          "Greater Astral Essence": 1,
+          "Lesser Mystic Essence": 28,
+          "Truesilver Rod": 1,
+          "Black Pearl": 1,
+          "Greater Mystic Essence": 1,
+          "Vision Dust": 28,
+          "Greater Nether Essence": 34,
+          "Large Radiant Shard": 67,
+          "Wildvine": 67
+        },
+        "required_reusable_tools_to_source": [],
+        "discrepancies": {
+          "Copper Rod": {
+            "imported": 0,
+            "route": 1
+          },
+          "Mote of Magic": {
+            "imported": 0,
+            "route": 1
+          }
+        }
+      },
+      "other_guide_summaries": [
+        {
+          "name": "Tried & Tested in Forever",
+          "publisher": "Wowhead",
+          "version": 2,
+          "average_crafts": 298,
+          "p90_crafts": 305,
+          "different_materials": 25,
+          "recipes_tools_vendor_materials_cost_raw": 137349,
+          "notes_count": 4,
+          "note_topics": [
+            "low odds",
+            "limited stock",
+            "special currency"
+          ],
+          "biggest_buys_reported": {
+            "Dream Dust": 195,
+            "Vision Dust": 111,
+            "Lesser Magic Essence": 92
+          },
+          "playtested_in_forever": true,
+          "all_recipes_in_forever": true,
+          "walkthrough_supplied": false
+        }
+      ]
+    },
+    {
+      "profession": "Alchemy",
+      "guide": "Easiest",
+      "skill_from": 1,
+      "skill_to": 300,
+      "source_estimate": {
+        "average_crafts": 310,
+        "average_player_budget": 310
+      },
+      "steps": [
+        {
+          "type": "craft",
+          "skill_from": 1,
+          "skill_to": 12,
+          "recipe": "Minor Arcane Elixir",
+          "skill_thresholds": {
+            "orange": 1,
+            "yellow": 10,
+            "green": 12,
+            "gray": 15
+          },
+          "crafts": {
+            "expected": 11,
+            "safe": 11
+          },
+          "materials_per_craft": {
+            "Peacebloom": 1,
+            "Empty Vial": 1
+          },
+          "source": {
+            "type": "trainer"
+          },
+          "alternatives": [
+            "Elixir of Minor Force",
+            "Elixir of Minor Defense"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 12,
+          "skill_to": 62,
+          "recipe": "Elixir of Minor Defense",
+          "skill_thresholds": {
+            "orange": 1,
+            "yellow": 55,
+            "green": 75,
+            "gray": 95
+          },
+          "crafts": {
+            "expected": 50,
+            "safe": 50
+          },
+          "materials_per_craft": {
+            "Silverleaf": 1,
+            "Peacebloom": 1,
+            "Empty Vial": 1
+          },
+          "source": {
+            "type": "trainer"
+          },
+          "alternatives": [
+            "Minor Arcane Elixir",
+            "Elixir of Minor Force"
+          ]
+        },
+        {
+          "type": "train_rank",
+          "rank": "Journeyman",
+          "requires_skill": 50,
+          "requires_character_level": 10,
+          "train_before_skill": 75
+        },
+        {
+          "type": "craft",
+          "skill_from": 62,
+          "skill_to": 76,
+          "recipe": "Minor Mana Potion",
+          "skill_thresholds": {
+            "orange": 25,
+            "yellow": 65,
+            "green": 85,
+            "gray": 105
+          },
+          "crafts": {
+            "expected": 15,
+            "safe": 15
+          },
+          "materials_per_craft": {
+            "Mageroyal": 1,
+            "Peacebloom": 1,
+            "Empty Vial": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 1
+          },
+          "alternatives": [
+            "Rage Potion",
+            "Minor Rejuvenation Potion"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 76,
+          "skill_to": 89,
+          "recipe": "Elixir of Minor Fortitude",
+          "skill_thresholds": {
+            "orange": 50,
+            "yellow": 80,
+            "green": 100,
+            "gray": 120
+          },
+          "crafts": {
+            "expected": 14,
+            "safe": 14
+          },
+          "materials_per_craft": {
+            "Earthroot": 2,
+            "Peacebloom": 1,
+            "Empty Vial": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 250
+          },
+          "alternatives": [
+            "Rage Potion",
+            "Minor Rejuvenation Potion"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 89,
+          "skill_to": 100,
+          "recipe": "Rage Potion",
+          "skill_thresholds": {
+            "orange": 60,
+            "yellow": 90,
+            "green": 110,
+            "gray": 130
+          },
+          "crafts": {
+            "expected": 12,
+            "safe": 12
+          },
+          "materials_per_craft": {
+            "Sharp Claw": 1,
+            "Briarthorn": 1,
+            "Empty Vial": 1
+          },
+          "source": {
+            "type": "vendor",
+            "cost_raw": 95,
+            "npc": "Hagrus",
+            "location": "Orgrimmar",
+            "limited_stock": 1,
+            "restocks": true
+          },
+          "alternatives": [
+            "Elixir of Minor Fortitude",
+            "Blackmouth Oil"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 100,
+          "skill_to": 137,
+          "recipe": "Holy Protection Potion",
+          "skill_thresholds": {
+            "orange": 100,
+            "yellow": 130,
+            "green": 150,
+            "gray": 170
+          },
+          "crafts": {
+            "expected": 37,
+            "safe": 37
+          },
+          "materials_per_craft": {
+            "Bruiseweed": 1,
+            "Swiftthistle": 1,
+            "Empty Vial": 1
+          },
+          "source": {
+            "type": "vendor",
+            "cost_raw": 842,
+            "npc": "Hula'mahi",
+            "location": "The Barrens",
+            "limited_stock": 1,
+            "restocks": true
+          },
+          "alternatives": [
+            "Elixir of Wisdom",
+            "Rage Potion"
+          ]
+        },
+        {
+          "type": "train_rank",
+          "rank": "Expert",
+          "requires_skill": 125,
+          "requires_character_level": 20,
+          "train_before_skill": 150
+        },
+        {
+          "type": "craft",
+          "skill_from": 137,
+          "skill_to": 162,
+          "recipe": "Elixir of Lesser Defense",
+          "skill_thresholds": {
+            "orange": 130,
+            "yellow": 155,
+            "green": 175,
+            "gray": 195
+          },
+          "crafts": {
+            "expected": 25,
+            "safe": 25
+          },
+          "materials_per_craft": {
+            "Wild Steelbloom": 1,
+            "Stranglekelp": 1,
+            "Leaded Vial": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 20
+          },
+          "alternatives": [
+            "Lesser Mana Potion",
+            "Fire Oil"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 162,
+          "skill_to": 187,
+          "recipe": "Mana Potion",
+          "skill_thresholds": {
+            "orange": 160,
+            "yellow": 180,
+            "green": 200,
+            "gray": 220
+          },
+          "crafts": {
+            "expected": 25,
+            "safe": 25
+          },
+          "materials_per_craft": {
+            "Stranglekelp": 1,
+            "Kingsblood": 1,
+            "Leaded Vial": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 50
+          },
+          "alternatives": [
+            "Shadow Protection Potion",
+            "Elixir of Lesser Defense"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 187,
+          "skill_to": 212,
+          "recipe": "Elixir of Agility",
+          "skill_thresholds": {
+            "orange": 185,
+            "yellow": 205,
+            "green": 225,
+            "gray": 245
+          },
+          "crafts": {
+            "expected": 25,
+            "safe": 25
+          },
+          "materials_per_craft": {
+            "Stranglekelp": 1,
+            "Goldthorn": 1,
+            "Leaded Vial": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 65
+          },
+          "alternatives": [
+            "Elixir of Lesser Fortitude",
+            "Great Rage Potion"
+          ]
+        },
+        {
+          "type": "train_rank",
+          "rank": "Artisan",
+          "requires_skill": 200,
+          "requires_character_level": 35,
+          "train_before_skill": 225
+        },
+        {
+          "type": "craft",
+          "skill_from": 212,
+          "skill_to": 227,
+          "recipe": "Catseye Draught",
+          "skill_thresholds": {
+            "orange": 200,
+            "yellow": 220,
+            "green": 240,
+            "gray": 260
+          },
+          "crafts": {
+            "expected": 15,
+            "safe": 15
+          },
+          "materials_per_craft": {
+            "Goldthorn": 1,
+            "Fadeleaf": 1,
+            "Leaded Vial": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 80
+          },
+          "alternatives": [
+            "Elixir of Defense",
+            "Greater Mana Potion"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 227,
+          "skill_to": 232,
+          "recipe": "Viridian Dye",
+          "skill_thresholds": {
+            "orange": 215,
+            "yellow": 230,
+            "green": 250,
+            "gray": 270
+          },
+          "crafts": {
+            "expected": 5,
+            "safe": 5
+          },
+          "materials_per_craft": {
+            "Stranglevine": 2,
+            "Crystal Vial": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 1
+          },
+          "alternatives": [
+            "Draught of Greater Water Breathing",
+            "Catseye Draught"
+          ],
+          "required_tool": "Fermenter"
+        },
+        {
+          "type": "craft",
+          "skill_from": 232,
+          "skill_to": 257,
+          "recipe": "Draught of Detect Undead",
+          "skill_thresholds": {
+            "orange": 230,
+            "yellow": 245,
+            "green": 265,
+            "gray": 285
+          },
+          "crafts": {
+            "expected": 27,
+            "safe": 27
+          },
+          "materials_per_craft": {
+            "Arthas' Tears": 1,
+            "Crystal Vial": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 50
+          },
+          "alternatives": [
+            "Viridian Dye",
+            "Dreamless Sleep Potion"
+          ]
+        },
+        {
+          "type": "craft",
+          "skill_from": 257,
+          "skill_to": 300,
+          "recipe": "Major Discolored Healing Potion",
+          "skill_thresholds": {
+            "orange": 250,
+            "yellow": 290,
+            "green": 310,
+            "gray": 330
+          },
+          "crafts": {
+            "expected": 44,
+            "safe": 44
+          },
+          "materials_per_craft": {
+            "Crystal Vial": 1,
+            "Plaguebloom": 1,
+            "Murloc Eye": 1
+          },
+          "source": {
+            "type": "trainer",
+            "cost_raw": 1
+          },
+          "alternatives": [
+            "Potion of Demon Slaying",
+            "Draught of Detect Demon"
+          ]
+        }
+      ],
+      "shopping": {
+        "source_import_name": "Wowhead Alchemy: Easiest",
+        "source_import_quantities": {
+          "Peacebloom": 91,
+          "Ghost Mushroom": 86,
+          "Gromsblood": 86,
+          "Stranglekelp": 77,
+          "Silverleaf": 50,
+          "Goldthorn": 41,
+          "Swiftthistle": 37,
+          "Bruiseweed": 37,
+          "Earthroot": 28,
+          "Arthas' Tears": 27,
+          "Wild Steelbloom": 25,
+          "Kingsblood": 25,
+          "Mageroyal": 15,
+          "Fadeleaf": 15,
+          "Briarthorn": 12,
+          "Sharp Claw": 12,
+          "Stranglevine": 10
+        },
+        "route_quantities_using_safe_counts": {
+          "Peacebloom": 90,
+          "Empty Vial": 139,
+          "Silverleaf": 50,
+          "Mageroyal": 15,
+          "Earthroot": 28,
+          "Sharp Claw": 12,
+          "Briarthorn": 12,
+          "Bruiseweed": 37,
+          "Swiftthistle": 37,
+          "Wild Steelbloom": 25,
+          "Stranglekelp": 75,
+          "Leaded Vial": 90,
+          "Kingsblood": 25,
+          "Goldthorn": 40,
+          "Fadeleaf": 15,
+          "Stranglevine": 10,
+          "Crystal Vial": 76,
+          "Arthas' Tears": 27,
+          "Plaguebloom": 44,
+          "Murloc Eye": 44
+        },
+        "required_reusable_tools_to_source": [
+          "Fermenter"
+        ],
+        "discrepancies": {
+          "Peacebloom": {
+            "imported": 91,
+            "route": 90
+          },
+          "Empty Vial": {
+            "imported": 0,
+            "route": 139
+          },
+          "Stranglekelp": {
+            "imported": 77,
+            "route": 75
+          },
+          "Leaded Vial": {
+            "imported": 0,
+            "route": 90
+          },
+          "Goldthorn": {
+            "imported": 41,
+            "route": 40
+          },
+          "Crystal Vial": {
+            "imported": 0,
+            "route": 76
+          },
+          "Plaguebloom": {
+            "imported": 0,
+            "route": 44
+          },
+          "Murloc Eye": {
+            "imported": 0,
+            "route": 44
+          },
+          "Ghost Mushroom": {
+            "imported": 86,
+            "route": 0
+          },
+          "Gromsblood": {
+            "imported": 86,
+            "route": 0
+          }
+        }
+      }
+    }
+  ]
+}

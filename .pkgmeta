@@ -1,0 +1,19 @@
+# CurseForge automatic packaging (https://support.curseforge.com/support/solutions/articles/9000197281)
+# A tag publishes: "v0.2.0" = release, "v0.2.0-beta.1" = beta, "v0.2.0-alpha.1" = alpha.
+package-as: Craftbound
+
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
+
+ignore:
+  - docs
+  - tests
+  - tools
+  - .luacheckrc
+  - CLAUDE.md
+  - AGENTS.md
+  - .beads
+  - .claude
+  - README.md
+  - .gitignore
