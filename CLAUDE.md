@@ -4,6 +4,14 @@ Profession levelling addon for WoW: Forever (Interface 16001, Lua 5.1, modern
 `C_TradeSkillUI` / `C_AuctionHouse` API). Forever only: no Classic or retail branches.
 Design: `docs/superpowers/specs/2026-11-22-craftbound-design.md`.
 
+## Skills
+
+Shared knowledge lives in Claude Code skills (plugin `wow-addons`, repo antnsn/addon-skills). Load the
+one that fits before working here; this file only holds what is specific to this repo.
+
+- `wow-addons:forever-client`: the Forever client API: secret values, missing globals, API lookups, probing in game
+- `wow-addons:addon-release`: releasing: tag, CurseForge webhook, the token, changelog, docs, screenshots
+
 ## Build & test
 
 ```bash
@@ -47,7 +55,7 @@ Protected `main`: `git switch -c <topic>`, commit (with `.beads/issues.jsonl`), 
 `gh pr create --fill`, `gh pr merge --squash --delete-branch`. Releases: a `## X` section in
 `CHANGELOG.md` and `python3 tools/sync_curseforge.py` (through a PR), then tag `vX` on main and
 push the tag: `.github/workflows/release.yml` packs it (`tools/package.py`) and publishes the
-GitHub release. CurseForge will take tags through its webhook once the project exists.
+GitHub release. CurseForge (project 1824701) also builds every tag through its webhook; details in `wow-addons:addon-release`.
 
 ## Issues
 
