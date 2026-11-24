@@ -10,7 +10,7 @@ description: Install Craftbound and level your first profession with it.
 
 1. Download the latest zip from [GitHub releases](https://github.com/antnsn/Craftbound/releases).
 2. Unzip it into `World of Warcraft\_forever_\Interface\AddOns`, so that you have `AddOns\Craftbound\Craftbound.toc`.
-3. Start the game, or restart it if it is running. `/reload` doesn't pick up a new addon.
+3. Start the game, or type `/reload` if it is already running.
 
 ## Your first session
 
