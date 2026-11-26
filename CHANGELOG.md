@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.1-alpha (2026-11-26)
 
 - **Overwrite** is a small checkbox on the guide's line now, not a full-width button: the
   route gets the room back.
