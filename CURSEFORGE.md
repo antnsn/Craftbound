@@ -25,6 +25,8 @@ Beside the profession window it shows the next step and crafts it with one butto
 ## The profession window
 - **A panel beside it**: the step, its skill-up colour, the reagents you have and need, and the route ahead.
 - **Craft** (button or key binding) crafts the step: as many as you can, never past your rank's cap. Enchants go on the right equipped item.
+- **Enchanting, one press per enchant**: drag cheap items into the **Enchant on** sidebar and the route's enchants go on them, not your gear; or turn on **Overwrite my enchants**. Either way Craftbound answers the game's "replace the enchant?" for you.
+- **Craft another recipe instead**: right-click a step to use another recipe you know (one closer by, or one the auction house has reagents for); the shopping list follows.
 - **Says what's missing**: a recipe to learn (and where, from the vendors of your faction), a rank to train, a tool to make.
 - **Waypoints** to the nearest trainer for your next rank or recipe, the recipe's vendor, or a vendor for missing reagents (`/craft way` or the map button; TomTom too). The places come from Questie's database.
 - **At the trainer**: a panel lists the rank and recipes your route needs from there, up to your stop, and one button trains only those.
@@ -84,6 +86,37 @@ Where trainers and vendors stand comes from QuestieDB, part of [Questie](https:/
 
 ## Changelog
 <!-- changelog:start -->
+### 0.3.0-alpha (2026-11-26)
+
+- **Enchanting skips the Runed Arcanite Rod**: it was one skill point (294-295) for an Arcanite Rod
+  (3 Arcanite Bars) and dear shards, and no enchant on the route needs it. Enchant Shield - Greater
+  Stamina takes you to 295 instead (one more Dream Dust craft).
+- **Craft another recipe instead**: right-click a step in the route list (profession panel) and
+  pick any learned recipe that still gives skill-ups, for example when the guide's recipe is
+  far away or not on the auction house. The step, Craft, the tracker and the shopping list all
+  follow your pick; "Back to ..." in the same list undoes it. Kept per character.
+- **Enchant on: items to enchant instead of your gear.** A sidebar beside the profession panel
+  (Enchanting guides) with a slot per kind the route enchants: drag a cheap item from your bags
+  onto it, and those enchants go on that item. The game's "replace the enchant?" and "bind it?"
+  questions for it are answered for you. Without a pick the slot shows what you wear (that gets
+  the enchant), and Craft's tooltip says which item the enchant goes on.
+- **Overwrite my enchants** (top of the panel, off by default): enchants go on your equipped gear
+  and replace whatever is on it: Craftbound answers the game's question for you. It warns you
+  before it turns on.
+- **Reagents in the bank**: they always counted as owned (nothing to buy), but now the
+  profession panel shows "N in bank" on the reagent, the tracker says "Fetch: ...", and Craft
+  says to fetch them instead of "Missing reagents". The mailbox likewise.
+- The profession panel's route lists the steps up to your stop, and the rest as one line
+  ("After your stop at 150: 14 more steps"; click it to change the stop), not ticked off as if
+  they were done.
+- The tracker's title fits on one line again ("Alchemy 75/150"; the logo says Craftbound).
+- Screenshots in the docs, the README and on the CurseForge page (the trainer panel and the
+  auction house too).
+- The merchant's **Buy route reagents** button sits just above the vendor window, on the right:
+  below it, the tab row covered it.
+- The profession panel's footer no longer says to go to the auction house when you have every
+  reagent.
+
 ### 0.2.2-alpha (2026-11-22)
 
 - First version on CurseForge.

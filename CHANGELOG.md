@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.0-alpha (2026-11-26)
 
 - **Enchanting skips the Runed Arcanite Rod**: it was one skill point (294-295) for an Arcanite Rod
   (3 Arcanite Bars) and dear shards, and no enchant on the route needs it. Enchant Shield - Greater
