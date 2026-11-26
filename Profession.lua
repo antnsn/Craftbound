@@ -182,20 +182,79 @@ end
 
 local replacePending -- the game asked "replace the enchant?" after our CraftEnchant
 local bindPending    -- ... or "bind it to you?" (an item in the bags)
+local answerUntil, bindUntil -- our last enchant's questions are ours to answer until then
 
-ns.On("REPLACE_ENCHANT", function() replacePending = GetTime() end)
-ns.On("BIND_ENCHANT", function() bindPending = GetTime() end)
+local function hideReplace() if StaticPopup_Hide then StaticPopup_Hide("REPLACE_ENCHANT") end end
+local function hideBind() if StaticPopup_Hide then StaticPopup_Hide("BIND_ENCHANT") StaticPopup_Hide("ENCHANT_BIND") end end
 
 local function answerReplace()
 	replacePending = nil
 	C_Item.ReplaceEnchant()
-	if StaticPopup_Hide then StaticPopup_Hide("REPLACE_ENCHANT") end
+	hideReplace()
 end
 local function answerBind()
 	bindPending = nil
 	C_Item.BindEnchant()
-	if StaticPopup_Hide then StaticPopup_Hide("BIND_ENCHANT") StaticPopup_Hide("ENCHANT_BIND") end
+	hideBind()
 end
+
+-- The one exception to "only from a press": the game asks a moment after the press, and the
+-- player chose to skip that question (a sidebar item, or Overwrite on). Answer it right away;
+-- if the client blocks that (ADDON_ACTION_BLOCKED), the question stays for the next press and
+-- Craftbound stops trying (settings.answerBlocked).
+-- answers tried this frame; a block reported meanwhile counts against all of them (we can't tell
+-- which call the client meant), so each one's question stays for the next press
+local attempts = {}
+ns.On("ADDON_ACTION_BLOCKED", function(addon)
+	if addon ~= ns.name then return end
+	for _, a in ipairs(attempts) do a.blocked = true end
+end)
+-- our cast ended (failed, cancelled, done): any later question is the player's own
+for _, e in ipairs({ "UNIT_SPELLCAST_FAILED", "UNIT_SPELLCAST_INTERRUPTED", "UNIT_SPELLCAST_SUCCEEDED" }) do
+	ns.On(e, function(unit) if unit == "player" then answerUntil, bindUntil = nil, nil end end)
+end
+
+local function answerNow(until_, call, hide, keep)
+	if not until_ or GetTime() > until_ or ns.db.settings.answerBlocked then return false end
+	local a = { keep = keep, hide = hide }
+	attempts[#attempts + 1] = a
+	if not pcall(call) then a.blocked = true end
+	if #attempts == 1 then
+		C_Timer.After(0, function() -- after the game has shown its questions
+			local list = attempts
+			attempts = {}
+			local any = false
+			for _, x in ipairs(list) do any = any or x.blocked end
+			for _, x in ipairs(list) do
+				if any then x.keep() else x.hide() end
+			end
+			if any then
+				ns.db.settings.answerBlocked = true
+				ns.Refresh()
+			end
+		end)
+	end
+	return true
+end
+
+ns.On("REPLACE_ENCHANT", function()
+	local at = GetTime()
+	replacePending = at
+	local until_ = answerUntil
+	answerUntil = nil -- one answer per enchant of ours
+	if answerNow(until_, C_Item.ReplaceEnchant, hideReplace, function() replacePending = at end) then
+		replacePending = nil
+	end
+end)
+ns.On("BIND_ENCHANT", function()
+	local at = GetTime()
+	bindPending = at
+	local until_ = bindUntil
+	bindUntil = nil
+	if answerNow(until_, C_Item.BindEnchant, hideBind, function() bindPending = at end) then
+		bindPending = nil
+	end
+end)
 -- is the game's question still up (asked in the last 30 s)? The bind dialog's name differs between
 -- client versions: either counts.
 local function asking(at, ...)
@@ -313,10 +372,10 @@ function ns.CraftPlan()
 			local loc, answer, inBags = ns.EnchantTarget(s.recipe)
 			if loc and loc:IsValid() and C_TradeSkillUI.CraftEnchant then
 				replacePending, bindPending = nil, nil
+				answerUntil = answer and GetTime() + 5 or nil
+				bindUntil = inBags and GetTime() + 5 or nil
 				C_TradeSkillUI.CraftEnchant(r.recipeID, 1, nil, loc)
-				-- asked while the cast started: still this press, so ours to answer
-				if answer and replacePending then answerReplace() end
-				if inBags and bindPending then answerBind() end
+				-- (asked while the cast started: the event handlers above answered already)
 			else
 				C_TradeSkillUI.CraftRecipe(r.recipeID, 1) -- the game asks for a target
 			end
@@ -488,6 +547,8 @@ local function build()
 		local plan = ns.CraftPlan()
 		tip:AddLine(plan.label)
 		if plan.reason then tip:AddLine(plan.reason, 1, 0.5, 0.4, true) end
+		local where = ns.CraftTarget()
+		if where then tip:AddLine(where, 1, 1, 1, true) end
 		tip:AddLine("Bind a key: Key Bindings > AddOns > Craftbound > Craft the next step.", 0.5, 0.8, 1, true)
 	end)
 

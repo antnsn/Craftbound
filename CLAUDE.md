@@ -26,7 +26,9 @@ wowbench check . && wowbench test .  # 0 errors, every scenario ok
 `Guides.lua` is generated: edit the JSON or `tools/build_guides.py`, never the Lua.
 Check that new API exists in `~/code/wowbench/api/client.txt` (many legacy globals are nil on
 Forever: `GetTradeSkillInfo`, `GetItemInfo`, `GetItemCount`...). Purchases and crafts only ever
-come from a click or a key binding: never from an event handler. Run `/codex:review` before
+come from a click or a key binding: never from an event handler. One exception, chosen by the
+maintainer: the game's "replace the enchant?"/"bind it?" questions are answered from their events
+when the player opted in (Enchant on sidebar, Overwrite my enchants); a block falls back to the next press. Run `/codex:review` before
 every commit.
 
 ## CurseForge

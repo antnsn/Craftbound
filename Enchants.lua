@@ -79,6 +79,23 @@ function ns.EnchantTarget(recipe)
 	return ItemLocation:CreateFromEquipmentSlot(KINDS[kind].slot), ns.db.settings.overwriteEnchants == true, false
 end
 
+-- Where the current step's enchant goes, as a line for the Craft button's tooltip (nil: no enchant)
+function ns.CraftTarget()
+	local st = ns.Status()
+	local kind = st and st.step and ns.EnchantKind(st.step.recipe)
+	if not kind then return nil end
+	local tgt = ns.char.enchantTargets[kind]
+	if type(tgt) == "table" and findInBags(tgt) then
+		return ("Goes on: %s (in your bags)"):format(itemName(tgt.id))
+	end
+	local worn = GetInventoryItemID("player", KINDS[kind].slot)
+	if worn then
+		return ("Goes on: your %s (%s)"):format(itemName(worn),
+			ns.db.settings.overwriteEnchants and "its enchant is replaced" or "the game asks before replacing its enchant")
+	end
+	return ("Goes on: nothing worn in the %s slot, the game asks you to pick an item"):format(kind:lower())
+end
+
 -- Overwrite my enchants: asks before it turns on
 local POPUP = "CRAFTBOUND_OVERWRITE"
 ns.OverwritePopup = {
@@ -202,8 +219,12 @@ function ns.RenderEnchantTargets(panel, guide, step)
 			local tgt = ns.char.enchantTargets[kind]
 			local id = type(tgt) == "table" and tgt.id or nil
 			local here = id and findInBags(tgt)
-			b.icon:SetTexture(here and C_Item.GetItemIconByID(id) or "Interface\\PaperDoll\\UI-Backpack-EmptySlot")
+			-- the picked item (greyed when it left the bags), else what you wear: it gets the enchant
+			local icon = id and C_Item.GetItemIconByID(id)
+				or GetInventoryItemTexture("player", KINDS[kind].slot)
+			b.icon:SetTexture(icon or "Interface\\PaperDoll\\UI-Backpack-EmptySlot")
 			b.icon:SetDesaturated(id ~= nil and not here)
+			b.icon:SetAlpha(id and 1 or 0.75)
 			b.label:SetTextColor(unpack(kind == current and UI.GOLD or { 0.8, 0.8, 0.8 }))
 			b:Show()
 			y = y - 54

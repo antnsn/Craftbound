@@ -9,9 +9,11 @@
 - **Enchant on: items to enchant instead of your gear.** A sidebar beside the profession panel
   (Enchanting guides) with a slot per kind the route enchants: drag a cheap item from your bags
   onto it, and those enchants go on that item. The game's "replace the enchant?" and "bind it?"
-  questions for it are answered in the same press: one press per enchant.
+  questions for it are answered for you. Without a pick the slot shows what you wear (that gets
+  the enchant), and Craft's tooltip says which item the enchant goes on.
 - **Overwrite my enchants** (top of the panel, off by default): enchants go on your equipped gear
-  and replace whatever is on it, without asking. It warns you before it turns on.
+  and replace whatever is on it: Craftbound answers the game's question for you. It warns you
+  before it turns on.
 - **Reagents in the bank**: they always counted as owned (nothing to buy), but now the
   profession panel shows "N in bank" on the reagent, the tracker says "Fetch: ...", and Craft
   says to fetch them instead of "Missing reagents". The mailbox likewise.

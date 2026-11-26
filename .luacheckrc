@@ -13,6 +13,6 @@ read_globals = {
 	"ATTACHMENTS_MAX_RECEIVE", "AddonCompartmentFrame", "GetCursorPosition", "Minimap", "AuctionHouseFrame", "BuyMerchantItem", "GetInboxItem", "GetInboxNumItems", "C_AuctionHouse", "C_Item", "C_MerchantFrame", "C_Timer",
 	"C_TradeSkillUI", "CreateFrame", "Enum", "GameTooltip", "GetMerchantItemID", "GetMerchantItemMaxStack",
 	"GetMerchantNumItems", "GetMoney", "GetProfessionInfo", "GetProfessions", "GetTime", "InCombatLockdown",
-	"IsShiftKeyDown", "ItemLocation", "MerchantFrame", "ProfessionsFrame", "StaticPopup_Hide", "StaticPopup_Visible", "NUM_BAG_SLOTS", "C_Container", "GetCursorInfo", "ClearCursor", "UIParent",
+	"IsShiftKeyDown", "ItemLocation", "MerchantFrame", "ProfessionsFrame", "StaticPopup_Hide", "StaticPopup_Visible", "GetInventoryItemTexture", "GetInventoryItemID", "NUM_BAG_SLOTS", "C_Container", "GetCursorInfo", "ClearCursor", "UIParent",
 	"UISpecialFrames", "UnitFactionGroup", "UnitLevel", "UnitName", "Screenshot", "StaticPopup_Show", "GetNumTrainerServices", "GetTrainerServiceInfo", "GetTrainerServiceCost", "BuyTrainerService", "IsTradeskillTrainer", "C_Map", "CreateVector2D", "UiMapPoint", "C_SuperTrack", "GetTrainerServiceSkillLine", "GetTrainerServiceTypeFilter", "GetTrainerServiceSkillReq", "GetTrainerServiceLevelReq", "PlaySound", "SOUNDKIT", "date", "geterrorhandler", "time", "tinsert",
 }
