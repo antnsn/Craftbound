@@ -86,6 +86,11 @@ Where trainers and vendors stand comes from QuestieDB, part of [Questie](https:/
 
 ## Changelog
 <!-- changelog:start -->
+### 0.3.1-alpha (2026-11-26)
+
+- **Overwrite** is a small checkbox on the guide's line now, not a full-width button: the
+  route gets the room back.
+
 ### 0.3.0-alpha (2026-11-26)
 
 - **Enchanting skips the Runed Arcanite Rod**: it was one skill point (294-295) for an Arcanite Rod
