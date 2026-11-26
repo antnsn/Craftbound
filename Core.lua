@@ -21,6 +21,8 @@ local DEFAULTS = {
 		minimap = true,      -- the minimap button
 		capGuard = true,     -- ask before Blizzard's Create buttons craft at a rank's cap (CapGuard.lua)
 		trainerPanel = true, -- the route's recipes beside the profession trainer (Trainer.lua)
+		overwriteEnchants = false, -- enchants replace the equipped ones without asking (Enchants.lua)
+		answerBlocked = nil, -- the client blocked answering the enchant questions outside a press
 	},
 	minimapIcon = nil,       -- LibDBIcon's position table { minimapPos, hide }
 	items = {},              -- [name] = itemID, learned at runtime
@@ -40,6 +42,7 @@ local CHAR_DEFAULTS = {
 	tracker = nil,           -- { point, x, y }
 	window = nil,            -- { point, x, y } of the Craftbound window
 	trackerHidden = nil,     -- the player closed it
+	enchantTargets = {},     -- [kind] = { id, guid }: the item in the bags that takes those enchants (Enchants.lua)
 }
 
 local function fill(t, defaults)
@@ -103,10 +106,10 @@ function ns.GuideState(key)
 		g = { ticks = {}, history = {}, started = time() }
 		ns.char.guides[key] = g
 	end
-	-- an edited custom guide: its step numbers changed, so hand ticks no longer fit
+	-- an edited custom guide: its step numbers changed, so hand ticks and recipe picks no longer fit
 	local guide = ns.Planner.Find(key)
 	if guide and guide.rev ~= g.rev then
-		g.ticks, g.rev = {}, guide.rev
+		g.ticks, g.swaps, g.rev = {}, nil, guide.rev
 	end
 	return g
 end

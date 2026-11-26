@@ -2,8 +2,9 @@
 -- to Blizzard's profession window (ProfessionsFrame).
 --
 -- Crafting is a click on our button or the "Craft next" key binding, both hardware events.
--- Enchants go on the matching equipped item (CraftEnchant); a "replace enchant?" question is
--- answered by the next press of the key or the button.
+-- Enchants go on the sidebar's item or the equipped one (Enchants.lua); the game's "replace the
+-- enchant?" and "bind it?" questions are answered in the same press when they are ours to answer,
+-- else by the next press of the key or the button.
 local _, ns = ...
 
 local UI = ns.UI
@@ -14,12 +15,6 @@ ns.SKILL_LINES = {
 	[171] = "Alchemy", [164] = "Blacksmithing", [333] = "Enchanting", [202] = "Engineering",
 	[182] = "Herbalism", [165] = "Leatherworking", [186] = "Mining", [393] = "Skinning",
 	[197] = "Tailoring", [185] = "Cooking", [129] = "First Aid", [356] = "Fishing",
-}
-
--- The equipped slot an enchant goes on, from its English name.
-local ENCHANT_SLOTS = {
-	Chest = 5, Bracer = 9, Boots = 8, Gloves = 10, Cloak = 15, Shield = 17,
-	["2H Weapon"] = 16, Weapon = 16,
 }
 
 -- Skills, outside the window -------------------------------------------------------------
@@ -106,19 +101,20 @@ function ns.ScanOpen()
 	local active = ns.ActiveGuide()
 	if guides[1] and (not active or active.profession ~= prof) then ns.SetActive(guides[1].key) end
 
-	-- remember the real reagents of every recipe the guides use
+	-- remember the real reagents of every recipe the guides use, and of the character's picks
+	local function remember(name, guideMats)
+		local r = name and byName[name]
+		if not r then return end
+		local mats, sch = readMats(r.recipeID, guideMats)
+		local rec = ns.db.recipes[name] or {}
+		rec.id = r.recipeID
+		if mats then rec.mats = mats end
+		rec.enchant = sch and Enum.TradeskillRecipeType and sch.recipeType == Enum.TradeskillRecipeType.Enchant or nil
+		ns.db.recipes[name] = rec
+	end
 	for _, g in ipairs(guides) do
-		for _, s in ipairs(g.steps) do
-			local r = s.recipe and byName[s.recipe]
-			if r then
-				local mats, sch = readMats(r.recipeID, s.mats)
-				local rec = ns.db.recipes[s.recipe] or {}
-				rec.id = r.recipeID
-				if mats then rec.mats = mats end
-				rec.enchant = sch and Enum.TradeskillRecipeType and sch.recipeType == Enum.TradeskillRecipeType.Enchant or nil
-				ns.db.recipes[s.recipe] = rec
-			end
-		end
+		for _, s in ipairs(g.steps) do remember(s.recipe, s.mats) end
+		for _, name in ipairs(ns.SwapNames(g.key)) do remember(name) end
 	end
 	ns.Refresh()
 end
@@ -185,12 +181,115 @@ end
 -- Crafting ----------------------------------------------------------------------------------
 
 local replacePending -- the game asked "replace the enchant?" after our CraftEnchant
+local bindPending    -- ... or "bind it to you?" (an item in the bags)
+local answerUntil, bindUntil -- our last enchant's questions are ours to answer until then
 
-ns.On("REPLACE_ENCHANT", function() replacePending = GetTime() end)
+-- Two kinds of "replace the enchant?": REPLACE_TRADESKILL_ENCHANT for a profession window enchant
+-- (what Forever asks for ours), REPLACE_ENCHANT for the older item path. Each has its own answer.
+local REPLACE = {
+	REPLACE_TRADESKILL_ENCHANT = "ReplaceTradeskillEnchant",
+	REPLACE_ENCHANT = "ReplaceEnchant",
+}
+local replaceKind = "REPLACE_ENCHANT" -- the event that asked last
+local function replaceCall() C_Item[REPLACE[replaceKind]]() end -- errors when missing: not answered
+local function hideReplace() if StaticPopup_Hide then StaticPopup_Hide(replaceKind) end end
+local function hideBind() if StaticPopup_Hide then StaticPopup_Hide("BIND_ENCHANT") StaticPopup_Hide("ENCHANT_BIND") end end
 
-local function enchantSlot(recipe)
-	local part = recipe:match("^Enchant (.-) %- ")
-	return part and ENCHANT_SLOTS[part]
+local function answerReplace()
+	replacePending = nil
+	replaceCall()
+	hideReplace()
+end
+local function answerBind()
+	bindPending = nil
+	C_Item.BindEnchant()
+	hideBind()
+end
+
+-- The one exception to "only from a press": the game asks a moment after the press, and the
+-- player chose to skip that question (a sidebar item, or Overwrite on). Answer it right away;
+-- if the client blocks that (ADDON_ACTION_BLOCKED), the question stays for the next press and
+-- Craftbound stops trying (settings.answerBlocked).
+-- answers tried this frame; a block reported meanwhile counts against all of them (we can't tell
+-- which call the client meant), so each one's question stays for the next press
+local attempts = {}
+ns.On("ADDON_ACTION_BLOCKED", function(addon)
+	if addon ~= ns.name then return end
+	for _, a in ipairs(attempts) do a.blocked = true end
+end)
+-- The questions come after our cast: it done, they arrive within moments; it failed or was
+-- cancelled, any later question is the player's own.
+local AFTER_CAST = 3
+ns.On("UNIT_SPELLCAST_SUCCEEDED", function(unit)
+	if unit ~= "player" then return end
+	local soon = GetTime() + AFTER_CAST
+	if answerUntil then answerUntil = math.min(answerUntil, soon) end
+	if bindUntil then bindUntil = math.min(bindUntil, soon) end
+end)
+for _, e in ipairs({ "UNIT_SPELLCAST_FAILED", "UNIT_SPELLCAST_INTERRUPTED" }) do
+	ns.On(e, function(unit) if unit == "player" then answerUntil, bindUntil = nil, nil end end)
+end
+
+local function answerNow(until_, call, hide, keep)
+	if not until_ or GetTime() > until_ or ns.db.settings.answerBlocked then
+		-- opted in, yet the game asks: say why it stays up
+		if ns.db.settings.overwriteEnchants or next(ns.char.enchantTargets) then
+			ns.Print(ns.db.settings.answerBlocked
+				and "the game blocked answering for you earlier: press Craft (or your key) to answer."
+				or "this enchant didn't come from Craftbound's Craft button or key, so the game's question is yours.")
+		end
+		return false
+	end
+	local a = { keep = keep, hide = hide }
+	attempts[#attempts + 1] = a
+	if not pcall(call) then a.blocked = true end
+	if #attempts == 1 then
+		C_Timer.After(0, function() -- after the game has shown its questions
+			local list = attempts
+			attempts = {}
+			local any = false
+			for _, x in ipairs(list) do any = any or x.blocked end
+			for _, x in ipairs(list) do
+				if any then x.keep() else x.hide() end
+			end
+			if any then
+				ns.db.settings.answerBlocked = true
+				ns.Refresh()
+			end
+		end)
+	end
+	return true
+end
+
+for event in pairs(REPLACE) do
+	ns.On(event, function()
+		local at = GetTime()
+		replaceKind, replacePending = event, at
+		local until_ = answerUntil
+		answerUntil = nil -- one answer per enchant of ours
+		if answerNow(until_, replaceCall, hideReplace, function() replacePending = at end) then
+			replacePending = nil
+		end
+	end)
+end
+ns.On("BIND_ENCHANT", function()
+	local at = GetTime()
+	bindPending = at
+	local until_ = bindUntil
+	bindUntil = nil
+	if answerNow(until_, C_Item.BindEnchant, hideBind, function() bindPending = at end) then
+		bindPending = nil
+	end
+end)
+-- is the game's question still up (asked in the last 30 s)? The bind dialog's name differs between
+-- client versions: either counts.
+local function asking(at, ...)
+	if not at or GetTime() - at >= 30 then return false end
+	if not StaticPopup_Visible then return true end
+	for i = 1, select("#", ...) do
+		if StaticPopup_Visible((select(i, ...))) then return true end
+	end
+	return false
 end
 
 -- Does the character have a tool (by name), or one of the items that serve as it (a better hammer)?
@@ -243,12 +342,11 @@ end
 
 -- What one press of Craft does right now: returns a plan { label, enabled, reason, run }.
 function ns.CraftPlan()
-	if replacePending and GetTime() - replacePending < 30 then
-		return { label = "Replace enchant", enabled = true, run = function()
-			replacePending = nil
-			C_Item.ReplaceEnchant()
-			if StaticPopup_Hide then StaticPopup_Hide("REPLACE_ENCHANT") end
-		end }
+	if asking(replacePending, replaceKind) then
+		return { label = "Replace enchant", enabled = true, run = answerReplace }
+	end
+	if asking(bindPending, "BIND_ENCHANT", "ENCHANT_BIND") then
+		return { label = "Bind and enchant", enabled = true, run = answerBind }
 	end
 	local st, ctx = ns.Status()
 	if not st then return { label = "Craft", enabled = false, reason = "No guide picked (/craft guide)." } end
@@ -265,6 +363,9 @@ function ns.CraftPlan()
 	end
 	if r.learned == false then
 		return { label = "Craft", enabled = false, reason = ns.LearnHint(s) }
+	end
+	if s.swappedFrom and r.relativeDifficulty == 3 then
+		return { label = "Craft", enabled = false, reason = ("%s is grey now: no more skill-ups. Right-click the step in the route list to pick another."):format(s.recipe) }
 	end
 	-- each craft gives at most one point: never craft past the rank's cap
 	local room = st.left
@@ -293,11 +394,15 @@ function ns.CraftPlan()
 	end
 	local rec = ns.db.recipes[s.recipe] or {}
 	if rec.enchant then
-		local slot = enchantSlot(s.recipe)
 		return { label = ("Enchant (%d left)"):format(st.left), enabled = true, run = function()
-			local loc = slot and ItemLocation and ItemLocation:CreateFromEquipmentSlot(slot)
+			local loc, answer, inBags = ns.EnchantTarget(s.recipe)
 			if loc and loc:IsValid() and C_TradeSkillUI.CraftEnchant then
+				replacePending, bindPending = nil, nil
+				-- until our cast is done (a few seconds after it, see UNIT_SPELLCAST_SUCCEEDED)
+				answerUntil = answer and GetTime() + 60 or nil
+				bindUntil = inBags and GetTime() + 60 or nil
 				C_TradeSkillUI.CraftEnchant(r.recipeID, 1, nil, loc)
+				-- (asked while the cast started: the event handlers above answered already)
 			else
 				C_TradeSkillUI.CraftRecipe(r.recipeID, 1) -- the game asks for a target
 			end
@@ -351,8 +456,17 @@ local function makeRouteRow(parent)
 	b.count = b:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
 	b.count:SetPoint("RIGHT", -2, 0)
 	b:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight", "ADD")
-	b:SetScript("OnClick", function(self)
-		if IsShiftKeyDown() then
+	b:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+	b:SetScript("OnClick", function(self, button)
+		if self.summary then
+			-- the window on this route's guide, where its stop is set
+			local g = ns.ActiveGuide()
+			if g and ns.Window and ns.Window.Show then ns.Window.Show(g.key) end
+			return
+		end
+		if button == "RightButton" then
+			ns.OpenSwapPicker(self.index)
+		elseif IsShiftKeyDown() then
 			local st = ns.Status()
 			ns.Tick(self.index, not (st and st.done[self.index]))
 		elseif self.step and self.step.recipe then
@@ -361,6 +475,11 @@ local function makeRouteRow(parent)
 	end)
 	UI.Tooltip(b, function(tip, self)
 		local s = self.step
+		if self.summary then
+			tip:AddLine("After your stop", 1, 1, 1)
+			tip:AddLine("You chose to stop this route earlier. Change or clear the stop in the Craftbound window (click).", nil, nil, nil, true)
+			return
+		end
 		tip:AddLine(stepLabel(s), 1, 1, 1)
 		if s.note then tip:AddLine(s.note, nil, nil, nil, true) end
 		for _, m in ipairs((s.recipe and ns.LiveMats(s.recipe)) or s.mats or {}) do
@@ -368,7 +487,9 @@ local function makeRouteRow(parent)
 		end
 		if s.alts then tip:AddLine("Alternatives: " .. table.concat(s.alts, ", "), 0.7, 0.7, 0.7, true) end
 		if s.source and s.source.cost then tip:AddLine("Recipe: " .. ns.Money(s.source.cost), 0.7, 0.7, 0.7) end
-		tip:AddLine("Click: show the recipe. Shift-click: tick off / undo.", 0.5, 0.8, 1, true)
+		if s.swappedFrom then tip:AddLine("Your pick, instead of " .. s.swappedFrom .. ".", 1, 0.82, 0, true) end
+		tip:AddLine("Click: show the recipe. Shift-click: tick off / undo."
+			.. (s.kind == "craft" and " Right-click: craft another recipe instead." or ""), 0.5, 0.8, 1, true)
 	end)
 	return b
 end
@@ -423,11 +544,19 @@ local function build()
 	f.guide = UI.Text(f, "small", { 0.8, 0.8, 0.8 })
 	f.guide:SetPoint("TOPLEFT", 10, -28)
 
+	f.overwrite = UI.Button(f, "", 280, 20, function() ns.ToggleOverwrite() end)
+	f.overwrite:SetPoint("TOPLEFT", 10, -44)
+	UI.Tooltip(f.overwrite, function(tip)
+		tip:AddLine("Overwrite my enchants")
+		tip:AddLine("On: enchants without an item in the sidebar go on your equipped gear and replace whatever "
+			.. "enchant is on it today, without asking. Off: the game asks first.", 1, 0.5, 0.4, true)
+	end)
+
 	f.bar = UI.Bar(f, 280, 14)
 	f.bar:SetPoint("TOPLEFT", 10, -46)
 
 	f.train = UI.Text(f, nil, { 1, 0.4, 0.3 })
-	f.train:SetPoint("TOPLEFT", 10, -66)
+	f.train:SetPoint("TOPLEFT", f.bar, "BOTTOMLEFT", 0, -6)
 	f.train:SetWidth(280)
 
 	f.now = UI.Text(f, nil, { 1, 1, 1 })
@@ -456,6 +585,8 @@ local function build()
 		local plan = ns.CraftPlan()
 		tip:AddLine(plan.label)
 		if plan.reason then tip:AddLine(plan.reason, 1, 0.5, 0.4, true) end
+		local where = ns.CraftTarget()
+		if where then tip:AddLine(where, 1, 1, 1, true) end
 		tip:AddLine("Bind a key: Key Bindings > AddOns > Craftbound > Craft the next step.", 0.5, 0.8, 1, true)
 	end)
 
@@ -500,11 +631,18 @@ local function render()
 		f.sub:SetText("")
 		f.mats:Reset() f.mats:Finish()
 		f.route:Reset() f.route:Finish()
-		f.craft:Hide() f.select:Hide() f.tick:Hide()
+		f.craft:Hide() f.select:Hide() f.tick:Hide() f.overwrite:Hide()
+		ns.RenderEnchantTargets(f, nil)
 		f.altsText:SetText("") f.routeTitle:Hide() f.footer:SetText("")
 		return
 	end
 	f.craft:Show() f.select:Show() f.tick:Show() f.routeTitle:Show()
+	local enchanting = guide.profession == "Enchanting"
+	f.overwrite:SetShown(enchanting)
+	f.overwrite:SetText(ns.db.settings.overwriteEnchants and UI.Color({ 1, 0.4, 0.3 }, "Overwrite my enchants: ON")
+		or "Overwrite my enchants: off")
+	f.bar:SetPoint("TOPLEFT", 10, enchanting and -70 or -46)
+	ns.RenderEnchantTargets(f, guide, st.step)
 	f.guide:SetText(("%s · %s  (%d-%d)"):format(guide.profession, guide.name, guide.from, guide.to))
 	f.bar:SetValue(st.percent)
 	f.bar.text:SetText(("%d / %d   ·   ~%d crafts to go"):format(ctx.skill, st.stop, st.total))
@@ -617,25 +755,40 @@ local function render()
 	local fit = 10
 	local top, bottom = f.routeTitle:GetBottom(), f.footer:GetTop()
 	if type(top) == "number" and type(bottom) == "number" then fit = math.max(3, math.floor((top - bottom - 6) / 15)) end
-	local n = #guide.steps
-	local first = math.max(1, (st.current or n) - 2) + (f.routeOffset or 0)
+	-- the steps on this route; those after the stop target are one line at the end, not a list
+	local list, after = {}, 0
+	local currentAt
+	for i = 1, #guide.steps do
+		if st.out[i] then
+			after = after + 1
+		else
+			list[#list + 1] = i
+			if i == st.current then currentAt = #list end
+		end
+	end
+	if after > 0 then fit = math.max(2, fit - 1) end
+	local n = #list
+	local first = math.max(1, (currentAt or n) - 2) + (f.routeOffset or 0)
 	first = math.max(1, math.min(first, n - fit + 1))
-	f.routeOffset = first - math.max(1, (st.current or n) - 2)
+	f.routeOffset = first - math.max(1, (currentAt or n) - 2)
 	local last = math.min(n, first + fit - 1)
 	f.routeTitle:SetText(last - first + 1 < n and ("Route  |cff999999(%d-%d of %d, mouse wheel)|r"):format(first, last, n) or "Route")
 	local prev = f.routeTitle
-	for i = first, last do
+	local function place(row)
+		row:ClearAllPoints()
+		row:SetPoint("TOPLEFT", prev, "BOTTOMLEFT", prev == f.routeTitle and -8 or 0, prev == f.routeTitle and -2 or 0)
+		prev = row
+	end
+	for k = first, last do
+		local i = list[k]
 		local step = guide.steps[i]
 		local row = f.route:Get()
-		row.index, row.step = i, step
-		local out, cur = st.out[i], i == st.current
-		local done = st.done[i] and not out
+		row.index, row.step, row.summary = i, step, nil
+		local cur = i == st.current
+		local done = st.done[i]
 		row.mark:SetText(done and "|TInterface\\RaidFrame\\ReadyCheck-Ready:12|t" or cur and UI.Color(UI.GOLD, ">") or "")
 		local label = stepLabel(step)
-		if out then -- after the stop: not done, just not on this route
-			row.text:SetText(UI.Color({ 0.4, 0.4, 0.4 }, label .. "  (past your stop)"))
-			row.count:SetText("")
-		elseif done then
+		if done then
 			row.text:SetText(UI.Color("gray", label))
 			row.count:SetText("")
 		else
@@ -645,9 +798,15 @@ local function render()
 			local left = P.CraftsLeft(step, ctx.skill, ctx.target)
 			row.count:SetText(left > 0 and ("x" .. left) or "")
 		end
-		row:ClearAllPoints()
-		row:SetPoint("TOPLEFT", prev, "BOTTOMLEFT", prev == f.routeTitle and -8 or 0, prev == f.routeTitle and -2 or 0)
-		prev = row
+		place(row)
+	end
+	if after > 0 then
+		local row = f.route:Get()
+		row.index, row.step, row.summary = nil, nil, true
+		row.mark:SetText("")
+		row.text:SetText(UI.Color({ 0.55, 0.55, 0.55 }, ("After your stop at %d: %d more steps"):format(st.stop, after)))
+		row.count:SetText("")
+		place(row)
 	end
 	f.route:Finish()
 

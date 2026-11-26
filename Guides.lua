@@ -3,7 +3,7 @@
 local _, ns = ...
 
 ns.Guides = {
-	{ key = "Enchanting:Tried & Tested", profession = "Enchanting", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 297, p90Crafts = 313, playtested = true,
+	{ key = "Enchanting:Tried & Tested", profession = "Enchanting", name = "Tried & Tested", from = 1, to = 300, avgCrafts = 297, p90Crafts = 314, playtested = true,
 		steps = {
 			{ kind = "tool", recipe = "Runed Copper Rod", colors = { 1, 5, 7, 10 }, expected = 1, safe = 1, mats = {
 				{ name = "Copper Rod", id = 6217, qty = 1 },
@@ -86,20 +86,12 @@ ns.Guides = {
 				{ npc = "Lokhtos Darkbargainer", id = 12944, location = "Blackrock Depths", cost = 11250 },
 				{ npc = "Kania", id = 15419, location = "Silithus", cost = 9000 },
 			} } },
-			{ kind = "craft", from = 265, to = 294, recipe = "Enchant Shield - Greater Stamina", colors = { 265, 285, 305, 325 }, expected = 30, safe = 31, tools = { "Runed Truesilver Rod" }, mats = {
+			{ kind = "craft", from = 265, to = 295, recipe = "Enchant Shield - Greater Stamina", colors = { 265, 285, 305, 325 }, expected = 31, safe = 33, tools = { "Runed Truesilver Rod" }, mats = {
 				{ name = "Dream Dust", id = 11176, qty = 6 },
 			}, source = { kind = "vendor", cost = 12631, npc = "Mythrin'dir", npcID = 4229, location = "Darnassus", vendors = {
 				{ npc = "Mythrin'dir", id = 4229, location = "Darnassus", side = "Alliance", cost = 12631, limited = true },
 				{ npc = "Daniel Bartlett", id = 4561, location = "Undercity", side = "Horde", cost = 11435 },
 			} } },
-			{ kind = "craft", from = 294, to = 295, recipe = "Runed Arcanite Rod", colors = { 290, 310, 330, 350 }, expected = 1, safe = 1, mats = {
-				{ name = "Arcanite Rod", id = 16206, qty = 1 },
-				{ name = "Golden Pearl", id = 13926, qty = 1 },
-				{ name = "Illusion Dust", id = 16204, qty = 10 },
-				{ name = "Greater Eternal Essence", id = 16203, qty = 4 },
-				{ name = "Small Brilliant Shard", id = 14343, qty = 4 },
-				{ name = "Large Brilliant Shard", id = 14344, qty = 2 },
-			}, source = { kind = "vendor", cost = 22000, npc = "Lorelae Wintersong", npcID = 12022, location = "Moonglade", limited = true }, note = "The recipe is sold by Lorelae Wintersong (Moonglade) in limited stock; it restocks. Keep the Runed Arcanite Rod: the last enchants need it." },
 			{ kind = "craft", from = 295, to = 300, recipe = "Enchant Cloak - Superior Defense", colors = { 285, 305, 325, 345 }, expected = 5, safe = 5, tools = { "Runed Truesilver Rod" }, mats = {
 				{ name = "Illusion Dust", id = 16204, qty = 8 },
 			}, source = { kind = "vendor", cost = 20000, npc = "Lorelae Wintersong", npcID = 12022, location = "Moonglade", limited = true }, note = "The recipe is sold by Lorelae Wintersong (Moonglade) in limited stock; it restocks." },

@@ -36,24 +36,20 @@
       "skill_to": 300,
       "source_estimate": {
         "average_crafts": 297,
-        "p90_crafts": 313,
+        "p90_crafts": 314,
         "playtested_in_forever": true,
         "source": "Wowhead: Tried & Tested in Forever, version 2"
       },
       "item_ids": {
-        "Arcanite Rod": 16206,
         "Black Pearl": 7971,
         "Copper Rod": 6217,
         "Crystal Vial": 8925,
         "Dream Dust": 11176,
-        "Golden Pearl": 13926,
         "Golden Rod": 11128,
         "Greater Astral Essence": 11082,
-        "Greater Eternal Essence": 16203,
         "Greater Mystic Essence": 11135,
         "Illusion Dust": 16204,
         "Iridescent Pearl": 5500,
-        "Large Brilliant Shard": 14344,
         "Lesser Astral Essence": 10998,
         "Lesser Magic Essence": 10938,
         "Mote of Magic": 247786,
@@ -65,7 +61,6 @@
         "Shadowgem": 1210,
         "Silver Rod": 6338,
         "Simple Wood": 4470,
-        "Small Brilliant Shard": 14343,
         "Soul Dust": 11083,
         "Strange Dust": 10940,
         "Truesilver Rod": 11144,
@@ -653,7 +648,7 @@
         {
           "type": "craft",
           "skill_from": 265,
-          "skill_to": 294,
+          "skill_to": 295,
           "recipe": "Enchant Shield - Greater Stamina",
           "skill_thresholds": {
             "orange": 265,
@@ -662,8 +657,8 @@
             "gray": 325
           },
           "crafts": {
-            "expected": 30,
-            "safe": 31
+            "expected": 31,
+            "safe": 33
           },
           "materials_per_craft": {
             "Dream Dust": 6
@@ -698,41 +693,6 @@
           "required_tools": [
             "Runed Truesilver Rod"
           ]
-        },
-        {
-          "type": "craft",
-          "skill_from": 294,
-          "skill_to": 295,
-          "recipe": "Runed Arcanite Rod",
-          "skill_thresholds": {
-            "orange": 290,
-            "yellow": 310,
-            "green": 330,
-            "gray": 350
-          },
-          "crafts": {
-            "expected": 1,
-            "safe": 1
-          },
-          "materials_per_craft": {
-            "Arcanite Rod": 1,
-            "Golden Pearl": 1,
-            "Illusion Dust": 10,
-            "Greater Eternal Essence": 4,
-            "Small Brilliant Shard": 4,
-            "Large Brilliant Shard": 2
-          },
-          "source": {
-            "type": "vendor",
-            "npc": "Lorelae Wintersong",
-            "npc_id": 12022,
-            "location": "Moonglade",
-            "cost_raw": 22000,
-            "limited_stock": true,
-            "vendors": null
-          },
-          "alternatives": [],
-          "instructions": "Keep the Runed Arcanite Rod: the last enchants need it."
         },
         {
           "type": "craft",

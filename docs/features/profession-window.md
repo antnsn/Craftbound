@@ -16,7 +16,20 @@ When you open a profession with a guide, Craftbound docks a panel to the right o
 - **The line in colour.** This is the step and its skill-up colour (orange, yellow, green, gray). Once the window is open the colour comes from the game, not the guide.
 - **The reagent rows.** Each one shows what you have (bags and bank) against what the rest of the step needs, green when you have enough.
 - **Craft.** It crafts as many as the step still needs, capped by what your reagents allow. For Alchemy that is one click for the whole batch.
-- **Enchant.** It puts one enchant on the item in the matching slot: Enchant Chest on your chest, Bracer on your wrists, and so on. When that item already has an enchant, the game asks whether to replace it. The button then says **Replace enchant**, and clicking it answers yes. If you have nothing in that slot, the game asks you to pick an item.
+- **Enchant.** It puts one enchant on the item for it: the item in the **Enchant on** sidebar if you put one there, else the item you wear in that slot (Enchant Chest on your chest, Bracer on your wrists, and so on). When your own gear already has an enchant, the game asks whether to replace it. The button then says **Replace enchant**, and clicking it answers yes. If you have nothing in that slot, the game asks you to pick an item.
+
+## Enchant on: items to enchant instead of your gear
+
+With an Enchanting guide, a narrow sidebar sits beside the panel, with one slot for each kind of item the route enchants (Chest, Bracer, Cloak...).
+
+- **Drag an item from your bags onto a slot.** From then on, every enchant of that kind goes on that very item instead of your gear. Use a cheap item you don't wear.
+- **No questions for it.** When the game asks "replace the enchant?" or "bind it to you?" for that item, Craftbound answers yes right away. (Should the game ever refuse that, the next press answers instead, as before.)
+- **Right-click a slot** to clear it. A greyed-out slot means the item is no longer in your bags: your equipped item gets the enchants again.
+- Only that exact item is used, never another copy of it.
+
+## Overwrite my enchants
+
+A button at the top of the panel, off by default. Turned on, every enchant without an item in the sidebar goes on your equipped gear and **replaces whatever enchant is on it today, without asking**: Craftbound answers the game's question for you. Turning it on asks you to confirm first; click it again to turn it off.
 - **Show recipe.** It selects the step's recipe in Blizzard's window.
 - **Done.** It ticks the step off by hand. Use it for steps Craftbound can't see you finish, such as disenchanting.
 
@@ -54,3 +67,12 @@ At a profession trainer a Craftbound panel sits beside the trainer window. It li
 ## Turning it off
 
 `/craft toggle panel` hides the panel, and `/craft toggle select` stops Craftbound selecting the recipe when the window opens.
+
+## Craft another recipe instead
+
+Right-click a step in the route list to pick another recipe for it, for example when the guide's recipe is sold far away or the auction house has no reagents for it.
+
+- The list shows the recipes you have learned that still give skill-ups, orange and yellow first. Click one to use it.
+- The step, the **Craft** button, the tracker and the shopping list all follow your pick. The step's craft count stays the guide's estimate.
+- When your pick turns grey, Craft stops and asks you to pick another.
+- **Back to** *the guide's recipe*, at the top of the same list, undoes it. Picks are kept per character.

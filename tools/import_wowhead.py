@@ -88,8 +88,28 @@ def source(r, cat):
     return {"type": "trainer"}
 
 
+# Route steps we leave out: {profession file name: {recipe id: why}}. The step before takes over
+# their skill range.
+SKIP = {
+    # 294-295 only: one skill-up for an Arcanite Rod (3 Arcanite Bars) and dear dust/shards; the
+    # last enchant uses the Runed Truesilver Rod. Shield - Greater Stamina is still yellow there.
+    "enchanting": {20051: "Runed Arcanite Rod"},
+}
+
+
+def skip_steps(name, steps):
+    out = []
+    for st in steps:
+        if st.get("recipe") in SKIP.get(name, {}) and out:
+            out[-1] = dict(out[-1], to=st["to"])
+        else:
+            out.append(st)
+    return out
+
+
 def build(name):
     route = json.load(open(os.path.join(DATA, "wh_%s.json" % name), encoding="utf-8"))["guides"][0]
+    route["steps"] = skip_steps(name, route["steps"])
     cat = json.load(open(os.path.join(DATA, "wh_catalog_%s.json" % name), encoding="utf-8"))["catalog"]
     skill = cat["skill"]
     prof = NAMES[skill]
@@ -240,8 +260,14 @@ def main(names):
         g = build(name)
         g = {k: v for k, v in g.items() if v is not None}
         # Wowhead's tested Forever route replaces the planner's character-specific "Easiest" one
-        data["guides"] = [x for x in data["guides"]
-                          if x["profession"] != g["profession"] or x["guide"] not in (g["guide"], "Easiest")] + [g]
+        # (in its old place, so a re-import doesn't reorder the file)
+        old = [i for i, x in enumerate(data["guides"])
+               if x["profession"] == g["profession"] and x["guide"] in (g["guide"], "Easiest")]
+        data["guides"] = [x for i, x in enumerate(data["guides"]) if i not in old[1:]]
+        if old:
+            data["guides"][old[0]] = g
+        else:
+            data["guides"].append(g)
         print("%s: %d steps, ~%d crafts (safe %d)" % (g["profession"], len(g["steps"]),
               g["source_estimate"]["average_crafts"], g["source_estimate"]["p90_crafts"]))
     data["vendor_prices"] = dict(sorted(prices.items(), key=lambda kv: int(kv[0])))
