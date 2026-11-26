@@ -2,11 +2,27 @@
 
 ## Unreleased
 
+- **Enchanting skips the Runed Arcanite Rod**: it was one skill point (294-295) for an Arcanite Rod
+  (3 Arcanite Bars) and dear shards, and no enchant on the route needs it. Enchant Shield - Greater
+  Stamina takes you to 295 instead (one more Dream Dust craft).
+- **Craft another recipe instead**: right-click a step in the route list (profession panel) and
+  pick any learned recipe that still gives skill-ups, for example when the guide's recipe is
+  far away or not on the auction house. The step, Craft, the tracker and the shopping list all
+  follow your pick; "Back to ..." in the same list undoes it. Kept per character.
+- **Enchant on: items to enchant instead of your gear.** A sidebar beside the profession panel
+  (Enchanting guides) with a slot per kind the route enchants: drag a cheap item from your bags
+  onto it, and those enchants go on that item. The game's "replace the enchant?" and "bind it?"
+  questions for it are answered for you. Without a pick the slot shows what you wear (that gets
+  the enchant), and Craft's tooltip says which item the enchant goes on.
+- **Overwrite my enchants** (top of the panel, off by default): enchants go on your equipped gear
+  and replace whatever is on it: Craftbound answers the game's question for you. It warns you
+  before it turns on.
 - **Reagents in the bank**: they always counted as owned (nothing to buy), but now the
   profession panel shows "N in bank" on the reagent, the tracker says "Fetch: ...", and Craft
   says to fetch them instead of "Missing reagents". The mailbox likewise.
-- The profession panel's route shows steps after your stop greyed out as "past your stop",
-  not ticked off as if they were done.
+- The profession panel's route lists the steps up to your stop, and the rest as one line
+  ("After your stop at 150: 14 more steps"; click it to change the stop), not ticked off as if
+  they were done.
 - The tracker's title fits on one line again ("Alchemy 75/150"; the logo says Craftbound).
 - Screenshots in the docs, the README and on the CurseForge page (the trainer panel and the
   auction house too).

@@ -636,7 +636,7 @@ function W.Render()
 	win.editor:SetShown(mode == "edit")
 	win.empty:SetShown(mode == "details" and g == nil)
 	if mode == "edit" then renderEditor()
-	elseif g then renderDetails(g) end
+	elseif g then renderDetails(ns.WithSwaps(g)) end -- with this character's recipe picks
 end
 
 function W.Show(key)

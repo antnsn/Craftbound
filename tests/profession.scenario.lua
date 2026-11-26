@@ -45,7 +45,8 @@ wb.expect("on the chest slot", loc.slot, 5)
 
 -- the game asks to replace the enchant: the next press answers it
 local replaced = 0
-T.inject({ C_Item = setmetatable({ ReplaceEnchant = function() replaced = replaced + 1 end }, { __index = wb.G.C_Item }) })
+T.inject({ C_Item = setmetatable({ ReplaceEnchant = function() replaced = replaced + 1 end }, { __index = wb.G.C_Item }),
+	StaticPopup_Visible = function() return true end })
 wb.fire("REPLACE_ENCHANT", "Old", "New")
 wb.expect("button offers the replace", wb.ns.CraftPlan().label, "Replace enchant")
 wb.ns.CraftNext()
