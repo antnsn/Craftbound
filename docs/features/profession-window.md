@@ -29,7 +29,7 @@ With an Enchanting guide, a narrow sidebar sits beside the panel, with one slot 
 
 ## Overwrite my enchants
 
-A button at the top of the panel, off by default. Turned on, every enchant without an item in the sidebar goes on your equipped gear and **replaces whatever enchant is on it today, without asking**: Craftbound answers the game's question for you. Turning it on asks you to confirm first; click it again to turn it off.
+A checkbox, **Overwrite**, at the top right of the panel (Enchanting guides), off by default. Turned on, every enchant without an item in the sidebar goes on your equipped gear and **replaces whatever enchant is on it today, without asking**: Craftbound answers the game's question for you. Turning it on asks you to confirm first; click it again to turn it off.
 - **Show recipe.** It selects the step's recipe in Blizzard's window.
 - **Done.** It ticks the step off by hand. Use it for steps Craftbound can't see you finish, such as disenchanting.
 

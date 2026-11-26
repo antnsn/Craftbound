@@ -118,11 +118,15 @@ end
 
 if m == "overwrite" then
 	local btn = wb.frame("CraftboundProfessionPanel").overwrite
+	wb.check(btn:GetHeight() <= 18, "a small checkbox, not a full-width button: " .. btn:GetHeight())
+	wb.expect("unchecked while off", btn.check:IsShown(), false)
 	btn:GetScript("OnClick")(btn)
 	wb.expect("turning it on asks first", popups[#popups], "CRAFTBOUND_OVERWRITE")
 	wb.expect("not on before the answer", wb.saved("CraftboundDB").settings.overwriteEnchants, false)
 	wb.ns.OverwritePopup.OnAccept()
 	wb.expect("on after yes", wb.saved("CraftboundDB").settings.overwriteEnchants, true)
+	wb.advance(0.1)
+	wb.expect("checked once on", btn.check:IsShown(), true)
 end
 
 wb.ns.CraftNext()

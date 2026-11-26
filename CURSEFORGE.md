@@ -25,7 +25,7 @@ Beside the profession window it shows the next step and crafts it with one butto
 ## The profession window
 - **A panel beside it**: the step, its skill-up colour, the reagents you have and need, and the route ahead.
 - **Craft** (button or key binding) crafts the step: as many as you can, never past your rank's cap. Enchants go on the right equipped item.
-- **Enchanting, one press per enchant**: drag cheap items into the **Enchant on** sidebar and the route's enchants go on them, not your gear; or turn on **Overwrite my enchants**. Either way Craftbound answers the game's "replace the enchant?" for you.
+- **Enchanting, one press per enchant**: drag cheap items into the **Enchant on** sidebar and the route's enchants go on them, not your gear; or tick **Overwrite**. Either way Craftbound answers the game's "replace the enchant?" for you.
 - **Craft another recipe instead**: right-click a step to use another recipe you know (one closer by, or one the auction house has reagents for); the shopping list follows.
 - **Says what's missing**: a recipe to learn (and where, from the vendors of your faction), a rank to train, a tool to make.
 - **Waypoints** to the nearest trainer for your next rank or recipe, the recipe's vendor, or a vendor for missing reagents (`/craft way` or the map button; TomTom too). The places come from Questie's database.
