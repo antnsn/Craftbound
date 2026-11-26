@@ -458,6 +458,12 @@ local function makeRouteRow(parent)
 	b:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight", "ADD")
 	b:RegisterForClicks("LeftButtonUp", "RightButtonUp")
 	b:SetScript("OnClick", function(self, button)
+		if self.summary then
+			-- the window on this route's guide, where its stop is set
+			local g = ns.ActiveGuide()
+			if g and ns.Window and ns.Window.Show then ns.Window.Show(g.key) end
+			return
+		end
 		if button == "RightButton" then
 			ns.OpenSwapPicker(self.index)
 		elseif IsShiftKeyDown() then
@@ -469,6 +475,11 @@ local function makeRouteRow(parent)
 	end)
 	UI.Tooltip(b, function(tip, self)
 		local s = self.step
+		if self.summary then
+			tip:AddLine("After your stop", 1, 1, 1)
+			tip:AddLine("You chose to stop this route earlier. Change or clear the stop in the Craftbound window (click).", nil, nil, nil, true)
+			return
+		end
 		tip:AddLine(stepLabel(s), 1, 1, 1)
 		if s.note then tip:AddLine(s.note, nil, nil, nil, true) end
 		for _, m in ipairs((s.recipe and ns.LiveMats(s.recipe)) or s.mats or {}) do
@@ -744,25 +755,40 @@ local function render()
 	local fit = 10
 	local top, bottom = f.routeTitle:GetBottom(), f.footer:GetTop()
 	if type(top) == "number" and type(bottom) == "number" then fit = math.max(3, math.floor((top - bottom - 6) / 15)) end
-	local n = #guide.steps
-	local first = math.max(1, (st.current or n) - 2) + (f.routeOffset or 0)
+	-- the steps on this route; those after the stop target are one line at the end, not a list
+	local list, after = {}, 0
+	local currentAt
+	for i = 1, #guide.steps do
+		if st.out[i] then
+			after = after + 1
+		else
+			list[#list + 1] = i
+			if i == st.current then currentAt = #list end
+		end
+	end
+	if after > 0 then fit = math.max(2, fit - 1) end
+	local n = #list
+	local first = math.max(1, (currentAt or n) - 2) + (f.routeOffset or 0)
 	first = math.max(1, math.min(first, n - fit + 1))
-	f.routeOffset = first - math.max(1, (st.current or n) - 2)
+	f.routeOffset = first - math.max(1, (currentAt or n) - 2)
 	local last = math.min(n, first + fit - 1)
 	f.routeTitle:SetText(last - first + 1 < n and ("Route  |cff999999(%d-%d of %d, mouse wheel)|r"):format(first, last, n) or "Route")
 	local prev = f.routeTitle
-	for i = first, last do
+	local function place(row)
+		row:ClearAllPoints()
+		row:SetPoint("TOPLEFT", prev, "BOTTOMLEFT", prev == f.routeTitle and -8 or 0, prev == f.routeTitle and -2 or 0)
+		prev = row
+	end
+	for k = first, last do
+		local i = list[k]
 		local step = guide.steps[i]
 		local row = f.route:Get()
-		row.index, row.step = i, step
-		local out, cur = st.out[i], i == st.current
-		local done = st.done[i] and not out
+		row.index, row.step, row.summary = i, step, nil
+		local cur = i == st.current
+		local done = st.done[i]
 		row.mark:SetText(done and "|TInterface\\RaidFrame\\ReadyCheck-Ready:12|t" or cur and UI.Color(UI.GOLD, ">") or "")
 		local label = stepLabel(step)
-		if out then -- after the stop: not done, just not on this route
-			row.text:SetText(UI.Color({ 0.4, 0.4, 0.4 }, label .. "  (past your stop)"))
-			row.count:SetText("")
-		elseif done then
+		if done then
 			row.text:SetText(UI.Color("gray", label))
 			row.count:SetText("")
 		else
@@ -772,9 +798,15 @@ local function render()
 			local left = P.CraftsLeft(step, ctx.skill, ctx.target)
 			row.count:SetText(left > 0 and ("x" .. left) or "")
 		end
-		row:ClearAllPoints()
-		row:SetPoint("TOPLEFT", prev, "BOTTOMLEFT", prev == f.routeTitle and -8 or 0, prev == f.routeTitle and -2 or 0)
-		prev = row
+		place(row)
+	end
+	if after > 0 then
+		local row = f.route:Get()
+		row.index, row.step, row.summary = nil, nil, true
+		row.mark:SetText("")
+		row.text:SetText(UI.Color({ 0.55, 0.55, 0.55 }, ("After your stop at %d: %d more steps"):format(st.stop, after)))
+		row.count:SetText("")
+		place(row)
 	end
 	f.route:Finish()
 

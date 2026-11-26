@@ -17,8 +17,9 @@
 - **Reagents in the bank**: they always counted as owned (nothing to buy), but now the
   profession panel shows "N in bank" on the reagent, the tracker says "Fetch: ...", and Craft
   says to fetch them instead of "Missing reagents". The mailbox likewise.
-- The profession panel's route shows steps after your stop greyed out as "past your stop",
-  not ticked off as if they were done.
+- The profession panel's route lists the steps up to your stop, and the rest as one line
+  ("After your stop at 150: 14 more steps"; click it to change the stop), not ticked off as if
+  they were done.
 - The tracker's title fits on one line again ("Alchemy 75/150"; the logo says Craftbound).
 - Screenshots in the docs, the README and on the CurseForge page (the trainer panel and the
   auction house too).
