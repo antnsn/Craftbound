@@ -101,19 +101,20 @@ function ns.ScanOpen()
 	local active = ns.ActiveGuide()
 	if guides[1] and (not active or active.profession ~= prof) then ns.SetActive(guides[1].key) end
 
-	-- remember the real reagents of every recipe the guides use
+	-- remember the real reagents of every recipe the guides use, and of the character's picks
+	local function remember(name, guideMats)
+		local r = name and byName[name]
+		if not r then return end
+		local mats, sch = readMats(r.recipeID, guideMats)
+		local rec = ns.db.recipes[name] or {}
+		rec.id = r.recipeID
+		if mats then rec.mats = mats end
+		rec.enchant = sch and Enum.TradeskillRecipeType and sch.recipeType == Enum.TradeskillRecipeType.Enchant or nil
+		ns.db.recipes[name] = rec
+	end
 	for _, g in ipairs(guides) do
-		for _, s in ipairs(g.steps) do
-			local r = s.recipe and byName[s.recipe]
-			if r then
-				local mats, sch = readMats(r.recipeID, s.mats)
-				local rec = ns.db.recipes[s.recipe] or {}
-				rec.id = r.recipeID
-				if mats then rec.mats = mats end
-				rec.enchant = sch and Enum.TradeskillRecipeType and sch.recipeType == Enum.TradeskillRecipeType.Enchant or nil
-				ns.db.recipes[s.recipe] = rec
-			end
-		end
+		for _, s in ipairs(g.steps) do remember(s.recipe, s.mats) end
+		for _, name in ipairs(ns.SwapNames(g.key)) do remember(name) end
 	end
 	ns.Refresh()
 end
@@ -278,6 +279,9 @@ function ns.CraftPlan()
 	if r.learned == false then
 		return { label = "Craft", enabled = false, reason = ns.LearnHint(s) }
 	end
+	if s.swappedFrom and r.relativeDifficulty == 3 then
+		return { label = "Craft", enabled = false, reason = ("%s is grey now: no more skill-ups. Right-click the step in the route list to pick another."):format(s.recipe) }
+	end
 	-- each craft gives at most one point: never craft past the rank's cap
 	local room = st.left
 	if ctx.maxSkill and s.kind == "craft" then
@@ -366,8 +370,11 @@ local function makeRouteRow(parent)
 	b.count = b:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
 	b.count:SetPoint("RIGHT", -2, 0)
 	b:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight", "ADD")
-	b:SetScript("OnClick", function(self)
-		if IsShiftKeyDown() then
+	b:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+	b:SetScript("OnClick", function(self, button)
+		if button == "RightButton" then
+			ns.OpenSwapPicker(self.index)
+		elseif IsShiftKeyDown() then
 			local st = ns.Status()
 			ns.Tick(self.index, not (st and st.done[self.index]))
 		elseif self.step and self.step.recipe then
@@ -383,7 +390,9 @@ local function makeRouteRow(parent)
 		end
 		if s.alts then tip:AddLine("Alternatives: " .. table.concat(s.alts, ", "), 0.7, 0.7, 0.7, true) end
 		if s.source and s.source.cost then tip:AddLine("Recipe: " .. ns.Money(s.source.cost), 0.7, 0.7, 0.7) end
-		tip:AddLine("Click: show the recipe. Shift-click: tick off / undo.", 0.5, 0.8, 1, true)
+		if s.swappedFrom then tip:AddLine("Your pick, instead of " .. s.swappedFrom .. ".", 1, 0.82, 0, true) end
+		tip:AddLine("Click: show the recipe. Shift-click: tick off / undo."
+			.. (s.kind == "craft" and " Right-click: craft another recipe instead." or ""), 0.5, 0.8, 1, true)
 	end)
 	return b
 end

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- **Craft another recipe instead**: right-click a step in the route list (profession panel) and
+  pick any learned recipe that still gives skill-ups, for example when the guide's recipe is
+  far away or not on the auction house. The step, Craft, the tracker and the shopping list all
+  follow your pick; "Back to ..." in the same list undoes it. Kept per character.
 - **Enchant on: items to enchant instead of your gear.** A sidebar beside the profession panel
   (Enchanting guides) with a slot per kind the route enchants: drag a cheap item from your bags
   onto it, and those enchants go on that item. The game's "replace the enchant?" and "bind it?"

@@ -20,6 +20,7 @@ Prices.lua
 Share.lua
 Custom.lua
 UI.lua
+Swaps.lua
 Enchants.lua
 Profession.lua
 CapGuard.lua

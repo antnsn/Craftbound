@@ -67,3 +67,12 @@ At a profession trainer a Craftbound panel sits beside the trainer window. It li
 ## Turning it off
 
 `/craft toggle panel` hides the panel, and `/craft toggle select` stops Craftbound selecting the recipe when the window opens.
+
+## Craft another recipe instead
+
+Right-click a step in the route list to pick another recipe for it, for example when the guide's recipe is sold far away or the auction house has no reagents for it.
+
+- The list shows the recipes you have learned that still give skill-ups, orange and yellow first. Click one to use it.
+- The step, the **Craft** button, the tracker and the shopping list all follow your pick. The step's craft count stays the guide's estimate.
+- When your pick turns grey, Craft stops and asks you to pick another.
+- **Back to** *the guide's recipe*, at the top of the same list, undoes it. Picks are kept per character.

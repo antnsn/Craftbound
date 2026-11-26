@@ -105,10 +105,10 @@ function ns.GuideState(key)
 		g = { ticks = {}, history = {}, started = time() }
 		ns.char.guides[key] = g
 	end
-	-- an edited custom guide: its step numbers changed, so hand ticks no longer fit
+	-- an edited custom guide: its step numbers changed, so hand ticks and recipe picks no longer fit
 	local guide = ns.Planner.Find(key)
 	if guide and guide.rev ~= g.rev then
-		g.ticks, g.rev = {}, guide.rev
+		g.ticks, g.swaps, g.rev = {}, nil, guide.rev
 	end
 	return g
 end
