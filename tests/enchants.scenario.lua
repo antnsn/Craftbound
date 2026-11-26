@@ -1,4 +1,4 @@
---@moods: target wrong plain overwrite gone later twin laterplain blocked cancel
+--@moods: target wrong plain overwrite gone later twin laterplain blocked cancel tradeskill tradeskillplain
 -- Enchant targets: items in the bags (the sidebar) take the route's enchants, and their "replace
 -- the enchant?" and "bind it?" questions are answered in the same press. Without one the equipped
 -- item gets it, and the game asks, unless "Overwrite my enchants" is on (with a warning first).
@@ -17,14 +17,14 @@ s.items[3000] = { name = "My Best Chest", equipLoc = "INVTYPE_CHEST", icon = 133
 s.slots[5] = 3000 -- worn
 s.items[2001] = { name = "Old Bracers", equipLoc = "INVTYPE_WRIST" }
 s.bags[2000] = 1
-local target = m == "target" or m == "later" or m == "twin" or m == "blocked" or m == "cancel"
-local later = m == "later" or m == "laterplain" or m == "blocked" or m == "cancel"
+local target = m == "target" or m == "later" or m == "twin" or m == "blocked" or m == "cancel" or m == "tradeskill"
+local later = m == "later" or m == "laterplain" or m == "blocked" or m == "cancel" or m:find("^tradeskill") ~= nil
 s.bags[2001] = 1
 
 wb.login({ saved = T.professionGlobals({ [T.ENCHANTING] = { name = "Enchanting", rank = 79, max = 150 } }) })
 local ts = T.tradeSkill(T.ENCHANTING, "Enchanting", 79, 150, T.enchantingRecipes())
 local cursor
-local popups, replaced, bound, hidden = {}, 0, 0, {}
+local popups, replaced, bound, hidden, tsReplaced = {}, 0, 0, {}, 0
 local blockOnce = m == "blocked"
 T.inject({
 	C_TradeSkillUI = ts,
@@ -43,6 +43,7 @@ T.inject({
 			replaced = replaced + 1
 		end,
 		BindEnchant = function() bound = bound + 1 end,
+		ReplaceTradeskillEnchant = function() tsReplaced = tsReplaced + 1 end,
 	}, { __index = wb.G.C_Item }),
 	GetCursorInfo = function() if cursor then return "item", cursor end end,
 	ClearCursor = function() cursor = nil end,
@@ -50,7 +51,9 @@ T.inject({
 	StaticPopup_Hide = function(which) hidden[#hidden + 1] = which end,
 	GetInventoryItemTexture = function(_, slot) return s.slots[slot] and s.items[s.slots[slot]].icon or nil end,
 	-- the game's own questions stay up until answered (the bind one under its newer name)
-	StaticPopup_Visible = function(which) return which == "REPLACE_ENCHANT" or which == "ENCHANT_BIND" end,
+	StaticPopup_Visible = function(which)
+		return which == "REPLACE_ENCHANT" or which == "REPLACE_TRADESKILL_ENCHANT" or which == "ENCHANT_BIND"
+	end,
 })
 -- the client asks while the cast starts (inside the press), or a moment later ("later")
 local craft = ts.CraftEnchant
@@ -162,6 +165,26 @@ if m == "cancel" then
 	wb.fire("UNIT_SPELLCAST_FAILED", "player")
 	wb.fire("REPLACE_ENCHANT", "Mine", "Other")
 	wb.expect("our cast failed: a later question is the player's", replaced, 0)
+	return
+end
+-- Forever's profession enchants ask with REPLACE_TRADESKILL_ENCHANT (answered by
+-- C_Item.ReplaceTradeskillEnchant), not REPLACE_ENCHANT
+if m == "tradeskill" then
+	wb.advance(6)
+	wb.fire("UNIT_SPELLCAST_SUCCEEDED", "player")
+	wb.fire("REPLACE_TRADESKILL_ENCHANT", "Old", "New")
+	wb.expect("the profession question answered", tsReplaced, 1)
+	wb.expect("with its own call", replaced, 0)
+	wb.advance(0.1)
+	wb.check(hidden[1] == "REPLACE_TRADESKILL_ENCHANT", "its question taken away")
+	return
+end
+if m == "tradeskillplain" then
+	wb.fire("REPLACE_TRADESKILL_ENCHANT", "Old", "New")
+	wb.expect("your own gear, Overwrite off: not answered", tsReplaced, 0)
+	wb.expect("the next press answers it", wb.ns.CraftPlan().label, "Replace enchant")
+	wb.ns.CraftNext()
+	wb.expect("with the profession call", tsReplaced, 1)
 	return
 end
 if m == "laterplain" then

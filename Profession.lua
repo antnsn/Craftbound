@@ -184,12 +184,20 @@ local replacePending -- the game asked "replace the enchant?" after our CraftEnc
 local bindPending    -- ... or "bind it to you?" (an item in the bags)
 local answerUntil, bindUntil -- our last enchant's questions are ours to answer until then
 
-local function hideReplace() if StaticPopup_Hide then StaticPopup_Hide("REPLACE_ENCHANT") end end
+-- Two kinds of "replace the enchant?": REPLACE_TRADESKILL_ENCHANT for a profession window enchant
+-- (what Forever asks for ours), REPLACE_ENCHANT for the older item path. Each has its own answer.
+local REPLACE = {
+	REPLACE_TRADESKILL_ENCHANT = "ReplaceTradeskillEnchant",
+	REPLACE_ENCHANT = "ReplaceEnchant",
+}
+local replaceKind = "REPLACE_ENCHANT" -- the event that asked last
+local function replaceCall() C_Item[REPLACE[replaceKind]]() end -- errors when missing: not answered
+local function hideReplace() if StaticPopup_Hide then StaticPopup_Hide(replaceKind) end end
 local function hideBind() if StaticPopup_Hide then StaticPopup_Hide("BIND_ENCHANT") StaticPopup_Hide("ENCHANT_BIND") end end
 
 local function answerReplace()
 	replacePending = nil
-	C_Item.ReplaceEnchant()
+	replaceCall()
 	hideReplace()
 end
 local function answerBind()
@@ -253,15 +261,17 @@ local function answerNow(until_, call, hide, keep)
 	return true
 end
 
-ns.On("REPLACE_ENCHANT", function()
-	local at = GetTime()
-	replacePending = at
-	local until_ = answerUntil
-	answerUntil = nil -- one answer per enchant of ours
-	if answerNow(until_, C_Item.ReplaceEnchant, hideReplace, function() replacePending = at end) then
-		replacePending = nil
-	end
-end)
+for event in pairs(REPLACE) do
+	ns.On(event, function()
+		local at = GetTime()
+		replaceKind, replacePending = event, at
+		local until_ = answerUntil
+		answerUntil = nil -- one answer per enchant of ours
+		if answerNow(until_, replaceCall, hideReplace, function() replacePending = at end) then
+			replacePending = nil
+		end
+	end)
+end
 ns.On("BIND_ENCHANT", function()
 	local at = GetTime()
 	bindPending = at
@@ -332,7 +342,7 @@ end
 
 -- What one press of Craft does right now: returns a plan { label, enabled, reason, run }.
 function ns.CraftPlan()
-	if asking(replacePending, "REPLACE_ENCHANT") then
+	if asking(replacePending, replaceKind) then
 		return { label = "Replace enchant", enabled = true, run = answerReplace }
 	end
 	if asking(bindPending, "BIND_ENCHANT", "ENCHANT_BIND") then
