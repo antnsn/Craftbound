@@ -2,8 +2,9 @@
 -- to Blizzard's profession window (ProfessionsFrame).
 --
 -- Crafting is a click on our button or the "Craft next" key binding, both hardware events.
--- Enchants go on the matching equipped item (CraftEnchant); a "replace enchant?" question is
--- answered by the next press of the key or the button.
+-- Enchants go on the sidebar's item or the equipped one (Enchants.lua); the game's "replace the
+-- enchant?" and "bind it?" questions are answered in the same press when they are ours to answer,
+-- else by the next press of the key or the button.
 local _, ns = ...
 
 local UI = ns.UI
@@ -14,12 +15,6 @@ ns.SKILL_LINES = {
 	[171] = "Alchemy", [164] = "Blacksmithing", [333] = "Enchanting", [202] = "Engineering",
 	[182] = "Herbalism", [165] = "Leatherworking", [186] = "Mining", [393] = "Skinning",
 	[197] = "Tailoring", [185] = "Cooking", [129] = "First Aid", [356] = "Fishing",
-}
-
--- The equipped slot an enchant goes on, from its English name.
-local ENCHANT_SLOTS = {
-	Chest = 5, Bracer = 9, Boots = 8, Gloves = 10, Cloak = 15, Shield = 17,
-	["2H Weapon"] = 16, Weapon = 16,
 }
 
 -- Skills, outside the window -------------------------------------------------------------
@@ -185,12 +180,30 @@ end
 -- Crafting ----------------------------------------------------------------------------------
 
 local replacePending -- the game asked "replace the enchant?" after our CraftEnchant
+local bindPending    -- ... or "bind it to you?" (an item in the bags)
 
 ns.On("REPLACE_ENCHANT", function() replacePending = GetTime() end)
+ns.On("BIND_ENCHANT", function() bindPending = GetTime() end)
 
-local function enchantSlot(recipe)
-	local part = recipe:match("^Enchant (.-) %- ")
-	return part and ENCHANT_SLOTS[part]
+local function answerReplace()
+	replacePending = nil
+	C_Item.ReplaceEnchant()
+	if StaticPopup_Hide then StaticPopup_Hide("REPLACE_ENCHANT") end
+end
+local function answerBind()
+	bindPending = nil
+	C_Item.BindEnchant()
+	if StaticPopup_Hide then StaticPopup_Hide("BIND_ENCHANT") StaticPopup_Hide("ENCHANT_BIND") end
+end
+-- is the game's question still up (asked in the last 30 s)? The bind dialog's name differs between
+-- client versions: either counts.
+local function asking(at, ...)
+	if not at or GetTime() - at >= 30 then return false end
+	if not StaticPopup_Visible then return true end
+	for i = 1, select("#", ...) do
+		if StaticPopup_Visible((select(i, ...))) then return true end
+	end
+	return false
 end
 
 -- Does the character have a tool (by name), or one of the items that serve as it (a better hammer)?
@@ -243,12 +256,11 @@ end
 
 -- What one press of Craft does right now: returns a plan { label, enabled, reason, run }.
 function ns.CraftPlan()
-	if replacePending and GetTime() - replacePending < 30 then
-		return { label = "Replace enchant", enabled = true, run = function()
-			replacePending = nil
-			C_Item.ReplaceEnchant()
-			if StaticPopup_Hide then StaticPopup_Hide("REPLACE_ENCHANT") end
-		end }
+	if asking(replacePending, "REPLACE_ENCHANT") then
+		return { label = "Replace enchant", enabled = true, run = answerReplace }
+	end
+	if asking(bindPending, "BIND_ENCHANT", "ENCHANT_BIND") then
+		return { label = "Bind and enchant", enabled = true, run = answerBind }
 	end
 	local st, ctx = ns.Status()
 	if not st then return { label = "Craft", enabled = false, reason = "No guide picked (/craft guide)." } end
@@ -293,11 +305,14 @@ function ns.CraftPlan()
 	end
 	local rec = ns.db.recipes[s.recipe] or {}
 	if rec.enchant then
-		local slot = enchantSlot(s.recipe)
 		return { label = ("Enchant (%d left)"):format(st.left), enabled = true, run = function()
-			local loc = slot and ItemLocation and ItemLocation:CreateFromEquipmentSlot(slot)
+			local loc, answer, inBags = ns.EnchantTarget(s.recipe)
 			if loc and loc:IsValid() and C_TradeSkillUI.CraftEnchant then
+				replacePending, bindPending = nil, nil
 				C_TradeSkillUI.CraftEnchant(r.recipeID, 1, nil, loc)
+				-- asked while the cast started: still this press, so ours to answer
+				if answer and replacePending then answerReplace() end
+				if inBags and bindPending then answerBind() end
 			else
 				C_TradeSkillUI.CraftRecipe(r.recipeID, 1) -- the game asks for a target
 			end
@@ -423,11 +438,19 @@ local function build()
 	f.guide = UI.Text(f, "small", { 0.8, 0.8, 0.8 })
 	f.guide:SetPoint("TOPLEFT", 10, -28)
 
+	f.overwrite = UI.Button(f, "", 280, 20, function() ns.ToggleOverwrite() end)
+	f.overwrite:SetPoint("TOPLEFT", 10, -44)
+	UI.Tooltip(f.overwrite, function(tip)
+		tip:AddLine("Overwrite my enchants")
+		tip:AddLine("On: enchants without an item in the sidebar go on your equipped gear and replace whatever "
+			.. "enchant is on it today, without asking. Off: the game asks first.", 1, 0.5, 0.4, true)
+	end)
+
 	f.bar = UI.Bar(f, 280, 14)
 	f.bar:SetPoint("TOPLEFT", 10, -46)
 
 	f.train = UI.Text(f, nil, { 1, 0.4, 0.3 })
-	f.train:SetPoint("TOPLEFT", 10, -66)
+	f.train:SetPoint("TOPLEFT", f.bar, "BOTTOMLEFT", 0, -6)
 	f.train:SetWidth(280)
 
 	f.now = UI.Text(f, nil, { 1, 1, 1 })
@@ -500,11 +523,18 @@ local function render()
 		f.sub:SetText("")
 		f.mats:Reset() f.mats:Finish()
 		f.route:Reset() f.route:Finish()
-		f.craft:Hide() f.select:Hide() f.tick:Hide()
+		f.craft:Hide() f.select:Hide() f.tick:Hide() f.overwrite:Hide()
+		ns.RenderEnchantTargets(f, nil)
 		f.altsText:SetText("") f.routeTitle:Hide() f.footer:SetText("")
 		return
 	end
 	f.craft:Show() f.select:Show() f.tick:Show() f.routeTitle:Show()
+	local enchanting = guide.profession == "Enchanting"
+	f.overwrite:SetShown(enchanting)
+	f.overwrite:SetText(ns.db.settings.overwriteEnchants and UI.Color({ 1, 0.4, 0.3 }, "Overwrite my enchants: ON")
+		or "Overwrite my enchants: off")
+	f.bar:SetPoint("TOPLEFT", 10, enchanting and -70 or -46)
+	ns.RenderEnchantTargets(f, guide, st.step)
 	f.guide:SetText(("%s · %s  (%d-%d)"):format(guide.profession, guide.name, guide.from, guide.to))
 	f.bar:SetValue(st.percent)
 	f.bar.text:SetText(("%d / %d   ·   ~%d crafts to go"):format(ctx.skill, st.stop, st.total))

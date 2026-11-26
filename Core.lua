@@ -21,6 +21,7 @@ local DEFAULTS = {
 		minimap = true,      -- the minimap button
 		capGuard = true,     -- ask before Blizzard's Create buttons craft at a rank's cap (CapGuard.lua)
 		trainerPanel = true, -- the route's recipes beside the profession trainer (Trainer.lua)
+		overwriteEnchants = false, -- enchants replace the equipped ones without asking (Enchants.lua)
 	},
 	minimapIcon = nil,       -- LibDBIcon's position table { minimapPos, hide }
 	items = {},              -- [name] = itemID, learned at runtime
@@ -40,6 +41,7 @@ local CHAR_DEFAULTS = {
 	tracker = nil,           -- { point, x, y }
 	window = nil,            -- { point, x, y } of the Craftbound window
 	trackerHidden = nil,     -- the player closed it
+	enchantTargets = {},     -- [kind] = { id, guid }: the item in the bags that takes those enchants (Enchants.lua)
 }
 
 local function fill(t, defaults)
