@@ -209,13 +209,29 @@ ns.On("ADDON_ACTION_BLOCKED", function(addon)
 	if addon ~= ns.name then return end
 	for _, a in ipairs(attempts) do a.blocked = true end
 end)
--- our cast ended (failed, cancelled, done): any later question is the player's own
-for _, e in ipairs({ "UNIT_SPELLCAST_FAILED", "UNIT_SPELLCAST_INTERRUPTED", "UNIT_SPELLCAST_SUCCEEDED" }) do
+-- The questions come after our cast: it done, they arrive within moments; it failed or was
+-- cancelled, any later question is the player's own.
+local AFTER_CAST = 3
+ns.On("UNIT_SPELLCAST_SUCCEEDED", function(unit)
+	if unit ~= "player" then return end
+	local soon = GetTime() + AFTER_CAST
+	if answerUntil then answerUntil = math.min(answerUntil, soon) end
+	if bindUntil then bindUntil = math.min(bindUntil, soon) end
+end)
+for _, e in ipairs({ "UNIT_SPELLCAST_FAILED", "UNIT_SPELLCAST_INTERRUPTED" }) do
 	ns.On(e, function(unit) if unit == "player" then answerUntil, bindUntil = nil, nil end end)
 end
 
 local function answerNow(until_, call, hide, keep)
-	if not until_ or GetTime() > until_ or ns.db.settings.answerBlocked then return false end
+	if not until_ or GetTime() > until_ or ns.db.settings.answerBlocked then
+		-- opted in, yet the game asks: say why it stays up
+		if ns.db.settings.overwriteEnchants or next(ns.char.enchantTargets) then
+			ns.Print(ns.db.settings.answerBlocked
+				and "the game blocked answering for you earlier: press Craft (or your key) to answer."
+				or "this enchant didn't come from Craftbound's Craft button or key, so the game's question is yours.")
+		end
+		return false
+	end
 	local a = { keep = keep, hide = hide }
 	attempts[#attempts + 1] = a
 	if not pcall(call) then a.blocked = true end
@@ -372,8 +388,9 @@ function ns.CraftPlan()
 			local loc, answer, inBags = ns.EnchantTarget(s.recipe)
 			if loc and loc:IsValid() and C_TradeSkillUI.CraftEnchant then
 				replacePending, bindPending = nil, nil
-				answerUntil = answer and GetTime() + 5 or nil
-				bindUntil = inBags and GetTime() + 5 or nil
+				-- until our cast is done (a few seconds after it, see UNIT_SPELLCAST_SUCCEEDED)
+				answerUntil = answer and GetTime() + 60 or nil
+				bindUntil = inBags and GetTime() + 60 or nil
 				C_TradeSkillUI.CraftEnchant(r.recipeID, 1, nil, loc)
 				-- (asked while the cast started: the event handlers above answered already)
 			else

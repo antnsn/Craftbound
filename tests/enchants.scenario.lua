@@ -143,8 +143,11 @@ if m == "twin" then
 	return
 end
 if m == "later" then
+	-- in game the question comes after the cast: seconds later, after UNIT_SPELLCAST_SUCCEEDED
+	wb.advance(6)
+	wb.fire("UNIT_SPELLCAST_SUCCEEDED", "player")
 	wb.fire("REPLACE_ENCHANT", "Old", "New")
-	wb.expect("asked after the press: answered right then", replaced, 1)
+	wb.expect("asked after the cast: answered right then", replaced, 1)
 	wb.fire("BIND_ENCHANT")
 	wb.expect("and the bind question too", bound, 1)
 	wb.advance(0.1)
