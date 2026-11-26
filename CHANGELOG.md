@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- **Enchanting skips the Runed Arcanite Rod**: it was one skill point (294-295) for an Arcanite Rod
+  (3 Arcanite Bars) and dear shards, and no enchant on the route needs it. Enchant Shield - Greater
+  Stamina takes you to 295 instead (one more Dream Dust craft).
 - **Reagents in the bank**: they always counted as owned (nothing to buy), but now the
   profession panel shows "N in bank" on the reagent, the tracker says "Fetch: ...", and Craft
   says to fetch them instead of "Missing reagents". The mailbox likewise.
